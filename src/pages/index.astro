@@ -17,16 +17,16 @@ const trafficLeadPool = approved
   .sort((a, b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)));
 const lead = trafficLeadPool[0] || approved[0];
 
-const hotStories = approved
+const hotStories = approved.length >= 6 ? approved
   .filter((story) => story.slug !== lead?.slug && (now - +new Date(story.publishedAt)) <= 48 * 60 * 60 * 1000)
   .sort((a,b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)))
-  .slice(0,6);
+  .slice(0, Math.min(6, Math.max(2, approved.length - 4))) : [];
 const used = new Set([lead?.slug, ...hotStories.map((story) => story.slug)].filter(Boolean));
 
-const saudiStories = approved
+const saudiPool = approved
   .filter((story) => story.section === 'saudi' && !used.has(story.slug))
-  .sort((a,b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)))
-  .slice(0,4);
+  .sort((a,b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)));
+const saudiStories = approved.length >= 7 && saudiPool.length >= 2 ? saudiPool.slice(0,4) : [];
 saudiStories.forEach((story) => used.add(story.slug));
 
 const latest = approved.filter((story) => !used.has(story.slug)).slice(0,9);
