@@ -1,6 +1,98 @@
 {
-  "generatedAt": "",
-  "date": "",
+  "generatedAt": "2026-09-07T13:10:29.620Z",
+  "date": "2026-09-07",
   "timezone": "Asia/Riyadh",
-  "events": []
+  "counts": {
+    "football": 6,
+    "nba": 0,
+    "mma": 0,
+    "wwe": 0,
+    "total": 6
+  },
+  "events": [
+    {
+      "id": "football-5970127",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Hilal ضد Neom SC",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-07T18:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 99,
+      "source": "FotMob",
+      "url": "/matches/al-hilal-neom-sc-2026-09-07-5970127/",
+      "internal": true
+    },
+    {
+      "id": "football-5970126",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Khaleej ضد Al Riyadh",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-07T15:30:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 75,
+      "source": "FotMob",
+      "url": "/matches/al-khaleej-al-riyadh-2026-09-07-5970126/",
+      "internal": true
+    },
+    {
+      "id": "football-5749662",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Cagliari ضد Lecce",
+      "subtitle": "Serie A",
+      "start": "2026-09-07T16:30:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 57,
+      "source": "FotMob",
+      "url": "/matches/cagliari-lecce-2026-09-07-5749662/",
+      "internal": true
+    },
+    {
+      "id": "football-5868046",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Getafe ضد Celta Vigo",
+      "subtitle": "LaLiga",
+      "start": "2026-09-07T17:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 57,
+      "source": "FotMob",
+      "url": "/matches/getafe-celta-vigo-2026-09-07-5868046/",
+      "internal": true
+    },
+    {
+      "id": "football-5749669",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Udinese ضد Lazio",
+      "subtitle": "Serie A",
+      "start": "2026-09-07T18:45:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 57,
+      "source": "FotMob",
+      "url": "/matches/udinese-lazio-2026-09-07-5749669/",
+      "internal": true
+    },
+    {
+      "id": "football-5868044",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Elche ضد Real Sociedad",
+      "subtitle": "LaLiga",
+      "start": "2026-09-07T19:30:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 57,
+      "source": "FotMob",
+      "url": "/matches/elche-real-sociedad-2026-09-07-5868044/",
+      "internal": true
+    }
+  ]
 }

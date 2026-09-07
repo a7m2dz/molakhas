@@ -1,1 +1,2934 @@
-[]
+[
+  {
+    "scopeVersion": 2,
+    "id": 6106246,
+    "slug": "liverpool-atletico-madrid-2026-09-09-6106246",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8650,
+      "name": "Liverpool",
+      "score": 0
+    },
+    "away": {
+      "id": 9906,
+      "name": "Atlético Madrid",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 74,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Liverpool-vs-Atl%C3%A9tico%20Madrid#6106246",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106237,
+    "slug": "psg-slovan-bratislava-2026-09-09-6106237",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 9847,
+      "name": "PSG",
+      "score": 0
+    },
+    "away": {
+      "id": 6019,
+      "name": "Slovan Bratislava",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 74,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/PSG-vs-Slovan%20Bratislava#6106237",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106280,
+    "slug": "sporting-cp-galatasaray-2026-09-09-6106280",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 9768,
+      "name": "Sporting CP",
+      "score": 0
+    },
+    "away": {
+      "id": 8637,
+      "name": "Galatasaray",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 50,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Sporting%20CP-vs-Galatasaray#6106280",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106318,
+    "slug": "napoli-arsenal-2026-09-09-6106318",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 9875,
+      "name": "Napoli",
+      "score": 0
+    },
+    "away": {
+      "id": 9825,
+      "name": "Arsenal",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 74,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Napoli-vs-Arsenal#6106318",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099342,
+    "slug": "chelsea-leeds-2026-09-09-6099342",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 8455,
+      "name": "Chelsea",
+      "score": 0
+    },
+    "away": {
+      "id": 8463,
+      "name": "Leeds",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 69,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Chelsea-vs-Leeds#6099342",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970133,
+    "slug": "al-fateh-fc-al-diriyah-2026-09-09-5970133",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T18:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 177356,
+      "name": "Al Fateh FC",
+      "score": 0
+    },
+    "away": {
+      "id": 1787233,
+      "name": "Al Diriyah",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 63,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Fateh%20FC-vs-Al%20Diriyah#5970133",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970134,
+    "slug": "al-nassr-fc-abha-2026-09-09-5970134",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T18:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 101918,
+      "name": "Al Nassr FC",
+      "score": 0
+    },
+    "away": {
+      "id": 150414,
+      "name": "Abha",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 87,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Nassr%20FC-vs-Abha#5970134",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 55
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106264,
+    "slug": "barcelona-feyenoord-2026-09-09-6106264",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T16:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8634,
+      "name": "Barcelona",
+      "score": 0
+    },
+    "away": {
+      "id": 10235,
+      "name": "Feyenoord",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 74,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Barcelona-vs-Feyenoord#6106264",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106400,
+    "slug": "vfb-stuttgart-viking-2026-09-09-6106400",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T16:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 10269,
+      "name": "VfB Stuttgart",
+      "score": 0
+    },
+    "away": {
+      "id": 8478,
+      "name": "Viking",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 50,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/VfB%20Stuttgart-vs-Viking#6106400",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970132,
+    "slug": "al-kholood-al-shabab-2026-09-09-5970132",
+    "date": "2026-09-09",
+    "kickoff": "2026-09-09T15:55:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 1523706,
+      "name": "Al Kholood",
+      "score": 0
+    },
+    "away": {
+      "id": 101916,
+      "name": "Al Shabab",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 87,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Kholood-vs-Al%20Shabab#5970132",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 55
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106272,
+    "slug": "dortmund-villarreal-2026-09-08-6106272",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 9789,
+      "name": "Dortmund",
+      "score": 0
+    },
+    "away": {
+      "id": 10205,
+      "name": "Villarreal",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 58,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Dortmund-vs-Villarreal#6106272",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106286,
+    "slug": "fc-porto-man-city-2026-09-08-6106286",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 9773,
+      "name": "FC Porto",
+      "score": 0
+    },
+    "away": {
+      "id": 8456,
+      "name": "Man City",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 58,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/FC%20Porto-vs-Man%20City#6106286",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106311,
+    "slug": "lille-real-betis-2026-09-08-6106311",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8639,
+      "name": "Lille",
+      "score": 0
+    },
+    "away": {
+      "id": 8603,
+      "name": "Real Betis",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 58,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Lille-vs-Real%20Betis#6106311",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106242,
+    "slug": "real-madrid-inter-2026-09-08-6106242",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8633,
+      "name": "Real Madrid",
+      "score": 0
+    },
+    "away": {
+      "id": 8636,
+      "name": "Inter",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 82,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Real%20Madrid-vs-Inter#6106242",
+    "updatedAt": "2026-09-07T13:10:29.136Z",
+    "details": {
+      "venue": "Estadio Bernabéu",
+      "referee": "Michael Oliver",
+      "attendance": null,
+      "round": "1",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Thibaut Courtois",
+          "Denzel Dumfries",
+          "Ibrahima Konaté",
+          "Dean Huijsen",
+          "Marc Cucurella",
+          "Federico Valverde",
+          "Jude Bellingham",
+          "Yan Diomande",
+          "Brahim Díaz",
+          "Vinícius Júnior",
+          "Kylian Mbappé"
+        ],
+        "away": [
+          "Josep Martínez",
+          "Alessandro Bastoni",
+          "Yann Aurel Bisseck",
+          "Manuel Akanji",
+          "Andy Diouf",
+          "Nicolò Barella",
+          "Curtis Jones",
+          "Hakan Çalhanoglu",
+          "Federico Dimarco",
+          "Lautaro Martínez",
+          "Marcus Thuram"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.136Z",
+      "detailGeneral": {
+        "matchId": "6106242",
+        "matchName": "Real Madrid-vs-Inter_Tue, Sep 8, 2026, 19:00 UTC",
+        "leagueName": "Champions League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 72
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099336,
+    "slug": "millwall-newcastle-2026-09-08-6099336",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 10004,
+      "name": "Millwall",
+      "score": 0
+    },
+    "away": {
+      "id": 10261,
+      "name": "Newcastle",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 53,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Millwall-vs-Newcastle#6099336",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099334,
+    "slug": "bournemouth-lincoln-2026-09-08-6099334",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 8678,
+      "name": "Bournemouth",
+      "score": 0
+    },
+    "away": {
+      "id": 8430,
+      "name": "Lincoln",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 53,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Bournemouth-vs-Lincoln#6099334",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099328,
+    "slug": "crystal-palace-middlesbrough-2026-09-08-6099328",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 9826,
+      "name": "Crystal Palace",
+      "score": 0
+    },
+    "away": {
+      "id": 8549,
+      "name": "Middlesbrough",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 53,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Crystal%20Palace-vs-Middlesbrough#6099328",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099339,
+    "slug": "leyton-orient-bradford-2026-09-08-6099339",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 8351,
+      "name": "Leyton Orient",
+      "score": 0
+    },
+    "away": {
+      "id": 8484,
+      "name": "Bradford",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 53,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Leyton%20Orient-vs-Bradford#6099339",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6099331,
+    "slug": "sunderland-hull-2026-09-08-6099331",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 938221,
+      "name": "EFL Cup",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 8472,
+      "name": "Sunderland",
+      "score": 0
+    },
+    "away": {
+      "id": 8667,
+      "name": "Hull",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 53,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Sunderland-vs-Hull#6099331",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 20
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970131,
+    "slug": "al-qadsiah-al-ahli-2026-09-08-5970131",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 101919,
+      "name": "Al Qadsiah",
+      "score": 0
+    },
+    "away": {
+      "id": 2530,
+      "name": "Al Ahli",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 95,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Qadsiah-vs-Al%20Ahli#5970131",
+    "updatedAt": "2026-09-07T13:10:29.103Z",
+    "details": {
+      "venue": "Prince Mohammed Bin Fahd Stadium",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Koen Casteels",
+          "Jehad Thakri",
+          "Nacho",
+          "Gaston Álvarez",
+          "Mohammed Abu Al Shamat",
+          "Mohammed Hamad Al Qahtani",
+          "Musab Al-Juwayr",
+          "Julian Weigl",
+          "Christopher Bonsu Baah",
+          "Julián Quiñones",
+          "Mateo Retegui"
+        ],
+        "away": [
+          "Édouard Mendy",
+          "Mohammed Sulaiman",
+          "Rayan Hamed",
+          "Roger Ibañez",
+          "Saad Balobaid",
+          "Artem Bondarenko",
+          "Valentin Atangana Edoa",
+          "Trincão",
+          "Eduard Spertsyan",
+          "Wenderson Galeno",
+          "Ivan Toney"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.103Z",
+      "detailGeneral": {
+        "matchId": "5970131",
+        "matchName": "Al Qadsiah-vs-Al Ahli_Tue, Sep 8, 2026, 18:00 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 82
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970130,
+    "slug": "al-ittihad-al-fayha-2026-09-08-5970130",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T18:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 8577,
+      "name": "Al Ittihad",
+      "score": 0
+    },
+    "away": {
+      "id": 582749,
+      "name": "Al-Fayha",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 95,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Ittihad-vs-Al-Fayha#5970130",
+    "updatedAt": "2026-09-07T13:10:29.121Z",
+    "details": {
+      "venue": "Alinma Bank Stadium at King Abdullah Sport City",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Predrag Rajković",
+          "Ahmed Al-Julaydan",
+          "Danilo Pereira",
+          "Hasan Kadesh",
+          "Faris Abdi",
+          "Dion Lopy",
+          "Mukhtar Ali",
+          "Ahmed Alghamdi",
+          "Houssem Aouar",
+          "Steven Bergwijn",
+          "George Ilenikhena"
+        ],
+        "away": [
+          "Orlando Mosquera",
+          "Mohammed Al Baqawi",
+          "Paulo Oliveira",
+          "Mokher Al-Rashidi",
+          "Ahmed Bamsaud",
+          "Alfa Semedo",
+          "Hugo Moura",
+          "Ali Al Hussain",
+          "Nawaf Al Harthi",
+          "Lázaro",
+          "Fashion Sakala"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.121Z",
+      "detailGeneral": {
+        "matchId": "5970130",
+        "matchName": "Al Ittihad-vs-Al-Fayha_Tue, Sep 8, 2026, 18:00 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 82
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106404,
+    "slug": "aek-athens-lask-2026-09-08-6106404",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T16:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8563,
+      "name": "AEK Athens",
+      "score": 0
+    },
+    "away": {
+      "id": 9977,
+      "name": "LASK",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 58,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/AEK%20Athens-vs-LASK#6106404",
+    "updatedAt": "2026-09-07T13:10:29.253Z",
+    "details": {
+      "venue": "ALLWYN Arena",
+      "referee": "Luís Godinho",
+      "attendance": null,
+      "round": "1",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Thomas Strakosha",
+          "Lazaros Rota",
+          "Harold Moukoudi",
+          "Filipe Relvas",
+          "Stavros Pilios",
+          "Lovro Majer",
+          "Răzvan Marin",
+          "Milán Vitális",
+          "Aboubakary Koïta",
+          "Barnabás Varga",
+          "Luka Jović"
+        ],
+        "away": [
+          "Lukas Jungwirth",
+          "Xavier Mbuyamba",
+          "Alemão",
+          "Andrés Andrade",
+          "Kasper Jørgensen",
+          "Robert Ljubičić",
+          "Melayro Bogarde",
+          "George Bello",
+          "Sascha Horvath",
+          "Moses Usor",
+          "Christoph Lang"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.253Z",
+      "detailGeneral": {
+        "matchId": "6106404",
+        "matchName": "AEK Athens-vs-LASK_Tue, Sep 8, 2026, 16:45 UTC",
+        "leagueName": "Champions League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 57
+  },
+  {
+    "scopeVersion": 2,
+    "id": 6106295,
+    "slug": "club-brugge-aston-villa-2026-09-08-6106295",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T16:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 943230,
+      "name": "Champions League",
+      "country": "INT"
+    },
+    "home": {
+      "id": 8342,
+      "name": "Club Brugge",
+      "score": 0
+    },
+    "away": {
+      "id": 10252,
+      "name": "Aston Villa",
+      "score": 0
+    },
+    "tournamentStage": "1",
+    "section": "football",
+    "opportunityScore": 58,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Club%20Brugge-vs-Aston%20Villa#6106295",
+    "updatedAt": "2026-09-07T13:10:29.269Z",
+    "details": {
+      "venue": "Jan Breydelstadion",
+      "referee": "Sandro Schärer",
+      "attendance": null,
+      "round": "1",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Yann Sommer",
+          "Kyriani Sabbe",
+          "Han-Beom Lee",
+          "Brandon Mechele",
+          "Joaquin Seys",
+          "Freddie Potts",
+          "Hans Vanaken",
+          "Carlos Forbs",
+          "Hugo Vetlesen",
+          "Mamadou Diakhon",
+          "Nicolò Tresoldi"
+        ],
+        "away": [
+          "Zion Suzuki",
+          "Matty Cash",
+          "Victor Nilsson Lindelöf",
+          "Pau Torres",
+          "Ian Maatsen",
+          "Boubacar Kamara",
+          "João Gomes",
+          "John McGinn",
+          "Emiliano Buendía",
+          "George Hemmings",
+          "Nicolas Jackson"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.269Z",
+      "detailGeneral": {
+        "matchId": "6106295",
+        "matchName": "Club Brugge-vs-Aston Villa_Tue, Sep 8, 2026, 16:45 UTC",
+        "leagueName": "Champions League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 57
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970129,
+    "slug": "al-hazem-al-taawoun-2026-09-08-5970129",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T15:55:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 101911,
+      "name": "Al Hazem",
+      "score": 0
+    },
+    "away": {
+      "id": 205686,
+      "name": "Al-Taawoun",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 71,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Hazem-vs-Al-Taawoun#5970129",
+    "updatedAt": "2026-09-07T13:10:29.239Z",
+    "details": {
+      "venue": "Ar-Rass Stadium (Al Hazm Club Stadium)",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Ibrahim Zaied",
+          "Saud Al-Rashid",
+          "Sultan Tanker",
+          "Abdurahman Al Dakheel",
+          "Amine Ben Hamida",
+          "Mory Konaté",
+          "Bonheur Mugisha",
+          "Abdulaziz Al-Dwehe",
+          "Aboubacar Bah",
+          "Elton Acolatse",
+          "Afimico Pululu"
+        ],
+        "away": [
+          "Mailson",
+          "Bassam Al-Hurayji",
+          "Zineddine Belaïd",
+          "Muteb Al Mufarrij",
+          "Marin Petkov",
+          "Oscar Dorley",
+          "Aschraf El Mahdioui",
+          "Mohammed Marzouq Al Kuwaykibi",
+          "Younes El Bahraoui",
+          "Parfait Guiagon",
+          "Abderrazak Hamdallah"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.239Z",
+      "detailGeneral": {
+        "matchId": "5970129",
+        "matchName": "Al Hazem-vs-Al-Taawoun_Tue, Sep 8, 2026, 15:55 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 57
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970128,
+    "slug": "al-ettifaq-al-faisaly-2026-09-08-5970128",
+    "date": "2026-09-08",
+    "kickoff": "2026-09-08T15:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 101915,
+      "name": "Al-Ettifaq",
+      "score": 0
+    },
+    "away": {
+      "id": 205687,
+      "name": "Al-Faisaly",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 71,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al-Ettifaq-vs-Al-Faisaly#5970128",
+    "updatedAt": "2026-09-07T13:10:29.224Z",
+    "details": {
+      "venue": "Al Ettifaq Club Stadium",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Turki Ba Al Jawsh",
+          "Radhi Al Otaibi",
+          "Jack Hendry",
+          "Abdullah Ahmed Khateeb",
+          "Meshal Al Alaeli",
+          "Abdoulaye Kanté",
+          "Ondrej Duda",
+          "Jordan Larsson",
+          "Álvaro Medrán",
+          "Bersant Celina",
+          "Moussa Dembélé"
+        ],
+        "away": [
+          "Fernando Pacheco",
+          "Yaseen Barnawi",
+          "Abdoulaye Seck",
+          "Mohammed Jahfali",
+          "Mohammed Al Shanqiti",
+          "Andrei Girotto",
+          "Christian Bassogog",
+          "Eid Al-Muwallad",
+          "Abdulrahman Al Sharif",
+          "Jaime Seoane",
+          "Alexandre Mendy"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.224Z",
+      "detailGeneral": {
+        "matchId": "5970128",
+        "matchName": "Al-Ettifaq-vs-Al-Faisaly_Tue, Sep 8, 2026, 15:30 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 57
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868044,
+    "slug": "elche-real-sociedad-2026-09-07-5868044",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T19:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 10268,
+      "name": "Elche",
+      "score": 0
+    },
+    "away": {
+      "id": 8560,
+      "name": "Real Sociedad",
+      "score": 0
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 57,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Elche-vs-Real%20Sociedad#5868044",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749669,
+    "slug": "udinese-lazio-2026-09-07-5749669",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 8600,
+      "name": "Udinese",
+      "score": 0
+    },
+    "away": {
+      "id": 8543,
+      "name": "Lazio",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 57,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Udinese-vs-Lazio#5749669",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970127,
+    "slug": "al-hilal-neom-sc-2026-09-07-5970127",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T18:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 2529,
+      "name": "Al Hilal",
+      "score": 0
+    },
+    "away": {
+      "id": 1699505,
+      "name": "Neom SC",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 99,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Hilal-vs-Neom%20SC#5970127",
+    "updatedAt": "2026-09-07T13:10:29.088Z",
+    "details": {
+      "venue": "Kingdom Arena",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Yassine Bounou",
+          "Mohammed Mahzari",
+          "Hassan Al Tambakti",
+          "Kalidou Koulibaly",
+          "Moteb Al-Harbi",
+          "Sergej Milinković-Savić",
+          "Mohamed Kanno",
+          "Rúben Neves",
+          "Crysencio Summerville",
+          "Sultan Mandash",
+          "Ollie Watkins"
+        ],
+        "away": [
+          "Marcin Bułka",
+          "Mohammed Al Burayk",
+          "Malang Sarr",
+          "Nathan Zézé",
+          "Hawsawi Ahmed",
+          "Muhannad Al Saad",
+          "Aloyayari Abdulmalik",
+          "Amadou Koné",
+          "Khalil Al Absi",
+          "Alexandre Lacazette",
+          "Haroune Camara"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.088Z",
+      "detailGeneral": {
+        "matchId": "5970127",
+        "matchName": "Al Hilal-vs-Neom SC_Mon, Sep 7, 2026, 18:00 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 82
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868046,
+    "slug": "getafe-celta-vigo-2026-09-07-5868046",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T17:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 8305,
+      "name": "Getafe",
+      "score": 0
+    },
+    "away": {
+      "id": 9910,
+      "name": "Celta Vigo",
+      "score": 0
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 57,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Getafe-vs-Celta%20Vigo#5868046",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749662,
+    "slug": "cagliari-lecce-2026-09-07-5749662",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T16:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 8529,
+      "name": "Cagliari",
+      "score": 0
+    },
+    "away": {
+      "id": 9888,
+      "name": "Lecce",
+      "score": 0
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 57,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Cagliari-vs-Lecce#5749662",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 40
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5970126,
+    "slug": "al-khaleej-al-riyadh-2026-09-07-5970126",
+    "date": "2026-09-07",
+    "kickoff": "2026-09-07T15:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "upcoming",
+    "score": "0 - 0",
+    "league": {
+      "id": 536,
+      "name": "Saudi Pro League",
+      "country": "KSA"
+    },
+    "home": {
+      "id": 550433,
+      "name": "Al Khaleej",
+      "score": 0
+    },
+    "away": {
+      "id": 582739,
+      "name": "Al Riyadh",
+      "score": 0
+    },
+    "tournamentStage": "6",
+    "section": "saudi",
+    "opportunityScore": 75,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Al%20Khaleej-vs-Al%20Riyadh#5970126",
+    "updatedAt": "2026-09-07T13:10:29.209Z",
+    "details": {
+      "venue": "Prince Mohammed Bin Fahd Stadium",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Anthony Moris",
+          "Raed Al Shanqiti",
+          "Kiki Kouyaté",
+          "Mohammed Al-Khabrani",
+          "Pedro Rebocho",
+          "Majed Omar Kanabah",
+          "Omar Mascarell",
+          "Nawaf Al-Sadi",
+          "Miguel Crespo",
+          "Musa Barrow",
+          "Thamer Al Khaibari"
+        ],
+        "away": [
+          "Milan Borjan",
+          "Sultan Al-Essa",
+          "Mohammed Al-Khaibari",
+          "Rodrigo Abascal",
+          "Sulaiman Hazazi",
+          "Teddy Okou",
+          "Victor Lekhal",
+          "Fahad Al Jayzani",
+          "Essam Bahri",
+          "Hassan Al-Ali",
+          "Leandro Antunes"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.209Z",
+      "detailGeneral": {
+        "matchId": "5970126",
+        "matchName": "Al Khaleej-vs-Al Riyadh_Mon, Sep 7, 2026, 15:30 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 72
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868045,
+    "slug": "espanyol-sevilla-2026-09-06-5868045",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T19:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "1 - 1",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 8558,
+      "name": "Espanyol",
+      "score": 1
+    },
+    "away": {
+      "id": 8302,
+      "name": "Sevilla",
+      "score": 1
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Espanyol-vs-Sevilla#5868045",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5802923,
+    "slug": "marseille-paris-fc-2026-09-06-5802923",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "2 - 3",
+    "league": {
+      "id": 53,
+      "name": "Ligue 1",
+      "country": "FRA"
+    },
+    "home": {
+      "id": 8592,
+      "name": "Marseille",
+      "score": 2
+    },
+    "away": {
+      "id": 6379,
+      "name": "Paris FC",
+      "score": 3
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Marseille-vs-Paris%20FC#5802923",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749667,
+    "slug": "juventus-milan-2026-09-06-5749667",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T18:45:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "1 - 1",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 9885,
+      "name": "Juventus",
+      "score": 1
+    },
+    "away": {
+      "id": 8564,
+      "name": "Milan",
+      "score": 1
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 79,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Juventus-vs-Milan#5749667",
+    "updatedAt": "2026-09-07T13:10:29.156Z",
+    "details": {
+      "venue": "Allianz Stadium",
+      "referee": "Maurizio Mariani",
+      "attendance": 41577,
+      "round": "3",
+      "events": [
+        {
+          "minute": "45",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "45",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "61",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "61",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "61",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "64",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "65",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "68",
+          "type": "Goal",
+          "player": "Alphadjo Cissè",
+          "assist": "Samuel Chukwueze",
+          "teamId": null,
+          "team": "",
+          "score": "0,1",
+          "description": ""
+        },
+        {
+          "minute": "76",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "79",
+          "type": "Card",
+          "player": "Pervis Estupinán",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "82",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "88",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "88",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "89",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90 + 2",
+          "type": "Card",
+          "player": "Koni De Winter",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": "+2"
+        },
+        {
+          "minute": "90 + 2",
+          "type": "Goal",
+          "player": "Federico Gatti",
+          "assist": "Teun Koopmeiners",
+          "teamId": null,
+          "team": "",
+          "score": "1,1",
+          "description": "+2"
+        },
+        {
+          "minute": "90 + 6",
+          "type": "Card",
+          "player": "Alphadjo Cissè",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": "+6"
+        },
+        {
+          "minute": "90 + 6",
+          "type": "Card",
+          "player": "Federico Gatti",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": "+6"
+        },
+        {
+          "minute": "90",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        }
+      ],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "49",
+          "away": "51"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "1.59",
+          "away": "0.11"
+        },
+        {
+          "title": "Total shots",
+          "home": "14",
+          "away": "3"
+        },
+        {
+          "title": "Shots on target",
+          "home": "5",
+          "away": "1"
+        },
+        {
+          "title": "Big chances",
+          "home": "3",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "2",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "379 (84%)",
+          "away": "413 (86%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "1",
+          "away": "3"
+        },
+        {
+          "title": "Corners",
+          "home": "7",
+          "away": "1"
+        }
+      ],
+      "lineups": {
+        "home": [
+          "Guglielmo Vicario",
+          "Pierre Kalulu",
+          "Gleison Bremer",
+          "Jhon Lucumí",
+          "Zeki Çelik",
+          "Manuel Locatelli",
+          "Douglas Luiz",
+          "Francisco Conceição",
+          "Nicolás González",
+          "Kerim Alajbegović",
+          "Randal Kolo Muani"
+        ],
+        "away": [
+          "Mike Maignan",
+          "Mario Gila",
+          "Koni De Winter",
+          "Strahinja Pavlović",
+          "Diego Moreira",
+          "Luka Modrić",
+          "Yunus Musah",
+          "Pervis Estupinán",
+          "Adrien Rabiot",
+          "Alexis Saelemaekers",
+          "Gonçalo Ramos"
+        ]
+      },
+      "topPlayers": [],
+      "xg": {
+        "home": "1.59",
+        "away": "0.11"
+      },
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.156Z",
+      "detailGeneral": {
+        "matchId": "5749667",
+        "matchName": "Juventus-vs-Milan_Sun, Sep 6, 2026, 18:45 UTC",
+        "leagueName": "Serie A"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 90
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868041,
+    "slug": "deportivo-alaves-osasuna-2026-09-06-5868041",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T16:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "5 - 2",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 9866,
+      "name": "Deportivo Alavés",
+      "score": 5
+    },
+    "away": {
+      "id": 8371,
+      "name": "Osasuna",
+      "score": 2
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Deportivo%20Alav%C3%A9s-vs-Osasuna#5868041",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868047,
+    "slug": "malaga-levante-2026-09-06-5868047",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T16:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "0 - 0",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 9864,
+      "name": "Málaga",
+      "score": 0
+    },
+    "away": {
+      "id": 8581,
+      "name": "Levante",
+      "score": 0
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/M%C3%A1laga-vs-Levante#5868047",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749661,
+    "slug": "bologna-sassuolo-2026-09-06-5749661",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T16:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "2 - 2",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 9857,
+      "name": "Bologna",
+      "score": 2
+    },
+    "away": {
+      "id": 7943,
+      "name": "Sassuolo",
+      "score": 2
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Bologna-vs-Sassuolo#5749661",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5795435,
+    "slug": "arsenal-chelsea-2026-09-06-5795435",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T15:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "2 - 1",
+    "league": {
+      "id": 47,
+      "name": "Premier League",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 9825,
+      "name": "Arsenal",
+      "score": 2
+    },
+    "away": {
+      "id": 8455,
+      "name": "Chelsea",
+      "score": 1
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 79,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Arsenal-vs-Chelsea#5795435",
+    "updatedAt": "2026-09-07T13:10:29.177Z",
+    "details": {
+      "venue": "Emirates Stadium",
+      "referee": "Chris Kavanagh",
+      "attendance": 60240,
+      "round": "3",
+      "events": [
+        {
+          "minute": "2",
+          "type": "Goal",
+          "player": "Morgan Rogers",
+          "assist": "Jorrel Hato",
+          "teamId": null,
+          "team": "",
+          "score": "0,1",
+          "description": ""
+        },
+        {
+          "minute": "12",
+          "type": "VAR",
+          "player": "Riccardo Calafiori",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "14",
+          "type": "Card",
+          "player": "João Pedro",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "25",
+          "type": "Goal",
+          "player": "Kai Havertz",
+          "assist": "Declan Rice",
+          "teamId": null,
+          "team": "",
+          "score": "1,1",
+          "description": ""
+        },
+        {
+          "minute": "45",
+          "type": "Card",
+          "player": "Cole Palmer",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "45",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "45",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "50",
+          "type": "Goal",
+          "player": "Martin Ødegaard",
+          "assist": "Christos Tzolis",
+          "teamId": null,
+          "team": "",
+          "score": "2,1",
+          "description": ""
+        },
+        {
+          "minute": "58",
+          "type": "Card",
+          "player": "Maxence Lacroix",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "58",
+          "type": "Card",
+          "player": "Christos Tzolis",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "60",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "60",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "67",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "67",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "77",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "78",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "81",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "83",
+          "type": "Card",
+          "player": "Morgan Rogers",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "87",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90 + 5",
+          "type": "Card",
+          "player": "Mikel Merino",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": "+5"
+        },
+        {
+          "minute": "90",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        }
+      ],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "54",
+          "away": "46"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "2.05",
+          "away": "0.39"
+        },
+        {
+          "title": "Total shots",
+          "home": "16",
+          "away": "13"
+        },
+        {
+          "title": "Shots on target",
+          "home": "9",
+          "away": "5"
+        },
+        {
+          "title": "Big chances",
+          "home": "4",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "3",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "390 (85%)",
+          "away": "314 (82%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "2",
+          "away": "4"
+        },
+        {
+          "title": "Corners",
+          "home": "5",
+          "away": "3"
+        }
+      ],
+      "lineups": {
+        "home": [
+          "David Raya",
+          "Ben White",
+          "Ezri Konsa",
+          "Gabriel",
+          "Riccardo Calafiori",
+          "Declan Rice",
+          "Myles Lewis-Skelly",
+          "Bukayo Saka",
+          "Martin Ødegaard",
+          "Christos Tzolis",
+          "Kai Havertz"
+        ],
+        "away": [
+          "Emiliano Martínez",
+          "Josh Acheampong",
+          "Maxence Lacroix",
+          "Wesley Fofana",
+          "Pedro Neto",
+          "Roméo Lavia",
+          "Reece James",
+          "Jorrel Hato",
+          "Cole Palmer",
+          "Morgan Rogers",
+          "João Pedro"
+        ]
+      },
+      "topPlayers": [],
+      "xg": {
+        "home": "2.05",
+        "away": "0.39"
+      },
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.177Z",
+      "detailGeneral": {
+        "matchId": "5795435",
+        "matchName": "Arsenal-vs-Chelsea_Sun, Sep 6, 2026, 15:30 UTC",
+        "leagueName": "Premier League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 90
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5881154,
+    "slug": "frankfurt-augsburg-2026-09-06-5881154",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T15:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "1 - 4",
+    "league": {
+      "id": 54,
+      "name": "Bundesliga",
+      "country": "GER"
+    },
+    "home": {
+      "id": 9810,
+      "name": "Frankfurt",
+      "score": 1
+    },
+    "away": {
+      "id": 8406,
+      "name": "Augsburg",
+      "score": 4
+    },
+    "tournamentStage": "2",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Frankfurt-vs-Augsburg#5881154",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5802919,
+    "slug": "angers-rennes-2026-09-06-5802919",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T15:15:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "1 - 2",
+    "league": {
+      "id": 53,
+      "name": "Ligue 1",
+      "country": "FRA"
+    },
+    "home": {
+      "id": 8121,
+      "name": "Angers",
+      "score": 1
+    },
+    "away": {
+      "id": 9851,
+      "name": "Rennes",
+      "score": 2
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Angers-vs-Rennes#5802919",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5868049,
+    "slug": "valencia-barcelona-2026-09-06-5868049",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T14:15:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "0 - 5",
+    "league": {
+      "id": 87,
+      "name": "LaLiga",
+      "country": "ESP"
+    },
+    "home": {
+      "id": 10267,
+      "name": "Valencia",
+      "score": 0
+    },
+    "away": {
+      "id": 8634,
+      "name": "Barcelona",
+      "score": 5
+    },
+    "tournamentStage": "4",
+    "section": "football",
+    "opportunityScore": 79,
+    "indexable": true,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Valencia-vs-Barcelona#5868049",
+    "updatedAt": "2026-09-07T13:10:29.196Z",
+    "details": {
+      "venue": "Estadio de Mestalla",
+      "referee": "Isidro Díaz de Mera Escuderos",
+      "attendance": 47319,
+      "round": "4",
+      "events": [
+        {
+          "minute": "6",
+          "type": "Goal",
+          "player": "Lamine Yamal",
+          "assist": "Fermín López",
+          "teamId": null,
+          "team": "",
+          "score": "0,1",
+          "description": ""
+        },
+        {
+          "minute": "8",
+          "type": "VAR",
+          "player": "Lamine Yamal",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "22",
+          "type": "Goal",
+          "player": "Fermín López",
+          "assist": "Anthony Gordon",
+          "teamId": null,
+          "team": "",
+          "score": "0,2",
+          "description": ""
+        },
+        {
+          "minute": "29",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "45",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "45 + 3",
+          "type": "Card",
+          "player": "Pau Cubarsí",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": "+3"
+        },
+        {
+          "minute": "45",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "47",
+          "type": "Card",
+          "player": "Rodri",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "50",
+          "type": "Goal",
+          "player": "Raphinha",
+          "assist": "Fermín López",
+          "teamId": null,
+          "team": "",
+          "score": "0,3",
+          "description": ""
+        },
+        {
+          "minute": "54",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "54",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "54",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "62",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "62",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "62",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "63",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "63",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "65",
+          "type": "Card",
+          "player": "Fermín López",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "75",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "76",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "79",
+          "type": "Goal",
+          "player": "Pedri",
+          "assist": "Dani Olmo",
+          "teamId": null,
+          "team": "",
+          "score": "0,4",
+          "description": ""
+        },
+        {
+          "minute": "81",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "81",
+          "type": "Card",
+          "player": "Arnau Martínez",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "84",
+          "type": "Goal",
+          "player": "Lamine Yamal",
+          "assist": "Dani Olmo",
+          "teamId": null,
+          "team": "",
+          "score": "0,5",
+          "description": ""
+        },
+        {
+          "minute": "86",
+          "type": "Comment",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90",
+          "type": "AddedTime",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
+        {
+          "minute": "90",
+          "type": "Half",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        }
+      ],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "26",
+          "away": "74"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "0.66",
+          "away": "4.08"
+        },
+        {
+          "title": "Total shots",
+          "home": "3",
+          "away": "25"
+        },
+        {
+          "title": "Shots on target",
+          "home": "2",
+          "away": "10"
+        },
+        {
+          "title": "Big chances",
+          "home": "2",
+          "away": "7"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "2",
+          "away": "4"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "205 (73%)",
+          "away": "728 (92%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "1",
+          "away": "3"
+        },
+        {
+          "title": "Corners",
+          "home": "1",
+          "away": "4"
+        }
+      ],
+      "lineups": {
+        "home": [
+          "Stole Dimitrievski",
+          "Arnau Martínez",
+          "Mouctar Diakhaby",
+          "Pepelu",
+          "Pablo Maffeo",
+          "Jesus Vázquez",
+          "David Otorbi",
+          "Filip Ugrinic",
+          "Aliou Dieng",
+          "Javier Guerra",
+          "Arnaut Danjuma"
+        ],
+        "away": [
+          "Joan García",
+          "Eric García",
+          "Pau Cubarsí",
+          "Gerard Martín",
+          "Xavi Espart",
+          "Rodri",
+          "Pedri",
+          "Lamine Yamal",
+          "Fermín López",
+          "Anthony Gordon",
+          "Raphinha"
+        ]
+      },
+      "topPlayers": [],
+      "xg": {
+        "home": "0.66",
+        "away": "4.08"
+      },
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-07T13:10:29.196Z",
+      "detailGeneral": {
+        "matchId": "5868049",
+        "matchName": "Valencia-vs-Barcelona_Sun, Sep 6, 2026, 14:15 UTC",
+        "leagueName": "LaLiga"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 90
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5881155,
+    "slug": "hamburger-sv-mainz-2026-09-06-5881155",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T13:30:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "0 - 5",
+    "league": {
+      "id": 54,
+      "name": "Bundesliga",
+      "country": "GER"
+    },
+    "home": {
+      "id": 9790,
+      "name": "Hamburger SV",
+      "score": 0
+    },
+    "away": {
+      "id": 9905,
+      "name": "Mainz",
+      "score": 5
+    },
+    "tournamentStage": "2",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Hamburger%20SV-vs-Mainz#5881155",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5795438,
+    "slug": "everton-man-united-2026-09-06-5795438",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T13:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "2 - 2",
+    "league": {
+      "id": 47,
+      "name": "Premier League",
+      "country": "ENG"
+    },
+    "home": {
+      "id": 8668,
+      "name": "Everton",
+      "score": 2
+    },
+    "away": {
+      "id": 10260,
+      "name": "Man United",
+      "score": 2
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Everton-vs-Man%20United#5795438",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5802927,
+    "slug": "troyes-strasbourg-2026-09-06-5802927",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T13:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "2 - 6",
+    "league": {
+      "id": 53,
+      "name": "Ligue 1",
+      "country": "FRA"
+    },
+    "home": {
+      "id": 10242,
+      "name": "Troyes",
+      "score": 2
+    },
+    "away": {
+      "id": 9848,
+      "name": "Strasbourg",
+      "score": 6
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Troyes-vs-Strasbourg#5802927",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749664,
+    "slug": "frosinone-venezia-2026-09-06-5749664",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T13:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "3 - 2",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 9891,
+      "name": "Frosinone",
+      "score": 3
+    },
+    "away": {
+      "id": 7881,
+      "name": "Venezia",
+      "score": 2
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Frosinone-vs-Venezia#5749664",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  },
+  {
+    "scopeVersion": 2,
+    "id": 5749668,
+    "slug": "parma-monza-2026-09-06-5749668",
+    "date": "2026-09-06",
+    "kickoff": "2026-09-06T13:00:00.000Z",
+    "timezone": "Asia/Riyadh",
+    "state": "final",
+    "score": "1 - 1",
+    "league": {
+      "id": 55,
+      "name": "Serie A",
+      "country": "ITA"
+    },
+    "home": {
+      "id": 10167,
+      "name": "Parma",
+      "score": 1
+    },
+    "away": {
+      "id": 6504,
+      "name": "Monza",
+      "score": 1
+    },
+    "tournamentStage": "3",
+    "section": "football",
+    "opportunityScore": 55,
+    "indexable": false,
+    "source": "FotMob",
+    "sourceUrl": "https://www.fotmob.com/matches/Parma-vs-Monza#5749668",
+    "updatedAt": "2026-09-07T13:10:28.376Z",
+    "indexQualityScore": 48
+  }
+]
