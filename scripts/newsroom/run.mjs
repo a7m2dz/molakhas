@@ -130,14 +130,18 @@ if (!configured()) {
 function qualityScore(rewritten, item) {
   const wordCount = rewritten.body.join(' ').split(/\s+/).filter(Boolean).length;
   const paragraphCount = rewritten.body.length;
-  let score = 45;
+  let score = 35;
   if (wordCount >= 120) score += 10;
   if (wordCount >= 180) score += 8;
   if (paragraphCount >= 4) score += 8;
-  if (rewritten.title.length >= 25 && rewritten.title.length <= 95) score += 8;
-  if (rewritten.excerpt.length >= 80 && rewritten.excerpt.length <= 220) score += 8;
-  if (rewritten.confidence >= 80) score += 8;
-  if (item.trust >= 92) score += 5;
+  if (rewritten.title.length >= 25 && rewritten.title.length <= 95) score += 7;
+  if (rewritten.excerpt.length >= 80 && rewritten.excerpt.length <= 220) score += 7;
+  if (rewritten.seoTitle.length >= 25 && rewritten.seoTitle.length <= 70) score += 5;
+  if (rewritten.metaDescription.length >= 120 && rewritten.metaDescription.length <= 180) score += 5;
+  if (rewritten.imageAlt.length >= 35 && rewritten.imageAlt.length <= 150) score += 5;
+  if (rewritten.focusKeyword.length >= 4) score += 3;
+  if (rewritten.confidence >= 80) score += 5;
+  if (item.trust >= 92) score += 2;
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
@@ -155,8 +159,19 @@ for (const item of selected) {
       slug,
       section: item.section,
       title: rewritten.title,
+      seoTitle: rewritten.seoTitle || rewritten.title,
+      metaDescription: rewritten.metaDescription || rewritten.excerpt,
+      focusKeyword: rewritten.focusKeyword,
       excerpt: rewritten.excerpt || rewritten.body[0].slice(0, 180),
       body: rewritten.body.slice(0, 8),
+      image: {
+        src: `/news-images/${slug}.webp`,
+        alt: rewritten.imageAlt || rewritten.title,
+        caption: rewritten.imageCaption || rewritten.excerpt,
+        width: 1200,
+        height: 675,
+        type: 'image/webp'
+      },
       sourceName: item.sourceName,
       sourceUrl: item.link,
       sourceId: item.sourceId,
