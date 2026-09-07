@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const issuesUrl = 'https://github.com/a7m2dz/molakhas/issues/new';
+---
+<BaseLayout title="تواصل مع ملخص" description="قناة التواصل مع فريق ملخص للتصحيحات، الملاحظات التحريرية وحقوق الصور.">
+  <section class="shell static-page prose-page">
+    <span class="kicker">تواصل معنا</span><h1>التواصل التحريري</h1>
+    <p>للتصحيحات، الملاحظات التحريرية، طلب إزالة أو تعديل صورة، أو أي استفسار متعلق بحقوق المحتوى، يمكنك فتح رسالة عبر قناة المشروع العامة أدناه مع إرفاق رابط الصفحة المعنية.</p>
+    <p><a class="button" href={issuesUrl} target="_blank" rel="noopener nofollow">فتح طلب تواصل ←</a></p>
+    <p class="muted-note">لا تضع معلومات شخصية أو حساسة في الرسائل العامة.</p>
+  </section>
+</BaseLayout>
