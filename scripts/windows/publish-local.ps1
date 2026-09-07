@@ -66,14 +66,10 @@ if (-not (Test-OmniRoutePort)) {
 }
 
 Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin main }
-
-if (-not (Test-Path (Join-Path $RepoPath 'node_modules'))) {
-  Invoke-Checked 'Installing dependencies...' { npm install --no-audit --no-fund }
-}
-
+Invoke-Checked 'Syncing dependencies...' { npm install --no-audit --no-fund }
 Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
 Invoke-Checked 'Scanning and generating stories...' { npm run newsroom }
-Invoke-Checked 'Verifying production build...' { npm run build }
+Invoke-Checked 'Verifying production build and WebP images...' { npm run build }
 
 $changes = git status --porcelain -- src/data/stories.json
 if (-not $changes) {
@@ -90,4 +86,4 @@ if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE
 git push origin main
 if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
 
-Write-Host '[Molakhas] Done. Cloudflare will deploy the new commit automatically.'
+Write-Host '[Molakhas] Done. Cloudflare will deploy the new commit and generate WebP images automatically.'
