@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LurvuePromo from '../../components/LurvuePromo.astro';
+import stories from '../../data/stories.json';
+import { sectionMap } from '../../data/sections';
+import { topicCounts, topicSlug } from '../../lib/content';
+
+export function getStaticPaths() {
+  const counts = topicCounts(stories as any[]);
+  return [...counts.entries()]
+    .filter(([, value]) => value.count >= 2)
+    .map(([slug, value]) => ({
+      params: { slug },
+      props: {
+        tag: value.name,
+        items: stories.filter((s) => s.status === 'approved' && (s.tags || []).some((t) => topicSlug(t) === slug))
+      }
+    }));
+}
+
+const { tag, items } = Astro.props;
+items.sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
+const leadSection = items[0]?.section || 'general';
+const description = `آخر أخبار ${tag} وتحديثاته في ملخص، مرتبة من الأحدث مع مصادر واضحة وروابط للأخبار المرتبطة.`;
+---
+<BaseLayout title={`${tag} - آخر الأخبار | ملخص`} description={description} section={leadSection}>
+  <header class="section-hero shell"><span>🏷️</span><div><small>موضوع</small><h1>{tag}</h1><p>{description}</p><div class="section-count">{items.length} خبر</div></div></header>
+  <section class="shell"><LurvuePromo section={leadSection} position="topic-page" keyword={tag} /></section>
+  <section class="shell section-block">
+    <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>أخبار {tag}</h2></div></div>
+    <div class="story-grid">{items.map((story) => <article class="story-card story-card-media">
+      <a href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={story.image?.src || `/news-images/${story.slug}.webp`} alt={story.image?.alt || ''} width="1200" height="675" loading="lazy" decoding="async" /></a>
+      <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
+      <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
+      <p>{story.excerpt}</p>
+      <div class="card-footer"><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small><a href={`/${story.section}/${story.slug}`}>اقرأ ←</a></div>
+    </article>)}</div>
+  </section>
+</BaseLayout>
+
+<style>.story-card-media{padding:0;overflow:hidden}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>a:first-child img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}</style>

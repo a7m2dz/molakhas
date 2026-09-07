@@ -1,22 +1,25 @@
 {
   "name": "molakhas",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/newsroom/generate-images.mjs && astro build",
     "preview": "astro preview",
     "newsroom": "node scripts/newsroom/run.mjs",
     "newsroom:dry": "node scripts/newsroom/run.mjs --dry-run",
-    "omniroute:test": "node scripts/newsroom/omniroute-test.mjs"
+    "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
+    "images:generate": "node scripts/newsroom/generate-images.mjs",
+    "indexnow": "node scripts/newsroom/indexnow.mjs"
   },
   "dependencies": {
     "astro": "^5.13.5",
-    "fast-xml-parser": "^5.2.5"
+    "fast-xml-parser": "^5.2.5",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "wrangler": "^4.33.1"
+    "wrangler": "^4.34.0"
   },
   "engines": { "node": ">=22" }
 }

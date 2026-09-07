@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stories from '../../data/stories.json';
+const recent = stories.filter((s)=>s.status==='approved').sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,12);
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Organization',
+  name:'فريق تحرير ملخص',
+  url:`${siteUrl}/authors/editorial-team`,
+  parentOrganization:{'@type':'Organization',name:'ملخص',url:siteUrl},
+  description:'فريق التحرير المسؤول عن مراجعة وصياغة الأخبار الرياضية في منصة ملخص.'
+};
+---
+<BaseLayout title="فريق تحرير ملخص" description="تعرف على منهج فريق تحرير ملخص ومهمته في مراجعة الأخبار الرياضية والمصادر قبل النشر.">
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <section class="shell static-page prose-page">
+    <span class="kicker">الكاتب</span><h1>فريق تحرير ملخص</h1>
+    <p>فريق تحرير ملخص مسؤول عن مراجعة الأخبار المنشورة، وضوح العنوان، سلامة الإسناد إلى المصدر، وقواعد الجودة التحريرية. تستخدم المنصة أتمتة وذكاء اصطناعي كمساعد تحريري، بينما تمنع سياساتنا اختلاق معلومات غير موجودة في المصدر.</p>
+    <p><a class="button" href="/editorial-policy">اقرأ سياسة التحرير</a></p>
+    {recent.length > 0 && <section class="related"><div class="section-title"><h2>أحدث الأخبار</h2></div><div class="story-list">{recent.map((story)=><article><div><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div><a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a></article>)}</div></section>}
+  </section>
+</BaseLayout>

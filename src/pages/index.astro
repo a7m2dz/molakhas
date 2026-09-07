@@ -3,32 +3,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LurvuePromo from '../components/LurvuePromo.astro';
 import { sections, sectionMap } from '../data/sections';
 import stories from '../data/stories.json';
+import { topicCounts } from '../lib/content';
 
 const approved = stories.filter((story) => story.status === 'approved').sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
 const lead = approved[0];
 const latest = approved.slice(1, 7);
 const lastUpdated = approved[0]?.publishedAt;
 const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug, approved.filter((story) => story.section === section.slug).length]));
+const topics = [...topicCounts(stories as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
 ---
-<BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، الكرة السعودية والعالمية، الانتقالات، UFC، WWE والملاكمة.">
+<BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، الكرة السعودية والعالمية، الانتقالات، UFC، WWE والملاكمة بصياغة عربية سريعة ومصادر واضحة.">
   <section class="hero shell">
     <div class="hero-copy">
       <span class="kicker">الخبر المهم، بسرعة</span>
       <h1>كل الرياضة.<br/><em>بلا حشو.</em></h1>
-      <p>ملخص يجمع أهم الأخبار الرياضية، يقلل التكرار، ويعرض لك ما يستحق القراءة أولًا.</p>
+      <p>ملخص يجمع أهم الأخبار الرياضية، يقلل التكرار، ويعرض لك ما يستحق القراءة أولًا مع مصدر واضح لكل خبر.</p>
       <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
     </div>
-    {lead ? <a class="lead-card" href={`/${lead.section}/${lead.slug}`}>
-      <span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span>
-      <h2>{lead.title}</h2><p>{lead.excerpt}</p><b>اقرأ الخبر ←</b>
+    {lead ? <a class="lead-card lead-card-image" href={`/${lead.section}/${lead.slug}`}>
+      <img src={lead.image?.src || `/news-images/${lead.slug}.webp`} alt={lead.image?.alt || ''} width="1200" height="675" fetchpriority="high" decoding="async" />
+      <div class="lead-overlay"><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><h2>{lead.title}</h2><p>{lead.excerpt}</p><b>اقرأ الخبر ←</b></div>
     </a> : <div class="lead-card lead-placeholder"><span>غرفة الأخبار</span><h2>الأخبار الجديدة في الطريق</h2><p>يتم فحص المصادر وإزالة التكرار قبل نشر الأخبار التي تستحق القراءة.</p></div>}
   </section>
 
   <section class="ticker shell"><span>الأقسام</span>{sections.map((s) => <a href={`/${s.slug}`}>{s.icon} {s.name} <small>{sectionCounts[s.slug] || 0}</small></a>)}</section>
 
+  {topics.length > 0 && <section class="topic-strip shell" aria-label="مواضيع رائجة"><span>مواضيع رائجة</span>{topics.map(([slug,data])=><a href={`/topic/${slug}`}>#{data.name} <small>{data.count}</small></a>)}</section>}
+
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/football">كرة القدم ←</a></div>
-    {latest.length ? <div class="story-grid">{latest.map((story) => <article class="story-card">
+    {latest.length ? <div class="story-grid">{latest.map((story) => <article class="story-card story-card-media">
+      <a class="story-image-link" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={story.image?.src || `/news-images/${story.slug}.webp`} alt={story.image?.alt || ''} width="1200" height="675" loading="lazy" decoding="async" /></a>
       <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
       <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
       <p>{story.excerpt}</p>
@@ -36,10 +41,14 @@ const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug
     </article>)}</div> : <div class="empty compact-empty"><h3>بانتظار أول دفعة أخبار</h3><p>بمجرد وصول الأخبار المعتمدة ستظهر هنا تلقائيًا.</p></div>}
   </section>
 
-  <section class="shell"><LurvuePromo section="general" /></section>
+  <section class="shell"><LurvuePromo section="general" position="home-middle" /></section>
 
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">تغطية حسب اهتمامك</span><h2>اختر رياضتك</h2></div></div>
     <div class="category-grid">{sections.map((s)=><a class="category-card" href={`/${s.slug}`}><span>{s.icon}</span><div><h3>{s.name}</h3><p>{s.description}</p><small>{sectionCounts[s.slug] || 0} خبر منشور</small></div></a>)}</div>
   </section>
 </BaseLayout>
+
+<style>
+.lead-card-image{position:relative;overflow:hidden;padding:0;min-height:410px}.lead-card-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.lead-card-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 15%,#07101d33 45%,#07101df2 100%)}.lead-overlay{position:relative;z-index:1;margin-top:auto;padding:32px}.lead-overlay span{color:var(--accent);font-size:12px;font-weight:900}.lead-overlay h2{margin:10px 0}.lead-overlay p{color:#d4dfec}.story-card-media{padding:0;overflow:hidden}.story-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}.topic-strip{display:flex;gap:9px;align-items:center;overflow:auto;padding:16px 0;white-space:nowrap;scrollbar-width:none}.topic-strip>span{color:var(--muted);font-size:12px}.topic-strip a{font-size:12px;border:1px solid var(--line);background:#0a1725;padding:6px 10px;border-radius:999px}.topic-strip small{color:var(--accent)}
+</style>

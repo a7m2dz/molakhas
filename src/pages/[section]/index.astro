@@ -10,14 +10,17 @@ export function getStaticPaths() {
 const { section } = Astro.props;
 const items = stories.filter((story) => story.status === 'approved' && story.section === section.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
 ---
-<BaseLayout title={`${section.name} | ملخص`} description={section.description} section={section.slug}>
+<BaseLayout title={`${section.name} - آخر الأخبار | ملخص`} description={`${section.description} آخر الأخبار مرتبة من الأحدث مع صور ومصادر واضحة.`} section={section.slug}>
   <header class="section-hero shell"><span>{section.icon}</span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p><div class="section-count">{items.length} خبر منشور</div></div></header>
-  <section class="shell"><LurvuePromo section={section.slug} /></section>
+  <section class="shell"><LurvuePromo section={section.slug} position="section-top" /></section>
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>آخر أخبار {section.name}</h2></div></div>
-    <div class="story-list">{items.length ? items.map((story) => <article>
-      <div><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
+    <div class="story-list media-list">{items.length ? items.map((story) => <article>
+      <a class="list-thumb" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={story.image?.src || `/news-images/${story.slug}.webp`} alt={story.image?.alt || ''} width="1200" height="675" loading="lazy" decoding="async" /></a>
+      <div class="list-copy"><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
       <a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a>
     </article>) : <div class="empty"><h2>نجهّز لك التغطية 👀</h2><p>سيظهر أحدث محتوى هذا القسم هنا فور اجتيازه بوابة الجودة.</p></div>}</div>
   </section>
 </BaseLayout>
+
+<style>.media-list article{display:grid;grid-template-columns:220px 1fr auto}.list-thumb img{display:block;width:220px;height:124px;object-fit:cover;border-radius:12px}.list-copy{min-width:0}@media(max-width:760px){.media-list article{grid-template-columns:1fr}.list-thumb img{width:100%;height:auto;aspect-ratio:16/9}.read-more{margin-top:4px}}</style>
