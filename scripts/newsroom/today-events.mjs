@@ -171,12 +171,7 @@ async function espnEvents({ sport, league, label, now, sourceName, horizonHours 
         const diff = +start - +new Date(now);
         if (diff < -6 * 3_600_000 || diff > horizonHours * 3_600_000) continue;
         const competition = Array.isArray(event?.competitions) ? event.competitions[0] : null;
-        const subtitle = clean(
-          competition?.notes?.[0]?.headline ||
-          competition?.type?.text ||
-          data?.leagues?.[0]?.name ||
-          label
-        );
+        const subtitle = clean(competition?.notes?.[0]?.headline || competition?.type?.text || data?.leagues?.[0]?.name || label);
         events.push({
           id: `${league}-${event.id}`,
           sport: league === 'nba' ? 'nba' : 'mma',
@@ -223,7 +218,7 @@ function easternToUtc(year, month, day, hour, minute = 0) {
 }
 
 function parseEtDate(text, now) {
-  const match = clean(text).match(/(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+)?(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:[,]?\s+(20\d{2}))?.*?(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)\s*ET/iu);
+  const match = clean(text).match(/(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+)?(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:[,]?\s+(20\d{2}))?.*?(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)\s*E(?:D|S)?T/iu);
   if (!match) return null;
   const month = MONTHS[String(match[1]).toLowerCase().replace('.', '')];
   if (month === undefined) return null;
@@ -254,20 +249,54 @@ function parseTapologyUfc(html, now) {
     const start = parseEtDate(context, now);
     if (!start || !inUpcomingWindow(start, now)) continue;
     seen.add(urlPath);
-    const locationMatch = context.match(/(?:MMA\s*[•·-]\s*|Image\s+)([^•·|]{2,70})(?:\s*[•·|]|$)/i);
     out.push({
       id: `tapology-${urlPath.split('/').filter(Boolean).pop()}`,
-      sport: 'mma',
-      sportLabel: 'MMA / UFC',
-      title,
-      subtitle: clean(locationMatch?.[1] || 'UFC'),
-      start: start.toISOString(),
+      sport: 'mma', sportLabel: 'MMA / UFC', title, subtitle: 'UFC', start: start.toISOString(),
       state: +start <= +now && +now - +start < 6 * 3_600_000 ? 'live' : +start < +now ? 'final' : 'upcoming',
-      score: '',
-      importance: /^UFC\s+\d+/i.test(title) ? 96 : 92,
-      source: 'Tapology',
-      url: `https://www.tapology.com${urlPath}`,
-      internal: false,
+      score: '', importance: /^UFC\s+\d+/i.test(title) ? 96 : 92, source: 'Tapology',
+      url: `https://www.tapology.com${urlPath}`, internal: false,
+      scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
+    });
+  }
+  return out.sort((a, b) => +new Date(a.start) - +new Date(b.start)).slice(0, MAX_PER_SPORT);
+}
+
+function parseUfcOfficial(html, now) {
+  const text = html
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<(?:br|\/p|\/li|\/h[1-6]|\/div|\/a)>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&');
+  const lines = text.split(/\n+/).map(clean).filter((x) => x.length >= 2 && x.length <= 280);
+  const out = [];
+  const seen = new Set();
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!/Main Card/i.test(line)) continue;
+    const start = parseEtDate(line, now);
+    if (!start || !inUpcomingWindow(start, now)) continue;
+    let title = '';
+    for (let back = 1; back <= 6; back++) {
+      const candidate = clean(lines[i - back] || '');
+      if (!candidate || candidate.length > 100 || /^(How to Watch|Upcoming|Start Times|Events?|Main Card|Prelims|Tickets?)$/i.test(candidate)) continue;
+      if (/\bvs\b/i.test(candidate)) { title = candidate; break; }
+    }
+    if (!title) title = `UFC • ${localDate(start)}`;
+    const key = `${title.toLowerCase()}-${start.toISOString()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    let subtitle = 'UFC';
+    for (let next = 1; next <= 5; next++) {
+      const candidate = clean(lines[i + next] || '');
+      if (/Arena|Center|Centre|Stadium|APEX/i.test(candidate)) { subtitle = candidate; break; }
+    }
+    out.push({
+      id: `ufc-official-${localDate(start)}-${out.length}`,
+      sport: 'mma', sportLabel: 'MMA / UFC', title: `UFC: ${title}`, subtitle,
+      start: start.toISOString(), state: 'upcoming', score: '', importance: 97,
+      source: 'UFC.com', url: 'https://www.ufc.com/events', internal: false,
       scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
     });
   }
@@ -282,9 +311,20 @@ async function ufcEvents(now) {
       console.log(`[Events] Tapology UFC radar: ${tapology.length} upcoming event(s) within ${UPCOMING_DAYS} days.`);
       return tapology;
     }
-    console.warn('[Events] Tapology returned no UFC events in the configured window; using ESPN fallback.');
+    console.warn('[Events] Tapology returned no UFC events in the configured window.');
   } catch (error) {
-    console.warn(`[Events] Tapology UFC unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}; using ESPN fallback.`);
+    console.warn(`[Events] Tapology UFC unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}.`);
+  }
+  try {
+    const html = await fetchText('https://www.ufc.com/events');
+    const official = parseUfcOfficial(html, now);
+    if (official.length) {
+      console.log(`[Events] UFC.com fallback radar: ${official.length} upcoming event(s) within ${UPCOMING_DAYS} days.`);
+      return official;
+    }
+    console.warn('[Events] UFC.com returned no parseable upcoming events; using ESPN fallback.');
+  } catch (error) {
+    console.warn(`[Events] UFC.com unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}; using ESPN fallback.`);
   }
   return espnEvents({ sport: 'mma', league: 'ufc', label: 'MMA / UFC', now, sourceName: 'ESPN fallback', horizonHours: UPCOMING_DAYS * 24 });
 }
@@ -318,7 +358,6 @@ function parseWweLines(html, now) {
     if (ap.startsWith('a') && hour === 12) hour = 0;
     const start = easternToUtc(year, month, day, hour, minute);
     if (!inUpcomingWindow(start, now)) continue;
-
     const dateIndex = line.search(dateRegex);
     let title = clean(line.slice(0, dateIndex).replace(/[•–—-]+$/g, ''));
     if (!title || title.length < 3 || /^(this week|upcoming)$/i.test(title)) title = clean(lines[i - 1] || 'WWE');
@@ -330,17 +369,10 @@ function parseWweLines(html, now) {
     const venueMatch = line.match(/,\s*([^,]+(?:Arena|Center|Stadium|Centre|Garden|Performance Center)[^–—-]*)\s*[–—-]/i);
     out.push({
       id: `wwe-${year}${String(month + 1).padStart(2, '0')}${String(day).padStart(2, '0')}-${out.length}`,
-      sport: 'wwe',
-      sportLabel: 'WWE',
-      title,
-      subtitle: clean(venueMatch?.[1] || 'عرض WWE'),
-      start: start.toISOString(),
-      state: +start <= +now && +now - +start < 4 * 3_600_000 ? 'live' : +start < +now ? 'final' : 'upcoming',
-      score: '',
-      importance: /Raw|SmackDown|NXT|WrestleMania|SummerSlam|Survivor|Money in the Bank|Royal Rumble|Crown Jewel|Night of Champions|TripleMania|Worlds Collide/i.test(title) ? 90 : 74,
-      source: 'WWE.com',
-      url: 'https://www.wwe.com/article/wwe-upcoming-events',
-      internal: false,
+      sport: 'wwe', sportLabel: 'WWE', title, subtitle: clean(venueMatch?.[1] || 'عرض WWE'),
+      start: start.toISOString(), state: +start <= +now && +now - +start < 4 * 3_600_000 ? 'live' : +start < +now ? 'final' : 'upcoming',
+      score: '', importance: /Raw|SmackDown|NXT|WrestleMania|SummerSlam|Survivor|Money in the Bank|Royal Rumble|Crown Jewel|Night of Champions|TripleMania|Worlds Collide/i.test(title) ? 90 : 74,
+      source: 'WWE.com', url: 'https://www.wwe.com/article/wwe-upcoming-events', internal: false,
       scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
     });
   }
@@ -368,29 +400,21 @@ const [football, nba, mma, wwe] = await Promise.all([
   wweEvents(now)
 ]);
 
-const events = [...football, ...nba, ...mma, ...wwe]
-  .sort((a, b) => {
-    const aLive = a.state === 'live' ? 1 : 0;
-    const bLive = b.state === 'live' ? 1 : 0;
-    if (aLive !== bLive) return bLive - aLive;
-    const aSoon = inTodayOrTonightWindow(a.start, now) ? 1 : 0;
-    const bSoon = inTodayOrTonightWindow(b.start, now) ? 1 : 0;
-    if (aSoon !== bSoon) return bSoon - aSoon;
-    return (+new Date(a.start) - +new Date(b.start)) || (Number(b.importance || 0) - Number(a.importance || 0));
-  });
+const events = [...football, ...nba, ...mma, ...wwe].sort((a, b) => {
+  const aLive = a.state === 'live' ? 1 : 0;
+  const bLive = b.state === 'live' ? 1 : 0;
+  if (aLive !== bLive) return bLive - aLive;
+  const aSoon = inTodayOrTonightWindow(a.start, now) ? 1 : 0;
+  const bSoon = inTodayOrTonightWindow(b.start, now) ? 1 : 0;
+  if (aSoon !== bSoon) return bSoon - aSoon;
+  return (+new Date(a.start) - +new Date(b.start)) || (Number(b.importance || 0) - Number(a.importance || 0));
+});
 
 const output = {
-  generatedAt: new Date().toISOString(),
-  date: today,
-  timezone: TIMEZONE,
-  upcomingDays: UPCOMING_DAYS,
-  tonightHours: TONIGHT_HOURS,
+  generatedAt: new Date().toISOString(), date: today, timezone: TIMEZONE,
+  upcomingDays: UPCOMING_DAYS, tonightHours: TONIGHT_HOURS,
   counts: {
-    football: football.length,
-    nba: nba.length,
-    mma: mma.length,
-    wwe: wwe.length,
-    total: events.length,
+    football: football.length, nba: nba.length, mma: mma.length, wwe: wwe.length, total: events.length,
     today: events.filter((event) => event.scope === 'today').length,
     upcoming: events.filter((event) => event.scope === 'upcoming').length
   },
