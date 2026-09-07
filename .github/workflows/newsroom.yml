@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || vars.FCC_BASE_URL || 'https://wheel-conflicts-pulse-arctic.trycloudflare.com/v1' }}
+      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || vars.FCC_BASE_URL }}
       FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
       FCC_MODEL: ${{ vars.FCC_MODEL }}
       FCC_TIMEOUT_MS: ${{ vars.FCC_TIMEOUT_MS || '60000' }}
@@ -54,30 +54,36 @@ jobs:
       - name: Scan RSS sources
         run: npm run newsroom:dry
 
-      - name: Show newsroom configuration
+      - name: Check cloud FCC configuration
+        id: fcc_config
         run: |
-          echo "FCC endpoint: $FCC_BASE_URL"
-          if [ -n "$FCC_API_KEY" ]; then echo "FCC auth: enabled"; else echo "FCC auth: not set (temporary test mode)"; fi
-          if [ -n "$FCC_MODEL" ]; then echo "FCC model: $FCC_MODEL"; else echo "FCC model: server default"; fi
+          if [ -n "$FCC_BASE_URL" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "Cloud FCC endpoint configured."
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Cloud FCC endpoint not configured; local Windows publisher is the primary generation path."
+          fi
 
-      - name: Verify FCC connection
+      - name: Verify cloud FCC connection
         id: fcc
+        if: steps.fcc_config.outputs.ready == 'true'
         continue-on-error: true
         run: npm run fcc:test
 
-      - name: Generate newsroom batch
-        if: steps.fcc.outcome == 'success'
+      - name: Generate newsroom batch in cloud
+        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome == 'success'
         run: npm run newsroom
 
-      - name: FCC unavailable notice
-        if: steps.fcc.outcome != 'success'
-        run: echo "FCC is currently unreachable; skipping content generation while keeping the site build healthy."
+      - name: Cloud FCC unavailable notice
+        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome != 'success'
+        run: echo "Cloud FCC is unreachable; skipping cloud generation. Local publisher can still generate through 127.0.0.1."
 
       - name: Build production site
         run: npm run build
 
-      - name: Commit generated stories
-        if: steps.fcc.outcome == 'success'
+      - name: Commit cloud-generated stories
+        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome == 'success'
         run: |
           if git diff --quiet -- src/data/stories.json; then
             echo "No newsroom changes."
