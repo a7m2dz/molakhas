@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/newsroom/generate-images.mjs && astro build",
+    "build": "node scripts/newsroom/source-images.mjs && astro build",
     "preview": "astro preview",
     "newsroom": "node scripts/newsroom/run.mjs",
     "newsroom:dry": "node scripts/newsroom/run.mjs --dry-run",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
-    "images:generate": "node scripts/newsroom/generate-images.mjs",
+    "images:generate": "node scripts/newsroom/source-images.mjs",
     "indexnow": "node scripts/newsroom/indexnow.mjs"
   },
   "dependencies": {
