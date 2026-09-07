@@ -43,7 +43,7 @@ function extractText(data) {
   return '';
 }
 
-async function chatWithModel(model, prompt) {
+async function chatWithModel(model, prompt, { temperature = 0.1 } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -55,11 +55,11 @@ async function chatWithModel(model, prompt) {
         messages: [
           {
             role: 'system',
-            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وإضافة قيمة حقيقية للقارئ بدون حشو أو اختلاق. يجب أن تكون كل الحقول التحريرية عربية سليمة، مع السماح فقط بأسماء العلامات والكيانات الأجنبية عند الحاجة. لا تستخدم أي أحرف صينية أو يابانية أو كورية، ولا شظايا كود أو كلمات هجينة بين العربية والإنجليزية. التزم بتعليمات المستخدم وأعد فقط المخرجات المطلوبة.'
+            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وإضافة قيمة حقيقية للقارئ بدون حشو أو اختلاق. يجب أن تكون كل الحقول التحريرية عربية سليمة، مع السماح فقط بأسماء العلامات والكيانات الأجنبية عند الحاجة. لا تستخدم أي أحرف صينية أو يابانية أو كورية، ولا شظايا كود أو كلمات هجينة بين العربية والإنجليزية. عندما يُطلب JSON فأعد JSON صالحًا فقط بلا Markdown.'
           },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.1,
+        temperature,
         stream: false
       }),
       signal: controller.signal
@@ -75,29 +75,92 @@ async function chatWithModel(model, prompt) {
   }
 }
 
-export async function omniRequest(prompt) {
+async function requestWithRouting(prompt, opts = {}) {
   try {
     console.log(`[OmniRoute] Model: ${configuredModel}`);
-    return await chatWithModel(configuredModel, prompt);
+    return await chatWithModel(configuredModel, prompt, opts);
   } catch (error) {
     if (!fallbackModel || fallbackModel === configuredModel) throw error;
     console.warn(`[OmniRoute] ${configuredModel} failed; falling back to ${fallbackModel}: ${error.message}`);
-    return chatWithModel(fallbackModel, prompt);
+    return chatWithModel(fallbackModel, prompt, opts);
   }
 }
 
-function parseJson(raw) {
-  const cleaned = String(raw || '')
+export async function omniRequest(prompt) {
+  return requestWithRouting(prompt);
+}
+
+function cleanJsonEnvelope(raw) {
+  let cleaned = String(raw || '')
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/i, '')
+    .replace(/^\uFEFF/, '')
     .trim();
+  const first = cleaned.indexOf('{');
+  const last = cleaned.lastIndexOf('}');
+  if (first >= 0 && last > first) cleaned = cleaned.slice(first, last + 1);
+  return cleaned;
+}
+
+function localJsonRepairs(raw) {
+  let text = cleanJsonEnvelope(raw);
+  text = text
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, ' ')
+    .replace(/,\s*([}\]])/g, '$1')
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'");
+  return text;
+}
+
+function tryParseJson(raw) {
+  const attempts = [cleanJsonEnvelope(raw), localJsonRepairs(raw)];
+  let lastError;
+  for (const candidate of [...new Set(attempts)]) {
+    try { return { value: JSON.parse(candidate), repaired: candidate !== attempts[0] }; }
+    catch (error) { lastError = error; }
+  }
+  throw Object.assign(new Error(lastError?.message || 'Invalid JSON'), { raw: cleanJsonEnvelope(raw) });
+}
+
+async function repairJsonWithModel(raw, parseError) {
+  const clipped = cleanJsonEnvelope(raw).slice(0, 12000);
+  const prompt = `أصلح JSON التالي فقط من ناحية البنية والصياغة التقنية.
+
+قواعد إلزامية:
+- أعد كائن JSON صالحًا فقط بلا Markdown أو شرح.
+- لا تضف أي حقيقة أو اسم أو رقم غير موجود في JSON الأصلي.
+- حافظ على نفس المفاتيح والقيم قدر الإمكان.
+- أصلح الفواصل والاقتباسات والمصفوفات والأقواس الناقصة.
+- إذا وجدت نصًا صينيًا/يابانيًا/كوريًا أو شظايا كود داخل حقل تحريري، لا تحاول اختراع بديل؛ اترك النص كما هو لكي يرفضه فحص الجودة لاحقًا.
+- لا تحذف الحقول المطلوبة.
+
+خطأ المحلل: ${String(parseError || '').slice(0, 500)}
+
+JSON غير الصالح:
+${clipped}`;
+  console.warn('[OmniRoute] Structured output malformed; attempting JSON repair...');
+  return requestWithRouting(prompt, { temperature: 0 });
+}
+
+async function requestJson(prompt) {
+  const raw = await requestWithRouting(prompt, { temperature: 0.08 });
   try {
-    return JSON.parse(cleaned);
-  } catch {
-    const first = cleaned.indexOf('{');
-    const last = cleaned.lastIndexOf('}');
-    if (first === -1 || last <= first) throw new Error(`OmniRoute did not return JSON: ${cleaned.slice(0, 220)}`);
-    return JSON.parse(cleaned.slice(first, last + 1));
+    return tryParseJson(raw).value;
+  } catch (firstError) {
+    let repairedRaw;
+    try {
+      repairedRaw = await repairJsonWithModel(raw, firstError.message);
+      return tryParseJson(repairedRaw).value;
+    } catch (repairError) {
+      console.warn(`[OmniRoute] JSON repair failed: ${repairError.message}`);
+      console.warn('[OmniRoute] Regenerating structured output once from source instructions...');
+      const regenerated = await requestWithRouting(`${prompt}\n\nتنبيه تقني: المحاولة السابقة لم تكن JSON صالحًا. أعد إنشاء الكائن كاملًا من الصفر. تأكد يدويًا من صحة JSON قبل الإرسال: اقتباسات مزدوجة، فاصلة بين كل خاصيتين، لا trailing commas، ولا Markdown.`, { temperature: 0 });
+      try {
+        return tryParseJson(regenerated).value;
+      } catch (finalError) {
+        throw new Error(`OmniRoute structured JSON failed after repair/regeneration: ${finalError.message}`);
+      }
+    }
   }
 }
 
@@ -115,7 +178,7 @@ export async function rewriteStory(item, qualityFeedback = '') {
 - لا تبالغ ولا تستخدم عنوانًا مضللًا.
 - H1 بين 25 و95 حرفًا ويصف الحدث مباشرة.
 - الملخص المرئي excerpt بين 80 و220 حرفًا.
-- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 420 كلمة عندما تسمح الحقائق، ولا تطل إذا كانت المعلومات محدودة.
+- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 360 كلمة عندما تسمح الحقائق، ولا تطل إذا كانت المعلومات محدودة.
 - اذكر الكيان أو البطولة الرئيسية طبيعيًا في أول فقرة عندما يكون مناسبًا.
 - لا تحشو الكلمات المفتاحية ولا تكررها صناعيًا.
 - أضف keyPoints من نقطتين إلى أربع نقاط سريعة تلخص أهم ما يعرفه القارئ، وكل نقطة يجب أن تكون مدعومة بالبيانات المتاحة.
@@ -146,7 +209,7 @@ importance من 1 إلى 5 لأهمية الخبر رياضيًا.
 رابط المصدر: ${item.link}
 القسم: ${item.section}${retryBlock}`;
 
-  const parsed = parseJson(await omniRequest(prompt));
+  const parsed = await requestJson(prompt);
   const body = Array.isArray(parsed.body) ? parsed.body.map((p) => String(p).trim()).filter(Boolean) : [];
   const keyPoints = Array.isArray(parsed.keyPoints) ? parsed.keyPoints.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 4) : [];
   if (!parsed.title || body.length < 2) throw new Error('OmniRoute JSON incomplete');
