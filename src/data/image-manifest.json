@@ -108,5 +108,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — UFC.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "ديفيد-رايا-راحة-الفوز-بالدوري-منحت-ا-رسنال-ثقة-ا-كبر": {
+    "src": "https://i.guim.co.uk/img/media/b5f841f08305ebce522e2f0ec6dc1441367cc49d/542_426_5290_4234/master/5290.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=693554ac5b1380b5a05f8d2eac10ef7c",
+    "fallbackSrc": "/news-images/ديفيد-رايا-راحة-الفوز-بالدوري-منحت-ا-رسنال-ثقة-ا-كبر.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/07/david-raya-arsenal-confidence-premier-league-relief",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/07/david-raya-arsenal-confidence-premier-league-relief",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 960,
+    "alt": "حارس مرمى أرسنال ديفيد رايا أثناء المباراة ضد تشيلسي في الدوري الإنجليزي الممتاز",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "uefa-ت-علن-عن-طاقم-تحكيم-مباراة-نابولي-وا-رسنال-في-دوري-ا-بطال-ا-وروبا": {
+    "src": "https://icdn.football-italia.net/wp-content/uploads/2025/05/Glenn-Nyberg-referee.jpg",
+    "fallbackSrc": "/news-images/uefa-ت-علن-عن-طاقم-تحكيم-مباراة-نابولي-وا-رسنال-في-دوري-ا-بطال-ا-وروبا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Football Italia",
+    "sourceUrl": "https://football-italia.net/official-referee-appointed-for-napoli-arsenal/",
+    "originalStoryUrl": "https://football-italia.net/official-referee-appointed-for-napoli-arsenal/",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 800,
+    "alt": "الحكم السويدي غلين نيبيرغ المُعيَّن لإدارة مباراة نابولي وأرسنال في دوري الأبطال.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Football Italia.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
