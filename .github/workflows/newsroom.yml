@@ -26,12 +26,13 @@ concurrency:
 jobs:
   newsroom:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
-      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || vars.FCC_BASE_URL }}
-      FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
-      FCC_MODEL: ${{ vars.FCC_MODEL }}
-      FCC_TIMEOUT_MS: ${{ vars.FCC_TIMEOUT_MS || '60000' }}
+      OMNIROUTE_BASE_URL: ${{ secrets.OMNIROUTE_BASE_URL || vars.OMNIROUTE_BASE_URL }}
+      OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
+      OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto/best-free' }}
+      OMNIROUTE_FALLBACK_MODEL: ${{ vars.OMNIROUTE_FALLBACK_MODEL || 'auto' }}
+      OMNIROUTE_TIMEOUT_MS: ${{ vars.OMNIROUTE_TIMEOUT_MS || '120000' }}
       NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
       NEWSROOM_MAX_AGE_HOURS: ${{ vars.NEWSROOM_MAX_AGE_HOURS || '72' }}
       AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED || 'true' }}
@@ -54,36 +55,36 @@ jobs:
       - name: Scan RSS sources
         run: npm run newsroom:dry
 
-      - name: Check cloud FCC configuration
-        id: fcc_config
+      - name: Check cloud OmniRoute configuration
+        id: omni_config
         run: |
-          if [ -n "$FCC_BASE_URL" ]; then
+          if [ -n "$OMNIROUTE_BASE_URL" ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
-            echo "Cloud FCC endpoint configured."
+            echo "Cloud OmniRoute endpoint configured."
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "Cloud FCC endpoint not configured; local Windows publisher is the primary generation path."
+            echo "Cloud OmniRoute endpoint not configured; Windows local publisher is the primary generation path."
           fi
 
-      - name: Verify cloud FCC connection
-        id: fcc
-        if: steps.fcc_config.outputs.ready == 'true'
+      - name: Verify cloud OmniRoute connection
+        id: omni
+        if: steps.omni_config.outputs.ready == 'true'
         continue-on-error: true
-        run: npm run fcc:test
+        run: npm run omniroute:test
 
       - name: Generate newsroom batch in cloud
-        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome == 'success'
+        if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome == 'success'
         run: npm run newsroom
 
-      - name: Cloud FCC unavailable notice
-        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome != 'success'
-        run: echo "Cloud FCC is unreachable; skipping cloud generation. Local publisher can still generate through 127.0.0.1."
+      - name: Cloud OmniRoute unavailable notice
+        if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome != 'success'
+        run: echo "Cloud OmniRoute is unreachable; skipping cloud generation. Local publisher can still use 127.0.0.1:20128."
 
       - name: Build production site
         run: npm run build
 
       - name: Commit cloud-generated stories
-        if: steps.fcc_config.outputs.ready == 'true' && steps.fcc.outcome == 'success'
+        if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome == 'success'
         run: |
           if git diff --quiet -- src/data/stories.json; then
             echo "No newsroom changes."
@@ -92,5 +93,5 @@ jobs:
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
           git add src/data/stories.json
-          git commit -m "newsroom: publish scheduled batch"
+          git commit -m "newsroom: publish scheduled OmniRoute batch"
           git push
