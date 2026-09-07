@@ -54,7 +54,7 @@ const INTENT_SIGNALS = [
 
 const CONVERSION_SIGNAL = /(?:مباراة|مواجهة|دوري|بطولة|نهائي|نزال|عرض|match|fixture|game|league|championship|fight|card|NBA|UFC|WWE)/iu;
 const LOW_VALUE_SIGNAL = /(?:ورشة|اجتماع|مجلس\s+الإدارة|تحت\s+(?:14|15)|معسكر\s+تدريبي|شراكة\s+إدارية|workshop|board\s+meeting|under[-\s]?(?:14|15)|training\s+camp)/iu;
-const FOTMOB_SNAPSHOT = new URL('../../src/data/fotmob-radar.json', import.meta.url);
+const FOTMOB_SNAPSHOT = new URL('../../.cache/fotmob-radar.json', import.meta.url);
 
 function readFotMobRadar(now) {
   try {
