@@ -182,5 +182,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic Football.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ا-رسنال-يهزم-تشيلسي-2-1-ويواصل-انطلاقة-مبهرة-في-الدوري-الا-نجليزي": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/3715/live/5e5aa660-aa2f-11f1-a291-b542ee92de7c.png",
+    "fallbackSrc": "/news-images/ا-رسنال-يهزم-تشيلسي-2-1-ويواصل-انطلاقة-مبهرة-في-الدوري-الا-نجليزي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/cqjkql0rkneo?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/cqjkql0rkneo?at_medium=RSS&at_campaign=rss",
+    "type": "image/png",
+    "alt": "لقطتان من كاي هافرتز ومارتن أودغارد أثناء احتفالهما بهدف فوز أرسنال على تشيلسي في ملعب لندن",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
