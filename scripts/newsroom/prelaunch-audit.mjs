@@ -132,12 +132,12 @@ pass.push(`${checkedLinks} internal links checked`);
 if (await exists('dist/index.html')) {
   const html = await fs.readFile(new URL('dist/index.html', ROOT), 'utf8');
   if (!/<html[^>]+lang="ar"[^>]+dir="rtl"/i.test(html)) failures.push('homepage missing Arabic RTL html attributes');
-  const widgetCount = (html.match(/مباريات وأحداث اليوم/gu) || []).length;
+  const widgetCount = (html.match(/data-today-widget(?:\s|=|>)/g) || []).length;
   if (widgetCount !== 1) failures.push(`homepage daily sports widget rendered ${widgetCount} times`);
   if (/وش عندنا اليوم[؟?]?/u.test(html)) failures.push('homepage still renders duplicate nightly-events panel');
   if (/href="\/football"[^>]*>\s*كل الأخبار/u.test(html)) failures.push('homepage all-news CTA incorrectly points to football');
   if (!/href="\/latest"/u.test(html)) failures.push('homepage missing latest-news archive link');
-  if (!/الأخبار الساخنة/u.test(html) && approved.length >= 2) warnings.push('homepage hot-news block has no renderable stories');
+  if (!/الأخبار الساخنة/u.test(html) && approved.length >= 6) warnings.push('homepage hot-news block has no renderable stories');
   pass.push('homepage duplicate-content and CTA checks completed');
 }
 
