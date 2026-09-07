@@ -7,6 +7,18 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-Location $RepoPath
 
+function Invoke-Checked {
+  param(
+    [Parameter(Mandatory=$true)][string]$Label,
+    [Parameter(Mandatory=$true)][scriptblock]$Command
+  )
+  Write-Host "[Molakhas] $Label"
+  & $Command
+  if ($LASTEXITCODE -ne 0) {
+    throw "$Label failed with exit code $LASTEXITCODE"
+  }
+}
+
 Write-Host "[Molakhas] Repo: $RepoPath"
 Write-Host "[Molakhas] FCC:  $FccBaseUrl"
 
@@ -51,22 +63,15 @@ if (-not (Test-FccPort)) {
   if (-not $ready) { throw 'FCC did not become ready on port 8082.' }
 }
 
-Write-Host '[Molakhas] Updating repository...'
-git pull --rebase --autostash origin main
+Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin main }
 
 if (-not (Test-Path (Join-Path $RepoPath 'node_modules'))) {
-  Write-Host '[Molakhas] Installing dependencies...'
-  npm install --no-audit --no-fund
+  Invoke-Checked 'Installing dependencies...' { npm install --no-audit --no-fund }
 }
 
-Write-Host '[Molakhas] Testing FCC...'
-npm run fcc:test
-
-Write-Host '[Molakhas] Scanning and generating stories...'
-npm run newsroom
-
-Write-Host '[Molakhas] Verifying production build...'
-npm run build
+Invoke-Checked 'Testing FCC...' { npm run fcc:test }
+Invoke-Checked 'Scanning and generating stories...' { npm run newsroom }
+Invoke-Checked 'Verifying production build...' { npm run build }
 
 $changes = git status --porcelain -- src/data/stories.json
 if (-not $changes) {
@@ -79,6 +84,8 @@ git config user.name 'molakhas-local-newsroom'
 git config user.email 'molakhas-local@users.noreply.github.com'
 git add src/data/stories.json
 git commit -m "newsroom: local FCC batch $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE" }
 git push origin main
+if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
 
 Write-Host '[Molakhas] Done. Cloudflare will deploy the new commit automatically.'
