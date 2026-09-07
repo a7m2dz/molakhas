@@ -14,6 +14,7 @@ export function GET() {
   const publicStories = stories.filter(s=>s.status==='approved' && s.sourceId!=='molakhas-editorial');
   const staticUrls = [
     { path: '', lastmod: new Date().toISOString() },
+    { path: '/latest', lastmod: publicStories[0]?.generatedAt || publicStories[0]?.publishedAt || new Date().toISOString() },
     { path: '/matches' }, { path: '/matches/today', lastmod: new Date().toISOString() },
     { path: '/teams' }, { path: '/competitions' },
     { path: '/about' }, { path: '/editorial-policy' }, { path: '/corrections' }, { path: '/contact' },
