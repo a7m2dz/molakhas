@@ -18,14 +18,34 @@ const matchUrls = (Array.isArray(matches) ? matches : [])
   .sort((a,b)=>+new Date(b.updatedAt || b.kickoff)-+new Date(a.updatedAt || a.kickoff))
   .map((m) => `${base}/matches/${m.slug}`);
 
+async function readHubUrls(kind, limit) {
+  try {
+    const dir = new URL(`../../dist/${kind}/`, import.meta.url);
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    return entries
+      .filter((entry) => entry.isDirectory() && !entry.name.startsWith('['))
+      .slice(0, limit)
+      .map((entry) => `${base}/${kind}/${entry.name}`);
+  } catch {
+    return [];
+  }
+}
+
+const teamUrls = await readHubUrls('teams', 24);
+const competitionUrls = await readHubUrls('competitions', 20);
+
 const urls = [...new Set([
   ...(matchUrls.length ? [`${base}/matches/today`] : []),
+  ...(teamUrls.length ? [`${base}/teams`] : []),
+  ...(competitionUrls.length ? [`${base}/competitions`] : []),
   ...storyUrls,
+  ...teamUrls,
+  ...competitionUrls,
   ...matchUrls
 ])].slice(0, 100);
 
 if (!urls.length) {
-  console.log('[IndexNow] No fresh approved or match URLs to submit.');
+  console.log('[IndexNow] No fresh story, match, team or competition URLs to submit.');
   process.exit(0);
 }
 
@@ -44,4 +64,4 @@ if (!response.ok && response.status !== 202) {
   const text = await response.text();
   throw new Error(`IndexNow ${response.status}: ${text.slice(0, 500)}`);
 }
-console.log(`[IndexNow] Submitted ${urls.length} fresh URLs (${response.status}).`);
+console.log(`[IndexNow] Submitted ${urls.length} fresh URLs (${response.status}); hubs=${teamUrls.length + competitionUrls.length}.`);
