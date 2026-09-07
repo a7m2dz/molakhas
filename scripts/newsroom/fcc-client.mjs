@@ -1,7 +1,9 @@
 const base = (process.env.FCC_BASE_URL || '').replace(/\/$/, '');
 const key = process.env.FCC_API_KEY || '';
-const model = process.env.FCC_MODEL || '';
+const configuredModel = (process.env.FCC_MODEL || '').trim();
 const timeoutMs = Number(process.env.FCC_TIMEOUT_MS || 60000);
+const FCC_DEFAULT_MODEL = 'nvidia_nim/nvidia/nemotron-3-super-120b-a12b';
+let cachedModel = configuredModel || '';
 
 function headers(extra = {}) {
   return {
@@ -44,15 +46,34 @@ export async function listModels() {
   }
 }
 
+async function resolveModel() {
+  if (cachedModel) return cachedModel;
+
+  const payload = await listModels();
+  const ids = Array.isArray(payload?.data)
+    ? payload.data.map((item) => String(item?.id || '').trim()).filter(Boolean)
+    : [];
+
+  cachedModel =
+    ids.find((id) => id === FCC_DEFAULT_MODEL) ||
+    ids.find((id) => /nemotron-3-super-120b-a12b/i.test(id)) ||
+    ids[0] ||
+    FCC_DEFAULT_MODEL;
+
+  console.log(`[FCC] Model: ${cachedModel}${configuredModel ? '' : ' (auto-selected)'}`);
+  return cachedModel;
+}
+
 export async function fccRequest(prompt) {
   if (!configured()) throw new Error('FCC_BASE_URL is missing');
+  const model = await resolveModel();
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(`${base}/responses`, {
       method: 'POST',
       headers: headers(),
-      body: JSON.stringify({ ...(model ? { model } : {}), input: prompt }),
+      body: JSON.stringify({ model, input: prompt }),
       signal: controller.signal
     });
     const text = await response.text();
