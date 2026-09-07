@@ -6,12 +6,14 @@ import stories from '../data/stories.json';
 import imageManifest from '../data/image-manifest.json';
 import { topicCounts } from '../lib/content';
 
-const approved = stories.filter((story) => story.status === 'approved').sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+const approved = stories
+  .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
+  .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
 const lead = approved[0];
-const latest = approved.slice(1, 7);
+const latest = approved.slice(1, 10);
 const lastUpdated = approved[0]?.publishedAt;
 const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug, approved.filter((story) => story.section === section.slug).length]));
-const topics = [...topicCounts(stories as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
+const topics = [...topicCounts(approved as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
 const mediaMap = imageManifest as Record<string, any>;
 const mediaFor = (story) => mediaMap[story.slug] || {};
 const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-images/${story.slug}.webp`;
@@ -19,35 +21,43 @@ const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${st
 const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
 ---
 <BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، الكرة السعودية والعالمية، الانتقالات، UFC، WWE والملاكمة بصياغة عربية سريعة ومصادر واضحة.">
-  <section class="hero shell">
-    <div class="hero-copy">
-      <span class="kicker">الخبر المهم، بسرعة</span>
-      <h1>كل الرياضة.<br/><em>بلا حشو.</em></h1>
-      <p>ملخص يجمع أهم الأخبار الرياضية، يقلل التكرار، ويعرض لك ما يستحق القراءة أولًا مع مصدر واضح لكل خبر.</p>
-      <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
-    </div>
-    {lead ? <a class="lead-card lead-card-image" href={`/${lead.section}/${lead.slug}`}>
+  <section class="news-hero shell">
+    {lead ? <a class="lead-feature" href={`/${lead.section}/${lead.slug}`} aria-label={lead.title}>
       <img src={imageFor(lead)} alt={altFor(lead)} width="1200" height="675" fetchpriority="high" decoding="async" referrerpolicy={mediaFor(lead).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(lead)}'`} />
-      <div class="lead-overlay"><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><h2>{lead.title}</h2><p>{lead.excerpt}</p><b>اقرأ الخبر ←</b></div>
-    </a> : <div class="lead-card lead-placeholder"><span>غرفة الأخبار</span><h2>الأخبار الجديدة في الطريق</h2><p>يتم فحص المصادر وإزالة التكرار قبل نشر الأخبار التي تستحق القراءة.</p></div>}
+      <div class="lead-shade"></div>
+      <div class="lead-content">
+        <div class="lead-meta"><span class="latest-pill">الأحدث</span><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><time datetime={lead.publishedAt}>{new Date(lead.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</time></div>
+        <h1>{lead.title}</h1>
+        <p>{lead.excerpt}</p>
+        <b>اقرأ الخبر كاملًا ←</b>
+      </div>
+    </a> : <div class="lead-feature lead-empty"><div class="lead-content"><span class="latest-pill">غرفة الأخبار</span><h1>أهم الأخبار في الطريق</h1><p>يتم فحص المصادر وإزالة التكرار قبل النشر.</p></div></div>}
+
+    <aside class="hero-panel">
+      <span class="kicker">ملخص • الرياضة بدون حشو</span>
+      <h2>الأهم أولًا.<br/><em>وبسرعة.</em></h2>
+      <p>أخبار رياضية مختصرة بمصدر واضح، من الكرة السعودية والعالمية إلى UFC وWWE والملاكمة.</p>
+      <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
+      <div class="quick-links">{sections.slice(0,6).map((s)=><a href={`/${s.slug}`}>{s.icon} {s.name}</a>)}</div>
+    </aside>
   </section>
+
+  <section class="shell hero-offer"><LurvuePromo section="general" position="home-hero" /></section>
 
   <section class="ticker shell"><span>الأقسام</span>{sections.map((s) => <a href={`/${s.slug}`}>{s.icon} {s.name} <small>{sectionCounts[s.slug] || 0}</small></a>)}</section>
 
   {topics.length > 0 && <section class="topic-strip shell" aria-label="مواضيع رائجة"><span>مواضيع رائجة</span>{topics.map(([slug,data])=><a href={`/topic/${slug}`}>#{data.name} <small>{data.count}</small></a>)}</section>}
 
   <section class="shell section-block">
-    <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/football">كرة القدم ←</a></div>
+    <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/football">كل الأخبار ←</a></div>
     {latest.length ? <div class="story-grid">{latest.map((story) => <article class="story-card story-card-media">
       <a class="story-image-link" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
       <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
       <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
       <p>{story.excerpt}</p>
       <div class="card-footer"><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small><a href={`/${story.section}/${story.slug}`}>اقرأ ←</a></div>
-    </article>)}</div> : <div class="empty compact-empty"><h3>بانتظار أول دفعة أخبار</h3><p>بمجرد وصول الأخبار المعتمدة ستظهر هنا تلقائيًا.</p></div>}
+    </article>)}</div> : <div class="empty compact-empty"><h3>بانتظار دفعة أخبار جديدة</h3><p>بمجرد وصول الأخبار المعتمدة ستظهر هنا تلقائيًا.</p></div>}
   </section>
-
-  <section class="shell"><LurvuePromo section="general" position="home-middle" /></section>
 
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">تغطية حسب اهتمامك</span><h2>اختر رياضتك</h2></div></div>
@@ -56,5 +66,7 @@ const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
 </BaseLayout>
 
 <style>
-.lead-card-image{position:relative;overflow:hidden;padding:0;min-height:410px}.lead-card-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.lead-card-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 15%,#07101d33 45%,#07101df2 100%)}.lead-overlay{position:relative;z-index:1;margin-top:auto;padding:32px}.lead-overlay span{color:var(--accent);font-size:12px;font-weight:900}.lead-overlay h2{margin:10px 0}.lead-overlay p{color:#d4dfec}.story-card-media{padding:0;overflow:hidden}.story-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}.topic-strip{display:flex;gap:9px;align-items:center;overflow:auto;padding:16px 0;white-space:nowrap;scrollbar-width:none}.topic-strip>span{color:var(--muted);font-size:12px}.topic-strip a{font-size:12px;border:1px solid var(--line);background:#0a1725;padding:6px 10px;border-radius:999px}.topic-strip small{color:var(--accent)}
+.news-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);gap:18px;padding:34px 0 18px;align-items:stretch}.lead-feature{position:relative;display:flex;min-height:520px;overflow:hidden;border:1px solid #2a4663;border-radius:26px;background:#0d1929;box-shadow:0 30px 80px #0005;color:inherit}.lead-feature:hover{color:inherit;border-color:#3b688d}.lead-feature>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}.lead-feature:hover>img{transform:scale(1.015)}.lead-shade{position:absolute;inset:0;background:linear-gradient(180deg,#06101a05 6%,#07101d35 42%,#07101df2 100%)}.lead-content{position:relative;z-index:2;margin-top:auto;padding:34px;max-width:850px}.lead-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#dbe7f4;font-size:11px}.lead-meta time{color:#b7c7d9}.latest-pill{display:inline-flex;padding:4px 9px;border-radius:999px;background:var(--accent);color:#061018;font-size:10px;font-weight:900}.lead-content h1{font-size:clamp(34px,5vw,58px);line-height:1.16;letter-spacing:-1.8px;margin:12px 0}.lead-content p{font-size:17px;line-height:1.8;color:#d5e0ec;max-width:760px;margin:0 0 14px}.lead-content b{color:var(--accent);font-size:13px}.lead-empty{background:linear-gradient(145deg,#132943,#0b1727)}.hero-panel{border:1px solid var(--line);border-radius:26px;background:linear-gradient(180deg,#0e2034,#0a1726);padding:28px;display:flex;flex-direction:column;justify-content:center}.hero-panel h2{font-size:38px;line-height:1.05;letter-spacing:-1.5px;margin:8px 0 16px}.hero-panel h2 em{font-style:normal;color:var(--accent)}.hero-panel>p{color:var(--muted);font-size:14px;margin:0 0 14px}.quick-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.quick-links a{font-size:11px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#091725}.quick-links a:hover{border-color:#3e6586}.hero-offer .lurvue{margin:8px 0 24px}.story-card-media{padding:0;overflow:hidden}.story-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}.topic-strip{display:flex;gap:9px;align-items:center;overflow:auto;padding:16px 0;white-space:nowrap;scrollbar-width:none}.topic-strip>span{color:var(--muted);font-size:12px}.topic-strip a{font-size:12px;border:1px solid var(--line);background:#0a1725;padding:6px 10px;border-radius:999px}.topic-strip small{color:var(--accent)}
+@media(max-width:900px){.news-hero{grid-template-columns:1fr}.hero-panel{min-height:230px}.lead-feature{min-height:460px}}
+@media(max-width:520px){.news-hero{padding-top:18px}.lead-feature{min-height:430px;border-radius:20px}.lead-content{padding:22px}.lead-content h1{font-size:34px;letter-spacing:-1px}.lead-content p{font-size:14px;line-height:1.65}.hero-panel{padding:22px;border-radius:20px}.hero-panel h2{font-size:32px}}
 </style>
