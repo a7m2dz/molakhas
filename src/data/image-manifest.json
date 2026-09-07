@@ -64,5 +64,33 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — الاتحاد السعودي لكرة القدم.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "موسم-الرياض-يستضيف-حدث-wwe-crown-jewel-في-نوفمبر-المقبل": {
+    "src": "https://www.wwe.com/f/styles/og_image/public/2026/09/NET_INTL_065804_CrownJewel26_LAUNCH_1920x1080.jpg",
+    "fallbackSrc": "/news-images/موسم-الرياض-يستضيف-حدث-wwe-crown-jewel-في-نوفمبر-المقبل.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "WWE",
+    "sourceUrl": "https://www.wwe.com/article/riyadh-to-host-wwe-crown-jewel-on-saturday-november-7",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU2wtT3o1Z2tPVjEzdWRhSEt6endOYmJxcDFuTXNqaENzY0ZxVHd1X3BHUW5mSjJiNHJEWHBUZDhob0t5dTcyZXI5a3I5ME5JUjhTbnRWSTBEeG11OGJleTBHUE9RN0JiRU81NmRLYUNDeXMxUWNxQWhZVDRKYWRyTk5SSjlQVXhv?oc=5",
+    "type": "image/jpeg",
+    "alt": "صورة لاستاد موسم الرياض بمدينة الملك عبدالله الاقتصادية أثناء استعدادات لحدث رياضي كبير.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — WWE.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "الدوري-السعودي-للمحترفين-ي-طلق-مو-شر-ا-جديد-ا-لقياس-ا-داء-اللاعبين": {
+    "src": "https://images.spl.com.sa/image/private/t_q-good/prd/assets/site%20image/Slide_16_9_-_1_clou9h.jpg",
+    "fallbackSrc": "/news-images/الدوري-السعودي-للمحترفين-ي-طلق-مو-شر-ا-جديد-ا-لقياس-ا-داء-اللاعبين.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "spl.com.sa",
+    "sourceUrl": "https://www.spl.com.sa/ar",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE9kT1JLRTBoeVZucndnc1JoTUVUT25WNDFfejBoeDYzVldEUTZvZlRoOUpvd3pNT3lPUTNHQXpn?oc=5",
+    "type": "image/jpeg",
+    "alt": "شعار رابطة الدوري السعودي للمحترفين على خلفية ملعب كرة ق]",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — spl.com.sa.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
