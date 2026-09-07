@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { groupByLeague, matchStateArabic, matchTimeArabic, todayMatches } from '../../lib/matches';
+import { competitionMeta, teamMeta } from '../../lib/hubs';
 
 const matches = todayMatches().sort((a, b) => {
   const stateWeight = (value: string) => value === 'live' ? 3 : value === 'upcoming' || value === 'scheduled' ? 2 : 1;
@@ -11,6 +12,8 @@ const matches = todayMatches().sort((a, b) => {
 });
 const groups = groupByLeague(matches);
 const liveCount = matches.filter((item) => item.state === 'live').length;
+const teamName = (value:string) => teamMeta(value).name || value;
+const leagueName = (value:string) => competitionMeta(value).name || value;
 const title = 'مباريات اليوم | المواعيد والنتائج المباشرة - ملخص';
 const description = `جدول مباريات اليوم بتوقيت السعودية مع النتائج المباشرة وأهم مباريات الدوري السعودي والدوريات الأوروبية الكبرى. ${matches.length ? `${matches.length} مباراة متاحة الآن.` : ''}`;
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
@@ -29,7 +32,7 @@ const schemaExtra = [
       '@type': 'ListItem',
       position: index + 1,
       url: `${siteUrl}/matches/${match.slug}/`,
-      name: `${match.home.name} ضد ${match.away.name}`
+      name: `${teamName(match.home.name)} ضد ${teamName(match.away.name)}`
     }))
   }
 ];
@@ -52,7 +55,7 @@ const schemaExtra = [
   <section class="shell match-day">
     {groups.length ? groups.map(([league, leagueMatches]) => (
       <div class="league-block">
-        <div class="league-head"><h2>{league}</h2><span>{leagueMatches.length} مباراة</span></div>
+        <div class="league-head"><h2>{leagueName(league)}</h2><span>{leagueMatches.length} مباراة</span></div>
         <div class="match-list">
           {leagueMatches.map((match) => (
             <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
@@ -61,8 +64,8 @@ const schemaExtra = [
                 <small>{matchStateArabic(match.state)}</small>
               </div>
               <div class="teams">
-                <div><b>{match.home.name}</b>{match.home.score !== null && match.home.score !== undefined && match.state !== 'upcoming' && <span>{match.home.score}</span>}</div>
-                <div><b>{match.away.name}</b>{match.away.score !== null && match.away.score !== undefined && match.state !== 'upcoming' && <span>{match.away.score}</span>}</div>
+                <div><b>{teamName(match.home.name)}</b>{match.home.score !== null && match.home.score !== undefined && match.state !== 'upcoming' && <span>{match.home.score}</span>}</div>
+                <div><b>{teamName(match.away.name)}</b>{match.away.score !== null && match.away.score !== undefined && match.state !== 'upcoming' && <span>{match.away.score}</span>}</div>
               </div>
               <div class="row-cta">التفاصيل ←</div>
             </a>
