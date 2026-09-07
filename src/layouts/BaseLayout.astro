@@ -95,6 +95,7 @@ const schema = {
     <header class="site-header">
       <a class="brand" href="/" aria-label="ملخص - الرئيسية"><span>مُلخّص</span><small>الرياضة بدون حشو</small></a>
       <nav aria-label="الأقسام">
+        <a href="/latest">آخر الأخبار</a>
         <a href="/matches/today">مباريات اليوم</a>
         <a href="/teams">الفرق</a>
         <a href="/competitions">البطولات</a>
@@ -106,7 +107,7 @@ const schema = {
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
       <div class="footer-row">
         <div><b>مُلخّص</b><p>أخبار رياضية مختصرة، واضحة، ومحدثة.</p></div>
-        <div class="footer-links"><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
+        <div class="footer-links"><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
       </div>
       <small>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</small>
     </footer>
