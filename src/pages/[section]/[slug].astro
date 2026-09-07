@@ -5,6 +5,8 @@ import { sectionMap } from '../../data/sections';
 import stories from '../../data/stories.json';
 import imageManifest from '../../data/image-manifest.json';
 import { topicCounts, topicSlug } from '../../lib/content';
+import { graphForStory, graphRelatedScore } from '../../lib/content-graph';
+import { matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
 
 export function getStaticPaths() {
   return stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
@@ -30,10 +32,10 @@ const words = story.body.join(' ').split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.ceil(words / 180));
 const publicStories = stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial');
 const counts = topicCounts(publicStories as any[]);
-const sharedTags = (candidate) => (candidate.tags || []).filter((tag) => (story.tags || []).includes(tag)).length;
+const graph = graphForStory(story);
 const related = publicStories
   .filter((s) => s.slug !== story.slug)
-  .map((s) => ({ story: s, score: sharedTags(s) * 4 + (s.section === story.section ? 2 : 0) + (s.importance || 1) * 0.2 }))
+  .map((s) => ({ story: s, score: graphRelatedScore(story, s) }))
   .filter((x) => x.score > 0)
   .sort((a,b)=>b.score-a.score || +new Date(b.story.publishedAt)-+new Date(a.story.publishedAt))
   .slice(0,4)
@@ -43,6 +45,10 @@ const imageFor = (item) => mediaFor(item).src || item.image?.src || `/news-image
 const fallbackFor = (item) => mediaFor(item).fallbackSrc || `/news-images/${item.slug}.webp`;
 const altFor = (item) => mediaFor(item).alt || item.image?.alt || '';
 
+const aboutEntities = [
+  ...graph.teams.map((hub) => ({ '@type':'SportsTeam', name:hub.name, url:`${siteUrl}/teams/${hub.slug}/` })),
+  ...graph.competitions.map((hub) => ({ '@type':'Thing', name:hub.name, url:`${siteUrl}/competitions/${hub.slug}/` }))
+];
 const schema = {
   '@context':'https://schema.org', '@type':'NewsArticle', headline:story.title, description:metaDescription,
   image:[imageUrl], thumbnailUrl:imageUrl, datePublished:story.publishedAt, dateModified:story.generatedAt || story.publishedAt,
@@ -50,7 +56,8 @@ const schema = {
   mainEntityOfPage:{'@type':'WebPage','@id':canonical},
   author:{'@type':'Organization',name:'فريق تحرير ملخص',url:`${siteUrl}/authors/editorial-team`},
   publisher:{'@type':'Organization',name:'ملخص',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}},
-  about:(story.entities || story.tags || []).slice(0,6).map((name)=>({'@type':'Thing',name})), isBasedOn:sourceHref
+  about: aboutEntities.length ? aboutEntities : (story.entities || story.tags || []).slice(0,6).map((name)=>({'@type':'Thing',name})),
+  isBasedOn:sourceHref
 };
 const breadcrumbSchema = {
   '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[
@@ -84,6 +91,22 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
     </figure>
 
     {story.keyPoints?.length >= 2 && <aside class="key-points" aria-label="أهم نقاط الخبر"><strong>الزبدة</strong><ul>{story.keyPoints.map((point)=><li>{point}</li>)}</ul></aside>}
+
+    {(graph.teams.length > 0 || graph.competitions.length > 0) && <nav class="entity-links" aria-label="روابط مرتبطة بالخبر">
+      <span>مرتبط بـ</span>
+      {graph.teams.map((hub)=><a href={`/teams/${hub.slug}/`}>⚽ {hub.name}</a>)}
+      {graph.competitions.map((hub)=><a href={`/competitions/${hub.slug}/`}>🏆 {hub.name}</a>)}
+    </nav>}
+
+    {graph.matches.length > 0 && <section class="story-match-links" aria-label="مباريات مرتبطة بالخبر">
+      <div class="story-match-title"><strong>مباريات مرتبطة</strong><a href="/matches/today/">مباريات اليوم ←</a></div>
+      <div class="story-match-grid">{graph.matches.map((match)=><a class:list={["story-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+        <div><span>{match.league.name}</span><small>{matchStateArabic(match.state)}</small></div>
+        <b>{match.home.name} <em>ضد</em> {match.away.name}</b>
+        <footer><strong>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</strong><small>{matchDateArabic(match.kickoff)}</small></footer>
+      </a>)}</div>
+    </section>}
+
     <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}<p>{paragraph}</p></>)}</div>
     <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
 
@@ -98,6 +121,9 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
 <style>
   .article-hero{margin:30px 0 12px}.article-hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:20px;border:1px solid var(--line);background:var(--panel)}.article-hero figcaption{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.6;display:grid;gap:4px}.image-credit{font-size:11px}.image-credit a{color:var(--accent)}
   .key-points{margin:25px 0;background:#0d1e31;border:1px solid #29425e;border-radius:18px;padding:20px 24px}.key-points strong{color:var(--accent);font-size:18px}.key-points ul{margin:10px 0 0;padding-right:22px}.key-points li{margin:7px 0;color:#dce6f2}
+  .entity-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.entity-links>span{font-size:11px;color:var(--muted)}.entity-links a{font-size:11px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#0a1725}.entity-links a:hover{border-color:var(--accent)}
+  .story-match-links{margin:20px 0 28px}.story-match-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.story-match-title>a{font-size:11px;color:var(--accent)}.story-match-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.story-match{border:1px solid var(--line);border-radius:15px;background:#091725;padding:14px;color:inherit}.story-match:hover{color:inherit;border-color:#3c6384}.story-match.live{border-color:#ff5b6655}.story-match>div,.story-match footer{display:flex;justify-content:space-between;gap:10px;align-items:center}.story-match span,.story-match small{font-size:9px;color:var(--muted)}.story-match b{display:block;font-size:14px;margin:9px 0}.story-match b em{font-style:normal;color:var(--muted);font-size:9px}.story-match footer{border-top:1px solid var(--line);padding-top:8px}.story-match footer strong{font-size:14px;color:var(--accent)}
   .share-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:28px 0;padding:14px 0;border-block:1px solid var(--line)}.share-row strong{margin-left:4px}.share-row a{padding:6px 11px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#dbe7f5;background:#0a1725}.share-row a:hover{border-color:var(--accent)}
   .article-source-note>div{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.related-card img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:10px}
+  @media(max-width:620px){.story-match-grid{grid-template-columns:1fr}}
 </style>
