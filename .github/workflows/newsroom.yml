@@ -11,6 +11,10 @@ concurrency:
 jobs:
   newsroom:
     runs-on: ubuntu-latest
+    env:
+      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || 'https://wheel-conflicts-pulse-arctic.trycloudflare.com/v1' }}
+      FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
+      FCC_MODEL: ${{ vars.FCC_MODEL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,30 +24,21 @@ jobs:
       - run: npm install
       - name: Check FCC configuration
         id: fcc
-        env:
-          FCC_BASE_URL: ${{ secrets.FCC_BASE_URL }}
-          FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
         run: |
           if [ -n "$FCC_BASE_URL" ] && [ -n "$FCC_API_KEY" ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "FCC endpoint configured."
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "FCC secrets not configured yet; skipping newsroom."
+            echo "FCC_API_KEY is not configured yet; skipping newsroom."
           fi
       - name: Verify FCC
         if: steps.fcc.outputs.ready == 'true'
         run: npm run fcc:test
-        env:
-          FCC_BASE_URL: ${{ secrets.FCC_BASE_URL }}
-          FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
-          FCC_MODEL: ${{ vars.FCC_MODEL }}
       - name: Generate newsroom batch
         if: steps.fcc.outputs.ready == 'true'
         run: npm run newsroom
         env:
-          FCC_BASE_URL: ${{ secrets.FCC_BASE_URL }}
-          FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
-          FCC_MODEL: ${{ vars.FCC_MODEL }}
           FCC_TIMEOUT_MS: ${{ vars.FCC_TIMEOUT_MS || '60000' }}
           NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
           AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED || 'true' }}
