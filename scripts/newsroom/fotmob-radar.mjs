@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -8,6 +9,7 @@ const TIMEOUT_MS = Number(process.env.FOTMOB_TIMEOUT_MS || 9000);
 const TRENDING_LIMIT = Number(process.env.FOTMOB_TRENDING_LIMIT || 24);
 const MATCH_WINDOW_HOURS = Number(process.env.FOTMOB_MATCH_WINDOW_HOURS || 18);
 const ENABLED = String(process.env.FOTMOB_RADAR_ENABLED || 'true').toLowerCase() !== 'false';
+const SNAPSHOT_PATH = new URL('../../src/data/fotmob-radar.json', import.meta.url);
 
 const IMPORTANT_LEAGUE = /(?:Saudi Pro League|Roshn Saudi League|Premier League|Champions League|Europa League|LaLiga|La Liga|Bundesliga|Serie A|Ligue 1|FA Cup|EFL Cup|Copa del Rey|Super Cup|Club World Cup|World Cup|AFC Champions League|MLS)/iu;
 const BIG_TEAM = /(?:Al Hilal|Al Nassr|Al Ittihad|Al Ahli|الهلال|النصر|الاتحاد|الأهلي|Real Madrid|Barcelona|Liverpool|Arsenal|Manchester City|Manchester United|Chelsea|Tottenham|Paris Saint-Germain|PSG|Bayern Munich|Inter|AC Milan|Juventus|Atletico Madrid|Borussia Dortmund)/iu;
@@ -191,7 +193,7 @@ async function fetchMatchSignals(now) {
 }
 
 export async function getFotMobRadarCandidates({ now = Date.now() } = {}) {
-  if (!ENABLED) return { candidates: [], stats: { enabled: false, trending: 0, matches: 0 } };
+  if (!ENABLED) return { candidates: [], stats: { enabled: false, trending: 0, matches: 0, total: 0 } };
 
   const [trending, matches] = await Promise.all([fetchTrending(now), fetchMatchSignals(now)]);
   return {
@@ -208,12 +210,18 @@ export async function getFotMobRadarCandidates({ now = Date.now() } = {}) {
 async function main() {
   const result = await getFotMobRadarCandidates();
   console.log(`[FotMob] Radar: ${result.stats.trending || 0} trending + ${result.stats.matches || 0} match signals = ${result.stats.total || 0}.`);
-  console.table(result.candidates.slice(0, 30).map((item) => ({
-    kind: item.radarKind,
-    section: item.section,
-    source: item.sourceName,
-    title: item.title.slice(0, 90)
-  })));
+
+  if (process.argv.includes('--write')) {
+    await fs.writeFile(SNAPSHOT_PATH, `${JSON.stringify(result.candidates, null, 2)}\n`, 'utf8');
+    console.log(`[FotMob] Snapshot updated: ${result.candidates.length} radar signals.`);
+  } else {
+    console.table(result.candidates.slice(0, 30).map((item) => ({
+      kind: item.radarKind,
+      section: item.section,
+      source: item.sourceName,
+      title: item.title.slice(0, 90)
+    })));
+  }
 }
 
 const isDirect = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
