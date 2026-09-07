@@ -37,7 +37,7 @@ function deepGet(obj, paths) {
       if (value == null || !(key in Object(value))) { ok = false; break; }
       value = value[key];
     }
-    if (ok && value !== undefined && value !== null && clean(typeof value === 'object' ? '' : value)) return value;
+    if (ok && value !== undefined && value !== null) return value;
   }
   return null;
 }
@@ -267,18 +267,19 @@ for (const target of targets) {
       updatedAt: new Date().toISOString()
     };
     matches[index].indexQualityScore = qualityScore(matches[index]);
-    matches[index].indexable = matches[index].indexable !== false && matches[index].indexQualityScore >= 55;
+    matches[index].indexable = Number(matches[index].opportunityScore || 0) >= 55 && matches[index].indexQualityScore >= 55;
     enriched += 1;
     console.log(`[MatchDetails] ${details.hasDetails ? 'Enriched' : 'Empty'} ${target.home.name} vs ${target.away.name}: events=${details.events.length}, stats=${details.stats.length}, lineups=${details.lineups.home.length}/${details.lineups.away.length}, quality=${matches[index].indexQualityScore}.`);
   } catch (error) {
     matches[index].indexQualityScore = qualityScore(matches[index]);
+    matches[index].indexable = Number(matches[index].opportunityScore || 0) >= 55 && Number(matches[index].indexQualityScore || 0) >= 55;
     console.warn(`[MatchDetails] ${target.home.name} vs ${target.away.name} unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}`);
   }
 }
 
 for (const match of matches) {
   if (!Number.isFinite(Number(match.indexQualityScore))) match.indexQualityScore = qualityScore(match);
-  if (match.indexable !== false) match.indexable = Number(match.indexQualityScore || 0) >= 55;
+  match.indexable = Number(match.opportunityScore || 0) >= 55 && Number(match.indexQualityScore || 0) >= 55;
 }
 
 await fs.writeFile(MATCHES_PATH, `${JSON.stringify(matches, null, 2)}\n`);
