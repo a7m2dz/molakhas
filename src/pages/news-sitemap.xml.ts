@@ -7,7 +7,7 @@ const absolute = (value='') => /^https?:\/\//i.test(String(value)) ? String(valu
 export function GET() {
   const mediaMap = imageManifest as Record<string, any>;
   const cutoff = Date.now() - 48 * 60 * 60 * 1000;
-  const recent = stories.filter(s=>s.status==='approved' && +new Date(s.publishedAt)>=cutoff).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,1000);
+  const recent = stories.filter(s=>s.status==='approved' && s.sourceId!=='molakhas-editorial' && +new Date(s.publishedAt)>=cutoff).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,1000);
   const urls = recent.map(s=>{
     const media = mediaMap[s.slug] || {};
     const image = absolute(media.src || s.image?.src || `/news-images/${s.slug}.webp`);
