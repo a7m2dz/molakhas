@@ -2,14 +2,14 @@
 
 منصة أخبار رياضية عربية Static مبنية بـ Astro، مع غرفة أخبار آلية:
 
-`RSS / Google News Radar → Deduplication → FCC → Quality Gate → GitHub → Cloudflare Workers Static Assets`
+`RSS / Google News Radar → Deduplication → OmniRoute → Quality Gate → GitHub → Cloudflare Workers Static Assets`
 
 ## الحالة الحالية
 
 - الموقع: `https://molakhas.a7asmari.workers.dev`
 - Cloudflare يبني وينشر تلقائيًا من `main`.
-- فحص RSS يعمل من GitHub Actions حتى عند توقف FCC.
-- FCC يمكن تشغيله محليًا بدون تعريضه للإنترنت عبر مسار Windows Local Publisher.
+- فحص RSS يعمل من GitHub Actions حتى لو OmniRoute المحلي متوقف.
+- توليد الأخبار الأساسي يعمل عبر OmniRoute المحلي على Windows بدون تعريضه للإنترنت.
 - تسويق Lurvue موجود site-wide وسياقي داخل الأخبار.
 
 ## Cloudflare
@@ -17,15 +17,13 @@
 - Build: `npm run build`
 - Deploy: `npx wrangler deploy`
 - Static assets: `dist/`
-- عند ربط دومين مخصص، اضبط `PUBLIC_SITE_URL` في Cloudflare Build Variables ليتم تحديث canonical / sitemap / RSS تلقائيًا.
+- عند ربط دومين مخصص اضبط `PUBLIC_SITE_URL` لتحديث canonical / sitemap / RSS.
 
 ## غرفة الأخبار
 
-الأوامر الأساسية:
-
 ```bash
 npm run newsroom:dry
-npm run fcc:test
+npm run omniroute:test
 npm run newsroom
 npm run build
 ```
@@ -38,15 +36,19 @@ npm run build
 - `AUTO_PUBLISH_MIN_SCORE=88`
 - `AUTO_PUBLISH_MIN_TRUST=88`
 - `AUTO_PUBLISH_MIN_CONFIDENCE=78`
-- `FCC_TIMEOUT_MS=60000`
+- `OMNIROUTE_MODEL=auto/best-free`
+- `OMNIROUTE_FALLBACK_MODEL=auto`
+- `OMNIROUTE_TIMEOUT_MS=120000`
 
-مصادر الرصد العامة تكون `discoveryOnly` ولا تنشر آليًا. المصادر عالية الثقة فقط تستطيع الوصول إلى `approved` بعد اجتياز الجودة والثقة ودرجة ثقة FCC.
+مصادر الرصد العامة تكون `discoveryOnly` ولا تنشر آليًا. المصادر عالية الثقة فقط تستطيع الوصول إلى `approved` بعد اجتياز الجودة والثقة ودرجة ثقة الكاتب.
 
-## FCC — المسار الموصى به
+## OmniRoute — المسار الموصى به
 
-للإنتاج، الأفضل تشغيل FCC محليًا ثم تشغيل Newsroom على نفس جهاز Windows. لا يحتاج هذا المسار Cloudflare Tunnel ولا يجعل FCC Public.
+شغّل OmniRoute محليًا على:
 
-بعد Clone للمستودع:
+`http://127.0.0.1:20128/v1`
+
+ثم شغّل:
 
 ```powershell
 npm install
@@ -55,15 +57,17 @@ powershell -ExecutionPolicy Bypass -File .\scripts\windows\publish-local.ps1
 
 السكربت يقوم بـ:
 
-1. تشغيل `fcc-server` تلقائيًا إذا كان متاحًا في PATH وغير شغال.
+1. التأكد أن OmniRoute يعمل على المنفذ `20128` ومحاولة تشغيله إذا كان مثبتًا وفي PATH.
 2. `git pull`.
-3. اختبار `http://127.0.0.1:8082/v1`.
+3. اختبار `/v1/models` و`/v1/chat/completions`.
 4. سحب RSS وإزالة التكرار.
-5. توليد الأخبار عبر FCC.
+5. توليد الأخبار عبر `auto/best-free` مع fallback إلى `auto`.
 6. Quality Gate.
 7. اختبار Astro build.
 8. Commit وPush فقط إذا تغير `stories.json`.
 9. Cloudflare ينشر الـcommit تلقائيًا.
+
+إذا OmniRoute عندك يتطلب API key، انسخ `.env.local.ps1.example` إلى `.env.local.ps1` وضع فيه المفتاح. الملف ignored من Git.
 
 ### جدولة Windows كل ساعتين
 
@@ -77,17 +81,16 @@ powershell -ExecutionPolicy Bypass -File .\scripts\windows\install-task.ps1
 schtasks /Run /TN "Molakhas Newsroom"
 ```
 
-إذا فعلت Proxy Auth في FCC، انسخ `.env.local.ps1.example` إلى `.env.local.ps1` وضع فيه `FCC_API_KEY`. هذا الملف ignored من Git.
+## OmniRoute عبر GitHub Actions
 
-## FCC عبر GitHub Actions / Tunnel
+المسار السحابي اختياري فقط إذا وفرت endpoint عام لـ OmniRoute. المتغيرات المدعومة:
 
-يبقى المسار السحابي موجودًا كخيار احتياطي. المتغيرات المدعومة:
+- `OMNIROUTE_BASE_URL`
+- `OMNIROUTE_API_KEY`
+- `OMNIROUTE_MODEL`
+- `OMNIROUTE_FALLBACK_MODEL`
 
-- `FCC_BASE_URL`
-- `FCC_API_KEY`
-- `FCC_MODEL`
-
-إذا FCC غير قابل للوصول، الـworkflow لا يكسر الموقع: يتخطى التوليد ويستمر في RSS dry-run وproduction build.
+إذا لم يوجد endpoint عام، GitHub Actions يكتفي بفحص RSS وproduction build، بينما Windows Local Publisher يتولى التوليد.
 
 ## SEO
 
@@ -103,7 +106,7 @@ schtasks /Run /TN "Molakhas Newsroom"
 
 ## Lurvue
 
-تسويق لورفيو مفعل site-wide من `BaseLayout.astro`، إضافة إلى CTA سياقي داخل المقالات بحسب القسم (كرة القدم، السعودية، الانتقالات، UFC، WWE، الملاكمة).
+تسويق لورفيو مفعل site-wide من `BaseLayout.astro`، إضافة إلى CTA سياقي داخل المقالات حسب القسم: كرة القدم، السعودية، الانتقالات، UFC، WWE، والملاكمة.
 
 - المتجر: `https://lurvue.com`
 - كود الخصم: `Hala10`
