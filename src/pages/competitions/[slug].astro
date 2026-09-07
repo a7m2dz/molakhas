@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
 import { buildCompetitionHubs, teamHref, type CompetitionHub } from '../../lib/hubs';
+import { competitionHubQuality, hubRobots } from '../../lib/index-quality';
 
 export function getStaticPaths() {
   return buildCompetitionHubs().map((hub) => ({ params: { slug: hub.slug }, props: { hub } }));
@@ -21,6 +22,8 @@ const isSaudi = /السعودي|خادم الحرمين|روشن/u.test(hub.name
 const title = `${hub.name}: المباريات والنتائج والأخبار | ملخص`;
 const description = `تابع مباريات ${hub.name} اليوم والقادمة، النتائج، المواعيد بتوقيت السعودية والفرق والأخبار المرتبطة بالبطولة في صفحة محدثة.`;
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const qualityScore = competitionHubQuality(hub);
+const robots = hubRobots(qualityScore);
 const schemaExtra = [
   {
     '@type': 'SportsOrganization',
@@ -40,7 +43,7 @@ const schemaExtra = [
   }
 ];
 ---
-<BaseLayout title={title} description={description} section={isSaudi ? 'saudi' : 'football'} schemaExtra={schemaExtra} modifiedAt={hub.updatedAt}>
+<BaseLayout title={title} description={description} section={isSaudi ? 'saudi' : 'football'} schemaExtra={schemaExtra} modifiedAt={hub.updatedAt} robots={robots}>
   <article class="shell entity-hub">
     <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>/</span><a href="/competitions">البطولات</a><span>/</span><span>{hub.name}</span></nav>
 
