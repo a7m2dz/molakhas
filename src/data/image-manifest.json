@@ -1,10 +1,18 @@
 {
   "welcome-to-molakhas": {
     "src": "/news-images/welcome-to-molakhas.webp",
-    "kind": "branded-fallback",
-    "alt": "ملخص يبدأ نسخته الجديدة: أخبار رياضية أسرع وقراءة أوضح",
-    "caption": "نسخة تجريبية من ملخص تجمع الأخبار الرياضية المهمة في تجربة عربية سريعة وخفيفة.",
-    "query": ""
+    "kind": "open-photo",
+    "archival": true,
+    "alt": "صورة أرشيفية مرتبطة بـملخص ورياضة",
+    "caption": "صورة أرشيفية مرتبطة بـملخص ورياضة؛ لا تمثل بالضرورة الحدث المذكور في الخبر.",
+    "creator": "Original: Nick Mark Derivative: translation: Avicenno, image editing: Mohammad Hijjawi",
+    "license": "BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=88256528",
+    "sourceTitle": "A Seattle Intensivist’s One-Pager on COVID-19-ar",
+    "provider": "wikimedia",
+    "sourceDescription": "",
+    "query": "ملخص"
   },
   "ا-وينز-غونثر-وبالور-يغدرون-بسامي-زين-في-سماكداون": {
     "src": "/news-images/ا-وينز-غونثر-وبالور-يغدرون-بسامي-زين-في-سماكداون.webp",
@@ -20,16 +28,32 @@
   },
   "ا-خضر-الفتيات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام": {
     "src": "/news-images/ا-خضر-الفتيات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام.webp",
-    "kind": "branded-fallback",
-    "alt": "لاعبات المنتخب السعودي للناشئات خلال معسكر تدريبي في الدمام",
-    "caption": "انطلاقة معسكر أخضر الفتيات تحت 15 عامًا في الدمام",
-    "query": "Saudi Arabia women national under-15 football team training"
+    "kind": "open-photo",
+    "archival": true,
+    "alt": "صورة أرشيفية مرتبطة بـكرة قدم نسائية والمنتخب السعودي",
+    "caption": "صورة أرشيفية مرتبطة بـكرة قدم نسائية والمنتخب السعودي؛ لا تمثل بالضرورة الحدث المذكور في الخبر.",
+    "creator": "Fawzi1500",
+    "license": "BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=76249578",
+    "sourceTitle": "Mrm lbtyry",
+    "provider": "wikimedia",
+    "sourceDescription": "",
+    "query": "كرة قدم نسائية"
   },
   "دوري-روشن-السعودي-يمتد-شراكته-مع-ea-sports-fcTM-لا-ربعة-ا-عوام-ا-ضافية": {
     "src": "/news-images/دوري-روشن-السعودي-يمتد-شراكته-مع-ea-sports-fcTM-لا-ربعة-ا-عوام-ا-ضافية.webp",
-    "kind": "branded-fallback",
-    "alt": "شعار دوري روشن السعودي يظهر خلال توقيع اتفاقية شراكة مع شركة EA SPORTS FC",
-    "caption": "دوري روشن السعودي يؤكد تمديد شراكته مع EA SPORTS FC™",
-    "query": "Saudi Pro League EA Sports FC partnership"
+    "kind": "open-photo",
+    "archival": true,
+    "alt": "صورة أرشيفية مرتبطة بـدوري روشن السعودي وكرة قدم سعودية",
+    "caption": "صورة أرشيفية مرتبطة بـدوري روشن السعودي وكرة قدم سعودية؛ لا تمثل بالضرورة الحدث المذكور في الخبر.",
+    "creator": "ElmoreniusOMG",
+    "license": "BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=133224514",
+    "sourceTitle": "Laliga-ea-sports-fc-destacada-01-1200x900",
+    "provider": "wikimedia",
+    "sourceDescription": "",
+    "query": "EA SPORTS FC"
   }
 }
