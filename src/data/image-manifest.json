@@ -1,1 +1,28 @@
-{}
+{
+  "welcome-to-molakhas": {
+    "src": "/news-images/welcome-to-molakhas.webp",
+    "kind": "branded-fallback",
+    "alt": "ملخص يبدأ نسخته الجديدة: أخبار رياضية أسرع وقراءة أوضح",
+    "caption": "نسخة تجريبية من ملخص تجمع الأخبار الرياضية المهمة في تجربة عربية سريعة وخفيفة.",
+    "query": ""
+  },
+  "ا-وينز-غونثر-وبالور-يغدرون-بسامي-زين-في-سماكداون": {
+    "src": "/news-images/ا-وينز-غونثر-وبالور-يغدرون-بسامي-زين-في-سماكداون.webp",
+    "kind": "wikimedia",
+    "alt": "سامي زين في نزال مواجهًا هجمة من كيفن أوينز خلال عرض سماكداون",
+    "caption": "Sami Zayn يتلقى هجمة من Kevin Owens في عرض WWE SmackDown.",
+    "creator": "Miguel Discart from Bruxelles, Belgique",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:WWE_Live_2016-09-07_22-05-51_ILCE-6300_2565_DxO_(30311426603).jpg",
+    "sourceTitle": "WWE Live 2016-09-07 22-05-51 ILCE-6300 2565 DxO (30311426603).jpg",
+    "query": "Kevin Owens Sami Zayn WWE"
+  },
+  "ا-خضر-الفتيات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام": {
+    "src": "/news-images/ا-خضر-الفتيات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام.webp",
+    "kind": "branded-fallback",
+    "alt": "لاعبات المنتخب السعودي للناشئات خلال معسكر تدريبي في الدمام",
+    "caption": "انطلاقة معسكر أخضر الفتيات تحت 15 عامًا في الدمام",
+    "query": "Saudi Arabia women national under-15 football team training"
+  }
+}
