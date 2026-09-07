@@ -5,8 +5,8 @@ import LurvuePromo from '../components/LurvuePromo.astro';
 import { sections } from '../data/sections';
 
 const {
-  title = 'ملخص | أخبار الرياضة',
-  description = 'أهم الأخبار الرياضية العربية والعالمية بسرعة ووضوح.',
+  title = 'ملخص | أخبار الرياضة والترفيه',
+  description = 'أهم الأخبار الرياضية والترفيهية العربية والعالمية بسرعة ووضوح.',
   section = 'general',
   type = 'website',
   publishedAt,
@@ -37,10 +37,13 @@ const primaryNav = [
   { href: '/ufc', label: 'MMA / UFC' },
   { href: '/basketball', label: 'كرة السلة' },
   { href: '/wwe', label: 'WWE' },
+  { href: '/movies', label: 'الأفلام' },
+  { href: '/tv', label: 'المسلسلات' },
   { href: '/saudi', label: 'السعودية' },
   { href: '/competitions', label: 'البطولات' },
   { href: '/teams', label: 'الفرق' }
 ];
+const footerSections = sections.filter((item) => ['football','basketball','ufc','wwe','movies','tv','saudi','transfers'].includes(item.slug));
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -60,7 +63,7 @@ const schema = {
       url: siteUrl,
       inLanguage: 'ar',
       publisher: {'@id': `${siteUrl}/#organization`},
-      description: 'منصة عربية تجمع الأخبار الرياضية ومركز المباريات والأحداث في تجربة سريعة ومختصرة.'
+      description: 'منصة عربية تجمع الأخبار الرياضية والترفيهية، مركز المباريات، الأفلام والمسلسلات في تجربة سريعة ومختصرة.'
     },
     ...extras
   ]
@@ -133,8 +136,8 @@ const schema = {
           </a>
           <p>SPORTS × ENTERTAINMENT × A BRIGHTER FEED</p><small>الأهم أولًا. بدون حشو.</small>
         </div>
-        <div class="footer-col"><b>روابط سريعة</b><a href="/">الرئيسية</a><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a></div>
-        <div class="footer-col"><b>الأقسام</b>{sections.slice(0,6).map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}</div>
+        <div class="footer-col"><b>روابط سريعة</b><a href="/">الرئيسية</a><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/movies">الأفلام</a><a href="/tv">المسلسلات</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a></div>
+        <div class="footer-col"><b>الأقسام</b>{footerSections.map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}</div>
         <div class="footer-col"><b>عن ملخص</b><a href="/about">من نحن</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a></div>
       </div>
       <div class="footer-bottom"><span>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</span><a href="/rss.xml">RSS</a><span class="footer-slogan">أكثر من مجرد ملخص</span></div>
