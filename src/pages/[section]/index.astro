@@ -9,7 +9,7 @@ export function getStaticPaths() {
   return sections.map((section) => ({ params: { section: section.slug }, props: { section } }));
 }
 const { section } = Astro.props;
-const items = stories.filter((story) => story.status === 'approved' && story.section === section.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
+const items = stories.filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial' && story.section === section.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
 const mediaMap = imageManifest as Record<string, any>;
 const mediaFor = (story) => mediaMap[story.slug] || {};
 const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-images/${story.slug}.webp`;
