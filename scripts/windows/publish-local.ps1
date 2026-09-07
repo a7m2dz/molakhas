@@ -70,20 +70,45 @@ Invoke-Checked 'Resolving source article images and local fallbacks...' { npm ru
 Invoke-Checked 'Verifying production build...' { npm run build }
 Invoke-Checked 'Running prelaunch quality audit...' { npm run audit:prelaunch }
 
-$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
+# Single-writer rule for generated data:
+# GitHub Actions owns the sports snapshots; the Windows publisher owns OmniRoute stories/media.
+# Restore locally refreshed sports snapshots before committing so scheduled CI updates cannot
+# conflict with local newsroom commits during a later rebase.
+Write-Host '[Molakhas] Leaving match/event snapshots to scheduled cloud refresh...'
+git restore -- src/data/matches.json src/data/today-events.json
+if ($LASTEXITCODE -ne 0) { throw "restoring cloud-owned sports snapshots failed with exit code $LASTEXITCODE" }
+
+$publishPaths = @(
+  'src/data/stories.json',
+  'src/data/image-manifest.json',
+  'src/data/search-feedback.json',
+  'public/news-images'
+)
+$changes = git status --porcelain -- $publishPaths
 if (-not $changes) {
-  Write-Host '[Molakhas] No publishable changes. Nothing to push.'
+  Write-Host '[Molakhas] No publishable OmniRoute/news media changes. Nothing to push.'
   exit 0
 }
 
-Write-Host '[Molakhas] Publishing newsroom + matches + daily sports package to GitHub...'
+Write-Host '[Molakhas] Publishing OmniRoute newsroom package to GitHub...'
 git config user.name 'molakhas-local-newsroom'
 git config user.email 'molakhas-local@users.noreply.github.com'
-git add src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
-git commit -m "newsroom: OmniRoute + sports center $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+git add -- $publishPaths
+git commit -m "newsroom: OmniRoute content $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE" }
+
 git push origin main
-if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
+if ($LASTEXITCODE -ne 0) {
+  Write-Warning '[Molakhas] Remote moved while the newsroom was running. Rebasing the content-only commit and retrying once...'
+  git fetch origin main
+  if ($LASTEXITCODE -ne 0) { throw "git fetch failed with exit code $LASTEXITCODE" }
+  git rebase origin/main
+  if ($LASTEXITCODE -ne 0) {
+    throw 'Automatic retry rebase failed. Your commit is preserved locally; resolve the reported conflict before rerunning.'
+  }
+  git push origin main
+  if ($LASTEXITCODE -ne 0) { throw "git push retry failed with exit code $LASTEXITCODE" }
+}
 
 Write-Host '[Molakhas] GitHub updated. Cloudflare will deploy automatically.'
 Write-Host '[Molakhas] Notifying IndexNow (non-blocking)...'
