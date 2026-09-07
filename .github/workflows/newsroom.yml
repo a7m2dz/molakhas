@@ -1,56 +1,73 @@
 name: Molakhas Newsroom
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '17 */2 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/newsroom.yml'
+      - 'scripts/newsroom/**'
+      - 'src/data/sources.json'
+
 permissions:
   contents: write
+
 concurrency:
   group: molakhas-newsroom
   cancel-in-progress: false
+
 jobs:
   newsroom:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
-      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || 'https://wheel-conflicts-pulse-arctic.trycloudflare.com/v1' }}
+      FCC_BASE_URL: ${{ secrets.FCC_BASE_URL || vars.FCC_BASE_URL || 'https://wheel-conflicts-pulse-arctic.trycloudflare.com/v1' }}
       FCC_API_KEY: ${{ secrets.FCC_API_KEY }}
       FCC_MODEL: ${{ vars.FCC_MODEL }}
+      FCC_TIMEOUT_MS: ${{ vars.FCC_TIMEOUT_MS || '60000' }}
+      NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
+      NEWSROOM_MAX_AGE_HOURS: ${{ vars.NEWSROOM_MAX_AGE_HOURS || '72' }}
+      AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED || 'true' }}
+      AUTO_PUBLISH_MIN_SCORE: ${{ vars.AUTO_PUBLISH_MIN_SCORE || '88' }}
+      AUTO_PUBLISH_MIN_TRUST: ${{ vars.AUTO_PUBLISH_MIN_TRUST || '88' }}
+      AUTO_PUBLISH_MIN_CONFIDENCE: ${{ vars.AUTO_PUBLISH_MIN_CONFIDENCE || '78' }}
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm install
-      - name: Check FCC configuration
-        id: fcc
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Show newsroom configuration
         run: |
-          if [ -n "$FCC_BASE_URL" ] && [ -n "$FCC_API_KEY" ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-            echo "FCC endpoint configured."
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "FCC_API_KEY is not configured yet; skipping newsroom."
-          fi
-      - name: Verify FCC
-        if: steps.fcc.outputs.ready == 'true'
+          echo "FCC endpoint: $FCC_BASE_URL"
+          if [ -n "$FCC_API_KEY" ]; then echo "FCC auth: enabled"; else echo "FCC auth: not set (temporary test mode)"; fi
+          if [ -n "$FCC_MODEL" ]; then echo "FCC model: $FCC_MODEL"; else echo "FCC model: server default"; fi
+
+      - name: Verify FCC connection
         run: npm run fcc:test
+
       - name: Generate newsroom batch
-        if: steps.fcc.outputs.ready == 'true'
         run: npm run newsroom
-        env:
-          FCC_TIMEOUT_MS: ${{ vars.FCC_TIMEOUT_MS || '60000' }}
-          NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
-          AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED || 'true' }}
-          AUTO_PUBLISH_MIN_SCORE: ${{ vars.AUTO_PUBLISH_MIN_SCORE || '90' }}
-          AUTO_PUBLISH_MIN_TRUST: ${{ vars.AUTO_PUBLISH_MIN_TRUST || '85' }}
-      - name: Build
-        if: steps.fcc.outputs.ready == 'true'
+
+      - name: Build production site
         run: npm run build
+
       - name: Commit generated stories
-        if: steps.fcc.outputs.ready == 'true'
         run: |
-          if git diff --quiet; then echo "No newsroom changes."; exit 0; fi
+          if git diff --quiet -- src/data/stories.json; then
+            echo "No newsroom changes."
+            exit 0
+          fi
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
           git add src/data/stories.json
