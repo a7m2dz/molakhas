@@ -10,6 +10,11 @@ on:
       - '.github/workflows/newsroom.yml'
       - 'scripts/newsroom/**'
       - 'src/data/sources.json'
+      - 'src/pages/**'
+      - 'src/layouts/**'
+      - 'src/components/**'
+      - 'src/styles/**'
+      - 'astro.config.mjs'
 
 permissions:
   contents: write
@@ -53,15 +58,23 @@ jobs:
           if [ -n "$FCC_MODEL" ]; then echo "FCC model: $FCC_MODEL"; else echo "FCC model: server default"; fi
 
       - name: Verify FCC connection
+        id: fcc
+        continue-on-error: true
         run: npm run fcc:test
 
       - name: Generate newsroom batch
+        if: steps.fcc.outcome == 'success'
         run: npm run newsroom
+
+      - name: FCC unavailable notice
+        if: steps.fcc.outcome != 'success'
+        run: echo "FCC is currently unreachable; skipping content generation while keeping the site build healthy."
 
       - name: Build production site
         run: npm run build
 
       - name: Commit generated stories
+        if: steps.fcc.outcome == 'success'
         run: |
           if git diff --quiet -- src/data/stories.json; then
             echo "No newsroom changes."
