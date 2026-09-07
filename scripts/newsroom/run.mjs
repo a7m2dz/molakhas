@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { XMLParser } from 'fast-xml-parser';
 import { configured, rewriteStory } from './omniroute-client.mjs';
+import { languageIssues } from './quality-gate.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const maxStories = Number(process.env.NEWSROOM_MAX_STORIES || 8);
@@ -46,8 +47,21 @@ const entryLink = (entry) => {
   return entry?.link?.['@_href'] ?? entry?.guid?.['#text'] ?? entry?.guid ?? '';
 };
 
-const existingLinks = new Set(stories.map((s) => s.sourceUrl).filter(Boolean));
-const existingTitles = stories.map((s) => s.title);
+let auditedExisting = false;
+for (const story of stories) {
+  if (story.status !== 'approved') continue;
+  const issues = languageIssues(story);
+  if (!issues.length) continue;
+  story.status = 'review';
+  story.qualityFlags = [...new Set([...(story.qualityFlags || []), 'language-quality-failed'])];
+  story.qualityNotes = issues;
+  auditedExisting = true;
+  console.warn(`[Audit] Unpublished corrupted story: ${story.title} :: ${issues.join('; ')}`);
+}
+
+const dedupeEligible = (story) => !(story.qualityFlags || []).includes('language-quality-failed');
+const existingLinks = new Set(stories.filter(dedupeEligible).map((s) => s.sourceUrl).filter(Boolean));
+const existingTitles = stories.filter(dedupeEligible).map((s) => s.title);
 const candidates = [];
 const now = Date.now();
 
@@ -55,7 +69,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.5 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.6 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -123,7 +137,11 @@ if (dryRun) {
   process.exit(0);
 }
 if (!configured()) {
-  console.log('OmniRoute is not configured; no stories written.');
+  if (auditedExisting) {
+    stories.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+    await fs.writeFile(storiesPath, `${JSON.stringify(stories.slice(0, 1500), null, 2)}\n`);
+  }
+  console.log('OmniRoute is not configured; no new stories written.');
   process.exit(0);
 }
 
@@ -148,16 +166,26 @@ function qualityScore(rewritten, item) {
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
-let changed = false;
+let changed = auditedExisting;
 for (const item of selected) {
   try {
-    const rewritten = await rewriteStory(item);
-    const score = qualityScore(rewritten, item);
-    const approved = autoPublishEnabled && !item.discoveryOnly && item.autoPublish && item.trust >= minTrust && score >= minScore && rewritten.confidence >= minConfidence;
-    const baseSlug = slugify(rewritten.title) || hash(item.link);
-    const slug = stories.some((s) => s.slug === baseSlug) ? `${baseSlug}-${hash(item.link).slice(0, 6)}` : baseSlug;
+    let rewritten = await rewriteStory(item);
+    let issues = languageIssues(rewritten);
+    if (issues.length) {
+      console.warn(`[Quality] Retrying ${item.title}: ${issues.join('; ')}`);
+      rewritten = await rewriteStory(item, issues.join('; '));
+      issues = languageIssues(rewritten);
+    }
 
-    stories.push({
+    const score = qualityScore(rewritten, item);
+    const languageClean = issues.length === 0;
+    const approved = autoPublishEnabled && languageClean && !item.discoveryOnly && item.autoPublish && item.trust >= minTrust && score >= minScore && rewritten.confidence >= minConfidence;
+    const baseSlug = slugify(rewritten.title) || hash(item.link);
+    const corruptIndex = stories.findIndex((s) => s.sourceUrl === item.link && (s.qualityFlags || []).includes('language-quality-failed'));
+    const slugConflict = stories.some((s, index) => s.slug === baseSlug && index !== corruptIndex);
+    const slug = slugConflict ? `${baseSlug}-${hash(item.link).slice(0, 6)}` : baseSlug;
+
+    const storyRecord = {
       id: hash(item.link),
       slug,
       section: item.section,
@@ -178,6 +206,8 @@ for (const item of selected) {
       confidence: rewritten.confidence,
       importance: rewritten.importance,
       trust: item.trust,
+      qualityFlags: languageClean ? [] : ['language-quality-failed'],
+      qualityNotes: issues,
       tags: rewritten.tags.slice(0, 6),
       entities: rewritten.entities.slice(0, 6),
       image: {
@@ -189,11 +219,15 @@ for (const item of selected) {
         height: 675,
         type: 'image/webp'
       }
-    });
+    };
+
+    if (corruptIndex >= 0) stories[corruptIndex] = storyRecord;
+    else stories.push(storyRecord);
+
     existingLinks.add(item.link);
     existingTitles.push(rewritten.title);
     changed = true;
-    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [${score}/${rewritten.confidence}]: ${rewritten.title}`);
+    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [${score}/${rewritten.confidence}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}: ${rewritten.title}`);
   } catch (error) {
     console.error(`Story failed: ${item.title}: ${error.message}`);
   }
