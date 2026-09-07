@@ -16,12 +16,15 @@ const {
   imageType,
   imageWidth,
   imageHeight,
-  tags = []
+  tags = [],
+  robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+  schemaExtra = []
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const imageUrl = image ? new URL(image, `${siteUrl}/`).toString() : null;
+const extras = Array.isArray(schemaExtra) ? schemaExtra : [schemaExtra].filter(Boolean);
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -42,7 +45,8 @@ const schema = {
       inLanguage: 'ar',
       publisher: {'@id': `${siteUrl}/#organization`},
       description: 'منصة رياضية عربية تركز على الأخبار المهمة بدون حشو.'
-    }
+    },
+    ...extras
   ]
 };
 ---
@@ -52,7 +56,7 @@ const schema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#07101d" />
     <meta name="generator" content="Astro" />
     <meta name="author" content="فريق تحرير ملخص" />
@@ -91,6 +95,7 @@ const schema = {
     <header class="site-header">
       <a class="brand" href="/" aria-label="ملخص - الرئيسية"><span>مُلخّص</span><small>الرياضة بدون حشو</small></a>
       <nav aria-label="الأقسام">
+        <a href="/matches/today">مباريات اليوم</a>
         {sections.map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}
       </nav>
     </header>
@@ -99,7 +104,7 @@ const schema = {
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
       <div class="footer-row">
         <div><b>مُلخّص</b><p>أخبار رياضية مختصرة، واضحة، ومحدثة.</p></div>
-        <div class="footer-links"><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
+        <div class="footer-links"><a href="/matches/today">مباريات اليوم</a><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
       </div>
       <small>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</small>
     </footer>
