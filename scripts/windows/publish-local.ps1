@@ -28,6 +28,7 @@ $env:OMNIROUTE_FALLBACK_MODEL = if ($env:OMNIROUTE_FALLBACK_MODEL) { $env:OMNIRO
 $env:OMNIROUTE_TIMEOUT_MS = if ($env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS } else { '120000' }
 $env:NEWSROOM_MAX_STORIES = "$MaxStories"
 $env:NEWSROOM_MAX_AGE_HOURS = '72'
+$env:NEWSROOM_MIN_TRAFFIC_SCORE = if ($env:NEWSROOM_MIN_TRAFFIC_SCORE) { $env:NEWSROOM_MIN_TRAFFIC_SCORE } else { '35' }
 $env:AUTO_PUBLISH_ENABLED = 'true'
 $env:AUTO_PUBLISH_MIN_SCORE = '88'
 $env:AUTO_PUBLISH_MIN_TRUST = '88'
@@ -64,7 +65,7 @@ if (-not (Test-OmniRoutePort)) {
 Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin main }
 Invoke-Checked 'Syncing dependencies...' { npm install --no-audit --no-fund }
 Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
-Invoke-Checked 'Scanning and generating stories...' { npm run newsroom }
+Invoke-Checked 'Ranking traffic opportunities and generating stories...' { npm run newsroom }
 Invoke-Checked 'Resolving source article images and local fallbacks...' { npm run images:generate }
 Invoke-Checked 'Verifying production build...' { npm run build }
 
