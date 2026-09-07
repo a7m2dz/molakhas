@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LurvuePromo from '../../components/LurvuePromo.astro';
+import { matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
+import { buildTeamHubs, competitionHref, type TeamHub } from '../../lib/hubs';
+
+export function getStaticPaths() {
+  return buildTeamHubs().map((hub) => ({ params: { slug: hub.slug }, props: { hub } }));
+}
+
+const { hub } = Astro.props as { hub: TeamHub };
+const now = Date.now();
+const matches = [...hub.matches]
+  .sort((a, b) => {
+    const aFuture = +new Date(a.kickoff) >= now - 4 * 3_600_000 ? 1 : 0;
+    const bFuture = +new Date(b.kickoff) >= now - 4 * 3_600_000 ? 1 : 0;
+    return (bFuture - aFuture) || (b.opportunityScore - a.opportunityScore) || (+new Date(a.kickoff) - +new Date(b.kickoff));
+  })
+  .slice(0, 14);
+const upcomingCount = hub.matches.filter((m) => m.state === 'upcoming' || m.state === 'scheduled' || m.state === 'live').length;
+const finalCount = hub.matches.filter((m) => m.state === 'final').length;
+const title = `مباريات وأخبار ${hub.name} اليوم | النتائج والمواعيد - ملخص`;
+const description = `تابع مباريات ${hub.name} اليوم والقادمة، النتائج، المواعيد بتوقيت السعودية وآخر الأخبار المرتبطة بالفريق في صفحة واحدة محدثة.`;
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const schemaExtra = [
+  {
+    '@type': 'SportsTeam',
+    '@id': `${siteUrl}/teams/${hub.slug}/#team`,
+    name: hub.name,
+    alternateName: hub.alternateName !== hub.name ? hub.alternateName : undefined,
+    sport: 'Football',
+    url: `${siteUrl}/teams/${hub.slug}/`
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'الفرق', item: `${siteUrl}/teams/` },
+      { '@type': 'ListItem', position: 3, name: hub.name, item: `${siteUrl}/teams/${hub.slug}/` }
+    ]
+  }
+];
+---
+<BaseLayout title={title} description={description} section={hub.name === 'الهلال' || hub.name === 'النصر' || hub.name === 'الاتحاد' || hub.name === 'الأهلي' || hub.name === 'القادسية' || hub.name === 'الشباب' ? 'saudi' : 'football'} schemaExtra={schemaExtra} modifiedAt={hub.updatedAt}>
+  <article class="shell entity-hub">
+    <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>/</span><a href="/teams">الفرق</a><span>/</span><span>{hub.name}</span></nav>
+
+    <header class="entity-hero">
+      <span class="entity-kicker">صفحة الفريق • محدثة من مركز المباريات</span>
+      <h1>{hub.name}</h1>
+      {hub.alternateName !== hub.name && <p class="alternate">{hub.alternateName}</p>}
+      <p>المباريات والنتائج والأخبار المرتبطة بـ <strong>{hub.name}</strong> في مكان واحد.</p>
+      <div class="entity-stats">
+        <div><b>{upcomingCount}</b><span>قادمة / جارية</span></div>
+        <div><b>{finalCount}</b><span>نتائج محفوظة</span></div>
+        <div><b>{hub.stories.length}</b><span>أخبار مرتبطة</span></div>
+      </div>
+    </header>
+
+    <LurvuePromo section={hub.name === 'الهلال' || hub.name === 'النصر' || hub.name === 'الاتحاد' || hub.name === 'الأهلي' ? 'saudi' : 'football'} position="team-hub-top" storySlug={hub.slug} storyTitle={hub.name} keyword={`مباريات ${hub.name}`} />
+
+    <section class="hub-section">
+      <div class="section-title"><div><span class="section-kicker">الموعد والنتيجة</span><h2>مباريات {hub.name}</h2></div><a href="/matches/today">مباريات اليوم</a></div>
+      {matches.length ? <div class="hub-match-grid">
+        {matches.map((match) => (
+          <a class:list={["hub-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+            <div class="hub-match-top"><span>{matchStateArabic(match.state)}</span><small><a href={competitionHref(match.league.name)}>{match.league.name}</a></small></div>
+            <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
+            <div class="hub-match-bottom"><b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b><small>{matchDateArabic(match.kickoff)}</small></div>
+          </a>
+        ))}
+      </div> : <div class="empty compact-empty"><h3>لا توجد مباريات محفوظة حاليًا</h3></div>}
+    </section>
+
+    <section class="hub-section">
+      <div class="section-title"><div><span class="section-kicker">آخر التغطيات</span><h2>أخبار {hub.name}</h2></div></div>
+      {hub.stories.length ? <div class="hub-news-grid">
+        {hub.stories.slice(0, 9).map((story) => <a href={`/${story.section}/${story.slug}/`}><span>{story.sourceName || 'ملخص'}</span><h3>{story.title}</h3><p>{story.excerpt}</p></a>)}
+      </div> : <div class="empty compact-empty"><h3>الأخبار المرتبطة ستظهر هنا تلقائيًا</h3><p>عندما تنشر غرفة الأخبار مادة مرتبطة بالفريق ستضاف لهذه الصفحة.</p></div>}
+    </section>
+
+    <section class="seo-copy">
+      <h2>كل ما يخص {hub.name}</h2>
+      <p>تجمع هذه الصفحة مواعيد مباريات <strong>{hub.name}</strong> ونتائجه وآخر الأخبار المرتبطة به. تتحدث بيانات المباريات تلقائيًا، لذلك يبقى رابط الفريق ثابتًا قبل المباراة وأثناءها وبعد نهايتها.</p>
+    </section>
+
+    <LurvuePromo section="football" position="team-hub-end" storySlug={hub.slug} storyTitle={hub.name} keyword={`مشاهدة مباريات ${hub.name}`} />
+  </article>
+</BaseLayout>
+
+<style>
+.entity-hub{max-width:1060px;padding:38px 0 75px}.entity-hero{padding:18px 0 12px}.entity-kicker{color:var(--accent);font-size:11px;font-weight:900}.entity-hero h1{font-size:clamp(44px,7vw,76px);line-height:1.05;margin:8px 0}.entity-hero>p{color:var(--muted);font-size:17px}.entity-hero .alternate{font-size:12px;margin:0;color:#b8c9da}.entity-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.entity-stats>div{min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 15px;display:flex;flex-direction:column}.entity-stats b{font-size:22px;color:var(--accent)}.entity-stats span{font-size:10px;color:var(--muted)}.hub-section{padding:32px 0}.hub-match-grid,.hub-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hub-match{background:linear-gradient(150deg,#10233a,#091624);border:1px solid var(--line);border-radius:16px;padding:17px;color:inherit}.hub-match:hover{color:inherit;border-color:#356086}.hub-match.live{border-color:#ff5b6655}.hub-match-top,.hub-match-bottom{display:flex;justify-content:space-between;gap:10px;align-items:center}.hub-match-top span{font-size:10px;color:var(--accent);font-weight:900}.hub-match-top small,.hub-match-bottom small{font-size:10px;color:var(--muted)}.hub-match h3{font-size:17px;line-height:1.5;margin:12px 0}.hub-match h3 em{font-style:normal;color:var(--muted);font-size:10px}.hub-match-bottom{border-top:1px solid var(--line);padding-top:10px}.hub-match-bottom b{font-size:18px}.hub-news-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.hub-news-grid span{font-size:10px;color:var(--accent)}.hub-news-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.hub-news-grid p{font-size:12px;color:var(--muted);margin:0}.seo-copy{padding:24px 0;border-top:1px solid var(--line);font-size:17px;line-height:2}.seo-copy p{color:#c7d5e7}@media(max-width:850px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr}.entity-stats>div{flex:1}.entity-hero h1{font-size:48px}}
+</style>
