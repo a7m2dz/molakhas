@@ -13,11 +13,16 @@ const { story } = Astro.props;
 const section = sectionMap[story.section];
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const canonical = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
-const media = (imageManifest as Record<string, any>)[story.slug] || {};
+const mediaMap = imageManifest as Record<string, any>;
+const media = mediaMap[story.slug] || {};
 const imageSrc = media.src || story.image?.src || `/news-images/${story.slug}.webp`;
+const fallbackSrc = media.fallbackSrc || `/news-images/${story.slug}.webp`;
 const imageUrl = new URL(imageSrc, `${siteUrl}/`).toString();
-const imageAlt = media.alt || story.image?.alt || `ملخص بصري لخبر ${story.title}`;
+const imageAlt = media.alt || story.image?.alt || `صورة مرتبطة بخبر ${story.title}`;
 const imageCaption = media.caption || story.image?.caption || story.excerpt;
+const imageType = media.type || story.image?.type || undefined;
+const imageWidth = media.width || story.image?.width || undefined;
+const imageHeight = media.height || story.image?.height || undefined;
 const seoTitle = story.seoTitle || story.title;
 const metaDescription = story.metaDescription || story.excerpt;
 const words = story.body.join(' ').split(/\s+/).filter(Boolean).length;
@@ -31,6 +36,10 @@ const related = stories
   .sort((a,b)=>b.score-a.score || +new Date(b.story.publishedAt)-+new Date(a.story.publishedAt))
   .slice(0,4)
   .map((x)=>x.story);
+const mediaFor = (item) => mediaMap[item.slug] || {};
+const imageFor = (item) => mediaFor(item).src || item.image?.src || `/news-images/${item.slug}.webp`;
+const fallbackFor = (item) => mediaFor(item).fallbackSrc || `/news-images/${item.slug}.webp`;
+const altFor = (item) => mediaFor(item).alt || item.image?.alt || '';
 
 const schema = {
   '@context':'https://schema.org', '@type':'NewsArticle', headline:story.title, description:metaDescription,
@@ -52,7 +61,7 @@ const xShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(story
 const waShare = `https://wa.me/?text=${encodeURIComponent(`${story.title}\n${canonical}`)}`;
 const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&text=${encodeURIComponent(story.title)}`;
 ---
-<BaseLayout title={`${seoTitle} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} tags={story.tags || []}>
+<BaseLayout title={`${seoTitle} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} imageType={imageType} imageWidth={imageWidth} imageHeight={imageHeight} tags={story.tags || []}>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <article class="article shell">
@@ -65,10 +74,10 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
     </header>
 
     <figure class="article-hero">
-      <img src={imageSrc} alt={imageAlt} width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" />
+      <img src={imageSrc} alt={imageAlt} width={imageWidth || 1200} height={imageHeight || 675} loading="eager" fetchpriority="high" decoding="async" referrerpolicy={media.external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackSrc}'`} />
       <figcaption>
         <span>{imageCaption}</span>
-        {media.sourceUrl && media.kind !== 'branded-fallback' && <small class="image-credit">الصورة: {media.creator || media.provider || 'مصدر مفتوح'}{media.provider ? <> · {media.provider}</> : null} · <a href={media.sourceUrl} target="_blank" rel="noopener nofollow">المصدر</a>{media.license ? <> · {media.licenseUrl ? <a href={media.licenseUrl} target="_blank" rel="noopener nofollow">{media.license}</a> : media.license}</> : null}</small>}
+        {media.kind === 'source-remote' && <small class="image-credit">الصورة من صفحة المصدر: {media.provider || story.sourceName || 'المصدر الأصلي'} · <a href={media.sourceUrl || story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر</a></small>}
       </figcaption>
     </figure>
 
@@ -77,7 +86,7 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
     <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
     {story.tags?.length > 0 && <div class="tag-list" aria-label="مواضيع الخبر">{story.tags.map((tag) => { const slug = topicSlug(tag); const available = (counts.get(slug)?.count || 0) >= 2; return available ? <a href={`/topic/${slug}`}>#{tag}</a> : <span>#{tag}</span>; })}</div>}
     <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر. يمكنك الرجوع إلى المصدر الأصلي للتحقق من التفاصيل والسياق الكامل.</p><div><a href={story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a><a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div></div>
-    {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={item.image?.src || `/news-images/${item.slug}.webp`} alt="" width="1200" height="675" loading="lazy" decoding="async"/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
+    {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={imageFor(item)} alt={altFor(item)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(item).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(item)}'`}/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
   </article>
 </BaseLayout>
 
