@@ -1,56 +1,110 @@
 [
   {
-    "id": "bbc-football",
-    "name": "BBC Sport Football",
-    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "id": "reuters-football",
+    "name": "Reuters Football",
+    "url": "https://news.google.com/rss/search?q=site%3Areuters.com%20football%20OR%20soccer&hl=en-US&gl=US&ceid=US%3Aen",
     "section": "football",
-    "trust": 92,
+    "trust": 95,
+    "priority": 100,
     "enabled": true,
-    "autoPublish": true
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   },
   {
-    "id": "google-saudi-football",
-    "name": "Google News - Saudi Football",
-    "url": "https://news.google.com/rss/search?q=%D8%AF%D9%88%D8%B1%D9%8A+%D8%B1%D9%88%D8%B4%D9%86+OR+%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84+OR+%D8%A7%D9%84%D9%86%D8%B5%D8%B1+OR+%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF&hl=ar&gl=SA&ceid=SA:ar",
+    "id": "saudi-official",
+    "name": "Saudi Football Official Sources",
+    "url": "https://news.google.com/rss/search?q=%28site%3Aspl.com.sa%20OR%20site%3Asaff.com.sa%29%20%D9%83%D8%B1%D8%A9%20%D8%A7%D9%84%D9%82%D8%AF%D9%85&hl=ar&gl=SA&ceid=SA%3Aar",
     "section": "saudi",
-    "trust": 82,
+    "trust": 96,
+    "priority": 100,
     "enabled": true,
-    "autoPublish": false
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   },
   {
-    "id": "google-transfers",
-    "name": "Google News - Transfers",
-    "url": "https://news.google.com/rss/search?q=football+transfer+news&hl=en-US&gl=US&ceid=US:en",
+    "id": "reuters-transfers",
+    "name": "Reuters Transfers",
+    "url": "https://news.google.com/rss/search?q=site%3Areuters.com%20football%20transfer&hl=en-US&gl=US&ceid=US%3Aen",
     "section": "transfers",
-    "trust": 78,
+    "trust": 95,
+    "priority": 98,
     "enabled": true,
-    "autoPublish": false
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   },
   {
-    "id": "google-ufc",
-    "name": "Google News - UFC",
-    "url": "https://news.google.com/rss/search?q=UFC+MMA&hl=en-US&gl=US&ceid=US:en",
+    "id": "ufc-official",
+    "name": "UFC",
+    "url": "https://news.google.com/rss/search?q=site%3Aufc.com%20UFC&hl=en-US&gl=US&ceid=US%3Aen",
     "section": "ufc",
-    "trust": 80,
+    "trust": 97,
+    "priority": 100,
     "enabled": true,
-    "autoPublish": false
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   },
   {
-    "id": "google-wwe",
-    "name": "Google News - WWE",
-    "url": "https://news.google.com/rss/search?q=WWE&hl=en-US&gl=US&ceid=US:en",
+    "id": "wwe-official",
+    "name": "WWE",
+    "url": "https://news.google.com/rss/search?q=site%3Awwe.com%20WWE&hl=en-US&gl=US&ceid=US%3Aen",
     "section": "wwe",
-    "trust": 78,
+    "trust": 97,
+    "priority": 100,
     "enabled": true,
-    "autoPublish": false
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   },
   {
-    "id": "google-boxing",
-    "name": "Google News - Boxing",
-    "url": "https://news.google.com/rss/search?q=boxing&hl=en-US&gl=US&ceid=US:en",
+    "id": "reuters-boxing",
+    "name": "Reuters Boxing",
+    "url": "https://news.google.com/rss/search?q=site%3Areuters.com%20boxing&hl=en-US&gl=US&ceid=US%3Aen",
     "section": "boxing",
-    "trust": 78,
+    "trust": 95,
+    "priority": 98,
     "enabled": true,
-    "autoPublish": false
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "google-saudi-radar",
+    "name": "Google News Saudi Radar",
+    "url": "https://news.google.com/rss/search?q=%D8%AF%D9%88%D8%B1%D9%8A%20%D8%B1%D9%88%D8%B4%D9%86%20OR%20%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84%20OR%20%D8%A7%D9%84%D9%86%D8%B5%D8%B1%20OR%20%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF%20OR%20%D8%A7%D9%84%D8%A3%D9%87%D9%84%D9%8A&hl=ar&gl=SA&ceid=SA%3Aar",
+    "section": "saudi",
+    "trust": 74,
+    "priority": 60,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "google-football-radar",
+    "name": "Google News Football Radar",
+    "url": "https://news.google.com/rss/search?q=football%20OR%20soccer%20Premier%20League%20OR%20Champions%20League%20OR%20LaLiga&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "football",
+    "trust": 72,
+    "priority": 55,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "google-ufc-radar",
+    "name": "Google News UFC Radar",
+    "url": "https://news.google.com/rss/search?q=UFC%20OR%20MMA&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "ufc",
+    "trust": 72,
+    "priority": 55,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
   }
 ]
