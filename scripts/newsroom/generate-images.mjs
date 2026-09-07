@@ -13,6 +13,7 @@ const brandDir = fileURLToPath(new URL('../../public/brand/', import.meta.url));
 await fs.mkdir(outDir, { recursive: true });
 await fs.mkdir(brandDir, { recursive: true });
 
+const RELEVANCE_VERSION = 2;
 const sectionNames = {
   football: 'كرة القدم', saudi: 'الكرة السعودية', transfers: 'الانتقالات',
   ufc: 'UFC', wwe: 'WWE', boxing: 'الملاكمة'
@@ -25,6 +26,34 @@ const palettes = {
 
 const esc = (value = '') => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 const stripHtml = (value = '') => String(value).replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/\s+/g, ' ').trim();
+
+const STOP_TOKENS = new Set([
+  'image','photo','photos','picture','news','official','highlights','sports','sport','match','game','games','team','club','football','soccer','fc',
+  'صورة','صور','خبر','أخبار','اخبار','رسمي','الرسمية','رياضة','رياضي','رياضية','كرة','قدم','فريق','نادي','مباراة','مباريات','بطولة','الدوري','دوري'
+]);
+const CONFLICT_GROUPS = [
+  ['saudi','roshn','spl','السعودي','روشن'],
+  ['laliga','la-liga','spain','spanish','إسبانيا','الاسباني','الإسباني'],
+  ['premier','premierleague','epl','الإنجليزي','الانجليزي'],
+  ['bundesliga','germany','german','الألماني','الالماني'],
+  ['seriea','italy','italian','الإيطالي','الايطالي'],
+  ['wwe','smackdown','raw','wrestlemania'],
+  ['ufc','mma','octagon']
+];
+
+function normalizeText(value = '') {
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function lexicalTokens(value = '') {
+  return normalizeText(value).split(' ').filter((token) => token.length >= 3 && !STOP_TOKENS.has(token));
+}
+function unique(values) { return [...new Set(values.filter(Boolean))]; }
 
 function archiveSubject(story) {
   const tags = (story.tags || []).filter((tag) => /\p{Script=Arabic}/u.test(String(tag))).slice(0, 2);
@@ -39,45 +68,88 @@ function archivalCopy(story) {
   };
 }
 function queryVariants(story) {
+  if (story.sourceId === 'molakhas-editorial') return [];
   const entities = (story.entities || []).map(String).filter(Boolean);
+  const latinEntities = entities.filter((x) => /[A-Za-z]/.test(x));
   const values = [
     story.image?.searchQuery,
+    latinEntities.slice(0, 2).join(' '),
+    latinEntities[0],
     entities.slice(0, 2).join(' '),
     entities[0],
-    story.focusKeyword,
-    ...(story.tags || []).slice(0, 2)
-  ].map((x) => String(x || '').trim()).filter((x) => x.length >= 2);
-  return [...new Set(values)].slice(0, 5);
+    story.focusKeyword
+  ].map((x) => String(x || '').trim()).filter((x) => x.length >= 3);
+  return unique(values).slice(0, 6);
 }
+function storySignals(story) {
+  const phrases = unique([
+    ...(story.entities || []).map(String),
+    story.image?.searchQuery,
+    story.focusKeyword
+  ].map((x) => normalizeText(x)).filter((x) => x.length >= 3));
+  const tokens = unique([
+    ...phrases.flatMap(lexicalTokens),
+    ...lexicalTokens(story.title)
+  ]);
+  return { phrases, tokens };
+}
+function conflictReason(story, candidateText) {
+  const storyText = normalizeText(`${story.title} ${(story.entities || []).join(' ')} ${story.image?.searchQuery || ''} ${story.focusKeyword || ''}`);
+  const hay = normalizeText(candidateText);
+  const storyGroups = CONFLICT_GROUPS.filter((group) => group.some((term) => storyText.includes(normalizeText(term))));
+  const candidateGroups = CONFLICT_GROUPS.filter((group) => group.some((term) => hay.includes(normalizeText(term))));
+  if (!storyGroups.length || !candidateGroups.length) return '';
+  const sharesGroup = storyGroups.some((group) => candidateGroups.includes(group));
+  if (sharesGroup) return '';
+  return 'conflicting competition/organization';
+}
+function evaluateCandidate(candidate, query, story) {
+  const hay = normalizeText(`${candidate.title || ''} ${candidate.description || ''} ${(candidate.tags || []).join(' ')}`);
+  if (!hay) return { accepted: false, score: 0, matchedTerms: [], reason: 'empty metadata' };
+
+  const conflict = conflictReason(story, hay);
+  if (conflict) return { accepted: false, score: 0, matchedTerms: [], reason: conflict };
+
+  const qTokens = unique(lexicalTokens(query));
+  const signals = storySignals(story);
+  const matchedQuery = qTokens.filter((token) => hay.includes(token));
+  const matchedAnchors = signals.tokens.filter((token) => hay.includes(token));
+  const exactPhrases = signals.phrases.filter((phrase) => phrase.includes(' ') && phrase.length >= 7 && hay.includes(phrase));
+  const strongSingle = matchedAnchors.filter((token) => token.length >= 6);
+
+  const accepted = exactPhrases.length > 0 || matchedAnchors.length >= 2 || matchedQuery.length >= 2 || strongSingle.length >= 1;
+  if (!accepted) {
+    return {
+      accepted: false,
+      score: 0,
+      matchedTerms: unique([...matchedQuery, ...matchedAnchors]),
+      reason: 'insufficient entity match'
+    };
+  }
+
+  let score = exactPhrases.length * 35 + matchedAnchors.length * 12 + matchedQuery.length * 8;
+  const width = Number(candidate.width || 0), height = Number(candidate.height || 0);
+  if (width && height) {
+    const ratio = width / height;
+    if (ratio >= 1.3 && ratio <= 2.15) score += 6;
+    if (width >= 1200 && height >= 650) score += 4;
+  }
+  return { accepted: true, score, matchedTerms: unique([...exactPhrases, ...matchedAnchors, ...matchedQuery]).slice(0, 8), reason: '' };
+}
+
 function isCommercialEditableLicense(value = '') {
   const v = String(value).toLowerCase().replace(/^cc\s*/, '').trim();
   return ['cc0', 'pdm', 'by', 'by-sa'].includes(v) || /^by-sa(?:\s|$)/.test(v) || /^by(?:\s|$)/.test(v);
 }
-function relevanceScore(item, query) {
-  const q = String(query).toLowerCase().split(/\s+/).filter((x) => x.length > 2);
-  const hay = `${item.title || ''} ${item.tags?.map?.((t) => t.name || t).join(' ') || ''}`.toLowerCase();
-  let score = q.reduce((n, token) => n + (hay.includes(token) ? 8 : 0), 0);
-  const w = Number(item.width || 0), h = Number(item.height || 0);
-  if (w && h) {
-    const ratio = w / h;
-    if (ratio >= 1.35 && ratio <= 2.1) score += 10;
-    score += Math.min(10, Math.log10(Math.max(1, w * h)));
-  }
-  return score;
-}
-
 async function searchOpenverse(query) {
   const url = new URL('https://api.openverse.org/v1/images/');
   url.searchParams.set('q', query);
-  url.searchParams.set('page_size', '20');
-  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.0 (https://molakhas.a7asmari.workers.dev)', accept: 'application/json' } });
+  url.searchParams.set('page_size', '30');
+  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.1 (https://molakhas.a7asmari.workers.dev)', accept: 'application/json' } });
   if (!response.ok) throw new Error(`Openverse search ${response.status}`);
   const data = await response.json();
   return (data?.results || [])
-    .filter((item) => (item?.url || item?.thumbnail) && isCommercialEditableLicense(item?.license))
-    .filter((item) => !item?.mature)
-    .sort((a, b) => relevanceScore(b, query) - relevanceScore(a, query))
-    .slice(0, 8)
+    .filter((item) => (item?.url || item?.thumbnail) && isCommercialEditableLicense(item?.license) && !item?.mature)
     .map((item) => ({
       downloadUrl: item.url || item.thumbnail,
       backupUrl: item.thumbnail || null,
@@ -88,7 +160,8 @@ async function searchOpenverse(query) {
       licenseUrl: item.license_url || '',
       provider: item.provider || item.source || 'Openverse',
       description: stripHtml(item.description || ''),
-      query
+      tags: (item.tags || []).map((tag) => stripHtml(tag?.name || tag)).filter(Boolean),
+      width: Number(item.width || 0), height: Number(item.height || 0), query
     }));
 }
 
@@ -99,17 +172,15 @@ function allowedCommonsLicense(meta = {}) {
 async function searchCommons(query) {
   const url = new URL('https://commons.wikimedia.org/w/api.php');
   url.searchParams.set('action', 'query'); url.searchParams.set('generator', 'search'); url.searchParams.set('gsrsearch', query);
-  url.searchParams.set('gsrnamespace', '6'); url.searchParams.set('gsrlimit', '12'); url.searchParams.set('prop', 'imageinfo');
+  url.searchParams.set('gsrnamespace', '6'); url.searchParams.set('gsrlimit', '20'); url.searchParams.set('prop', 'imageinfo');
   url.searchParams.set('iiprop', 'url|size|mime|extmetadata'); url.searchParams.set('iiurlwidth', '1600'); url.searchParams.set('format', 'json'); url.searchParams.set('origin', '*');
-  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.0 (https://molakhas.a7asmari.workers.dev)' } });
+  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.1 (https://molakhas.a7asmari.workers.dev)' } });
   if (!response.ok) throw new Error(`Commons search ${response.status}`);
   const data = await response.json();
   return Object.values(data?.query?.pages || {}).map((page) => {
     const info = page?.imageinfo?.[0], meta = info?.extmetadata || {};
     return { page, info, meta };
   }).filter(({ info, meta }) => info?.url && /^image\/(jpeg|png|webp)$/i.test(info?.mime || '') && Number(info?.width || 0) >= 900 && Number(info?.height || 0) >= 500 && allowedCommonsLicense(meta))
-    .sort((a, b) => (Number(b.info.width) * Number(b.info.height)) - (Number(a.info.width) * Number(a.info.height)))
-    .slice(0, 5)
     .map(({ page, info, meta }) => ({
       downloadUrl: info.thumburl || info.url,
       backupUrl: info.url,
@@ -120,12 +191,12 @@ async function searchCommons(query) {
       licenseUrl: String(meta?.LicenseUrl?.value || '').trim(),
       provider: 'Wikimedia Commons',
       description: stripHtml(meta?.ImageDescription?.value || ''),
-      query
+      tags: [], width: Number(info?.width || 0), height: Number(info?.height || 0), query
     }));
 }
 
 async function downloadBuffer(url) {
-  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.0 (https://molakhas.a7asmari.workers.dev)', accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8' } });
+  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/2.1 (https://molakhas.a7asmari.workers.dev)', accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8' } });
   if (!response.ok) throw new Error(`Image download ${response.status}`);
   const type = response.headers.get('content-type') || '';
   if (!type.startsWith('image/')) throw new Error(`Not an image: ${type || 'unknown content-type'}`);
@@ -136,7 +207,7 @@ async function downloadBuffer(url) {
 function brandOverlay(section, accent) {
   return Buffer.from(`<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07101d" stop-opacity="0"/><stop offset="1" stop-color="#07101d" stop-opacity="0.50"/></linearGradient></defs><rect width="1200" height="675" fill="url(#fade)"/><rect x="875" y="535" width="255" height="76" rx="22" fill="#07101d" fill-opacity="0.76" stroke="${accent}" stroke-opacity="0.65"/><text x="1095" y="571" text-anchor="end" direction="rtl" font-family="Tahoma, Segoe UI, Arial, sans-serif" font-size="25" font-weight="900" fill="${accent}">مُلخّص</text><text x="1095" y="598" text-anchor="end" direction="rtl" font-family="Tahoma, Segoe UI, Arial, sans-serif" font-size="15" fill="#dfe9f6">${esc(section)}</text></svg>`);
 }
-async function savePhoto(candidate, story, outPath) {
+async function savePhoto(candidate, story, outPath, relevance) {
   let input;
   try { input = await downloadBuffer(candidate.downloadUrl); }
   catch (error) {
@@ -151,7 +222,8 @@ async function savePhoto(candidate, story, outPath) {
     src: `/news-images/${story.slug}.webp`, kind: 'open-photo', archival: true,
     alt: copy.alt, caption: copy.caption, creator: candidate.creator, license: candidate.license,
     licenseUrl: candidate.licenseUrl, sourceUrl: candidate.sourceUrl, sourceTitle: candidate.title,
-    provider: candidate.provider, sourceDescription: candidate.description, query: candidate.query
+    provider: candidate.provider, sourceDescription: candidate.description, query: candidate.query,
+    relevanceVersion: RELEVANCE_VERSION, relevanceScore: relevance.score, matchedTerms: relevance.matchedTerms
   };
 }
 
@@ -161,11 +233,17 @@ function wrapArabic(text, maxChars = 33, maxLines = 4) {
   if (line && lines.length < maxLines) lines.push(line); if (words.join(' ').length > lines.join(' ').length && lines.length) lines[lines.length - 1] = `${lines[lines.length - 1].replace(/[.…]+$/u, '')}…`;
   return lines;
 }
-async function writeFallback(story, outPath) {
+async function writeFallback(story, outPath, reason = '') {
   const [bg, panel, accent] = palettes[story.section] || palettes.football; const section = sectionNames[story.section] || 'رياضة'; const lines = wrapArabic(story.title);
   const lineSvg = lines.map((line, i) => `<text x="1080" y="${270 + i * 74}" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tahoma, Segoe UI, Arial, sans-serif" font-size="54" font-weight="700" fill="#f7f9fc">${esc(line)}</text>`).join('');
   const svg = `<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${bg}"/><stop offset="1" stop-color="${panel}"/></linearGradient></defs><rect width="1200" height="675" fill="url(#bg)"/>${lineSvg}<text x="1085" y="126" text-anchor="middle" direction="rtl" font-family="Tahoma, Segoe UI, Arial, sans-serif" font-size="30" font-weight="900" fill="${accent}">مُلخّص</text><text x="1130" y="632" text-anchor="end" direction="rtl" font-family="Tahoma, Segoe UI, Arial, sans-serif" font-size="19" fill="#b7c4d6">molakhas.a7asmari.workers.dev</text></svg>`;
   await sharp(Buffer.from(svg)).resize(1200, 675, { fit: 'cover' }).webp({ quality: 84, effort: 5 }).toFile(outPath);
+  manifest[story.slug] = {
+    src: `/news-images/${story.slug}.webp`, kind: 'branded-fallback',
+    alt: story.image?.alt || story.title, caption: story.image?.caption || story.excerpt,
+    query: queryVariants(story)[0] || '', relevanceVersion: RELEVANCE_VERSION,
+    rejectionReason: reason || 'no sufficiently relevant open photo found'
+  };
 }
 async function ensureLogo() {
   const logoPath = path.join(brandDir, 'molakhas-logo.png'); try { await fs.access(logoPath); return; } catch {}
@@ -174,34 +252,58 @@ async function ensureLogo() {
 }
 
 await ensureLogo();
-let generated = 0, realPhotos = 0, upgraded = 0, fallback = 0;
+let generated = 0, realPhotos = 0, upgraded = 0, fallback = 0, rejected = 0;
 for (const story of stories.filter((s) => s?.status === 'approved' && s?.slug && s?.title)) {
   const outPath = path.join(outDir, `${story.slug}.webp`); const current = manifest[story.slug] || {};
   let fileExists = false; try { await fs.access(outPath); fileExists = true; } catch {}
-  if (fileExists && current.kind && !['branded-fallback', 'existing'].includes(current.kind)) continue;
+
+  const currentTrusted = fileExists && current.kind === 'open-photo' && Number(current.relevanceVersion || 0) >= RELEVANCE_VERSION && Number(current.relevanceScore || 0) > 0;
+  if (currentTrusted) continue;
+
+  if (story.sourceId === 'molakhas-editorial') {
+    await writeFallback(story, outPath, 'editorial story uses branded artwork');
+    generated += 1; fallback += 1;
+    console.log(`[Images] Branded editorial image: ${story.slug}`);
+    continue;
+  }
 
   let saved = false;
+  let rejectionReason = 'no candidate passed entity relevance';
   for (const query of queryVariants(story)) {
     let candidates = [];
-    try { candidates = await searchOpenverse(query); } catch (error) { console.warn(`[Images] Openverse lookup failed (${query}): ${error.message}`); }
-    if (!candidates.length) {
-      try { candidates = await searchCommons(query); } catch (error) { console.warn(`[Images] Commons lookup failed (${query}): ${error.message}`); }
+    try { candidates.push(...await searchOpenverse(query)); } catch (error) { console.warn(`[Images] Openverse lookup failed (${query}): ${error.message}`); }
+    try { candidates.push(...await searchCommons(query)); } catch (error) { console.warn(`[Images] Commons lookup failed (${query}): ${error.message}`); }
+
+    const ranked = candidates
+      .map((candidate) => ({ candidate, relevance: evaluateCandidate(candidate, query, story) }))
+      .filter((x) => x.relevance.accepted)
+      .sort((a, b) => b.relevance.score - a.relevance.score)
+      .slice(0, 10);
+
+    if (!ranked.length) {
+      rejected += candidates.length;
+      continue;
     }
-    for (const candidate of candidates) {
+
+    for (const { candidate, relevance } of ranked) {
       try {
-        await savePhoto(candidate, story, outPath); saved = true; realPhotos += 1; generated += 1; if (fileExists) upgraded += 1;
-        console.log(`[Images] Real photo: ${story.slug} ← ${candidate.provider} / ${candidate.title || query}`); break;
-      } catch (error) { console.warn(`[Images] Candidate failed for ${story.slug}: ${error.message}`); }
+        await savePhoto(candidate, story, outPath, relevance);
+        saved = true; realPhotos += 1; generated += 1; if (fileExists) upgraded += 1;
+        console.log(`[Images] Relevant photo [${relevance.score}]: ${story.slug} ← ${candidate.provider} / ${candidate.title || query} :: ${relevance.matchedTerms.join(', ')}`);
+        break;
+      } catch (error) {
+        rejectionReason = error.message;
+        console.warn(`[Images] Candidate failed for ${story.slug}: ${error.message}`);
+      }
     }
     if (saved) break;
   }
   if (saved) continue;
 
-  if (!fileExists) {
-    await writeFallback(story, outPath);
-    manifest[story.slug] = { src: `/news-images/${story.slug}.webp`, kind: 'branded-fallback', alt: story.image?.alt || story.title, caption: story.image?.caption || story.excerpt, query: queryVariants(story)[0] || '' };
-    fallback += 1; generated += 1;
-  }
+  await writeFallback(story, outPath, rejectionReason);
+  fallback += 1; generated += 1;
+  if (fileExists) upgraded += 1;
+  console.warn(`[Images] No sufficiently relevant real photo for ${story.slug}; using branded fallback.`);
 }
 await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-console.log(`[Images] Generated/updated ${generated} images (${realPhotos} real photos, ${upgraded} upgraded fallbacks, ${fallback} new branded fallbacks).`);
+console.log(`[Images] Generated/updated ${generated} images (${realPhotos} relevant real photos, ${upgraded} replacements, ${fallback} branded fallbacks, ${rejected} irrelevant candidates rejected).`);
