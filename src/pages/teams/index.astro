@@ -2,13 +2,17 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { buildTeamHubs } from '../../lib/hubs';
+import { teamHubQuality } from '../../lib/index-quality';
 
-const hubs = buildTeamHubs();
+const allHubs = buildTeamHubs();
+const hubs = allHubs
+  .filter((hub) => hub.known || teamHubQuality(hub) >= 55)
+  .sort((a,b) => (b.opportunityScore-a.opportunityScore) || (teamHubQuality(b)-teamHubQuality(a)) || (b.matches.length-a.matches.length));
 const title = 'الفرق | مباريات وأخبار الأندية السعودية والعالمية - ملخص';
 const description = 'صفحات الفرق في ملخص: مواعيد ونتائج وأخبار الهلال والنصر والاتحاد والأهلي وريال مدريد وبرشلونة وليفربول وأرسنال وأهم الأندية.';
 ---
 <BaseLayout title={title} description={description} section="football">
-  <section class="shell section-hero"><span>🛡️</span><div><small>Team Hubs</small><h1>الفرق</h1><p>صفحات دائمة تجمع مباريات ونتائج وأخبار كل فريق.</p></div></section>
+  <section class="shell section-hero"><span>🛡️</span><div><small>مراكز الفرق</small><h1>الفرق</h1><p>صفحات دائمة تجمع مباريات ونتائج وأخبار أهم الفرق التي يغطيها ملخص.</p></div></section>
   <div class="shell"><LurvuePromo section="football" position="teams-directory" /></div>
   <section class="shell directory-section">
     <div class="section-title"><div><span class="section-kicker">الأكثر أهمية الآن</span><h2>أهم الفرق</h2></div><a href="/matches/today">مباريات اليوم</a></div>
