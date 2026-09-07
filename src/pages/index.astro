@@ -4,27 +4,32 @@ import LurvuePromo from '../components/LurvuePromo.astro';
 import TodaySportsWidget from '../components/TodaySportsWidget.astro';
 import { sections, sectionMap } from '../data/sections';
 import stories from '../data/stories.json';
-import todaySnapshot from '../data/today-events.json';
 import imageManifest from '../data/image-manifest.json';
 import { topicCounts } from '../lib/content';
 
 const approved = stories
   .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
   .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+
 const now = Date.now();
 const trafficLeadPool = approved
   .filter((story) => Number(story.trafficScore || 0) > 0 && (now - +new Date(story.publishedAt)) <= 36 * 60 * 60 * 1000)
   .sort((a, b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)));
 const lead = trafficLeadPool[0] || approved[0];
-const latest = approved.filter((story) => story.slug !== lead?.slug).slice(0, 9);
+
 const hotStories = approved
   .filter((story) => story.slug !== lead?.slug && (now - +new Date(story.publishedAt)) <= 48 * 60 * 60 * 1000)
   .sort((a,b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)))
   .slice(0,6);
+const used = new Set([lead?.slug, ...hotStories.map((story) => story.slug)].filter(Boolean));
+
 const saudiStories = approved
-  .filter((story) => story.section === 'saudi')
+  .filter((story) => story.section === 'saudi' && !used.has(story.slug))
   .sort((a,b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)))
   .slice(0,4);
+saudiStories.forEach((story) => used.add(story.slug));
+
+const latest = approved.filter((story) => !used.has(story.slug)).slice(0,9);
 const lastUpdated = approved[0]?.publishedAt;
 const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug, approved.filter((story) => story.section === section.slug).length]));
 const topics = [...topicCounts(approved as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
@@ -32,15 +37,7 @@ const mediaMap = imageManifest as Record<string, any>;
 const mediaFor = (story) => mediaMap[story.slug] || {};
 const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-images/${story.slug}.webp`;
 const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${story.slug}.webp`;
-const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
-const dailyEvents = Array.isArray((todaySnapshot as any)?.events) ? (todaySnapshot as any).events : [];
-const liveEvents = dailyEvents.filter((event:any) => event.state === 'live').sort((a:any,b:any)=>Number(b.importance||0)-Number(a.importance||0)).slice(0,4);
-const tonightEvents = dailyEvents
-  .filter((event:any) => event.state === 'upcoming')
-  .sort((a:any,b:any)=>(Number(b.importance||0)-Number(a.importance||0)) || (+new Date(a.start)-+new Date(b.start)))
-  .slice(0,6);
-const eventTime = (value='') => { try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(value)); } catch { return ''; } };
-const eventIcon = (sport='') => sport === 'football' ? '⚽' : sport === 'nba' ? '🏀' : sport === 'mma' ? '🥊' : sport === 'wwe' ? '🤼' : '🏆';
+const altFor = (story) => mediaFor(story).alt || story.image?.alt || story.title || '';
 ---
 <BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، مباريات اليوم، الكرة السعودية والعالمية، NBA، UFC، WWE والانتقالات بصياغة عربية سريعة ومصادر واضحة.">
   <section class="news-hero shell">
@@ -60,35 +57,19 @@ const eventIcon = (sport='') => sport === 'football' ? '⚽' : sport === 'nba' ?
       <h2>الأهم أولًا.<br/><em>وبسرعة.</em></h2>
       <p>أخبار رياضية مختصرة بمصدر واضح، مع مباريات وأحداث اليوم من كرة القدم وNBA وMMA وWWE.</p>
       <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
-      <div class="quick-links"><a href="/matches/today">⚡ مباريات اليوم</a>{sections.slice(0,5).map((s)=><a href={`/${s.slug}`}>{s.icon} {s.name}</a>)}</div>
+      <div class="quick-links"><a href="/latest">📰 آخر الأخبار</a><a href="/matches/today">⚡ مباريات اليوم</a>{sections.slice(0,4).map((s)=><a href={`/${s.slug}`}>{s.icon} {s.name}</a>)}</div>
     </aside>
   </section>
 
   <section class="shell hero-offer"><LurvuePromo section="general" position="home-hero" /></section>
-
   <section class="shell"><TodaySportsWidget /></section>
-
-  {(liveEvents.length > 0 || tonightEvents.length > 0) && <section class="shell pulse-grid">
-    {liveEvents.length > 0 && <div class="pulse-panel live-panel">
-      <div class="pulse-head"><div><span class="section-kicker">🔴 مباشر الآن</span><h2>الحدث شغال</h2></div><a href="/matches/today">المركز ←</a></div>
-      <div class="pulse-list">{liveEvents.map((event:any)=><a href={event.url || '#'} target={event.internal ? undefined : '_blank'} rel={event.internal ? undefined : 'nofollow noopener'}>
-        <span>{eventIcon(event.sport)} {event.subtitle}</span><b>{event.title}</b><footer><strong>{event.score || 'مباشر'}</strong><small>{eventTime(event.start)}</small></footer>
-      </a>)}</div>
-    </div>}
-    {tonightEvents.length > 0 && <div class="pulse-panel">
-      <div class="pulse-head"><div><span class="section-kicker">🌙 مباريات وأحداث الليلة</span><h2>وش عندنا اليوم؟</h2></div><a href="/matches/today">التفاصيل ←</a></div>
-      <div class="pulse-list">{tonightEvents.map((event:any)=><a href={event.url || '#'} target={event.internal ? undefined : '_blank'} rel={event.internal ? undefined : 'nofollow noopener'}>
-        <span>{eventIcon(event.sport)} {event.subtitle}</span><b>{event.title}</b><footer><strong>{eventTime(event.start)}</strong><small>{event.source}</small></footer>
-      </a>)}</div>
-    </div>}
-  </section>}
 
   <section class="ticker shell"><span>الأقسام</span>{sections.map((s) => <a href={`/${s.slug}`}>{s.icon} {s.name} <small>{sectionCounts[s.slug] || 0}</small></a>)}</section>
 
   {topics.length > 0 && <section class="topic-strip shell" aria-label="مواضيع رائجة"><span>مواضيع رائجة</span>{topics.map(([slug,data])=><a href={`/topic/${slug}`}>#{data.name} <small>{data.count}</small></a>)}</section>}
 
   {hotStories.length > 0 && <section class="shell section-block hot-block">
-    <div class="section-title"><div><span class="section-kicker">🔥 Traffic Engine</span><h2>الأخبار الساخنة</h2></div><small>ترتيب حسب الطلب + الحداثة + إشارات الرادار</small></div>
+    <div class="section-title"><div><span class="section-kicker">🔥 الأهم حسب الرادار</span><h2>الأخبار الساخنة</h2></div><a href="/latest">كل الأخبار ←</a></div>
     <div class="hot-grid">{hotStories.map((story,index)=><a class:list={["hot-story", { primary:index===0 }]} href={`/${story.section}/${story.slug}`}>
       <span><b>#{index+1}</b> {sectionMap[story.section]?.name ?? 'رياضة'} {Number(story.trafficScore||0)>0 && <em>{story.trafficScore}/100</em>}</span>
       <h3>{story.title}</h3>
@@ -105,29 +86,26 @@ const eventIcon = (sport='') => sport === 'football' ? '⚽' : sport === 'nba' ?
     </a>)}</div>
   </section>}
 
-  <section class="shell section-block">
-    <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/football">كل الأخبار ←</a></div>
-    {latest.length ? <div class="story-grid">{latest.map((story) => <article class="story-card story-card-media">
+  {latest.length > 0 && <section class="shell section-block">
+    <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/latest">كل الأخبار ←</a></div>
+    <div class="story-grid">{latest.map((story) => <article class="story-card story-card-media">
       <a class="story-image-link" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
       <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
       <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
       <p>{story.excerpt}</p>
       <div class="card-footer"><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small><a href={`/${story.section}/${story.slug}`}>اقرأ ←</a></div>
-    </article>)}</div> : <div class="empty compact-empty"><h3>بانتظار دفعة أخبار جديدة</h3><p>بمجرد وصول الأخبار المعتمدة ستظهر هنا تلقائيًا.</p></div>}
-  </section>
+    </article>)}</div>
+  </section>}
 
   <section class="shell section-block">
-    <div class="section-title"><div><span class="section-kicker">تغطية حسب اهتمامك</span><h2>اختر رياضتك</h2></div></div>
+    <div class="section-title"><div><span class="section-kicker">تغطية حسب اهتمامك</span><h2>اختر رياضتك</h2></div><a href="/latest">آخر الأخبار ←</a></div>
     <div class="category-grid">{sections.map((s)=><a class="category-card" href={`/${s.slug}`}><span>{s.icon}</span><div><h3>{s.name}</h3><p>{s.description}</p><small>{sectionCounts[s.slug] || 0} خبر منشور</small></div></a>)}</div>
   </section>
 </BaseLayout>
 
 <style>
-.news-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);gap:18px;padding:34px 0 18px;align-items:stretch}.lead-feature{position:relative;display:flex;min-height:520px;overflow:hidden;border:1px solid #2a4663;border-radius:26px;background:#0d1929;box-shadow:0 30px 80px #0005;color:inherit}.lead-feature:hover{color:inherit;border-color:#3b688d}.lead-feature>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}.lead-feature:hover>img{transform:scale(1.015)}.lead-shade{position:absolute;inset:0;background:linear-gradient(180deg,#06101a05 6%,#07101d35 42%,#07101df2 100%)}.lead-content{position:relative;z-index:2;margin-top:auto;padding:34px;max-width:850px}.lead-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#dbe7f4;font-size:11px}.lead-meta time{color:#b7c7d9}.latest-pill{display:inline-flex;padding:4px 9px;border-radius:999px;background:var(--accent);color:#061018;font-size:10px;font-weight:900}.lead-content h1{font-size:clamp(34px,5vw,58px);line-height:1.16;letter-spacing:-1.8px;margin:12px 0}.lead-content p{font-size:17px;line-height:1.8;color:#d5e0ec;max-width:760px;margin:0 0 14px}.lead-content b{color:var(--accent);font-size:13px}.lead-empty{background:linear-gradient(145deg,#132943,#0b1727)}.hero-panel{border:1px solid var(--line);border-radius:26px;background:linear-gradient(180deg,#0e2034,#0a1726);padding:28px;display:flex;flex-direction:column;justify-content:center}.hero-panel h2{font-size:38px;line-height:1.05;letter-spacing:-1.5px;margin:8px 0 16px}.hero-panel h2 em{font-style:normal;color:var(--accent)}.hero-panel>p{color:var(--muted);font-size:14px;margin:0 0 14px}.quick-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.quick-links a{font-size:11px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#091725}.quick-links a:hover{border-color:#3e6586}.hero-offer .lurvue{margin:8px 0 24px}.story-card-media{padding:0;overflow:hidden}.story-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}.topic-strip{display:flex;gap:9px;align-items:center;overflow:auto;padding:16px 0;white-space:nowrap;scrollbar-width:none}.topic-strip>span{color:var(--muted);font-size:12px}.topic-strip a{font-size:12px;border:1px solid var(--line);background:#0a1725;padding:6px 10px;border-radius:999px}.topic-strip small{color:var(--accent)}
-.pulse-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 0}.pulse-panel{border:1px solid var(--line);border-radius:20px;background:#0a1827;padding:18px}.pulse-panel.live-panel{border-color:#ff5b6644;background:linear-gradient(145deg,#21151d,#0b1725)}.pulse-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.pulse-head h2{font-size:22px;margin:2px 0}.pulse-head>a{font-size:10px;color:var(--accent)}.pulse-list{display:grid;gap:7px}.pulse-list>a{display:grid;gap:5px;padding:11px;border:1px solid var(--line);border-radius:12px;background:#081522;color:inherit}.pulse-list>a:hover{color:inherit;border-color:#3c6384}.pulse-list span{font-size:9px;color:var(--muted)}.pulse-list b{font-size:13px}.pulse-list footer{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:6px}.pulse-list footer strong{font-size:12px;color:var(--accent)}.pulse-list footer small{font-size:9px;color:var(--muted)}
-.hot-block .section-title>small{color:var(--muted);font-size:9px}.hot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.hot-story{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#091725;padding:17px;color:inherit}.hot-story:hover{color:inherit;border-color:#3b6689}.hot-story.primary{background:linear-gradient(145deg,#123029,#0a1827);border-color:#58dcb24a}.hot-story>span{font-size:9px;color:var(--muted)}.hot-story>span b{color:var(--accent)}.hot-story>span em{font-style:normal;color:#ffe488;margin-inline-start:5px}.hot-story h3{font-size:17px;line-height:1.5;margin:8px 0}.hot-story p{font-size:11px;color:var(--muted);margin:0 0 auto}.hot-story footer{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:9px;margin-top:12px}.hot-story footer small{font-size:8px;color:var(--muted)}.hot-story footer b{font-size:10px;color:var(--accent)}
-.saudi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.saudi-grid>a{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;border:1px solid var(--line);border-radius:16px;background:#091725;overflow:hidden;color:inherit}.saudi-grid>a:hover{color:inherit;border-color:#3c6384}.saudi-grid img{width:150px;height:100%;min-height:115px;object-fit:cover}.saudi-grid>a>div{padding:12px 0 12px 12px}.saudi-grid span{font-size:9px;color:var(--accent)}.saudi-grid h3{font-size:15px;line-height:1.5;margin:5px 0}.saudi-grid small{font-size:8px;color:var(--muted)}
-@media(max-width:900px){.news-hero{grid-template-columns:1fr}.hero-panel{min-height:230px}.lead-feature{min-height:460px}.hot-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:700px){.pulse-grid,.saudi-grid{grid-template-columns:1fr}}
-@media(max-width:520px){.news-hero{padding-top:18px}.lead-feature{min-height:430px;border-radius:20px}.lead-content{padding:22px}.lead-content h1{font-size:34px;letter-spacing:-1px}.lead-content p{font-size:14px;line-height:1.65}.hero-panel{padding:22px;border-radius:20px}.hero-panel h2{font-size:32px}.hot-grid{grid-template-columns:1fr}.saudi-grid>a{grid-template-columns:115px 1fr}.saudi-grid img{width:115px}.pulse-grid{padding-top:8px}}
+.news-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);gap:18px;padding:34px 0 18px;align-items:stretch}.lead-feature{position:relative;display:flex;min-height:520px;overflow:hidden;border:1px solid #2a4663;border-radius:26px;background:#0d1929;box-shadow:0 30px 80px #0005;color:inherit}.lead-feature:hover{color:inherit;border-color:#3b688d}.lead-feature>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}.lead-feature:hover>img{transform:scale(1.015)}.lead-shade{position:absolute;inset:0;background:linear-gradient(180deg,#06101a05 6%,#07101d35 42%,#07101df2 100%)}.lead-content{position:relative;z-index:2;margin-top:auto;padding:34px;max-width:850px}.lead-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#dbe7f4;font-size:11px}.lead-meta time{color:#b7c7d9}.latest-pill{display:inline-flex;padding:4px 9px;border-radius:999px;background:var(--accent);color:#061018;font-size:10px;font-weight:900}.lead-content h1{font-size:clamp(34px,5vw,58px);line-height:1.16;letter-spacing:-1.8px;margin:12px 0}.lead-content p{font-size:17px;line-height:1.8;color:#d5e0ec;max-width:760px;margin:0 0 14px}.lead-content b{color:var(--accent);font-size:13px}.lead-empty{background:linear-gradient(145deg,#132943,#0b1727)}.hero-panel{border:1px solid var(--line);border-radius:26px;background:linear-gradient(180deg,#0e2034,#0a1726);padding:28px;display:flex;flex-direction:column;justify-content:center}.hero-panel h2{font-size:38px;line-height:1.05;letter-spacing:-1.5px;margin:8px 0 16px}.hero-panel h2 em{font-style:normal;color:var(--accent)}.hero-panel>p{color:var(--muted);font-size:14px;margin:0 0 14px}.quick-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.quick-links a{font-size:11px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#091725}.quick-links a:hover{border-color:#3e6586}.hero-offer .lurvue{margin:8px 0 24px}.topic-strip{display:flex;gap:9px;align-items:center;overflow:auto;padding:16px 0;white-space:nowrap;scrollbar-width:none}.topic-strip>span{color:var(--muted);font-size:12px}.topic-strip a{font-size:12px;border:1px solid var(--line);background:#0a1725;padding:6px 10px;border-radius:999px}.topic-strip small{color:var(--accent)}.hot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hot-story{background:linear-gradient(145deg,#101f31,#0a1725);border:1px solid var(--line);border-radius:18px;padding:19px;display:flex;flex-direction:column;min-height:220px}.hot-story.primary{border-color:#59e6a84d}.hot-story>span{font-size:10px;color:var(--accent);display:flex;gap:7px;align-items:center}.hot-story em{font-style:normal;color:#c7d5e7}.hot-story h3{font-size:19px;line-height:1.45;margin:9px 0}.hot-story p{color:var(--muted);font-size:12px;margin:0 0 auto}.hot-story footer{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:12px;margin-top:14px}.hot-story footer small{color:var(--muted);font-size:9px}.hot-story footer b{color:var(--accent);font-size:11px}.saudi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.saudi-grid>a{display:grid;grid-template-columns:180px 1fr;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;color:inherit}.saudi-grid img{width:180px;height:120px;object-fit:cover}.saudi-grid div{padding:14px 14px 14px 0}.saudi-grid span{font-size:10px;color:var(--accent)}.saudi-grid h3{font-size:17px;line-height:1.45;margin:5px 0}.saudi-grid small{font-size:9px;color:var(--muted)}.story-card-media{padding:0;overflow:hidden}.story-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.story-card-media>span,.story-card-media>h3,.story-card-media>p,.story-card-media>.card-footer{margin-inline:22px}.story-card-media>span{margin-top:16px}.story-card-media>.card-footer{margin-bottom:20px}
+@media(max-width:900px){.news-hero{grid-template-columns:1fr}.hero-panel{min-height:230px}.lead-feature{min-height:460px}.hot-grid{grid-template-columns:1fr 1fr}.saudi-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.hot-grid{grid-template-columns:1fr}.saudi-grid>a{grid-template-columns:120px 1fr}.saudi-grid img{width:120px;height:100%}}
+@media(max-width:520px){.news-hero{padding-top:18px}.lead-feature{min-height:430px;border-radius:20px}.lead-content{padding:22px}.lead-content h1{font-size:34px;letter-spacing:-1px}.lead-content p{font-size:14px;line-height:1.65}.hero-panel{padding:22px;border-radius:20px}.hero-panel h2{font-size:32px}.saudi-grid>a{grid-template-columns:1fr}.saudi-grid img{width:100%;height:auto;aspect-ratio:16/9}.saudi-grid div{padding:0 14px 14px}}
 </style>
