@@ -4,15 +4,28 @@ const key = '4d5c8189e6697955fa6202bddfcc91a5';
 const base = (process.env.PUBLIC_SITE_URL || 'https://molakhas.a7asmari.workers.dev').replace(/\/$/, '');
 const site = new URL(base);
 const stories = JSON.parse(await fs.readFile(new URL('../../src/data/stories.json', import.meta.url), 'utf8'));
+let matches = [];
+try { matches = JSON.parse(await fs.readFile(new URL('../../src/data/matches.json', import.meta.url), 'utf8')); } catch {}
 const cutoff = Date.now() - 24 * 60 * 60 * 1000;
-const urls = stories
+
+const storyUrls = stories
   .filter((s) => s.status === 'approved' && +new Date(s.generatedAt || s.publishedAt) >= cutoff)
   .sort((a,b)=>+new Date(b.generatedAt || b.publishedAt)-+new Date(a.generatedAt || a.publishedAt))
-  .slice(0, 100)
   .map((s) => `${base}/${s.section}/${s.slug}`);
 
+const matchUrls = (Array.isArray(matches) ? matches : [])
+  .filter((m) => m?.slug && m.indexable !== false && Number(m.opportunityScore || 0) >= 55 && +new Date(m.updatedAt || 0) >= cutoff)
+  .sort((a,b)=>+new Date(b.updatedAt || b.kickoff)-+new Date(a.updatedAt || a.kickoff))
+  .map((m) => `${base}/matches/${m.slug}`);
+
+const urls = [...new Set([
+  ...(matchUrls.length ? [`${base}/matches/today`] : []),
+  ...storyUrls,
+  ...matchUrls
+])].slice(0, 100);
+
 if (!urls.length) {
-  console.log('[IndexNow] No fresh approved URLs to submit.');
+  console.log('[IndexNow] No fresh approved or match URLs to submit.');
   process.exit(0);
 }
 
