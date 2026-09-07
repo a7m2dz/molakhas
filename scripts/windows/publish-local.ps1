@@ -65,7 +65,7 @@ Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin m
 Invoke-Checked 'Syncing dependencies...' { npm install --no-audit --no-fund }
 Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
 Invoke-Checked 'Scanning and generating stories...' { npm run newsroom }
-Invoke-Checked 'Generating/ensuring licensed WebP images...' { npm run images:generate }
+Invoke-Checked 'Resolving source article images and local fallbacks...' { npm run images:generate }
 Invoke-Checked 'Verifying production build...' { npm run build }
 
 $changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json public/news-images public/brand
