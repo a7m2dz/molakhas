@@ -2,44 +2,45 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { allMatches, matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
-import { competitionMeta, teamMeta } from '../../lib/hubs';
+import { teamMeta, competitionMeta } from '../../lib/hubs';
 
 const now = Date.now();
 const featured = allMatches
   .filter((item) => +new Date(item.kickoff) >= now - 12 * 3_600_000 && +new Date(item.kickoff) <= now + 48 * 3_600_000)
   .sort((a, b) => (b.opportunityScore || 0) - (a.opportunityScore || 0) || +new Date(a.kickoff) - +new Date(b.kickoff))
   .slice(0, 12);
-const teamName = (value:string) => teamMeta(value).name || value;
-const leagueName = (value:string) => competitionMeta(value).name || value;
 const title = 'مركز المباريات | أهم مباريات اليوم والقادمة - ملخص';
 const description = 'مركز مباريات ملخص: أهم مباريات اليوم والقادمة في الدوري السعودي والدوريات الأوروبية والبطولات القارية مع المواعيد والنتائج.';
 ---
 <BaseLayout title={title} description={description} section="football">
   <section class="shell section-hero">
-    <span>⚽</span>
-    <div><small>مركز المباريات</small><h1>مركز المباريات</h1><p>المباريات الأعلى اهتمامًا الآن، مع تحديث الحالة والنتيجة.</p></div>
+    <span><img src="/brand/icon-football.svg" width="44" height="44" alt="" /></span>
+    <div><small>MATCH CENTER</small><h1>مركز المباريات</h1><p>المباريات الأعلى اهتمامًا الآن، مع تحديث الحالة والنتيجة.</p></div>
   </section>
 
   <div class="shell hub-cta"><a class="button" href="/matches/today">عرض جميع مباريات اليوم ←</a></div>
   <div class="shell"><LurvuePromo section="football" position="match-center-hub" /></div>
 
   <section class="shell featured-matches">
-    <div class="section-title"><h2>الأهم الآن</h2><a href="/matches/today">جدول اليوم</a></div>
+    <div class="section-title"><div><span class="section-kicker">LIVE & UPCOMING</span><h2>الأهم الآن</h2></div><a href="/matches/today">جدول اليوم ←</a></div>
     <div class="feature-grid">
-      {featured.length ? featured.map((match) => (
-        <a class:list={["feature-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
-          <span>{leagueName(match.league.name)}</span>
-          <h3>{teamName(match.home.name)} <em>ضد</em> {teamName(match.away.name)}</h3>
+      {featured.length ? featured.map((match) => {
+        const home = teamMeta(match.home.name).name || match.home.name;
+        const away = teamMeta(match.away.name).name || match.away.name;
+        const competition = competitionMeta(match.league.name).name || match.league.name;
+        return <a class:list={["feature-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+          <span>{competition}</span>
+          <h3>{home} <em>ضد</em> {away}</h3>
           <div class="fixture-info">
             <b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b>
             <small>{matchStateArabic(match.state)} • {matchDateArabic(match.kickoff)}</small>
           </div>
-        </a>
-      )) : <div class="empty"><h2>جاري تجهيز مركز المباريات</h2><p>سيظهر هنا جدول المباريات بعد أول تحديث من FotMob.</p></div>}
+        </a>;
+      }) : <div class="empty"><h2>جاري تجهيز مركز المباريات</h2><p>سيظهر هنا جدول المباريات بعد أول تحديث من FotMob.</p></div>}
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hub-cta{padding-bottom:8px}.featured-matches{padding:34px 0 70px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature-match{background:linear-gradient(150deg,#10233a,#0a1625);border:1px solid var(--line);border-radius:19px;padding:20px;min-height:180px;display:flex;flex-direction:column}.feature-match:hover{color:inherit;border-color:#315878}.feature-match.live{border-color:#ff5b6655}.feature-match>span{font-size:10px;color:var(--accent);font-weight:900}.feature-match h3{font-size:20px;line-height:1.5;margin:12px 0 auto}.feature-match h3 em{font-style:normal;color:var(--muted);font-size:12px}.fixture-info{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:12px;margin-top:15px}.fixture-info b{font-size:20px}.fixture-info small{font-size:10px;color:var(--muted)}@media(max-width:850px){.feature-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.feature-grid{grid-template-columns:1fr}}
+.hub-cta{padding-bottom:8px}.featured-matches{padding:32px 0 70px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.feature-match{position:relative;overflow:hidden;background:linear-gradient(150deg,#121826,#090e15);border:1px solid var(--line);border-radius:17px;padding:19px;min-height:180px;display:flex;flex-direction:column}.feature-match:after{content:"";position:absolute;left:-50px;bottom:-75px;width:150px;height:150px;background:radial-gradient(circle,#22d3ee16,transparent 68%);pointer-events:none}.feature-match:hover{color:inherit;border-color:#8952df70;box-shadow:var(--glow);transform:translateY(-2px)}.feature-match.live{border-color:#ff4d6d62;box-shadow:0 0 28px #ff4d6d12}.feature-match>span{font-size:9px;color:var(--cyan);font-weight:900}.feature-match h3{font-size:19px;line-height:1.5;margin:12px 0 auto}.feature-match h3 em{font-style:normal;color:var(--muted);font-size:10px}.fixture-info{display:flex;flex-direction:column;border-top:1px solid var(--line-soft);padding-top:11px;margin-top:15px}.fixture-info b{font-size:19px}.fixture-info small{font-size:9px;color:var(--muted)}@media(max-width:850px){.feature-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.feature-grid{grid-template-columns:1fr}}
 </style>
