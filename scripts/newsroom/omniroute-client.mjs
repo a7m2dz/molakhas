@@ -21,24 +21,17 @@ export async function listModels() {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(`${base}/models`, {
-      headers: headers(),
-      signal: controller.signal
-    });
+    const response = await fetch(`${base}/models`, { headers: headers(), signal: controller.signal });
     const text = await response.text();
     if (!response.ok) throw new Error(`OmniRoute models ${response.status}: ${text.slice(0, 500)}`);
     return JSON.parse(text);
-  } finally {
-    clearTimeout(timer);
-  }
+  } finally { clearTimeout(timer); }
 }
 
 function extractText(data) {
   const content = data?.choices?.[0]?.message?.content;
   if (typeof content === 'string') return content.trim();
-  if (Array.isArray(content)) {
-    return content.map((part) => typeof part === 'string' ? part : (part?.text || '')).join('').trim();
-  }
+  if (Array.isArray(content)) return content.map((part) => typeof part === 'string' ? part : (part?.text || '')).join('').trim();
   if (typeof data?.output_text === 'string') return data.output_text.trim();
   return '';
 }
@@ -55,7 +48,7 @@ async function chatWithModel(model, prompt, { temperature = 0.1 } = {}) {
         messages: [
           {
             role: 'system',
-            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وإضافة قيمة حقيقية للقارئ بدون حشو أو اختلاق. يجب أن تكون كل الحقول التحريرية عربية سليمة، مع السماح فقط بأسماء العلامات والكيانات الأجنبية عند الحاجة. لا تستخدم أي أحرف صينية أو يابانية أو كورية، ولا شظايا كود أو كلمات هجينة بين العربية والإنجليزية. عندما يُطلب JSON فأعد JSON صالحًا فقط بلا Markdown.'
+            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وإضافة قيمة حقيقية للقارئ بدون حشو أو اختلاق. يجب أن تكون كل الحقول التحريرية عربية سليمة، مع السماح فقط بأسماء العلامات والكيانات الأجنبية عند الحاجة. لا تستخدم أي أحرف صينية أو يابانية أو كورية أو سيريليّة، ولا شظايا كود أو كلمات هجينة بين العربية والإنجليزية. عندما يُطلب JSON فأعد JSON صالحًا فقط بلا Markdown.'
           },
           { role: 'user', content: prompt }
         ],
@@ -70,9 +63,7 @@ async function chatWithModel(model, prompt, { temperature = 0.1 } = {}) {
     const out = extractText(data);
     if (!out) throw new Error(`OmniRoute returned no text: ${text.slice(0, 300)}`);
     return out;
-  } finally {
-    clearTimeout(timer);
-  }
+  } finally { clearTimeout(timer); }
 }
 
 async function requestWithRouting(prompt, opts = {}) {
@@ -103,13 +94,11 @@ function cleanJsonEnvelope(raw) {
 }
 
 function localJsonRepairs(raw) {
-  let text = cleanJsonEnvelope(raw);
-  text = text
+  return cleanJsonEnvelope(raw)
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, ' ')
     .replace(/,\s*([}\]])/g, '$1')
     .replace(/[“”]/g, '"')
     .replace(/[‘’]/g, "'");
-  return text;
 }
 
 function tryParseJson(raw) {
@@ -131,7 +120,7 @@ async function repairJsonWithModel(raw, parseError) {
 - لا تضف أي حقيقة أو اسم أو رقم غير موجود في JSON الأصلي.
 - حافظ على نفس المفاتيح والقيم قدر الإمكان.
 - أصلح الفواصل والاقتباسات والمصفوفات والأقواس الناقصة.
-- إذا وجدت نصًا صينيًا/يابانيًا/كوريًا أو شظايا كود داخل حقل تحريري، لا تحاول اختراع بديل؛ اترك النص كما هو لكي يرفضه فحص الجودة لاحقًا.
+- إذا وجدت نصًا فاسدًا أو شظايا كود داخل حقل تحريري، لا تخترع بديلًا؛ اتركه لكي يرفضه فحص الجودة لاحقًا.
 - لا تحذف الحقول المطلوبة.
 
 خطأ المحلل: ${String(parseError || '').slice(0, 500)}
@@ -147,67 +136,71 @@ async function requestJson(prompt) {
   try {
     return tryParseJson(raw).value;
   } catch (firstError) {
-    let repairedRaw;
     try {
-      repairedRaw = await repairJsonWithModel(raw, firstError.message);
+      const repairedRaw = await repairJsonWithModel(raw, firstError.message);
       return tryParseJson(repairedRaw).value;
     } catch (repairError) {
       console.warn(`[OmniRoute] JSON repair failed: ${repairError.message}`);
       console.warn('[OmniRoute] Regenerating structured output once from source instructions...');
       const regenerated = await requestWithRouting(`${prompt}\n\nتنبيه تقني: المحاولة السابقة لم تكن JSON صالحًا. أعد إنشاء الكائن كاملًا من الصفر. تأكد يدويًا من صحة JSON قبل الإرسال: اقتباسات مزدوجة، فاصلة بين كل خاصيتين، لا trailing commas، ولا Markdown.`, { temperature: 0 });
-      try {
-        return tryParseJson(regenerated).value;
-      } catch (finalError) {
-        throw new Error(`OmniRoute structured JSON failed after repair/regeneration: ${finalError.message}`);
-      }
+      try { return tryParseJson(regenerated).value; }
+      catch (finalError) { throw new Error(`OmniRoute structured JSON failed after repair/regeneration: ${finalError.message}`); }
     }
   }
 }
 
 export async function rewriteStory(item, qualityFeedback = '') {
   const retryBlock = qualityFeedback ? `\n\nهذه محاولة تصحيح. المخرجات السابقة فشلت فحص الجودة للأسباب التالية:\n- ${qualityFeedback}\nأعد كتابة جميع الحقول من الصفر بالعربية السليمة، ولا تكرر أي جزء فاسد من المحاولة السابقة.` : '';
+  const sourceBlock = item.sourceContent
+    ? `\n\nالمادة المستخرجة من صفحة الناشر الأصلية (هي المرجع الأساسي للحقائق):\n---\n${String(item.sourceContent).slice(0, 9000)}\n---`
+    : '\n\nلم نتمكن من استخراج نص صفحة الناشر؛ اعتمد فقط على العنوان والوصف المتاحين ولا توسع بما لا تدعمه البيانات.';
+
   const prompt = `أنت محرر رياضي عربي محترف وخبير SEO لمنصة "ملخص". صغ خبرًا أصليًا ومفيدًا اعتمادًا فقط على البيانات أدناه.
 
 قواعد التحرير:
+- المادة المستخرجة من صفحة الناشر هي المرجع الأساسي عند توفرها؛ لا تضف شيئًا غير موجود فيها أو في بيانات RSS.
 - لا تخترع أي رقم أو تصريح أو نتيجة أو اسم غير موجود.
 - إذا كانت المعلومة تقريرًا أو شائعة فقل "بحسب المصدر" ولا تحولها إلى حقيقة مؤكدة.
 - لا تنسخ صياغة المصدر حرفيًا، ولا تستخدم أكثر من 8 كلمات متتالية من النص الأصلي.
 - اكتب بالعربية الفصحى السهلة المناسبة للقارئ السعودي والعربي.
-- كل الحقول التحريرية يجب أن تكون عربية سليمة. يجوز إبقاء أسماء مثل WWE وUFC وأسماء الأشخاص الأجنبية فقط عند الحاجة.
-- ممنوع تمامًا استخدام أحرف صينية أو يابانية أو كورية، أو شظايا برمجية، أو كلمات هجينة مثل مزج حروف عربية وإنجليزية داخل الكلمة نفسها.
+- كل الحقول التحريرية يجب أن تكون عربية سليمة. يجوز إبقاء أسماء العلامات مثل WWE وUFC وEA SPORTS FC وأسماء الأشخاص الأجنبية فقط عند الحاجة.
+- ممنوع استخدام أحرف صينية أو يابانية أو كورية أو سيريليّة، أو شظايا برمجية، أو كلمات هجينة بين العربية والإنجليزية داخل الكلمة نفسها.
+- لا تستخدم كلمات إنجليزية عامة مثل updates أو trademark أو report إذا لها بديل عربي طبيعي.
 - لا تبالغ ولا تستخدم عنوانًا مضللًا.
 - H1 بين 25 و95 حرفًا ويصف الحدث مباشرة.
-- الملخص المرئي excerpt بين 80 و220 حرفًا.
-- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 360 كلمة عندما تسمح الحقائق، ولا تطل إذا كانت المعلومات محدودة.
+- excerpt بين 80 و220 حرفًا.
+- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 420 كلمة عندما تسمح المادة المصدرية، ولا تطل إذا كانت المعلومات محدودة.
 - اذكر الكيان أو البطولة الرئيسية طبيعيًا في أول فقرة عندما يكون مناسبًا.
 - لا تحشو الكلمات المفتاحية ولا تكررها صناعيًا.
-- أضف keyPoints من نقطتين إلى أربع نقاط سريعة تلخص أهم ما يعرفه القارئ، وكل نقطة يجب أن تكون مدعومة بالبيانات المتاحة.
+- أضف keyPoints من نقطتين إلى أربع نقاط سريعة، وكل نقطة يجب أن تكون مدعومة بالبيانات المتاحة.
 - لا تضف إعلان لورفيو داخل النص؛ الموقع يضيف الإعلان تلقائيًا.
 - لا تذكر أنك نموذج ذكاء اصطناعي أو تشرح تفكيرك.
 
 قواعد SEO والصور:
-- seoTitle عنوان نتائج البحث بالعربية، طبيعي وجذاب، بحد أقصى 60 حرفًا تقريبًا، ولا تضف "| ملخص" لأن الموقع يضيف العلامة.
+- seoTitle عنوان نتائج البحث بالعربية، طبيعي وجذاب، بحد أقصى 60 حرفًا تقريبًا، ولا تضف "| ملخص".
 - metaDescription وصف بحث عربي من 130 إلى 160 حرفًا تقريبًا، يلخص القيمة الخبرية دون clickbait.
 - focusKeyword عبارة بحث عربية واحدة طبيعية من كلمتين إلى خمس كلمات مرتبطة مباشرة بالخبر.
-- imageAlt وصف عربي دقيق للصورة المصاحبة، من 50 إلى 125 حرفًا تقريبًا؛ لا تبدأ بـ"صورة لـ" ولا تحشو كلمات مفتاحية.
+- imageAlt وصف عربي دقيق للصورة المصاحبة، من 50 إلى 125 حرفًا تقريبًا.
 - imageCaption تعليق عربي قصير للصورة من 35 إلى 110 أحرف.
-- imageSearchQuery عبارة بحث بالإنجليزية من 2 إلى 6 كلمات للعثور على صورة حقيقية مرخصة في Wikimedia Commons. استخدم أسماء اللاعب/الفريق/المقاتل/البطولة الأساسية فقط.
-- entities من 2 إلى 6 أسماء كيانات أساسية في الخبر مثل لاعب، فريق، بطولة أو مدينة، بدون تكرار.
-- tags من 2 إلى 6 وسوم حقيقية مرتبطة بالكيانات أو البطولة أو الموضوع.
+- imageSearchQuery عبارة قصيرة من 2 إلى 6 كلمات تصف الكيان الأساسي للخبر؛ تستخدم فقط كبيانات مساعدة ولا تبني عليها أي حقيقة.
+- entities من 2 إلى 6 أسماء كيانات أساسية في الخبر.
+- tags من 2 إلى 6 وسوم مرتبطة فعليًا بالخبر.
 
 أعد JSON صالحًا فقط، بلا Markdown وبلا أي نص قبله أو بعده.
 
 الشكل المطلوب حرفيًا:
 {"title":"","seoTitle":"","metaDescription":"","focusKeyword":"","excerpt":"","keyPoints":[""],"body":[""],"tags":[""],"entities":[""],"imageAlt":"","imageCaption":"","imageSearchQuery":"","confidence":0,"importance":1}
 
-confidence من 0 إلى 100 ويعكس كفاية المعلومات ودقتها.
+confidence من 0 إلى 100 ويعكس كفاية المادة المصدرية ودقتها، وليس جودة الأسلوب فقط.
 importance من 1 إلى 5 لأهمية الخبر رياضيًا.
 
 العنوان الوارد: ${item.title}
 الوصف المتاح: ${item.description}
 الناشر: ${item.sourceName}
-رابط المصدر: ${item.link}
-القسم: ${item.section}${retryBlock}`;
+رابط RSS/Google News: ${item.link}
+رابط صفحة الناشر الأصلية: ${item.publisherUrl || 'غير متاح'}
+طريقة إثراء المصدر: ${item.enrichmentMethod || 'rss-only'}
+القسم: ${item.section}${sourceBlock}${retryBlock}`;
 
   const parsed = await requestJson(prompt);
   const body = Array.isArray(parsed.body) ? parsed.body.map((p) => String(p).trim()).filter(Boolean) : [];
