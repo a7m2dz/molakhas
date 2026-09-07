@@ -1,0 +1,56 @@
+[
+  {
+    "id": "bbc-football",
+    "name": "BBC Sport Football",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "section": "football",
+    "trust": 92,
+    "enabled": true,
+    "autoPublish": true
+  },
+  {
+    "id": "google-saudi-football",
+    "name": "Google News - Saudi Football",
+    "url": "https://news.google.com/rss/search?q=%D8%AF%D9%88%D8%B1%D9%8A+%D8%B1%D9%88%D8%B4%D9%86+OR+%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84+OR+%D8%A7%D9%84%D9%86%D8%B5%D8%B1+OR+%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 82,
+    "enabled": true,
+    "autoPublish": false
+  },
+  {
+    "id": "google-transfers",
+    "name": "Google News - Transfers",
+    "url": "https://news.google.com/rss/search?q=football+transfer+news&hl=en-US&gl=US&ceid=US:en",
+    "section": "transfers",
+    "trust": 78,
+    "enabled": true,
+    "autoPublish": false
+  },
+  {
+    "id": "google-ufc",
+    "name": "Google News - UFC",
+    "url": "https://news.google.com/rss/search?q=UFC+MMA&hl=en-US&gl=US&ceid=US:en",
+    "section": "ufc",
+    "trust": 80,
+    "enabled": true,
+    "autoPublish": false
+  },
+  {
+    "id": "google-wwe",
+    "name": "Google News - WWE",
+    "url": "https://news.google.com/rss/search?q=WWE&hl=en-US&gl=US&ceid=US:en",
+    "section": "wwe",
+    "trust": 78,
+    "enabled": true,
+    "autoPublish": false
+  },
+  {
+    "id": "google-boxing",
+    "name": "Google News - Boxing",
+    "url": "https://news.google.com/rss/search?q=boxing&hl=en-US&gl=US&ceid=US:en",
+    "section": "boxing",
+    "trust": 78,
+    "enabled": true,
+    "autoPublish": false
+  }
+]
