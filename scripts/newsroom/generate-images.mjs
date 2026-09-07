@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const root = new URL('../../', import.meta.url);
 const stories = JSON.parse(await fs.readFile(new URL('../../src/data/stories.json', import.meta.url), 'utf8'));
-const outDir = new URL('../../public/news-images/', import.meta.url);
+const outDir = fileURLToPath(new URL('../../public/news-images/', import.meta.url));
 await fs.mkdir(outDir, { recursive: true });
 
 const sectionNames = {
@@ -86,7 +86,7 @@ for (const story of stories) {
     <text x="70" y="632" text-anchor="start" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#92a4bc">1200×675 • WebP</text>
   </svg>`;
 
-  const outPath = path.join(new URL(outDir).pathname, `${story.slug}.webp`);
+  const outPath = path.join(outDir, `${story.slug}.webp`);
   await sharp(Buffer.from(svg))
     .resize(1200, 675, { fit: 'cover' })
     .webp({ quality: 84, effort: 5 })
