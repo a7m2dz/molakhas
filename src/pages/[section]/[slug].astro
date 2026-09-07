@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { sectionMap } from '../../data/sections';
 import stories from '../../data/stories.json';
+import imageManifest from '../../data/image-manifest.json';
+import { topicCounts, topicSlug } from '../../lib/content';
 
 export function getStaticPaths() {
   return stories.filter((s) => s.status === 'approved').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
@@ -11,14 +13,25 @@ const { story } = Astro.props;
 const section = sectionMap[story.section];
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const canonical = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
-const imageSrc = story.image?.src || `/news-images/${story.slug}.webp`;
+const media = (imageManifest as Record<string, any>)[story.slug] || {};
+const imageSrc = media.src || story.image?.src || `/news-images/${story.slug}.webp`;
 const imageUrl = new URL(imageSrc, `${siteUrl}/`).toString();
-const imageAlt = story.image?.alt || `ملخص بصري لخبر ${story.title}`;
-const imageCaption = story.image?.caption || story.excerpt;
+const imageAlt = media.alt || story.image?.alt || `ملخص بصري لخبر ${story.title}`;
+const imageCaption = media.caption || story.image?.caption || story.excerpt;
 const seoTitle = story.seoTitle || story.title;
 const metaDescription = story.metaDescription || story.excerpt;
-const related = stories.filter((s) => s.status === 'approved' && s.section === story.section && s.slug !== story.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,3);
-const wordCount = story.body.join(' ').split(/\s+/).filter(Boolean).length;
+const words = story.body.join(' ').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.ceil(words / 180));
+const counts = topicCounts(stories as any[]);
+const sharedTags = (candidate) => (candidate.tags || []).filter((tag) => (story.tags || []).includes(tag)).length;
+const related = stories
+  .filter((s) => s.status === 'approved' && s.slug !== story.slug)
+  .map((s) => ({ story: s, score: sharedTags(s) * 4 + (s.section === story.section ? 2 : 0) + (s.importance || 1) * 0.2 }))
+  .filter((x) => x.score > 0)
+  .sort((a,b)=>b.score-a.score || +new Date(b.story.publishedAt)-+new Date(a.story.publishedAt))
+  .slice(0,4)
+  .map((x)=>x.story);
+
 const schema = {
   '@context':'https://schema.org',
   '@type':'NewsArticle',
@@ -29,12 +42,19 @@ const schema = {
   datePublished:story.publishedAt,
   dateModified:story.generatedAt || story.publishedAt,
   inLanguage:'ar',
+  isAccessibleForFree:true,
   articleSection:section?.name ?? 'رياضة',
   keywords:(story.tags || []).join(', '),
-  wordCount,
+  wordCount:words,
   mainEntityOfPage:{'@type':'WebPage','@id':canonical},
-  author:{'@type':'Organization',name:'ملخص',url:siteUrl},
-  publisher:{'@type':'Organization',name:'ملخص',url:siteUrl},
+  author:{'@type':'Organization',name:'فريق تحرير ملخص',url:`${siteUrl}/authors/editorial-team`},
+  publisher:{
+    '@type':'Organization',
+    name:'ملخص',
+    url:siteUrl,
+    logo:{'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}
+  },
+  about:(story.entities || story.tags || []).slice(0,6).map((name)=>({'@type':'Thing',name})),
   isBasedOn:story.sourceUrl
 };
 const breadcrumbSchema = {
@@ -46,6 +66,9 @@ const breadcrumbSchema = {
     {'@type':'ListItem',position:3,name:story.title,item:canonical}
   ]
 };
+const xShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(story.title)}&url=${encodeURIComponent(canonical)}`;
+const waShare = `https://wa.me/?text=${encodeURIComponent(`${story.title}\n${canonical}`)}`;
+const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&text=${encodeURIComponent(story.title)}`;
 ---
 <BaseLayout
   title={`${seoTitle} | ملخص`}
@@ -66,26 +89,52 @@ const breadcrumbSchema = {
       <span class="article-section">{section?.name ?? 'رياضة'}</span>
       <h1>{story.title}</h1>
       <p class="article-deck">{story.excerpt}</p>
-      <div class="article-meta"><span>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</span><span>المصدر: <a href={story.sourceUrl} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
+      <div class="article-meta">
+        <span>بقلم <a href="/authors/editorial-team">فريق تحرير ملخص</a></span>
+        <time datetime={story.publishedAt}>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</time>
+        <span>{readingMinutes} د قراءة</span>
+        <span>المصدر: <a href={story.sourceUrl} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span>
+      </div>
     </header>
 
     <figure class="article-hero">
       <img src={imageSrc} alt={imageAlt} width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" />
-      {imageCaption && <figcaption>{imageCaption}</figcaption>}
+      <figcaption>
+        <span>{imageCaption}</span>
+        {media.kind === 'wikimedia' && <small class="image-credit">الصورة: {media.creator || 'Wikimedia Commons'} · {media.sourceUrl ? <a href={media.sourceUrl} target="_blank" rel="noopener nofollow">المصدر</a> : null}{media.license ? <> · {media.licenseUrl ? <a href={media.licenseUrl} target="_blank" rel="noopener nofollow">{media.license}</a> : media.license}</> : null}</small>}
+      </figcaption>
     </figure>
 
-    <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} />}<p>{paragraph}</p></>)}</div>
+    {story.keyPoints?.length >= 2 && <aside class="key-points" aria-label="أهم نقاط الخبر"><strong>الزبدة</strong><ul>{story.keyPoints.map((point)=><li>{point}</li>)}</ul></aside>}
 
-    {story.tags?.length > 0 && <div class="tag-list" aria-label="وسوم الخبر">{story.tags.map((tag) => <span>#{tag}</span>)}</div>}
+    <div class="article-body">
+      {story.body.map((paragraph, index) => <>
+        {index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}
+        <p>{paragraph}</p>
+      </>)}
+    </div>
 
-    <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية. يمكنك الرجوع إلى المصدر الأصلي للتحقق من التفاصيل والسياق الكامل.</p><a href={story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a></div>
+    <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
 
-    <LurvuePromo section={story.section} />
+    {story.tags?.length > 0 && <div class="tag-list" aria-label="مواضيع الخبر">{story.tags.map((tag) => {
+      const slug = topicSlug(tag);
+      const available = (counts.get(slug)?.count || 0) >= 2;
+      return available ? <a href={`/topic/${slug}`}>#{tag}</a> : <span>#{tag}</span>;
+    })}</div>}
 
-    {related.length > 0 && <section class="related"><div class="section-title"><h2>أخبار مرتبطة</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
+    <div class="article-source-note">
+      <strong>عن هذا الخبر</strong>
+      <p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر. يمكنك الرجوع إلى المصدر الأصلي للتحقق من التفاصيل والسياق الكامل.</p>
+      <div><a href={story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a><a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div>
+    </div>
+
+    {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={item.image?.src || `/news-images/${item.slug}.webp`} alt="" width="1200" height="675" loading="lazy" decoding="async"/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
   </article>
 </BaseLayout>
 
 <style>
-  .article-hero{margin:30px 0 12px}.article-hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:20px;border:1px solid var(--line);background:var(--panel)}.article-hero figcaption{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.6}
+  .article-hero{margin:30px 0 12px}.article-hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:20px;border:1px solid var(--line);background:var(--panel)}.article-hero figcaption{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.6;display:grid;gap:4px}.image-credit{font-size:11px}.image-credit a{color:var(--accent)}
+  .key-points{margin:25px 0;background:#0d1e31;border:1px solid #29425e;border-radius:18px;padding:20px 24px}.key-points strong{color:var(--accent);font-size:18px}.key-points ul{margin:10px 0 0;padding-right:22px}.key-points li{margin:7px 0;color:#dce6f2}
+  .share-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:28px 0;padding:14px 0;border-block:1px solid var(--line)}.share-row strong{margin-left:4px}.share-row a{padding:6px 11px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#dbe7f5;background:#0a1725}.share-row a:hover{border-color:var(--accent)}
+  .article-source-note>div{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.related-card img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:10px}
 </style>
