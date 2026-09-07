@@ -55,7 +55,7 @@ async function chatWithModel(model, prompt) {
         messages: [
           {
             role: 'system',
-            content: 'أنت محرر رياضي عربي دقيق. التزم بتعليمات المستخدم وأعد فقط المخرجات المطلوبة دون شرح لعملية التفكير.'
+            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وعدم حشو الكلمات المفتاحية. التزم بتعليمات المستخدم وأعد فقط المخرجات المطلوبة.'
           },
           { role: 'user', content: prompt }
         ],
@@ -102,24 +102,35 @@ function parseJson(raw) {
 }
 
 export async function rewriteStory(item) {
-  const prompt = `أنت محرر رياضي عربي محترف في منصة "ملخص". صغ خبرًا أصليًا ودقيقًا اعتمادًا فقط على البيانات أدناه.
+  const prompt = `أنت محرر رياضي عربي محترف وخبير SEO لمنصة "ملخص". صغ خبرًا أصليًا ودقيقًا اعتمادًا فقط على البيانات أدناه.
 
-قواعد إلزامية:
+قواعد التحرير:
 - لا تخترع أي رقم أو تصريح أو نتيجة أو اسم غير موجود.
 - إذا كانت المعلومة تقريرًا أو شائعة فقل "بحسب المصدر" ولا تحولها إلى حقيقة مؤكدة.
 - لا تنسخ صياغة المصدر حرفيًا، ولا تستخدم أكثر من 8 كلمات متتالية من النص الأصلي.
 - اكتب بالعربية الفصحى السهلة المناسبة للقارئ السعودي والعربي.
 - لا تبالغ ولا تستخدم عنوانًا مضللًا.
-- العنوان بين 25 و95 حرفًا.
-- الملخص بين 80 و220 حرفًا.
+- H1 بين 25 و95 حرفًا، ويصف الحدث مباشرة.
+- الملخص المرئي excerpt بين 80 و220 حرفًا.
 - اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 420 كلمة عندما تسمح الحقائق.
+- اذكر الكيان أو البطولة الرئيسية طبيعيًا في أول فقرة عندما يكون ذلك مناسبًا.
+- لا تحشو الكلمات المفتاحية ولا تكررها صناعيًا.
 - إذا كانت المعلومات محدودة فلا تطل ولا تملأ الفراغ بتخمينات.
 - لا تضف إعلان لورفيو داخل النص؛ الموقع يضيف الإعلان تلقائيًا.
 - لا تذكر أنك نموذج ذكاء اصطناعي أو تشرح تفكيرك.
-- أعد JSON صالحًا فقط، بلا Markdown وبلا أي نص قبله أو بعده.
+
+قواعد SEO:
+- seoTitle عنوان نتائج البحث، طبيعي وجذاب، بحد أقصى 60 حرفًا تقريبًا، ولا تضف "| ملخص" لأن الموقع يضيف العلامة.
+- metaDescription وصف بحث عربي من 130 إلى 160 حرفًا تقريبًا، يلخص القيمة الخبرية دون clickbait.
+- focusKeyword عبارة بحث واحدة طبيعية من كلمتين إلى خمس كلمات مرتبطة مباشرة بالخبر.
+- imageAlt وصف عربي دقيق للصورة التحريرية المصاحبة، من 50 إلى 125 حرفًا تقريبًا؛ لا تبدأ بـ"صورة لـ" ولا تحشو كلمات مفتاحية.
+- imageCaption تعليق قصير للصورة من 35 إلى 110 أحرف.
+- tags من 2 إلى 6 وسوم حقيقية مرتبطة بالكيانات أو البطولة أو الموضوع.
+
+أعد JSON صالحًا فقط، بلا Markdown وبلا أي نص قبله أو بعده.
 
 الشكل المطلوب حرفيًا:
-{"title":"","excerpt":"","body":[""],"tags":[""],"confidence":0,"importance":1}
+{"title":"","seoTitle":"","metaDescription":"","focusKeyword":"","excerpt":"","body":[""],"tags":[""],"imageAlt":"","imageCaption":"","confidence":0,"importance":1}
 
 confidence من 0 إلى 100 ويعكس كفاية المعلومات ودقتها.
 importance من 1 إلى 5 لأهمية الخبر رياضيًا.
@@ -134,11 +145,18 @@ importance من 1 إلى 5 لأهمية الخبر رياضيًا.
   const body = Array.isArray(parsed.body) ? parsed.body.map((p) => String(p).trim()).filter(Boolean) : [];
   if (!parsed.title || body.length < 2) throw new Error('OmniRoute JSON incomplete');
 
+  const title = String(parsed.title).trim();
+  const excerpt = String(parsed.excerpt || '').trim();
   return {
-    title: String(parsed.title).trim(),
-    excerpt: String(parsed.excerpt || '').trim(),
+    title,
+    seoTitle: String(parsed.seoTitle || title).trim().slice(0, 70),
+    metaDescription: String(parsed.metaDescription || excerpt).trim().slice(0, 180),
+    focusKeyword: String(parsed.focusKeyword || '').trim().slice(0, 80),
+    excerpt,
     body,
     tags: Array.isArray(parsed.tags) ? parsed.tags.map(String).map((x) => x.trim()).filter(Boolean) : [],
+    imageAlt: String(parsed.imageAlt || title).trim().slice(0, 150),
+    imageCaption: String(parsed.imageCaption || excerpt || title).trim().slice(0, 150),
     confidence: Math.max(0, Math.min(100, Number(parsed.confidence) || 0)),
     importance: Math.max(1, Math.min(5, Number(parsed.importance) || 1))
   };
