@@ -69,17 +69,17 @@ Invoke-Checked 'Ranking traffic opportunities and generating stories...' { npm r
 Invoke-Checked 'Resolving source article images and local fallbacks...' { npm run images:generate }
 Invoke-Checked 'Verifying production build...' { npm run build }
 
-$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json public/news-images public/brand
+$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json src/data/matches.json public/news-images public/brand
 if (-not $changes) {
   Write-Host '[Molakhas] No publishable changes. Nothing to push.'
   exit 0
 }
 
-Write-Host '[Molakhas] Publishing newsroom package to GitHub...'
+Write-Host '[Molakhas] Publishing newsroom + match package to GitHub...'
 git config user.name 'molakhas-local-newsroom'
 git config user.email 'molakhas-local@users.noreply.github.com'
-git add src/data/stories.json src/data/image-manifest.json public/news-images public/brand
-git commit -m "newsroom: OmniRoute batch $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+git add src/data/stories.json src/data/image-manifest.json src/data/matches.json public/news-images public/brand
+git commit -m "newsroom: OmniRoute + matches $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE" }
 git push origin main
 if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
