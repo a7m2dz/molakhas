@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import { XMLParser } from 'fast-xml-parser';
 import { configured, rewriteStory } from './omniroute-client.mjs';
 import { languageIssues } from './quality-gate.mjs';
+import { factualIssues } from './fact-consistency.mjs';
 import { enrichCandidate } from './source-enrichment.mjs';
 import { rankTrafficCandidates, selectTrafficCandidates } from './traffic-opportunity.mjs';
 import { applySearchFeedback } from './search-feedback-boost.mjs';
@@ -63,7 +64,7 @@ for (const story of stories) {
   console.warn(`[Audit] Unpublished corrupted story: ${story.title} :: ${issues.join('; ')}`);
 }
 
-const dedupeEligible = (story) => !(story.qualityFlags || []).includes('language-quality-failed');
+const dedupeEligible = (story) => !(story.qualityFlags || []).some((flag) => flag === 'language-quality-failed' || flag === 'factual-quality-failed');
 const existingLinks = new Set(stories.filter(dedupeEligible).map((s) => s.sourceUrl).filter(Boolean));
 const publishedTitles = stories.filter((s) => dedupeEligible(s) && s.status === 'approved').map((s) => s.title);
 const candidates = [];
@@ -74,7 +75,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.8 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.9 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -172,21 +173,31 @@ for (const rawItem of selected) {
     if (item.sourceContent) console.log(`[Source] Enriched (${item.enrichmentMethod}) ${item.title}: ${item.sourceContent.length} chars`);
     else console.warn(`[Source] RSS-only ${item.title}`);
 
+    const canFactCheck = Boolean((item.sourceContent?.length || 0) >= 350 || (item.description?.length || 0) >= 180);
     let rewritten = await rewriteStory(item);
-    let issues = languageIssues(rewritten);
-    if (issues.length) {
-      console.warn(`[Quality] Retrying ${item.title}: ${issues.join('; ')}`);
-      rewritten = await rewriteStory(item, issues.join('; '));
-      issues = languageIssues(rewritten);
+    let language = languageIssues(rewritten);
+    let facts = canFactCheck ? factualIssues(rewritten, item) : [];
+
+    if (language.length || facts.length) {
+      const retryNotes = [...language, ...facts].join('; ');
+      console.warn(`[Quality] Retrying ${item.title}: ${retryNotes}`);
+      rewritten = await rewriteStory(item, retryNotes);
+      language = languageIssues(rewritten);
+      facts = canFactCheck ? factualIssues(rewritten, item) : [];
     }
 
     const score = qualityScore(rewritten, item);
-    const languageClean = issues.length === 0;
-    const approved = autoPublishEnabled && languageClean && !item.discoveryOnly && item.autoPublish && item.trust >= minTrust && score >= minScore && rewritten.confidence >= minConfidence;
+    const languageClean = language.length === 0;
+    const factualClean = facts.length === 0;
+    const approved = autoPublishEnabled && languageClean && factualClean && !item.discoveryOnly && item.autoPublish && item.trust >= minTrust && score >= minScore && rewritten.confidence >= minConfidence;
     const baseSlug = slugify(rewritten.title) || hash(item.link);
-    const corruptIndex = stories.findIndex((s) => s.sourceUrl === item.link && (s.qualityFlags || []).includes('language-quality-failed'));
+    const corruptIndex = stories.findIndex((s) => s.sourceUrl === item.link && (s.qualityFlags || []).some((flag) => flag === 'language-quality-failed' || flag === 'factual-quality-failed'));
     const slugConflict = stories.some((s, index) => s.slug === baseSlug && index !== corruptIndex);
     const slug = slugConflict ? `${baseSlug}-${hash(item.link).slice(0, 6)}` : baseSlug;
+    const qualityFlags = [
+      ...(languageClean ? [] : ['language-quality-failed']),
+      ...(factualClean ? [] : ['factual-quality-failed'])
+    ];
 
     const storyRecord = {
       id: hash(item.link),
@@ -204,6 +215,7 @@ for (const rawItem of selected) {
       publisherUrl: item.publisherUrl || '',
       sourceId: item.sourceId,
       sourceEnrichment: item.enrichmentMethod || 'rss-only',
+      factChecked: canFactCheck,
       trafficScore: rawItem.trafficScore || 0,
       trafficSignals: rawItem.trafficSignals || [],
       searchFeedback: rawItem.searchFeedback || undefined,
@@ -216,8 +228,9 @@ for (const rawItem of selected) {
       confidence: rewritten.confidence,
       importance: rewritten.importance,
       trust: item.trust,
-      qualityFlags: languageClean ? [] : ['language-quality-failed'],
-      qualityNotes: issues,
+      qualityFlags,
+      qualityNotes: language,
+      factualNotes: facts,
       tags: rewritten.tags.slice(0, 6),
       entities: rewritten.entities.slice(0, 6),
       image: {
@@ -237,7 +250,8 @@ for (const rawItem of selected) {
     existingLinks.add(item.link);
     publishedTitles.push(rewritten.title);
     changed = true;
-    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [Q${score}/C${rewritten.confidence}/T${rawItem.trafficScore || 0}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}: ${rewritten.title}`);
+    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [Q${score}/C${rewritten.confidence}/T${rawItem.trafficScore || 0}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}${factualClean ? '' : ' [FACT BLOCKED]'}: ${rewritten.title}`);
+    if (facts.length) console.warn(`[Facts] ${rewritten.title}: ${facts.join('; ')}`);
   } catch (error) {
     console.error(`Story failed: ${rawItem.title}: ${error.message}`);
   }
