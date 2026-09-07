@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,7 +17,8 @@
     "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
     "images:generate": "node scripts/newsroom/source-images.mjs",
-    "indexnow": "node scripts/newsroom/indexnow.mjs"
+    "indexnow": "node scripts/newsroom/indexnow.mjs",
+    "audit:prelaunch": "node scripts/newsroom/prelaunch-audit.mjs"
   },
   "dependencies": {
     "astro": "^5.13.5",
