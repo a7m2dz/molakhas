@@ -2,11 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import stories from '../../data/stories.json';
-import { indexableMatches, matchDateArabic, matchStateArabic, matchTimeArabic, type MolakhasMatch } from '../../lib/matches';
+import { allMatches, isMatchIndexable, matchDateArabic, matchIndexQualityScore, matchStateArabic, matchTimeArabic, type MolakhasMatch } from '../../lib/matches';
 import { teamHref, competitionHref } from '../../lib/hubs';
 
 export function getStaticPaths() {
-  return indexableMatches().map((match) => ({ params: { slug: match.slug }, props: { match } }));
+  return allMatches.map((match) => ({ params: { slug: match.slug }, props: { match } }));
 }
 
 const { match } = Astro.props as { match: MolakhasMatch };
@@ -25,10 +25,10 @@ const scoreText = match.score || `${match.home.score ?? ''} - ${match.away.score
 const titlePrefix = isFinal ? `نتيجة مباراة ${home} و${away}` : isLive ? `${home} ضد ${away} مباشر` : `موعد مباراة ${home} و${away}`;
 const title = `${titlePrefix} | ${competition} - ملخص`;
 const description = isFinal
-  ? `نتيجة مباراة ${home} و${away} في ${competition}: ${scoreText || 'النتيجة النهائية'}، مع تفاصيل الموعد وروابط الأخبار المرتبطة.`
+  ? `نتيجة مباراة ${home} و${away} في ${competition}: ${scoreText || 'النتيجة النهائية'}، مع أحداث المباراة والإحصائيات والتشكيلة عند توفرها.`
   : isLive
-    ? `متابعة حالة مباراة ${home} و${away} في ${competition} الآن، النتيجة الحالية ${scoreText || 'قيد التحديث'} وروابط الأخبار المرتبطة.`
-    : `موعد مباراة ${home} و${away} في ${competition} يوم ${date} الساعة ${time} بتوقيت السعودية، مع صفحة تتحدث إلى النتيجة بعد انطلاق المباراة.`;
+    ? `متابعة مباراة ${home} و${away} في ${competition} الآن، النتيجة الحالية ${scoreText || 'قيد التحديث'} مع الأحداث والإحصائيات.`
+    : `موعد مباراة ${home} و${away} في ${competition} يوم ${date} الساعة ${time} بتوقيت السعودية، مع التشكيلة والإحصائيات عند توفرها.`;
 
 const textNeedles = [home.toLowerCase(), away.toLowerCase()];
 const related = (stories as any[])
@@ -37,6 +37,18 @@ const related = (stories as any[])
   .filter(({ haystack }) => textNeedles.some((needle) => needle.length > 2 && haystack.includes(needle)))
   .slice(0, 5)
   .map(({ story }) => story);
+
+const details = match.details || {};
+const events = Array.isArray(details.events) ? details.events : [];
+const stats = Array.isArray(details.stats) ? details.stats : [];
+const homeLineup = Array.isArray(details.lineups?.home) ? details.lineups.home : [];
+const awayLineup = Array.isArray(details.lineups?.away) ? details.lineups.away : [];
+const topPlayers = Array.isArray(details.topPlayers) ? details.topPlayers : [];
+const qualityScore = matchIndexQualityScore(match);
+const indexable = isMatchIndexable(match);
+const robots = indexable
+  ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+  : 'noindex,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const eventStatus = isFinal
@@ -56,7 +68,8 @@ const schemaExtra = [
     url: `${siteUrl}/matches/${match.slug}/`,
     homeTeam: { '@type': 'SportsTeam', name: home, url: `${siteUrl}${homeUrl}` },
     awayTeam: { '@type': 'SportsTeam', name: away, url: `${siteUrl}${awayUrl}` },
-    superEvent: { '@type': 'SportsEvent', name: competition, url: `${siteUrl}${competitionUrl}` }
+    superEvent: { '@type': 'SportsEvent', name: competition, url: `${siteUrl}${competitionUrl}` },
+    location: details.venue ? { '@type': 'Place', name: details.venue } : undefined
   },
   {
     '@type': 'BreadcrumbList',
@@ -68,7 +81,7 @@ const schemaExtra = [
   }
 ];
 ---
-<BaseLayout title={title} description={description} section={match.section || 'football'} schemaExtra={schemaExtra} modifiedAt={match.updatedAt}>
+<BaseLayout title={title} description={description} section={match.section || 'football'} schemaExtra={schemaExtra} modifiedAt={match.updatedAt} robots={robots}>
   <article class="shell match-page">
     <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>/</span><a href="/matches/today">مباريات اليوم</a><span>/</span><span>{home} ضد {away}</span></nav>
 
@@ -84,6 +97,7 @@ const schemaExtra = [
       <div class="score-center">
         {(isLive || isFinal) ? <b>{scoreText || '—'}</b> : <b class="time-score">{time}</b>}
         <span>{stateLabel}</span>
+        {details.xg && <small class="xg">xG {details.xg.home || '—'} - {details.xg.away || '—'}</small>}
       </div>
       <a class="team" href={awayUrl}><strong>{away}</strong><small>الضيف</small></a>
     </section>
@@ -93,20 +107,11 @@ const schemaExtra = [
     <section class="match-copy">
       <h2>{isFinal ? `نتيجة ${home} و${away}` : isLive ? `متابعة ${home} و${away}` : `موعد ${home} و${away}`}</h2>
       {isFinal ? (
-        <>
-          <p>انتهت مباراة <a href={homeUrl}><strong>{home}</strong></a> و<a href={awayUrl}><strong>{away}</strong></a> في <a href={competitionUrl}><strong>{competition}</strong></a> بنتيجة <strong>{scoreText || 'مسجلة في مركز المباريات'}</strong>. تحتفظ هذه الصفحة بنفس الرابط بعد نهاية اللقاء حتى تكون النتيجة والموعد في مكان واحد.</p>
-          <p>يمكنك متابعة الأخبار المرتبطة بالمواجهة من قسم الأخبار أدناه، بينما تعتمد نتيجة المباراة وحالتها على آخر تحديث وصل إلى مركز المباريات.</p>
-        </>
+        <p>انتهت مباراة <a href={homeUrl}><strong>{home}</strong></a> و<a href={awayUrl}><strong>{away}</strong></a> في <a href={competitionUrl}><strong>{competition}</strong></a> بنتيجة <strong>{scoreText || 'مسجلة في مركز المباريات'}</strong>. تعرض الصفحة أدناه أحداث اللقاء والإحصائيات والتشكيلة بحسب آخر بيانات متاحة.</p>
       ) : isLive ? (
-        <>
-          <p>مباراة <a href={homeUrl}><strong>{home}</strong></a> و<a href={awayUrl}><strong>{away}</strong></a> جارية الآن ضمن <a href={competitionUrl}><strong>{competition}</strong></a>. النتيجة الظاهرة حاليًا هي <strong>{scoreText || 'قيد التحديث'}</strong>، ويتم تحديث حالة الصفحة مع تحديث بيانات المباريات.</p>
-          <p>بعد صافرة النهاية تتحول الصفحة نفسها تلقائيًا إلى صفحة النتيجة النهائية، بدون تغيير الرابط.</p>
-        </>
+        <p>مباراة <a href={homeUrl}><strong>{home}</strong></a> و<a href={awayUrl}><strong>{away}</strong></a> جارية الآن ضمن <a href={competitionUrl}><strong>{competition}</strong></a>. النتيجة الحالية <strong>{scoreText || 'قيد التحديث'}</strong>، وتُحدّث تفاصيل المباراة مع تحديث مركز المباريات.</p>
       ) : (
-        <>
-          <p>تقام مباراة <a href={homeUrl}><strong>{home}</strong></a> ضد <a href={awayUrl}><strong>{away}</strong></a> ضمن <a href={competitionUrl}><strong>{competition}</strong></a> يوم <strong>{date}</strong> عند الساعة <strong>{time}</strong> بتوقيت السعودية.</p>
-          <p>عند انطلاق المواجهة تتحول هذه الصفحة من صفحة الموعد إلى مركز متابعة للحالة والنتيجة، ثم تحتفظ بالنتيجة النهائية بعد نهاية المباراة.</p>
-        </>
+        <p>تقام مباراة <a href={homeUrl}><strong>{home}</strong></a> ضد <a href={awayUrl}><strong>{away}</strong></a> ضمن <a href={competitionUrl}><strong>{competition}</strong></a> يوم <strong>{date}</strong> عند الساعة <strong>{time}</strong> بتوقيت السعودية. تظهر التشكيلة والبيانات التفصيلية هنا فور توفرها.</p>
       )}
 
       <div class="facts">
@@ -114,10 +119,54 @@ const schemaExtra = [
         <div><span>الموعد</span><b>{date}</b></div>
         <div><span>الوقت</span><b>{time} بتوقيت السعودية</b></div>
         <div><span>الحالة</span><b>{stateLabel}</b></div>
+        {details.venue && <div><span>الملعب</span><b>{details.venue}</b></div>}
+        {details.referee && <div><span>الحكم</span><b>{details.referee}</b></div>}
+        {details.round && <div><span>الجولة</span><b>{details.round}</b></div>}
+        {details.attendance && <div><span>الحضور</span><b>{new Intl.NumberFormat('ar-SA').format(details.attendance)}</b></div>}
       </div>
-
-      {match.sourceUrl && <p class="data-source">بيانات المباراة: <a href={match.sourceUrl} target="_blank" rel="nofollow noopener">FotMob</a> • آخر تحديث: {match.updatedAt ? new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(match.updatedAt)) : 'تلقائي'}</p>}
     </section>
+
+    {events.length > 0 && (
+      <section class="detail-section">
+        <div class="section-title"><div><span class="section-kicker">لحظة بلحظة</span><h2>أحداث المباراة</h2></div></div>
+        <div class="timeline">
+          {events.map((event:any) => (
+            <div class="timeline-row">
+              <time>{event.minute || '•'}</time>
+              <div><b>{event.player || event.type || 'حدث'}</b><span>{[event.type, event.assist ? `صناعة: ${event.assist}` : '', event.description].filter(Boolean).join(' • ')}</span></div>
+              {event.score && <strong>{event.score}</strong>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {stats.length > 0 && (
+      <section class="detail-section">
+        <div class="section-title"><div><span class="section-kicker">أرقام اللقاء</span><h2>إحصائيات {home} و{away}</h2></div></div>
+        <div class="stats-table">
+          <div class="stats-head"><b>{home}</b><span>الإحصائية</span><b>{away}</b></div>
+          {stats.map((stat:any) => <div class="stat-row"><strong>{stat.home || '—'}</strong><span>{stat.title}</span><strong>{stat.away || '—'}</strong></div>)}
+        </div>
+      </section>
+    )}
+
+    {(homeLineup.length > 0 || awayLineup.length > 0) && (
+      <section class="detail-section">
+        <div class="section-title"><div><span class="section-kicker">التشكيل الأساسي</span><h2>تشكيلة المباراة</h2></div></div>
+        <div class="lineups">
+          <div><h3>{home}</h3>{homeLineup.length ? <ol>{homeLineup.map((name) => <li>{name}</li>)}</ol> : <p>لم تتوفر التشكيلة بعد.</p>}</div>
+          <div><h3>{away}</h3>{awayLineup.length ? <ol>{awayLineup.map((name) => <li>{name}</li>)}</ol> : <p>لم تتوفر التشكيلة بعد.</p>}</div>
+        </div>
+      </section>
+    )}
+
+    {topPlayers.length > 0 && (
+      <section class="detail-section">
+        <div class="section-title"><div><span class="section-kicker">الأبرز</span><h2>أفضل لاعبي المباراة</h2></div></div>
+        <div class="top-players">{topPlayers.map((player:any) => <div><b>{player.name}</b><span>{player.team || ''}</span>{player.rating && <strong>{Number(player.rating).toFixed(1)}</strong>}</div>)}</div>
+      </section>
+    )}
 
     {related.length > 0 && (
       <section class="related-news">
@@ -128,10 +177,17 @@ const schemaExtra = [
       </section>
     )}
 
+    <div class="match-data-note">
+      <span>جودة صفحة الفهرسة: {qualityScore}/100 {indexable ? '• مؤهلة للفهرسة' : '• noindex مؤقتًا حتى تكتمل البيانات'}</span>
+      {match.sourceUrl && <span>بيانات المباراة: <a href={match.sourceUrl} target="_blank" rel="nofollow noopener">FotMob</a></span>}
+      {details.detailUpdatedAt && <span>آخر تحديث تفصيلي: {new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(details.detailUpdatedAt))}</span>}
+    </div>
+
     <LurvuePromo section={match.section || 'football'} position="match-center-end" storySlug={match.slug} storyTitle={`${home} ضد ${away}`} keyword={`مباراة ${home} ${away}`} />
   </article>
 </BaseLayout>
 
 <style>
-  .match-page{max-width:920px;padding:38px 0 75px}.match-header{text-align:center;padding:18px 0 25px}.competition{display:flex;justify-content:center;gap:8px;align-items:center;color:var(--accent);font-weight:900;font-size:12px}.competition a{color:var(--accent)}.competition small{color:var(--muted);font-weight:400}.state-pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:5px 10px;border:1px solid var(--line);background:#0b1827;border-radius:999px;color:var(--muted);font-size:10px}.state-pill.live{color:#ff838b;border-color:#ff5b6644}.state-pill i{width:7px;height:7px;background:#ff5b66;border-radius:50%;box-shadow:0 0 0 4px #ff5b6620}.match-header h1{font-size:clamp(36px,6vw,62px);line-height:1.2;margin:12px 0 8px}.match-header h1 a{color:inherit}.match-header h1 a:hover{color:var(--accent)}.match-header h1 em{font-style:normal;color:var(--muted);font-size:.42em;font-weight:500}.match-header p{margin:0;color:var(--muted)}.scoreboard{display:grid;grid-template-columns:1fr 180px 1fr;align-items:center;gap:18px;padding:30px;background:linear-gradient(145deg,#112640,#091725);border:1px solid #27445f;border-radius:24px;box-shadow:0 24px 60px #0004}.scoreboard.live{border-color:#ff5b6655}.team{text-align:center;display:flex;flex-direction:column;color:inherit}.team:hover{color:var(--accent)}.team strong{font-size:22px}.team small{font-size:10px;color:var(--muted)}.score-center{text-align:center;display:flex;flex-direction:column}.score-center b{font-size:38px;letter-spacing:2px}.score-center .time-score{font-size:28px;letter-spacing:0}.score-center span{font-size:10px;color:var(--accent)}.match-copy{font-size:18px;line-height:2;padding:25px 0}.match-copy h2{font-size:28px}.match-copy p a{color:inherit;border-bottom:1px dotted #59e6a855}.match-copy p a:hover{color:var(--accent)}.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0}.facts>div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column}.facts span{font-size:10px;color:var(--muted)}.facts b{font-size:14px}.facts b a{color:inherit}.facts b a:hover{color:var(--accent)}.data-source{font-size:11px!important;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}.data-source a{color:var(--accent)}.related-news{padding:24px 0}.related-match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.related-match-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.related-match-grid span{color:var(--accent);font-size:10px}.related-match-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.related-match-grid p{font-size:12px;color:var(--muted);margin:0}@media(max-width:650px){.scoreboard{grid-template-columns:1fr 100px 1fr;padding:20px 12px}.team strong{font-size:16px}.score-center b{font-size:27px}.facts,.related-match-grid{grid-template-columns:1fr}.match-header h1 em{display:block;margin:8px 0}}
+.match-page{max-width:920px;padding:38px 0 75px}.match-header{text-align:center;padding:18px 0 25px}.competition{display:flex;justify-content:center;gap:8px;align-items:center;color:var(--accent);font-weight:900;font-size:12px}.competition small{color:var(--muted);font-weight:400}.state-pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:5px 10px;border:1px solid var(--line);background:#0b1827;border-radius:999px;color:var(--muted);font-size:10px}.state-pill.live{color:#ff838b;border-color:#ff5b6644}.state-pill i{width:7px;height:7px;background:#ff5b66;border-radius:50%;box-shadow:0 0 0 4px #ff5b6620}.match-header h1{font-size:clamp(36px,6vw,62px);line-height:1.2;margin:12px 0 8px}.match-header h1 em{font-style:normal;color:var(--muted);font-size:.42em;font-weight:500}.match-header p{margin:0;color:var(--muted)}.scoreboard{display:grid;grid-template-columns:1fr 180px 1fr;align-items:center;gap:18px;padding:30px;background:linear-gradient(145deg,#112640,#091725);border:1px solid #27445f;border-radius:24px;box-shadow:0 24px 60px #0004}.scoreboard.live{border-color:#ff5b6655}.team{text-align:center;display:flex;flex-direction:column}.team strong{font-size:22px}.team small{font-size:10px;color:var(--muted)}.score-center{text-align:center;display:flex;flex-direction:column}.score-center b{font-size:38px;letter-spacing:2px}.score-center .time-score{font-size:28px;letter-spacing:0}.score-center span{font-size:10px;color:var(--accent)}.score-center .xg{font-size:9px;color:var(--muted);margin-top:5px}.match-copy{font-size:18px;line-height:2;padding:25px 0}.match-copy h2{font-size:28px}.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0}.facts>div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column}.facts span{font-size:10px;color:var(--muted)}.facts b{font-size:14px}.detail-section{padding:28px 0;border-top:1px solid var(--line)}.timeline{display:flex;flex-direction:column;gap:8px}.timeline-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 14px}.timeline-row time{font-weight:900;color:var(--accent);text-align:center}.timeline-row div{display:flex;flex-direction:column}.timeline-row div b{font-size:14px}.timeline-row div span{font-size:10px;color:var(--muted)}.timeline-row>strong{font-size:14px}.stats-table{border:1px solid var(--line);border-radius:16px;overflow:hidden}.stats-head,.stat-row{display:grid;grid-template-columns:1fr 1.5fr 1fr;text-align:center;gap:12px;align-items:center;padding:11px 14px}.stats-head{background:#102337;color:var(--accent)}.stat-row{border-top:1px solid var(--line);background:#091725}.stat-row span{font-size:11px;color:var(--muted)}.stat-row strong{font-size:14px}.lineups{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lineups>div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.lineups h3{margin:0 0 12px;color:var(--accent)}.lineups ol{margin:0;padding-inline-start:24px;columns:1}.lineups li{padding:4px 0;font-size:13px}.lineups p{font-size:12px;color:var(--muted)}.top-players{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.top-players>div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;display:grid;grid-template-columns:1fr auto;gap:3px}.top-players b{font-size:13px}.top-players span{font-size:10px;color:var(--muted)}.top-players strong{grid-row:1/3;grid-column:2;color:var(--accent);font-size:22px}.related-news{padding:24px 0}.related-match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.related-match-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.related-match-grid span{color:var(--accent);font-size:10px}.related-match-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.related-match-grid p{font-size:12px;color:var(--muted);margin:0}.match-data-note{display:flex;gap:8px;flex-wrap:wrap;padding:13px 0 22px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.match-data-note span{border:1px solid var(--line);border-radius:999px;padding:5px 8px}.match-data-note a{color:var(--accent)}
+@media(max-width:650px){.scoreboard{grid-template-columns:1fr 100px 1fr;padding:20px 12px}.team strong{font-size:16px}.score-center b{font-size:27px}.facts,.related-match-grid,.lineups,.top-players{grid-template-columns:1fr}.match-header h1 em{display:block;margin:8px 0}.timeline-row{grid-template-columns:45px 1fr auto;padding:10px}.stats-head,.stat-row{grid-template-columns:.8fr 1.5fr .8fr;padding:10px 7px}}
 </style>
