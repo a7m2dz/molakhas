@@ -9,8 +9,9 @@
     "preview": "astro preview",
     "fotmob:radar": "node scripts/newsroom/fotmob-radar.mjs",
     "fotmob:refresh": "node scripts/newsroom/fotmob-radar.mjs --write",
-    "newsroom": "npm run fotmob:refresh && node scripts/newsroom/run.mjs",
-    "newsroom:dry": "npm run fotmob:refresh && node scripts/newsroom/run.mjs --dry-run",
+    "search:feedback": "node scripts/newsroom/search-console-feedback.mjs",
+    "newsroom": "npm run search:feedback && npm run fotmob:refresh && node scripts/newsroom/run.mjs",
+    "newsroom:dry": "npm run search:feedback && npm run fotmob:refresh && node scripts/newsroom/run.mjs --dry-run",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
     "images:generate": "node scripts/newsroom/source-images.mjs",
     "indexnow": "node scripts/newsroom/indexnow.mjs"
