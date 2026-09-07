@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LurvuePromo from '../components/LurvuePromo.astro';
+import TodaySportsWidget from '../components/TodaySportsWidget.astro';
 import { sections, sectionMap } from '../data/sections';
 import stories from '../data/stories.json';
 import imageManifest from '../data/image-manifest.json';
@@ -47,6 +48,8 @@ const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
   </section>
 
   <section class="shell hero-offer"><LurvuePromo section="general" position="home-hero" /></section>
+
+  <section class="shell"><TodaySportsWidget /></section>
 
   <section class="ticker shell"><span>الأقسام</span>{sections.map((s) => <a href={`/${s.slug}`}>{s.icon} {s.name} <small>{sectionCounts[s.slug] || 0}</small></a>)}</section>
 
