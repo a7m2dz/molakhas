@@ -10,7 +10,7 @@ function letters(text = '') {
 export function arabicRatio(text = '') {
   const all = letters(text);
   if (!all.length) return 0;
-  const arabic = all.filter((ch) => /\p{Script=Arabic}/u.test(ch)).length;
+  const arabic = all.filter((ch) => /\p{Script_Extensions=Arabic}/u.test(ch)).length;
   return arabic / all.length;
 }
 
@@ -18,13 +18,13 @@ function mixedScriptTokens(text = '') {
   return String(text)
     .split(/[\s،,.;:!?()\[\]{}"'«»/\\|]+/u)
     .filter(Boolean)
-    .filter((token) => /\p{Script=Arabic}/u.test(token) && /[A-Za-z]/u.test(token));
+    .filter((token) => /\p{Script_Extensions=Arabic}/u.test(token) && /[A-Za-z]/u.test(token));
 }
 
 function foreignScriptLetters(text = '') {
   return [...String(text)]
     .filter((ch) => /\p{L}/u.test(ch))
-    .filter((ch) => !/\p{Script=Arabic}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
+    .filter((ch) => !/\p{Script_Extensions=Arabic}/u.test(ch) && !/\p{Script_Extensions=Latin}/u.test(ch));
 }
 
 function suspiciousEnglishWords(text = '') {
