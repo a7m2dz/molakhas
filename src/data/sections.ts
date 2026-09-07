@@ -2,6 +2,8 @@ export const sections = [
   { slug: 'football', name: 'كرة القدم', icon: '⚽', description: 'أهم أخبار الكرة العالمية لحظة بلحظة.' },
   { slug: 'saudi', name: 'الكرة السعودية', icon: '🇸🇦', description: 'دوري روشن، الأندية والمنتخب السعودي.' },
   { slug: 'transfers', name: 'الانتقالات', icon: '🔁', description: 'آخر أخبار وصفقات سوق الانتقالات.' },
+  { slug: 'basketball', name: 'كرة السلة / NBA', icon: '🏀', description: 'أخبار NBA وكرة السلة العالمية والنتائج والصفقات.' },
+  { slug: 'sports', name: 'رياضات عامة', icon: '🏆', description: 'أخبار الرياضات العالمية من أبرز الشبكات والمصادر.' },
   { slug: 'ufc', name: 'UFC / MMA', icon: '🥊', description: 'أخبار النزالات والبطاقات والنتائج.' },
   { slug: 'wwe', name: 'WWE', icon: '🤼', description: 'آخر أخبار وعروض المصارعة.' },
   { slug: 'boxing', name: 'الملاكمة', icon: '🥊', description: 'نزالات الملاكمة والأبطال والبطاقات.' }
