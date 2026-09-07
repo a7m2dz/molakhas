@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LurvuePromo from '../../components/LurvuePromo.astro';
+import { buildTeamHubs } from '../../lib/hubs';
+
+const hubs = buildTeamHubs();
+const title = 'الفرق | مباريات وأخبار الأندية السعودية والعالمية - ملخص';
+const description = 'صفحات الفرق في ملخص: مواعيد ونتائج وأخبار الهلال والنصر والاتحاد والأهلي وريال مدريد وبرشلونة وليفربول وأرسنال وأهم الأندية.';
+---
+<BaseLayout title={title} description={description} section="football">
+  <section class="shell section-hero"><span>🛡️</span><div><small>Team Hubs</small><h1>الفرق</h1><p>صفحات دائمة تجمع مباريات ونتائج وأخبار كل فريق.</p></div></section>
+  <div class="shell"><LurvuePromo section="football" position="teams-directory" /></div>
+  <section class="shell directory-section">
+    <div class="section-title"><div><span class="section-kicker">الأكثر أهمية الآن</span><h2>أهم الفرق</h2></div><a href="/matches/today">مباريات اليوم</a></div>
+    {hubs.length ? <div class="directory-grid">{hubs.map((hub) => <a href={`/teams/${hub.slug}/`}><span>{hub.opportunityScore}/100</span><h3>{hub.name}</h3>{hub.alternateName !== hub.name && <small>{hub.alternateName}</small>}<p>{hub.matches.length} مباراة • {hub.stories.length} خبر</p></a>)}</div> : <div class="empty"><h2>جاري تجهيز صفحات الفرق</h2><p>تظهر الصفحات بعد تحديث مركز المباريات.</p></div>}
+  </section>
+</BaseLayout>
+<style>
+.directory-section{padding:34px 0 75px}.directory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.directory-grid>a{background:linear-gradient(150deg,#10233a,#0a1625);border:1px solid var(--line);border-radius:17px;padding:18px;min-height:135px}.directory-grid>a:hover{color:inherit;border-color:#356086}.directory-grid span{font-size:9px;color:var(--accent);font-weight:900}.directory-grid h3{font-size:20px;margin:7px 0 2px}.directory-grid small{color:var(--muted);font-size:9px}.directory-grid p{color:var(--muted);font-size:11px;margin:14px 0 0}@media(max-width:900px){.directory-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.directory-grid{grid-template-columns:1fr 1fr}}@media(max-width:430px){.directory-grid{grid-template-columns:1fr}}
+</style>
