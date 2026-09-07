@@ -6,7 +6,7 @@ const esc = (v='') => String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').r
 const absolute = (value='') => /^https?:\/\//i.test(String(value)) ? String(value) : `${base}${String(value).startsWith('/') ? '' : '/'}${value}`;
 export function GET() {
   const mediaMap = imageManifest as Record<string, any>;
-  const items = stories.filter(s=>s.status==='approved').sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,60).map(s=>{
+  const items = stories.filter(s=>s.status==='approved' && s.sourceId!=='molakhas-editorial').sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,60).map(s=>{
     const url = `${base}/${s.section}/${s.slug}`;
     const media = mediaMap[s.slug] || {};
     const image = absolute(media.src || s.image?.src || `/news-images/${s.slug}.webp`);
