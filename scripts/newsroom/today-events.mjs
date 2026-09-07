@@ -212,9 +212,15 @@ function easternOffsetMs(approxUtc) {
 }
 
 function easternToUtc(year, month, day, hour, minute = 0) {
-  let utc = new Date(Date.UTC(year, month, day, hour, minute));
-  for (let i = 0; i < 2; i++) utc = new Date(+utc - easternOffsetMs(utc));
-  return utc;
+  const localWallClockUtc = Date.UTC(year, month, day, hour, minute);
+  let candidate = new Date(localWallClockUtc);
+  for (let i = 0; i < 3; i++) {
+    const offset = easternOffsetMs(candidate);
+    const corrected = new Date(localWallClockUtc - offset);
+    if (+corrected === +candidate) return corrected;
+    candidate = corrected;
+  }
+  return candidate;
 }
 
 function parseEtDate(text, now) {
