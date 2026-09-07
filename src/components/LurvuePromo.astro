@@ -1,21 +1,25 @@
 ---
 const { section = 'general', compact = false } = Astro.props;
-const copy: Record<string, { eyebrow: string; text: string }> = {
-  football: { eyebrow: 'تابع الموسم كامل', text: 'مبارياتك وبطولاتك المفضلة بجودة 4K في مكان واحد.' },
-  saudi: { eyebrow: 'متابعة الكرة السعودية', text: 'تابع مباريات الموسم والبطولات بجودة 4K عبر لورفيو.' },
-  transfers: { eyebrow: 'من الخبر إلى المباراة', text: 'بعد أخبار الصفقات، تابع الموسم والبطولات بجودة 4K.' },
-  ufc: { eyebrow: 'سهرة النزالات', text: 'تابع النزالات والبطاقات الرياضية بجودة 4K عبر لورفيو.' },
-  wwe: { eyebrow: 'رياضة وترفيه', text: 'تابع العروض والمحتوى الرياضي والترفيهي من مكان واحد.' },
-  boxing: { eyebrow: 'ليالي الملاكمة', text: 'استمتع بمتابعة البطاقات والنزالات بجودة 4K.' },
-  general: { eyebrow: 'متجر لورفيو', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K ⭐' }
+const copy: Record<string, { eyebrow: string; text: string; cta: string }> = {
+  football: { eyebrow: 'تابع الموسم كامل', text: 'مبارياتك وبطولاتك المفضلة بجودة 4K في مكان واحد عبر لورفيو.', cta: 'شاهد الباقات' },
+  saudi: { eyebrow: 'الكرة السعودية على شاشة واحدة', text: 'تابع مباريات الموسم والبطولات بجودة 4K عبر متجر لورفيو.', cta: 'تابع الموسم' },
+  transfers: { eyebrow: 'من الصفقة إلى الملعب', text: 'بعد أخبار الانتقالات، تابع المباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
+  ufc: { eyebrow: 'سهرة النزالات', text: 'تابع بطاقات UFC والنزالات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
+  wwe: { eyebrow: 'رياضة وترفيه', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي من مكان واحد عبر لورفيو.', cta: 'اكتشف الباقات' },
+  boxing: { eyebrow: 'ليالي الملاكمة', text: 'استمتع بمتابعة البطاقات والنزالات والرياضة بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
+  general: { eyebrow: 'متجر لورفيو', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K ⭐', cta: 'زيارة لورفيو' }
 };
 const item = copy[section] ?? copy.general;
+const url = new URL('https://lurvue.com');
+url.searchParams.set('utm_source', 'molakhas');
+url.searchParams.set('utm_medium', 'referral');
+url.searchParams.set('utm_campaign', section || 'general');
 ---
 <aside class:list={["lurvue", { compact }]} aria-label="عرض متجر لورفيو">
   <div>
     <span class="lurvue-eyebrow">{item.eyebrow}</span>
     <strong>{item.text}</strong>
-    <small>استخدم كود الخصم <b>Hala10</b></small>
+    <small>خصم إضافي باستخدام الكود <b>Hala10</b></small>
   </div>
-  <a href="https://lurvue.com" target="_blank" rel="sponsored noopener">زيارة لورفيو ←</a>
+  <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener">{item.cta} ←</a>
 </aside>

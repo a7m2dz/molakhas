@@ -3,12 +3,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { sections } from '../../data/sections';
 import stories from '../../data/stories.json';
-export function getStaticPaths() { return sections.map((section) => ({ params: { section: section.slug }, props: { section } })); }
+
+export function getStaticPaths() {
+  return sections.map((section) => ({ params: { section: section.slug }, props: { section } }));
+}
 const { section } = Astro.props;
 const items = stories.filter((story) => story.status === 'approved' && story.section === section.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
 ---
 <BaseLayout title={`${section.name} | ملخص`} description={section.description} section={section.slug}>
-  <header class="section-hero shell"><span>{section.icon}</span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p></div></header>
+  <header class="section-hero shell"><span>{section.icon}</span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p><div class="section-count">{items.length} خبر منشور</div></div></header>
   <section class="shell"><LurvuePromo section={section.slug} /></section>
-  <section class="shell section-block"><div class="story-list">{items.length ? items.map((story) => <article><div><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div><a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a></article>) : <div class="empty"><h2>نجهّز لك التغطية 👀</h2><p>سيظهر أحدث محتوى هذا القسم هنا فور نشره.</p></div>}</div></section>
+  <section class="shell section-block">
+    <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>آخر أخبار {section.name}</h2></div></div>
+    <div class="story-list">{items.length ? items.map((story) => <article>
+      <div><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
+      <a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a>
+    </article>) : <div class="empty"><h2>نجهّز لك التغطية 👀</h2><p>سيظهر أحدث محتوى هذا القسم هنا فور اجتيازه بوابة الجودة.</p></div>}</div>
+  </section>
 </BaseLayout>

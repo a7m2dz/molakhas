@@ -3,17 +3,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { sectionMap } from '../../data/sections';
 import stories from '../../data/stories.json';
-export function getStaticPaths() { return stories.filter((s) => s.status === 'approved').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } })); }
+
+export function getStaticPaths() {
+  return stories.filter((s) => s.status === 'approved').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
+}
 const { story } = Astro.props;
 const section = sectionMap[story.section];
-const schema = { '@context':'https://schema.org', '@type':'NewsArticle', headline:story.title, datePublished:story.publishedAt, dateModified:story.publishedAt, inLanguage:'ar', mainEntityOfPage:new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString(), publisher:{'@type':'Organization',name:'ملخص'}, isBasedOn:story.sourceUrl };
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const related = stories.filter((s) => s.status === 'approved' && s.section === story.section && s.slug !== story.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,3);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'NewsArticle',
+  headline:story.title,
+  description:story.excerpt,
+  datePublished:story.publishedAt,
+  dateModified:story.generatedAt || story.publishedAt,
+  inLanguage:'ar',
+  mainEntityOfPage:canonical,
+  author:{'@type':'Organization',name:'ملخص'},
+  publisher:{'@type':'Organization',name:'ملخص',url:(Astro.site ?? new URL(Astro.url.origin)).toString()},
+  isBasedOn:story.sourceUrl
+};
 ---
-<BaseLayout title={`${story.title} | ملخص`} description={story.excerpt} section={story.section}>
+<BaseLayout title={`${story.title} | ملخص`} description={story.excerpt} section={story.section} type="article" publishedAt={story.publishedAt}>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="article shell">
     <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>←</span><a href={`/${story.section}`}>{section?.name ?? 'رياضة'}</a></nav>
-    <header><span class="article-section">{section?.name ?? 'رياضة'}</span><h1>{story.title}</h1><p class="article-deck">{story.excerpt}</p><div class="article-meta"><span>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</span><span>المصدر: <a href={story.sourceUrl} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div></header>
-    <div class="article-body">{story.body.map((paragraph, index) => <>{index === 1 && <LurvuePromo section={story.section} />}<p>{paragraph}</p></>)}</div>
+    <header>
+      <span class="article-section">{section?.name ?? 'رياضة'}</span>
+      <h1>{story.title}</h1>
+      <p class="article-deck">{story.excerpt}</p>
+      <div class="article-meta"><span>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</span><span>المصدر: <a href={story.sourceUrl} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
+    </header>
+
+    <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} />}<p>{paragraph}</p></>)}</div>
+
+    {story.tags?.length > 0 && <div class="tag-list" aria-label="وسوم الخبر">{story.tags.map((tag) => <span>#{tag}</span>)}</div>}
+
+    <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية. يمكنك الرجوع إلى المصدر الأصلي للتحقق من التفاصيل والسياق الكامل.</p><a href={story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a></div>
+
     <LurvuePromo section={story.section} />
+
+    {related.length > 0 && <section class="related"><div class="section-title"><h2>أخبار مرتبطة</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
   </article>
 </BaseLayout>
