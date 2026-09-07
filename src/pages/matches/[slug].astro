@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LurvuePromo from '../../components/LurvuePromo.astro';
+import stories from '../../data/stories.json';
+import { indexableMatches, matchDateArabic, matchStateArabic, matchTimeArabic, type MolakhasMatch } from '../../lib/matches';
+
+export function getStaticPaths() {
+  return indexableMatches().map((match) => ({ params: { slug: match.slug }, props: { match } }));
+}
+
+const { match } = Astro.props as { match: MolakhasMatch };
+const home = match.home.name;
+const away = match.away.name;
+const competition = match.league.name;
+const isLive = match.state === 'live';
+const isFinal = match.state === 'final';
+const stateLabel = matchStateArabic(match.state);
+const time = matchTimeArabic(match.kickoff);
+const date = matchDateArabic(match.kickoff);
+const scoreText = match.score || `${match.home.score ?? ''} - ${match.away.score ?? ''}`.replace(/^\s*-\s*$/, '');
+const titlePrefix = isFinal ? `نتيجة مباراة ${home} و${away}` : isLive ? `${home} ضد ${away} مباشر` : `موعد مباراة ${home} و${away}`;
+const title = `${titlePrefix} | ${competition} - ملخص`;
+const description = isFinal
+  ? `نتيجة مباراة ${home} و${away} في ${competition}: ${scoreText || 'النتيجة النهائية'}، مع تفاصيل الموعد وروابط الأخبار المرتبطة.`
+  : isLive
+    ? `متابعة حالة مباراة ${home} و${away} في ${competition} الآن، النتيجة الحالية ${scoreText || 'قيد التحديث'} وروابط الأخبار المرتبطة.`
+    : `موعد مباراة ${home} و${away} في ${competition} يوم ${date} الساعة ${time} بتوقيت السعودية، مع صفحة تتحدث إلى النتيجة بعد انطلاق المباراة.`;
+
+const textNeedles = [home.toLowerCase(), away.toLowerCase()];
+const related = (stories as any[])
+  .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
+  .map((story) => ({ story, haystack: `${story.title || ''} ${story.excerpt || ''} ${(story.entities || []).join(' ')}`.toLowerCase() }))
+  .filter(({ haystack }) => textNeedles.some((needle) => needle.length > 2 && haystack.includes(needle)))
+  .slice(0, 5)
+  .map(({ story }) => story);
+
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const eventStatus = isFinal
+  ? 'https://schema.org/EventCompleted'
+  : isLive
+    ? 'https://schema.org/EventInProgress'
+    : 'https://schema.org/EventScheduled';
+const schemaExtra = [
+  {
+    '@type': 'SportsEvent',
+    '@id': `${siteUrl}/matches/${match.slug}/#event`,
+    name: `${home} ضد ${away} - ${competition}`,
+    startDate: match.kickoff,
+    eventStatus,
+    sport: 'Football',
+    description,
+    url: `${siteUrl}/matches/${match.slug}/`,
+    homeTeam: { '@type': 'SportsTeam', name: home },
+    awayTeam: { '@type': 'SportsTeam', name: away },
+    superEvent: { '@type': 'SportsEvent', name: competition }
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'مباريات اليوم', item: `${siteUrl}/matches/today/` },
+      { '@type': 'ListItem', position: 3, name: `${home} ضد ${away}`, item: `${siteUrl}/matches/${match.slug}/` }
+    ]
+  }
+];
+---
+<BaseLayout title={title} description={description} section={match.section || 'football'} schemaExtra={schemaExtra} modifiedAt={match.updatedAt}>
+  <article class="shell match-page">
+    <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>/</span><a href="/matches/today">مباريات اليوم</a><span>/</span><span>{home} ضد {away}</span></nav>
+
+    <header class="match-header">
+      <div class="competition"><span>{competition}</span>{match.tournamentStage && <small>{match.tournamentStage}</small>}</div>
+      <div class:list={["state-pill", { live: isLive }]}>{isLive && <i></i>}{stateLabel}</div>
+      <h1>{home} <em>ضد</em> {away}</h1>
+      <p>{date} • {time} بتوقيت السعودية</p>
+    </header>
+
+    <section class:list={["scoreboard", { live: isLive }]} aria-label={`مباراة ${home} ضد ${away}`}>
+      <div class="team"><strong>{home}</strong><small>صاحب الأرض</small></div>
+      <div class="score-center">
+        {(isLive || isFinal) ? <b>{scoreText || '—'}</b> : <b class="time-score">{time}</b>}
+        <span>{stateLabel}</span>
+      </div>
+      <div class="team"><strong>{away}</strong><small>الضيف</small></div>
+    </section>
+
+    <LurvuePromo section={match.section || 'football'} position="match-center-inline" storySlug={match.slug} storyTitle={`${home} ضد ${away}`} keyword={`مباراة ${home} ${away}`} />
+
+    <section class="match-copy">
+      <h2>{isFinal ? `نتيجة ${home} و${away}` : isLive ? `متابعة ${home} و${away}` : `موعد ${home} و${away}`}</h2>
+      {isFinal ? (
+        <>
+          <p>انتهت مباراة <strong>{home}</strong> و<strong>{away}</strong> في <strong>{competition}</strong> بنتيجة <strong>{scoreText || 'مسجلة في مركز المباريات'}</strong>. تحتفظ هذه الصفحة بنفس الرابط بعد نهاية اللقاء حتى تكون النتيجة والموعد في مكان واحد.</p>
+          <p>يمكنك متابعة الأخبار المرتبطة بالمواجهة من قسم الأخبار أدناه، بينما تعتمد نتيجة المباراة وحالتها على آخر تحديث وصل إلى مركز المباريات.</p>
+        </>
+      ) : isLive ? (
+        <>
+          <p>مباراة <strong>{home}</strong> و<strong>{away}</strong> جارية الآن ضمن <strong>{competition}</strong>. النتيجة الظاهرة حاليًا هي <strong>{scoreText || 'قيد التحديث'}</strong>، ويتم تحديث حالة الصفحة مع تحديث بيانات المباريات.</p>
+          <p>بعد صافرة النهاية تتحول الصفحة نفسها تلقائيًا إلى صفحة النتيجة النهائية، بدون تغيير الرابط.</p>
+        </>
+      ) : (
+        <>
+          <p>تقام مباراة <strong>{home}</strong> ضد <strong>{away}</strong> ضمن <strong>{competition}</strong> يوم <strong>{date}</strong> عند الساعة <strong>{time}</strong> بتوقيت السعودية.</p>
+          <p>عند انطلاق المواجهة تتحول هذه الصفحة من صفحة الموعد إلى مركز متابعة للحالة والنتيجة، ثم تحتفظ بالنتيجة النهائية بعد نهاية المباراة.</p>
+        </>
+      )}
+
+      <div class="facts">
+        <div><span>البطولة</span><b>{competition}</b></div>
+        <div><span>الموعد</span><b>{date}</b></div>
+        <div><span>الوقت</span><b>{time} بتوقيت السعودية</b></div>
+        <div><span>الحالة</span><b>{stateLabel}</b></div>
+      </div>
+
+      {match.sourceUrl && <p class="data-source">بيانات المباراة: <a href={match.sourceUrl} target="_blank" rel="nofollow noopener">FotMob</a> • آخر تحديث: {match.updatedAt ? new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(match.updatedAt)) : 'تلقائي'}</p>}
+    </section>
+
+    {related.length > 0 && (
+      <section class="related-news">
+        <div class="section-title"><h2>أخبار مرتبطة بالمباراة</h2><a href={`/${match.section || 'football'}`}>المزيد</a></div>
+        <div class="related-match-grid">
+          {related.map((story:any) => <a href={`/${story.section}/${story.slug}/`}><span>{story.sourceName}</span><h3>{story.title}</h3><p>{story.excerpt}</p></a>)}
+        </div>
+      </section>
+    )}
+
+    <LurvuePromo section={match.section || 'football'} position="match-center-end" storySlug={match.slug} storyTitle={`${home} ضد ${away}`} keyword={`مباراة ${home} ${away}`} />
+  </article>
+</BaseLayout>
+
+<style>
+  .match-page{max-width:920px;padding:38px 0 75px}.match-header{text-align:center;padding:18px 0 25px}.competition{display:flex;justify-content:center;gap:8px;align-items:center;color:var(--accent);font-weight:900;font-size:12px}.competition small{color:var(--muted);font-weight:400}.state-pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:5px 10px;border:1px solid var(--line);background:#0b1827;border-radius:999px;color:var(--muted);font-size:10px}.state-pill.live{color:#ff838b;border-color:#ff5b6644}.state-pill i{width:7px;height:7px;background:#ff5b66;border-radius:50%;box-shadow:0 0 0 4px #ff5b6620}.match-header h1{font-size:clamp(36px,6vw,62px);line-height:1.2;margin:12px 0 8px}.match-header h1 em{font-style:normal;color:var(--muted);font-size:.42em;font-weight:500}.match-header p{margin:0;color:var(--muted)}.scoreboard{display:grid;grid-template-columns:1fr 180px 1fr;align-items:center;gap:18px;padding:30px;background:linear-gradient(145deg,#112640,#091725);border:1px solid #27445f;border-radius:24px;box-shadow:0 24px 60px #0004}.scoreboard.live{border-color:#ff5b6655}.team{text-align:center;display:flex;flex-direction:column}.team strong{font-size:22px}.team small{font-size:10px;color:var(--muted)}.score-center{text-align:center;display:flex;flex-direction:column}.score-center b{font-size:38px;letter-spacing:2px}.score-center .time-score{font-size:28px;letter-spacing:0}.score-center span{font-size:10px;color:var(--accent)}.match-copy{font-size:18px;line-height:2;padding:25px 0}.match-copy h2{font-size:28px}.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0}.facts>div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column}.facts span{font-size:10px;color:var(--muted)}.facts b{font-size:14px}.data-source{font-size:11px!important;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}.data-source a{color:var(--accent)}.related-news{padding:24px 0}.related-match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.related-match-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.related-match-grid span{color:var(--accent);font-size:10px}.related-match-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.related-match-grid p{font-size:12px;color:var(--muted);margin:0}@media(max-width:650px){.scoreboard{grid-template-columns:1fr 100px 1fr;padding:20px 12px}.team strong{font-size:16px}.score-center b{font-size:27px}.facts,.related-match-grid{grid-template-columns:1fr}.match-header h1 em{display:block;margin:8px 0}}
+</style>
