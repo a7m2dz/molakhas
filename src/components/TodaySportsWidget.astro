@@ -9,6 +9,16 @@ const labels = {
   mma: { name: 'MMA', icon: '🥊' },
   wwe: { name: 'WWE', icon: '🤼' }
 };
+const nameAliases = [
+  ['Al Hilal','الهلال'],['Al Nassr FC','النصر'],['Al Nassr','النصر'],['Al Ittihad','الاتحاد'],['Al Ahli','الأهلي'],['Al Qadsiah','القادسية'],['Al Shabab','الشباب'],
+  ['Real Madrid','ريال مدريد'],['Barcelona','برشلونة'],['Liverpool','ليفربول'],['Arsenal','أرسنال'],['Chelsea','تشيلسي'],['Man United','مانشستر يونايتد'],['Manchester United','مانشستر يونايتد'],['Man City','مانشستر سيتي'],['Manchester City','مانشستر سيتي'],['Juventus','يوفنتوس'],['Milan','ميلان'],['Inter','إنتر ميلان']
+];
+const competitionAliases = [
+  ['Saudi Pro League','دوري روشن السعودي'],['Premier League','الدوري الإنجليزي الممتاز'],['LaLiga','الدوري الإسباني'],['La Liga','الدوري الإسباني'],['Serie A','الدوري الإيطالي'],['Bundesliga','الدوري الألماني'],['Ligue 1','الدوري الفرنسي'],['Champions League','دوري أبطال أوروبا'],['King Cup','كأس خادم الحرمين الشريفين']
+];
+const replaceAliases = (value='', aliases:any[]) => aliases.reduce((text,[from,to]) => text.replace(new RegExp(`\\b${from.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\b`,'gi'),to),String(value || ''));
+const eventTitle = (event:any) => event.sport === 'football' ? replaceAliases(event.title, nameAliases) : event.title;
+const eventSubtitle = (event:any) => event.sport === 'football' ? replaceAliases(event.subtitle, competitionAliases) : event.subtitle;
 const counts = Object.fromEntries(Object.keys(labels).map((key) => [key, events.filter((event:any) => event.sport === key).length]));
 const visibleEvents = events;
 const generatedAt = (snapshot as any)?.generatedAt;
@@ -55,8 +65,8 @@ const displayScore = (event:any) => ['live','final'].includes(event.state) ? Str
             <span class="sport-chip">{labels[event.sport]?.icon} {labels[event.sport]?.name || event.sportLabel}</span>
             <span class:list={["event-state", { live: event.state === 'live' }]}>{event.state === 'live' && <i></i>}{stateLabel(event.state)}</span>
           </div>
-          <h3>{event.title}</h3>
-          <p>{event.subtitle}</p>
+          <h3>{eventTitle(event)}</h3>
+          <p>{eventSubtitle(event)}</p>
           <div class="event-bottom">
             <b>{score || eventTime(event.start)}</b>
             <small>{score ? eventTime(event.start) : event.source}</small>
