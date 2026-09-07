@@ -4,10 +4,12 @@ import { XMLParser } from 'fast-xml-parser';
 import { configured, rewriteStory } from './omniroute-client.mjs';
 import { languageIssues } from './quality-gate.mjs';
 import { enrichCandidate } from './source-enrichment.mjs';
+import { rankTrafficCandidates, selectTrafficCandidates } from './traffic-opportunity.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const maxStories = Number(process.env.NEWSROOM_MAX_STORIES || 8);
 const maxAgeHours = Number(process.env.NEWSROOM_MAX_AGE_HOURS || 72);
+const minTrafficScore = Number(process.env.NEWSROOM_MIN_TRAFFIC_SCORE || 35);
 const minScore = Number(process.env.AUTO_PUBLISH_MIN_SCORE || 88);
 const minTrust = Number(process.env.AUTO_PUBLISH_MIN_TRUST || 88);
 const minConfidence = Number(process.env.AUTO_PUBLISH_MIN_CONFIDENCE || 78);
@@ -62,15 +64,16 @@ for (const story of stories) {
 
 const dedupeEligible = (story) => !(story.qualityFlags || []).includes('language-quality-failed');
 const existingLinks = new Set(stories.filter(dedupeEligible).map((s) => s.sourceUrl).filter(Boolean));
-const existingTitles = stories.filter(dedupeEligible).map((s) => s.title);
+const publishedTitles = stories.filter((s) => dedupeEligible(s) && s.status === 'approved').map((s) => s.title);
 const candidates = [];
+const candidateLinks = new Set();
 const now = Date.now();
 
 for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.7 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.8 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -85,10 +88,10 @@ for (const source of sources.filter((item) => item.enabled)) {
       const link = clean(entryLink(entry));
       const pubDate = safeDate(entry?.pubDate ?? entry?.published ?? entry?.updated ?? Date.now());
       const ageHours = (now - +pubDate) / 3_600_000;
-      if (!title || !link || existingLinks.has(link) || ageHours > maxAgeHours || ageHours < -2) continue;
-      if (existingTitles.some((old) => similarity(title, old) >= 0.78)) continue;
-      if (candidates.some((old) => similarity(title, old.title) >= 0.72)) continue;
+      if (!title || !link || candidateLinks.has(link) || existingLinks.has(link) || ageHours > maxAgeHours || ageHours < -2) continue;
+      if (publishedTitles.some((old) => similarity(title, old) >= 0.78)) continue;
 
+      candidateLinks.add(link);
       candidates.push({
         title,
         link,
@@ -108,33 +111,26 @@ for (const source of sources.filter((item) => item.enabled)) {
   }
 }
 
-candidates.sort((a, b) => (b.priority - a.priority) || (+new Date(b.pubDate) - +new Date(a.pubDate)));
+const rankedCandidates = rankTrafficCandidates(candidates, { now });
+const strongTraffic = rankedCandidates.filter((item) => item.trafficScore >= minTrafficScore);
+const trafficPool = strongTraffic.length >= Math.min(3, maxStories) ? strongTraffic : rankedCandidates;
+const selected = selectTrafficCandidates(trafficPool, maxStories);
 
-function selectDiverse(items, limit) {
-  const selected = [];
-  const perSection = new Map();
-  const maxPerSection = Math.min(2, Math.max(1, Math.ceil(limit / 4)));
-  for (const item of items) {
-    const count = perSection.get(item.section) || 0;
-    if (count >= maxPerSection) continue;
-    selected.push(item);
-    perSection.set(item.section, count + 1);
-    if (selected.length >= limit) break;
-  }
-  if (selected.length < limit) {
-    for (const item of items) {
-      if (selected.includes(item)) continue;
-      selected.push(item);
-      if (selected.length >= limit) break;
-    }
-  }
-  return selected;
-}
+console.log(`[Traffic] Found ${candidates.length} fresh raw candidates; ranked ${rankedCandidates.length} publishable opportunities; selected ${selected.length}.`);
+selected.forEach((item, index) => {
+  console.log(`[Traffic] #${index + 1} ${item.trafficScore}/100 ${item.section} :: ${item.title} :: ${(item.trafficSignals || []).join(', ')}`);
+});
 
-const selected = selectDiverse(candidates, maxStories);
-console.log(`Found ${candidates.length} fresh candidates; selected ${selected.length}.`);
 if (dryRun) {
-  console.table(selected.map((x) => ({ section: x.section, trust: x.trust, source: x.sourceName, title: x.title.slice(0, 70) })));
+  console.table(selected.map((x) => ({
+    traffic: x.trafficScore,
+    section: x.section,
+    coverage: x.sourceCoverage,
+    radar: x.radarCoverage,
+    trust: x.trust,
+    source: x.sourceName,
+    title: x.title.slice(0, 70)
+  })));
   process.exit(0);
 }
 if (!configured()) {
@@ -207,6 +203,10 @@ for (const rawItem of selected) {
       publisherUrl: item.publisherUrl || '',
       sourceId: item.sourceId,
       sourceEnrichment: item.enrichmentMethod || 'rss-only',
+      trafficScore: rawItem.trafficScore || 0,
+      trafficSignals: rawItem.trafficSignals || [],
+      sourceCoverage: rawItem.sourceCoverage || 1,
+      radarCoverage: rawItem.radarCoverage || 0,
       publishedAt: safeDate(item.pubDate).toISOString(),
       generatedAt: new Date().toISOString(),
       status: approved ? 'approved' : 'review',
@@ -233,9 +233,9 @@ for (const rawItem of selected) {
     else stories.push(storyRecord);
 
     existingLinks.add(item.link);
-    existingTitles.push(rewritten.title);
+    publishedTitles.push(rewritten.title);
     changed = true;
-    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [${score}/${rewritten.confidence}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}: ${rewritten.title}`);
+    console.log(`${approved ? 'APPROVED' : 'REVIEW'} [Q${score}/C${rewritten.confidence}/T${rawItem.trafficScore || 0}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}: ${rewritten.title}`);
   } catch (error) {
     console.error(`Story failed: ${rawItem.title}: ${error.message}`);
   }
