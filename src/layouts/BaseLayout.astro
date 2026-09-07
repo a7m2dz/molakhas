@@ -25,6 +25,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).to
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const imageUrl = image ? new URL(image, `${siteUrl}/`).toString() : null;
 const extras = Array.isArray(schemaExtra) ? schemaExtra : [schemaExtra].filter(Boolean);
+const storeUrl = new URL('https://lurvue.com');
+storeUrl.searchParams.set('utm_source','molakhas');
+storeUrl.searchParams.set('utm_medium','header');
+storeUrl.searchParams.set('utm_campaign','molakhas-brand-shell');
+const primaryNav = [
+  { href: '/', label: 'الرئيسية' },
+  { href: '/latest', label: 'الأخبار' },
+  { href: '/matches/today', label: 'مباريات اليوم' },
+  { href: '/football', label: 'كرة القدم' },
+  { href: '/ufc', label: 'MMA / UFC' },
+  { href: '/basketball', label: 'كرة السلة' },
+  { href: '/wwe', label: 'WWE' },
+  { href: '/saudi', label: 'السعودية' },
+  { href: '/competitions', label: 'البطولات' },
+  { href: '/teams', label: 'الفرق' }
+];
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -34,7 +50,7 @@ const schema = {
       name: 'ملخص',
       alternateName: 'Molakhas',
       url: siteUrl,
-      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}
+      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.svg`}
     },
     {
       '@type': 'WebSite',
@@ -44,7 +60,7 @@ const schema = {
       url: siteUrl,
       inLanguage: 'ar',
       publisher: {'@id': `${siteUrl}/#organization`},
-      description: 'منصة رياضية عربية تركز على الأخبار المهمة بدون حشو.'
+      description: 'منصة عربية تجمع الأخبار الرياضية ومركز المباريات والأحداث في تجربة سريعة ومختصرة.'
     },
     ...extras
   ]
@@ -57,12 +73,14 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-    <meta name="theme-color" content="#07101d" />
+    <meta name="theme-color" content="#080B0F" />
     <meta name="generator" content="Astro" />
     <meta name="author" content="فريق تحرير ملخص" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="ar" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="ملخص RSS" href="/rss.xml" />
+    <link rel="icon" type="image/svg+xml" href="/brand/molakhas-mark.svg" />
+    <link rel="apple-touch-icon" href="/brand/molakhas-mark.svg" />
     {imageUrl && <link rel="preload" as="image" href={imageUrl} fetchpriority="high" />}
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="ملخص" />
@@ -92,24 +110,25 @@ const schema = {
   <body>
     <a class="skip-link" href="#content">تجاوز إلى المحتوى</a>
     <div class="top-promo"><LurvuePromo section={section} compact position="topbar" /></div>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="ملخص - الرئيسية"><span>مُلخّص</span><small>الرياضة بدون حشو</small></a>
-      <nav aria-label="الأقسام">
-        <a href="/latest">آخر الأخبار</a>
-        <a href="/matches/today">مباريات اليوم</a>
-        <a href="/teams">الفرق</a>
-        <a href="/competitions">البطولات</a>
-        {sections.map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}
-      </nav>
+    <header class="site-header-wrap">
+      <div class="site-header">
+        <a class="brand" href="/" aria-label="ملخص - الرئيسية"><img src="/brand/molakhas-logo.svg" width="215" height="55" alt="ملخص Molakhas" /></a>
+        <nav aria-label="التنقل الرئيسي">
+          {primaryNav.map((item) => <a class:list={[{ active: Astro.url.pathname === item.href || (item.href !== '/' && Astro.url.pathname.startsWith(item.href)) }]} href={item.href}>{item.label}</a>)}
+        </nav>
+        <a class="store-cta" href={storeUrl.toString()} target="_blank" rel="sponsored nofollow noopener"><span>▣</span> متجر لورفيو</a>
+      </div>
     </header>
     <main id="content"><slot /></main>
     <footer class="site-footer">
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
-      <div class="footer-row">
-        <div><b>مُلخّص</b><p>أخبار رياضية مختصرة، واضحة، ومحدثة.</p></div>
-        <div class="footer-links"><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
+      <div class="footer-main">
+        <div class="footer-brand"><img src="/brand/molakhas-logo.svg" width="240" height="62" alt="ملخص Molakhas" /><p>SPORTS × ENTERTAINMENT × A BRIGHTER FEED</p><small>الأهم أولًا. بدون حشو.</small></div>
+        <div class="footer-col"><b>روابط سريعة</b><a href="/">الرئيسية</a><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a></div>
+        <div class="footer-col"><b>الأقسام</b>{sections.slice(0,6).map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}</div>
+        <div class="footer-col"><b>عن ملخص</b><a href="/about">من نحن</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a></div>
       </div>
-      <small>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</small>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</span><a href="/rss.xml">RSS</a><span class="footer-slogan">أكثر من مجرد ملخص</span></div>
     </footer>
   </body>
 </html>
