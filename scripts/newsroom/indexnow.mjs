@@ -14,27 +14,25 @@ const storyUrls = stories
   .map((s) => `${base}/${s.section}/${s.slug}`);
 
 const matchUrls = (Array.isArray(matches) ? matches : [])
-  .filter((m) => m?.slug && m.indexable !== false && Number(m.opportunityScore || 0) >= 55 && +new Date(m.updatedAt || 0) >= cutoff)
+  .filter((m) => m?.slug && m.indexable !== false && Number(m.indexQualityScore || 0) >= 55 && Number(m.opportunityScore || 0) >= 55 && +new Date(m.updatedAt || 0) >= cutoff)
   .sort((a,b)=>+new Date(b.updatedAt || b.kickoff)-+new Date(a.updatedAt || a.kickoff))
   .map((m) => `${base}/matches/${m.slug}`);
 
-async function readHubUrls(kind, limit) {
+async function sitemapHubUrls(kind, limit) {
   try {
-    const dir = new URL(`../../dist/${kind}/`, import.meta.url);
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    return entries
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith('['))
-      .slice(0, limit)
-      .map((entry) => `${base}/${kind}/${entry.name}`);
+    const xml = await fs.readFile(new URL('../../dist/sitemap.xml', import.meta.url), 'utf8');
+    const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].replaceAll('&amp;','&'));
+    return urls.filter((url) => url.startsWith(`${base}/${kind}/`) && url !== `${base}/${kind}`).slice(0, limit);
   } catch {
     return [];
   }
 }
 
-const teamUrls = await readHubUrls('teams', 24);
-const competitionUrls = await readHubUrls('competitions', 20);
+const teamUrls = await sitemapHubUrls('teams', 24);
+const competitionUrls = await sitemapHubUrls('competitions', 20);
 
 const urls = [...new Set([
+  ...(storyUrls.length ? [`${base}/latest`] : []),
   ...(matchUrls.length ? [`${base}/matches/today`] : []),
   ...(teamUrls.length ? [`${base}/teams`] : []),
   ...(competitionUrls.length ? [`${base}/competitions`] : []),
@@ -64,4 +62,4 @@ if (!response.ok && response.status !== 202) {
   const text = await response.text();
   throw new Error(`IndexNow ${response.status}: ${text.slice(0, 500)}`);
 }
-console.log(`[IndexNow] Submitted ${urls.length} fresh URLs (${response.status}); hubs=${teamUrls.length + competitionUrls.length}.`);
+console.log(`[IndexNow] Submitted ${urls.length} fresh URLs (${response.status}); indexable hubs=${teamUrls.length + competitionUrls.length}.`);
