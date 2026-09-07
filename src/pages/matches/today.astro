@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { groupByLeague, matchStateArabic, matchTimeArabic, todayMatches } from '../../lib/matches';
-import { competitionMeta, teamMeta } from '../../lib/hubs';
+import { teamMeta, competitionMeta } from '../../lib/hubs';
 
 const matches = todayMatches().sort((a, b) => {
   const stateWeight = (value: string) => value === 'live' ? 3 : value === 'upcoming' || value === 'scheduled' ? 2 : 1;
@@ -12,8 +12,6 @@ const matches = todayMatches().sort((a, b) => {
 });
 const groups = groupByLeague(matches);
 const liveCount = matches.filter((item) => item.state === 'live').length;
-const teamName = (value:string) => teamMeta(value).name || value;
-const leagueName = (value:string) => competitionMeta(value).name || value;
 const title = 'مباريات اليوم | المواعيد والنتائج المباشرة - ملخص';
 const description = `جدول مباريات اليوم بتوقيت السعودية مع النتائج المباشرة وأهم مباريات الدوري السعودي والدوريات الأوروبية الكبرى. ${matches.length ? `${matches.length} مباراة متاحة الآن.` : ''}`;
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
@@ -32,15 +30,15 @@ const schemaExtra = [
       '@type': 'ListItem',
       position: index + 1,
       url: `${siteUrl}/matches/${match.slug}/`,
-      name: `${teamName(match.home.name)} ضد ${teamName(match.away.name)}`
+      name: `${teamMeta(match.home.name).name || match.home.name} ضد ${teamMeta(match.away.name).name || match.away.name}`
     }))
   }
 ];
 ---
 <BaseLayout title={title} description={description} section="football" schemaExtra={schemaExtra}>
   <section class="shell match-hero">
-    <div>
-      <span class="section-kicker">مركز المباريات</span>
+    <div class="match-hero-copy">
+      <span class="section-kicker">TODAY MATCHES</span>
       <h1>مباريات اليوم</h1>
       <p>المواعيد والنتائج بتوقيت السعودية — تتحدث البيانات تلقائيًا مع كل بناء للموقع.</p>
     </div>
@@ -53,26 +51,29 @@ const schemaExtra = [
   <div class="shell"><LurvuePromo section="football" position="matches-today-top" /></div>
 
   <section class="shell match-day">
-    {groups.length ? groups.map(([league, leagueMatches]) => (
-      <div class="league-block">
-        <div class="league-head"><h2>{leagueName(league)}</h2><span>{leagueMatches.length} مباراة</span></div>
+    {groups.length ? groups.map(([league, leagueMatches]) => {
+      const leagueName = competitionMeta(league).name || league;
+      return <div class="league-block">
+        <div class="league-head"><h2>{leagueName}</h2><span>{leagueMatches.length} مباراة</span></div>
         <div class="match-list">
-          {leagueMatches.map((match) => (
-            <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+          {leagueMatches.map((match) => {
+            const home = teamMeta(match.home.name).name || match.home.name;
+            const away = teamMeta(match.away.name).name || match.away.name;
+            return <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
               <div class="match-status">
                 <strong>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</strong>
                 <small>{matchStateArabic(match.state)}</small>
               </div>
               <div class="teams">
-                <div><b>{teamName(match.home.name)}</b>{match.home.score !== null && match.home.score !== undefined && match.state !== 'upcoming' && <span>{match.home.score}</span>}</div>
-                <div><b>{teamName(match.away.name)}</b>{match.away.score !== null && match.away.score !== undefined && match.state !== 'upcoming' && <span>{match.away.score}</span>}</div>
+                <div><b>{home}</b>{match.home.score !== null && match.home.score !== undefined && match.state !== 'upcoming' && <span>{match.home.score}</span>}</div>
+                <div><b>{away}</b>{match.away.score !== null && match.away.score !== undefined && match.state !== 'upcoming' && <span>{match.away.score}</span>}</div>
               </div>
               <div class="row-cta">التفاصيل ←</div>
-            </a>
-          ))}
+            </a>;
+          })}
         </div>
-      </div>
-    )) : (
+      </div>;
+    }) : (
       <div class="empty compact-empty"><h2>لا توجد مباريات كبرى مسجلة اليوم حتى الآن</h2><p>سيتم تحديث الصفحة تلقائيًا عند وصول بيانات جديدة من الرادار.</p></div>
     )}
   </section>
@@ -81,5 +82,5 @@ const schemaExtra = [
 </BaseLayout>
 
 <style>
-  .match-hero{padding:58px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.match-hero h1{font-size:clamp(42px,7vw,72px);line-height:1;margin:0}.match-hero p{color:var(--muted);max-width:660px}.match-stats{display:flex;align-items:baseline;gap:8px;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:18px}.match-stats>strong{font-size:34px;color:var(--accent)}.match-stats>span{color:var(--muted)}.match-stats b{display:flex;align-items:center;gap:7px;margin-inline-start:12px;color:#fff}.match-stats i{width:8px;height:8px;border-radius:50%;background:#ff5b66;box-shadow:0 0 0 5px #ff5b6622}.match-day{padding:20px 0 60px}.league-block{margin:0 0 28px}.league-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.league-head h2{font-size:22px;margin:0}.league-head span{font-size:11px;color:var(--muted)}.match-list{display:grid;gap:8px}.match-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:18px;padding:16px 18px;background:linear-gradient(180deg,var(--panel),#0a1625);border:1px solid var(--line);border-radius:16px;transition:.18s transform,.18s border-color}.match-row:hover{transform:translateY(-1px);border-color:#345778;color:inherit}.match-row.live{border-color:#ff5b6655}.match-status{display:flex;flex-direction:column;text-align:center;border-inline-end:1px solid var(--line);padding-inline-end:16px}.match-status strong{font-size:17px}.match-status small{font-size:10px;color:var(--accent)}.live .match-status small{color:#ff7a83}.teams{display:grid;gap:5px}.teams>div{display:flex;align-items:center;justify-content:space-between;gap:16px}.teams b{font-size:15px}.teams span{font-weight:900;font-size:17px}.row-cta{font-size:12px;color:var(--accent);font-weight:900;white-space:nowrap}@media(max-width:650px){.match-hero{align-items:flex-start;flex-direction:column}.match-row{grid-template-columns:78px 1fr}.row-cta{display:none}.match-status{padding-inline-end:10px}.match-stats{width:100%;justify-content:center}}
+.match-hero{padding:52px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.match-hero-copy{display:flex;gap:14px;flex-direction:column}.match-hero-copy:before{content:"";width:64px;height:64px;background:url('/brand/icon-football.svg') center/48px no-repeat,linear-gradient(145deg,#1d1028,#0b141e);border:1px solid #8b5cf65c;border-radius:18px;box-shadow:var(--glow)}.match-hero h1{font-size:clamp(42px,7vw,72px);line-height:1;margin:0}.match-hero p{color:var(--muted);max-width:660px;margin:0}.match-stats{display:flex;align-items:baseline;gap:8px;padding:15px 19px;background:linear-gradient(145deg,#121826,#090e15);border:1px solid var(--line);border-radius:16px}.match-stats>strong{font-size:32px;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}.match-stats>span{color:var(--muted)}.match-stats b{display:flex;align-items:center;gap:7px;margin-inline-start:12px;color:#fff}.match-stats i{width:8px;height:8px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 0 5px #ff4d6d1d,0 0 16px #ff4d6d}.match-day{padding:18px 0 58px}.league-block{margin:0 0 26px}.league-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.league-head h2{font-size:21px;margin:0}.league-head span{font-size:10px;color:var(--muted)}.match-list{display:grid;gap:8px}.match-row{display:grid;grid-template-columns:108px 1fr auto;align-items:center;gap:17px;padding:15px 17px;background:linear-gradient(180deg,#111824,#090e15);border:1px solid var(--line);border-radius:15px}.match-row:hover{transform:translateY(-1px);border-color:#8a54df70;color:inherit;box-shadow:0 12px 30px #0004}.match-row.live{border-color:#ff4d6d60;box-shadow:inset 0 0 0 1px #ff4d6d10}.match-status{display:flex;flex-direction:column;text-align:center;border-inline-end:1px solid var(--line-soft);padding-inline-end:15px}.match-status strong{font-size:16px}.match-status small{font-size:9px;color:var(--cyan)}.live .match-status small{color:#ff8395}.teams{display:grid;gap:5px}.teams>div{display:flex;align-items:center;justify-content:space-between;gap:16px}.teams b{font-size:14px}.teams span{font-weight:900;font-size:16px}.row-cta{font-size:11px;color:var(--cyan);font-weight:900;white-space:nowrap}@media(max-width:650px){.match-hero{align-items:flex-start;flex-direction:column}.match-row{grid-template-columns:78px 1fr}.row-cta{display:none}.match-status{padding-inline-end:10px}.match-stats{width:100%;justify-content:center}}
 </style>
