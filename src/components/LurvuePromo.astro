@@ -9,13 +9,13 @@ const {
 } = Astro.props;
 
 const copy: Record<string, { eyebrow: string; text: string; cta: string }> = {
-  football: { eyebrow: 'المباراة أهم من الخبر', text: 'تابع الدوريات والبطولات والمباريات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
-  saudi: { eyebrow: 'عيش الموسم كامل', text: 'تابع الكرة السعودية والمباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'تابع الموسم' },
-  transfers: { eyebrow: 'من الخبر إلى الملعب', text: 'تابع النجوم بعد الصفقات والمباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
+  football: { eyebrow: 'المباراة أهم من الخبر', text: 'تابع أهم الدوريات والبطولات والمباريات بجودة 4K عبر لورفيو.', cta: 'تابع المباريات' },
+  saudi: { eyebrow: 'عيش الموسم كامل', text: 'تابع دوري روشن والكرة السعودية والمباريات بجودة 4K عبر لورفيو.', cta: 'تابع دوري روشن' },
+  transfers: { eyebrow: 'من الخبر إلى الملعب', text: 'تابع النجوم بعد الصفقات وأهم الدوريات والمباريات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
   ufc: { eyebrow: 'لا تفوت سهرة النزالات', text: 'تابع بطاقات UFC والنزالات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
   wwe: { eyebrow: 'رياضة وترفيه في مكان واحد', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي عبر لورفيو.', cta: 'اكتشف الباقات' },
   boxing: { eyebrow: 'ليلة النزال على شاشة كبيرة', text: 'تابع بطاقات الملاكمة والنزالات والرياضة بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
-  general: { eyebrow: 'متجر لورفيو', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K ⭐', cta: 'زيارة لورفيو' }
+  general: { eyebrow: 'كل الرياضة في مكان واحد', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'ابدأ الآن' }
 };
 
 const item = copy[section] ?? copy.general;
@@ -26,12 +26,17 @@ url.searchParams.set('utm_campaign', `content-${section || 'general'}`);
 url.searchParams.set('utm_content', [position, storySlug].filter(Boolean).join('-').slice(0, 120));
 if (keyword) url.searchParams.set('utm_term', String(keyword).slice(0, 80));
 const aria = storyTitle ? `عرض لورفيو المرتبط بخبر ${storyTitle}` : 'عرض متجر لورفيو';
+const eyebrow = compact ? '4K • خصم 10% • Hala10' : item.eyebrow;
 ---
 <aside class:list={["lurvue", { compact }]} aria-label={aria} data-lurvue-position={position}>
   <div>
-    <span class="lurvue-eyebrow"><span class="ad-label">إعلان</span> {item.eyebrow}</span>
+    <span class="lurvue-eyebrow"><span class="ad-label">إعلان</span> {eyebrow}</span>
     <strong>{item.text}</strong>
-    <small><span class="lurvue-proof">4K • رياضة وترفيه</span> <span>• خصم بالكود <b>Hala10</b></span></small>
+    <small><span class="lurvue-proof">تجربة 24 ساعة • رياضة وترفيه</span> <span>• خصم <b>10%</b> بالكود <code>Hala10</code></span></small>
   </div>
   <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener" data-lurvue-cta={position}>{item.cta} ←</a>
 </aside>
+
+<style>
+  .ad-label{display:inline-flex;align-items:center;padding:1px 6px;border:1px solid #ffffff24;border-radius:999px;color:#b8c9da;font-size:9px;letter-spacing:.2px;margin-inline-end:5px}.lurvue code{font-family:inherit;font-weight:900;color:#fff;background:#06131f;border:1px dashed #59e6a866;padding:1px 6px;border-radius:7px}.lurvue a{transition:transform .18s ease,box-shadow .18s ease}.lurvue a:hover{transform:translateY(-1px);box-shadow:0 8px 24px #59e6a833}.lurvue-proof{font-weight:700;color:#d9e8f4}
+</style>
