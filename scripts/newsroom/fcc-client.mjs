@@ -8,6 +8,7 @@ let cachedModel = configuredModel || '';
 function headers(extra = {}) {
   return {
     'content-type': 'application/json',
+    accept: 'application/json, text/event-stream',
     ...(key ? { authorization: `Bearer ${key}` } : {}),
     ...extra
   };
@@ -18,11 +19,55 @@ function outputText(data) {
   for (const item of data?.output || []) {
     for (const content of item?.content || []) {
       if (typeof content?.text === 'string') return content.text;
+      if (typeof content?.text?.value === 'string') return content.text.value;
     }
   }
   const chatContent = data?.choices?.[0]?.message?.content;
   if (typeof chatContent === 'string') return chatContent;
   return '';
+}
+
+function outputTextFromSse(raw) {
+  const deltas = [];
+  let completedResponse = null;
+  let lastObject = null;
+
+  for (const line of String(raw).split(/\r?\n/)) {
+    if (!line.startsWith('data:')) continue;
+    const payload = line.slice(5).trim();
+    if (!payload || payload === '[DONE]') continue;
+
+    try {
+      const event = JSON.parse(payload);
+      lastObject = event;
+
+      if (typeof event?.delta === 'string') deltas.push(event.delta);
+      const chatDelta = event?.choices?.[0]?.delta?.content;
+      if (typeof chatDelta === 'string') deltas.push(chatDelta);
+
+      if (event?.response && typeof event.response === 'object') {
+        completedResponse = event.response;
+      }
+    } catch {
+      // Ignore malformed/diagnostic SSE lines and continue collecting valid events.
+    }
+  }
+
+  const finalText = outputText(completedResponse) || outputText(lastObject);
+  if (finalText) return finalText;
+  return deltas.join('');
+}
+
+function parseFccText(raw) {
+  const text = String(raw || '').trim();
+  if (!text) return '';
+
+  try {
+    return outputText(JSON.parse(text));
+  } catch {
+    if (/^(event:|data:)/m.test(text)) return outputTextFromSse(text);
+    throw new Error(`FCC returned an unsupported response format: ${text.slice(0, 180)}`);
+  }
 }
 
 export function configured() {
@@ -73,14 +118,13 @@ export async function fccRequest(prompt) {
     const response = await fetch(`${base}/responses`, {
       method: 'POST',
       headers: headers(),
-      body: JSON.stringify({ model, input: prompt }),
+      body: JSON.stringify({ model, input: prompt, stream: false }),
       signal: controller.signal
     });
     const text = await response.text();
     if (!response.ok) throw new Error(`FCC ${response.status}: ${text.slice(0, 500)}`);
-    const data = JSON.parse(text);
-    const out = outputText(data).trim();
-    if (!out) throw new Error('FCC returned no text');
+    const out = parseFccText(text).trim();
+    if (!out) throw new Error(`FCC returned no text. Raw response: ${text.slice(0, 300)}`);
     return out;
   } finally {
     clearTimeout(timer);
