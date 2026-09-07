@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,10 +14,11 @@
     "events:quality": "node scripts/newsroom/event-snapshot-quality.mjs",
     "sports:refresh": "npm run fotmob:refresh && npm run matches:enrich && npm run events:refresh && npm run events:quality",
     "search:feedback": "node scripts/newsroom/search-console-feedback.mjs",
-    "entertainment": "node scripts/newsroom/entertainment-run.mjs",
+    "entertainment": "node scripts/newsroom/entertainment-run.mjs && node scripts/newsroom/entertainment-review-repair.mjs",
     "entertainment:dry": "node scripts/newsroom/entertainment-run.mjs --dry-run",
-    "newsroom": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs && node scripts/newsroom/entertainment-run.mjs",
-    "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run && node scripts/newsroom/entertainment-run.mjs --dry-run",
+    "entertainment:repair": "node scripts/newsroom/entertainment-review-repair.mjs",
+    "newsroom": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs && npm run entertainment",
+    "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run && npm run entertainment:dry",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
     "images:generate": "node scripts/newsroom/source-images.mjs",
     "indexnow": "node scripts/newsroom/indexnow.mjs",
