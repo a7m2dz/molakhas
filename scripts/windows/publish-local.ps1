@@ -68,6 +68,7 @@ Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
 Invoke-Checked 'Refreshing sports radar, match details, daily events and newsroom...' { npm run newsroom }
 Invoke-Checked 'Resolving source article images and local fallbacks...' { npm run images:generate }
 Invoke-Checked 'Verifying production build...' { npm run build }
+Invoke-Checked 'Running prelaunch quality audit...' { npm run audit:prelaunch }
 
 $changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
 if (-not $changes) {
