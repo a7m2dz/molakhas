@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import { XMLParser } from 'fast-xml-parser';
 import { configured, rewriteStory } from './omniroute-client.mjs';
 import { languageIssues } from './quality-gate.mjs';
+import { enrichCandidate } from './source-enrichment.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const maxStories = Number(process.env.NEWSROOM_MAX_STORIES || 8);
@@ -69,7 +70,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.6 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.7 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -163,12 +164,17 @@ function qualityScore(rewritten, item) {
   if (rewritten.entities.length >= 2) score += 3;
   if (rewritten.confidence >= 80) score += 7;
   if (item.trust >= 92) score += 5;
+  if (item.sourceContent?.length >= 600) score += 4;
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
 let changed = auditedExisting;
-for (const item of selected) {
+for (const rawItem of selected) {
   try {
+    const item = await enrichCandidate(rawItem);
+    if (item.sourceContent) console.log(`[Source] Enriched (${item.enrichmentMethod}) ${item.title}: ${item.sourceContent.length} chars`);
+    else console.warn(`[Source] RSS-only ${item.title}`);
+
     let rewritten = await rewriteStory(item);
     let issues = languageIssues(rewritten);
     if (issues.length) {
@@ -198,7 +204,9 @@ for (const item of selected) {
       body: rewritten.body.slice(0, 8),
       sourceName: item.sourceName,
       sourceUrl: item.link,
+      publisherUrl: item.publisherUrl || '',
       sourceId: item.sourceId,
+      sourceEnrichment: item.enrichmentMethod || 'rss-only',
       publishedAt: safeDate(item.pubDate).toISOString(),
       generatedAt: new Date().toISOString(),
       status: approved ? 'approved' : 'review',
@@ -229,7 +237,7 @@ for (const item of selected) {
     changed = true;
     console.log(`${approved ? 'APPROVED' : 'REVIEW'} [${score}/${rewritten.confidence}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}: ${rewritten.title}`);
   } catch (error) {
-    console.error(`Story failed: ${item.title}: ${error.message}`);
+    console.error(`Story failed: ${rawItem.title}: ${error.message}`);
   }
 }
 
