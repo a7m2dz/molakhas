@@ -16,21 +16,28 @@ function headers(extra = {}) {
 
 function outputText(data) {
   if (typeof data?.output_text === 'string') return data.output_text;
+
+  // Responses API may include reasoning items before the final message.
+  // Only read final assistant message/output_text content here.
   for (const item of data?.output || []) {
+    if (item?.type && item.type !== 'message') continue;
     for (const content of item?.content || []) {
+      if (content?.type && content.type !== 'output_text' && content.type !== 'text') continue;
       if (typeof content?.text === 'string') return content.text;
       if (typeof content?.text?.value === 'string') return content.text.value;
     }
   }
+
   const chatContent = data?.choices?.[0]?.message?.content;
   if (typeof chatContent === 'string') return chatContent;
   return '';
 }
 
 function outputTextFromSse(raw) {
-  const deltas = [];
+  const outputDeltas = [];
+  const chatDeltas = [];
   let completedResponse = null;
-  let lastObject = null;
+  let doneText = '';
 
   for (const line of String(raw).split(/\r?\n/)) {
     if (!line.startsWith('data:')) continue;
@@ -39,27 +46,35 @@ function outputTextFromSse(raw) {
 
     try {
       const event = JSON.parse(payload);
-      lastObject = event;
+      const type = String(event?.type || '');
 
-      if (typeof event?.delta === 'string') deltas.push(event.delta);
-      if (typeof event?.text === 'string' && /output_text/i.test(String(event?.type || ''))) {
-        deltas.push(event.text);
+      // Crucial: never collect generic event.delta because FCC also streams
+      // reasoning deltas. Only collect the final output_text channel.
+      if (type === 'response.output_text.delta' && typeof event?.delta === 'string') {
+        outputDeltas.push(event.delta);
       }
 
-      const chatDelta = event?.choices?.[0]?.delta?.content;
-      if (typeof chatDelta === 'string') deltas.push(chatDelta);
+      if (type === 'response.output_text.done' && typeof event?.text === 'string') {
+        doneText = event.text;
+      }
 
-      if (event?.response && typeof event.response === 'object') {
+      if (type === 'response.completed' && event?.response && typeof event.response === 'object') {
         completedResponse = event.response;
       }
+
+      // Compatibility fallback for OpenAI-style chat completion streams.
+      const chatDelta = event?.choices?.[0]?.delta?.content;
+      if (typeof chatDelta === 'string') chatDeltas.push(chatDelta);
     } catch {
       // Ignore malformed/diagnostic SSE lines and continue collecting valid events.
     }
   }
 
-  const finalText = outputText(completedResponse) || outputText(lastObject);
-  if (finalText) return finalText;
-  return deltas.join('');
+  const completedText = outputText(completedResponse);
+  if (completedText) return completedText;
+  if (doneText) return doneText;
+  if (outputDeltas.length) return outputDeltas.join('');
+  return chatDeltas.join('');
 }
 
 function parseFccText(raw) {
@@ -128,7 +143,7 @@ export async function fccRequest(prompt) {
     const text = await response.text();
     if (!response.ok) throw new Error(`FCC ${response.status}: ${text.slice(0, 500)}`);
     const out = parseFccText(text).trim();
-    if (!out) throw new Error(`FCC returned no text. Raw response: ${text.slice(0, 300)}`);
+    if (!out) throw new Error(`FCC returned no final output text. Raw response: ${text.slice(0, 300)}`);
     return out;
   } finally {
     clearTimeout(timer);
@@ -140,8 +155,12 @@ function parseJson(raw) {
   try {
     return JSON.parse(cleaned);
   } catch {
+    const fenced = cleaned.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+    if (fenced) {
+      try { return JSON.parse(fenced[1]); } catch {}
+    }
     const match = cleaned.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error('FCC did not return JSON');
+    if (!match) throw new Error(`FCC did not return JSON. Final text: ${cleaned.slice(0, 220)}`);
     return JSON.parse(match[0]);
   }
 }
@@ -159,6 +178,7 @@ export async function rewriteStory(item) {
 - اكتب 4 إلى 7 فقرات قصيرة. استهدف 180 إلى 420 كلمة عندما تسمح الحقائق بذلك، ولا تطل إذا كانت البيانات محدودة.
 - لا تضف إعلان لورفيو داخل النص؛ الموقع يضيفه تلقائيًا في موضع مناسب.
 - لا تذكر أنك نموذج ذكاء اصطناعي.
+- مهم جدًا: المخرج النهائي يجب أن يكون JSON فقط بلا شرح قبله أو بعده.
 
 أعد JSON صالحًا فقط بهذا الشكل:
 {"title":"","excerpt":"","body":[""],"tags":[""],"confidence":0,"importance":1}
