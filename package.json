@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,8 @@
     "newsroom": "node scripts/newsroom/run.mjs",
     "newsroom:dry": "node scripts/newsroom/run.mjs --dry-run",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
-    "images:generate": "node scripts/newsroom/generate-images.mjs"
+    "images:generate": "node scripts/newsroom/generate-images.mjs",
+    "indexnow": "node scripts/newsroom/indexnow.mjs"
   },
   "dependencies": {
     "astro": "^5.13.5",
@@ -18,7 +19,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "wrangler": "^4.33.1"
+    "wrangler": "^4.34.0"
   },
   "engines": { "node": ">=22" }
 }
