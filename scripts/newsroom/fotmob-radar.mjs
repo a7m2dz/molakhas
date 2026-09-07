@@ -12,19 +12,23 @@ const ENABLED = String(process.env.FOTMOB_RADAR_ENABLED || 'true').toLowerCase()
 const CACHE_DIR = new URL('../../.cache/', import.meta.url);
 const SNAPSHOT_PATH = new URL('../../.cache/fotmob-radar.json', import.meta.url);
 const MATCHES_PATH = new URL('../../src/data/matches.json', import.meta.url);
+const MATCH_SCOPE_VERSION = 2;
 
-const BIG_TEAM = /(?:Al Hilal|Al Nassr|Al Ittihad|Al Ahli|Al Qadsiah|Al Shabab|الهلال|النصر|الاتحاد|الأهلي|القادسية|الشباب|Real Madrid|Barcelona|Liverpool|Arsenal|Manchester City|Manchester United|Chelsea|Tottenham|Paris Saint-Germain|PSG|Bayern Munich|Inter(?: Milan)?|AC Milan|Juventus|Atletico Madrid|Borussia Dortmund|Newcastle United)/iu;
+const BIG_TEAM = /(?:Al Hilal|Al Nassr|Al Ittihad|Al Ahli|Al Qadsiah|Al Shabab|الهلال|النصر|الاتحاد|الأهلي|القادسية|الشباب|Real Madrid|Barcelona|Liverpool|Arsenal|Manchester City|Manchester United|Chelsea|Tottenham|Paris Saint-Germain|PSG|Bayern Munich|Inter Milan|AC Milan|Juventus|Atletico Madrid|Borussia Dortmund|Newcastle United)/iu;
 const SAUDI_SIGNAL = /(?:Saudi Pro League|Roshn|Saudi Arabia|Al Hilal|Al Nassr|Al Ittihad|Al Ahli|Al Qadsiah|Al Shabab|الهلال|النصر|الاتحاد|الأهلي|القادسية|الشباب)/iu;
 const TRANSFER_SIGNAL = /(?:transfer|signing|signs|joins|joined|move|bid|deal|contract|loan|fee|انتقال|صفقة|تعاقد)/iu;
 
-const DOMESTIC_COMPETITIONS = [
-  /^(?:Premier League|FA Cup|EFL Cup|Carabao Cup|Community Shield)$/iu,
-  /^(?:LaLiga|La Liga|LaLiga EA Sports|Copa del Rey|Supercopa de España|Spanish Super Cup)$/iu,
-  /^(?:Bundesliga|DFB-Pokal|DFB Pokal|DFL-Supercup|Franz Beckenbauer Supercup)$/iu,
-  /^(?:Serie A|Coppa Italia|Supercoppa Italiana)$/iu,
-  /^(?:Ligue 1|Coupe de France|Trophée des Champions|Trophee des Champions)$/iu,
-  /^(?:Saudi Pro League|Saudi Professional League|Roshn Saudi League|King Cup|King's Cup|Saudi King Cup|Saudi Super Cup|Custodian of the Two Holy Mosques Cup)$/iu
-];
+const COUNTRY_COMPETITIONS = {
+  ENG: /^(?:Premier League|FA Cup|EFL Cup|Carabao Cup|Community Shield)$/iu,
+  GBR: /^(?:Premier League|FA Cup|EFL Cup|Carabao Cup|Community Shield)$/iu,
+  ESP: /^(?:LaLiga|La Liga|LaLiga EA Sports|Copa del Rey|Supercopa de España|Spanish Super Cup)$/iu,
+  GER: /^(?:Bundesliga|DFB-Pokal|DFB Pokal|DFL-Supercup|Franz Beckenbauer Supercup)$/iu,
+  DEU: /^(?:Bundesliga|DFB-Pokal|DFB Pokal|DFL-Supercup|Franz Beckenbauer Supercup)$/iu,
+  ITA: /^(?:Serie A|Coppa Italia|Supercoppa Italiana)$/iu,
+  FRA: /^(?:Ligue 1|Coupe de France|Trophée des Champions|Trophee des Champions)$/iu,
+  KSA: /^(?:Saudi Pro League|Saudi Professional League|Roshn Saudi League|King Cup|King's Cup|Saudi King Cup|Saudi Super Cup|Custodian of the Two Holy Mosques Cup)$/iu,
+  SAU: /^(?:Saudi Pro League|Saudi Professional League|Roshn Saudi League|King Cup|King's Cup|Saudi King Cup|Saudi Super Cup|Custodian of the Two Holy Mosques Cup)$/iu
+};
 
 const CONTINENTAL_COMPETITIONS = [
   /^(?:Champions League|UEFA Champions League)$/iu,
@@ -89,8 +93,14 @@ function localDateISO(epochMs) {
   return `${map.year}-${map.month}-${map.day}`;
 }
 
-function isDomesticCompetition(name = '') {
-  return DOMESTIC_COMPETITIONS.some((pattern) => pattern.test(clean(name)));
+function leagueCountry(league = {}) {
+  return clean(league?.ccode || '').toUpperCase();
+}
+
+function isDomesticCompetition(league = {}) {
+  const country = leagueCountry(league);
+  const pattern = COUNTRY_COMPETITIONS[country];
+  return Boolean(pattern && pattern.test(clean(league?.name || '')));
 }
 
 function isContinentalCompetition(name = '') {
@@ -98,16 +108,12 @@ function isContinentalCompetition(name = '') {
 }
 
 function isSaudiCompetition(league = {}) {
-  const name = clean(league?.name || '');
-  const ccode = clean(league?.ccode || '').toUpperCase();
-  return /(?:Saudi|Roshn|King Cup|King's Cup)/iu.test(name) || ['SAU', 'KSA'].includes(ccode);
+  return ['SAU', 'KSA'].includes(leagueCountry(league)) && COUNTRY_COMPETITIONS[leagueCountry(league)]?.test(clean(league?.name || ''));
 }
 
-function relevantMatch(league, match) {
+function relevantMatch(league) {
   const leagueName = clean(league?.name || '');
-  if (isDomesticCompetition(leagueName) || isContinentalCompetition(leagueName)) return true;
-  const text = `${leagueName} ${match?.home?.name || ''} ${match?.away?.name || ''}`;
-  return BIG_TEAM.test(text) && /(?:Super Cup|Friendly|Club World Cup|Intercontinental)/iu.test(leagueName);
+  return isDomesticCompetition(league) || isContinentalCompetition(leagueName);
 }
 
 function classifySection(text = '') {
@@ -147,10 +153,8 @@ function trendingCandidate(article, index, now) {
 }
 
 function matchState(match, now) {
-  const finished = Boolean(match?.status?.finished);
-  const started = Boolean(match?.status?.started);
-  if (finished) return 'final';
-  if (started) return 'live';
+  if (Boolean(match?.status?.finished)) return 'final';
+  if (Boolean(match?.status?.started)) return 'live';
   const kickoff = +new Date(match?.status?.utcTime || match?.timeTS || now);
   return kickoff > now ? 'upcoming' : 'scheduled';
 }
@@ -159,9 +163,9 @@ function matchOpportunity(league, match, state, now) {
   const leagueName = clean(league?.name || '');
   const text = `${leagueName} ${match?.home?.name || ''} ${match?.away?.name || ''}`;
   let score = 25;
-  if (isDomesticCompetition(leagueName)) score += 20;
+  if (isDomesticCompetition(league)) score += 20;
   if (isContinentalCompetition(leagueName)) score += 25;
-  if (isSaudiCompetition(league) || SAUDI_SIGNAL.test(text)) score += 18;
+  if (isSaudiCompetition(league)) score += 18;
   if (BIG_TEAM.test(text)) score += 24;
   if (state === 'live') score += 15;
   else if (state === 'final') score += 10;
@@ -175,7 +179,7 @@ function matchOpportunity(league, match, state, now) {
 }
 
 function makeMatchRecord(league, match, now) {
-  if (!match?.id || !match?.home?.name || !match?.away?.name || !relevantMatch(league, match)) return null;
+  if (!match?.id || !match?.home?.name || !match?.away?.name || !relevantMatch(league)) return null;
   const leagueName = clean(league?.name || 'Football');
   const home = clean(match.home.name);
   const away = clean(match.away.name);
@@ -184,11 +188,12 @@ function makeMatchRecord(league, match, now) {
   const kickoffMs = Number.isNaN(+kickoff) ? now : +kickoff;
   const state = matchState(match, now);
   const score = clean(match?.status?.scoreStr || `${match?.home?.score ?? ''} - ${match?.away?.score ?? ''}`).replace(/^\s*-\s*$/, '');
-  const section = (isSaudiCompetition(league) || SAUDI_SIGNAL.test(`${leagueName} ${home} ${away}`)) ? 'saudi' : 'football';
+  const section = isSaudiCompetition(league) ? 'saudi' : 'football';
   const opportunityScore = matchOpportunity(league, match, state, now);
   const date = localDateISO(kickoffMs);
   const slug = `${slugify(`${home}-${away}`)}-${date}-${match.id}`;
   return {
+    scopeVersion: MATCH_SCOPE_VERSION,
     id: Number(match.id),
     slug,
     date,
@@ -199,7 +204,7 @@ function makeMatchRecord(league, match, now) {
     league: {
       id: Number(league?.id || match?.leagueId || 0),
       name: leagueName,
-      country: clean(league?.ccode || '')
+      country: leagueCountry(league)
     },
     home: {
       id: Number(match?.home?.id || 0),
@@ -297,7 +302,7 @@ async function mergeMatchArchive(current, now) {
   let previous = [];
   try {
     const parsed = JSON.parse(await fs.readFile(MATCHES_PATH, 'utf8'));
-    previous = Array.isArray(parsed) ? parsed : [];
+    previous = Array.isArray(parsed) ? parsed.filter((item) => Number(item?.scopeVersion || 0) === MATCH_SCOPE_VERSION) : [];
   } catch {}
   const map = new Map(previous.map((item) => [Number(item.id), item]));
   for (const item of current) map.set(Number(item.id), item);
@@ -333,7 +338,6 @@ async function main() {
   const now = Date.now();
   const result = await getFotMobRadarCandidates({ now });
   console.log(`[FotMob] Radar: ${result.stats.trending || 0} trending + ${result.stats.matches || 0} match signals = ${result.stats.total || 0}; ${result.stats.matchPages || 0} indexable match pages.`);
-
   if (process.argv.includes('--write')) {
     await fs.mkdir(CACHE_DIR, { recursive: true });
     await fs.writeFile(SNAPSHOT_PATH, `${JSON.stringify(result.candidates, null, 2)}\n`, 'utf8');
