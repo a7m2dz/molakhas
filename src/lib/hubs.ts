@@ -172,7 +172,6 @@ export function buildTeamHubs(): TeamHub[] {
         known: meta.known
       };
     })
-    .filter((hub) => hub.known || hub.matches.length >= 2 || hub.stories.length >= 1)
     .sort((a, b) => (b.opportunityScore - a.opportunityScore) || (b.matches.length - a.matches.length) || a.name.localeCompare(b.name, 'ar'));
 }
 
