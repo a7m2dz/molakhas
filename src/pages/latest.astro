@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LurvuePromo from '../components/LurvuePromo.astro';
+import { sectionMap } from '../data/sections';
+import stories from '../data/stories.json';
+import imageManifest from '../data/image-manifest.json';
+
+const items = stories
+  .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
+  .sort((a,b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+  .slice(0,60);
+const mediaMap = imageManifest as Record<string, any>;
+const mediaFor = (story) => mediaMap[story.slug] || {};
+const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-images/${story.slug}.webp`;
+const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${story.slug}.webp`;
+const altFor = (story) => mediaFor(story).alt || story.image?.alt || story.title || '';
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const schemaExtra = {
+  '@type':'CollectionPage',
+  '@id':`${siteUrl}/latest/#collection`,
+  name:'آخر الأخبار الرياضية - ملخص',
+  url:`${siteUrl}/latest/`,
+  inLanguage:'ar',
+  mainEntity:{
+    '@type':'ItemList',
+    itemListElement:items.slice(0,20).map((story,index)=>({
+      '@type':'ListItem',
+      position:index+1,
+      url:`${siteUrl}/${story.section}/${story.slug}/`,
+      name:story.title
+    }))
+  }
+};
+---
+<BaseLayout title="آخر الأخبار الرياضية | ملخص" description="آخر الأخبار الرياضية من جميع أقسام ملخص مرتبة من الأحدث: كرة القدم، السعودية، الانتقالات، NBA، UFC، WWE والملاكمة." schemaExtra={schemaExtra}>
+  <header class="section-hero shell latest-hero"><span>📰</span><div><small>جميع الأقسام</small><h1>آخر الأخبار</h1><p>آخر ما نُشر في ملخص من جميع الرياضات، مرتب زمنيًا بدون حصره في قسم كرة القدم.</p><div class="section-count">{items.length} خبرًا ظاهرًا</div></div></header>
+  <section class="shell"><LurvuePromo section="general" position="latest-top" /></section>
+  <section class="shell section-block">
+    <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>كل الأخبار</h2></div><a href="/matches/today">مباريات اليوم ←</a></div>
+    <div class="latest-list">{items.length ? items.map((story) => <article>
+      <a class="latest-thumb" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
+      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'رياضة'} • {new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
+      <a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a>
+    </article>) : <div class="empty"><h2>بانتظار الأخبار</h2><p>تظهر هنا الأخبار المعتمدة من جميع الأقسام فور نشرها.</p></div>}</div>
+  </section>
+</BaseLayout>
+
+<style>
+.latest-hero{padding-bottom:10px}.latest-list{display:grid;gap:12px}.latest-list article{display:grid;grid-template-columns:220px 1fr auto;gap:20px;align-items:center;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:18px}.latest-thumb img{display:block;width:220px;height:124px;object-fit:cover;border-radius:12px}.latest-copy{min-width:0}.latest-copy>span{font-size:10px;color:var(--accent)}.latest-copy h2{font-size:21px;line-height:1.45;margin:5px 0}.latest-copy p{font-size:13px;color:var(--muted);margin:0}.latest-list .read-more{font-size:12px}
+@media(max-width:760px){.latest-list article{grid-template-columns:1fr}.latest-thumb img{width:100%;height:auto;aspect-ratio:16/9}.latest-list .read-more{margin-top:2px}}
+</style>
