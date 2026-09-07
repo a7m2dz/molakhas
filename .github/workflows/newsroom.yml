@@ -90,14 +90,20 @@ jobs:
       - name: Run prelaunch quality audit
         run: npm run audit:prelaunch
 
-      - name: Persist refreshed newsroom and sports package
+      # Single-writer rule:
+      # - Windows publisher owns OmniRoute stories + article media.
+      # - Scheduled/manual GitHub Actions owns match/event snapshots.
+      # Push-triggered validation must never write generated data back to main,
+      # otherwise a local publisher run can race the bot and create rebase conflicts.
+      - name: Persist scheduled sports snapshots
+        if: github.event_name != 'push'
         run: |
-          if git diff --quiet -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand; then
-            echo "No publishable data changes."
+          if git diff --quiet -- src/data/matches.json src/data/today-events.json; then
+            echo "No sports snapshot changes."
             exit 0
           fi
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
-          git add src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
-          git commit -m "newsroom: refresh sports and newsroom package"
+          git add src/data/matches.json src/data/today-events.json
+          git commit -m "newsroom: refresh sports snapshots"
           git push
