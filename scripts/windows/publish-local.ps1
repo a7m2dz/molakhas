@@ -65,21 +65,21 @@ if (-not (Test-OmniRoutePort)) {
 Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin main }
 Invoke-Checked 'Syncing dependencies...' { npm install --no-audit --no-fund }
 Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
-Invoke-Checked 'Refreshing Search Console feedback, ranking traffic opportunities and generating stories...' { npm run newsroom }
+Invoke-Checked 'Refreshing sports radar, match details, daily events and newsroom...' { npm run newsroom }
 Invoke-Checked 'Resolving source article images and local fallbacks...' { npm run images:generate }
 Invoke-Checked 'Verifying production build...' { npm run build }
 
-$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/search-feedback.json public/news-images public/brand
+$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
 if (-not $changes) {
   Write-Host '[Molakhas] No publishable changes. Nothing to push.'
   exit 0
 }
 
-Write-Host '[Molakhas] Publishing newsroom + match + search feedback package to GitHub...'
+Write-Host '[Molakhas] Publishing newsroom + matches + daily sports package to GitHub...'
 git config user.name 'molakhas-local-newsroom'
 git config user.email 'molakhas-local@users.noreply.github.com'
-git add src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/search-feedback.json public/news-images public/brand
-git commit -m "newsroom: OmniRoute + matches + search feedback $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+git add src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
+git commit -m "newsroom: OmniRoute + sports center $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE" }
 git push origin main
 if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
