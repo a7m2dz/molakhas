@@ -10,23 +10,23 @@ const labels = {
   wwe: { name: 'WWE', icon: '🤼' }
 };
 const counts = Object.fromEntries(Object.keys(labels).map((key) => [key, events.filter((event:any) => event.sport === key).length]));
-const visibleEvents = events.slice(0, 24);
+const visibleEvents = events;
 const generatedAt = (snapshot as any)?.generatedAt;
 const stateLabel = (state='') => state === 'live' ? 'مباشر' : state === 'final' ? 'انتهت' : 'اليوم';
 const eventTime = (value='') => {
-  try {
-    return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(value));
-  } catch { return ''; }
+  try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(value)); }
+  catch { return ''; }
 };
 const todayArabic = (() => {
   try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',weekday:'long',day:'numeric',month:'long'}).format(new Date(`${date}T12:00:00+03:00`)); }
   catch { return 'اليوم'; }
 })();
+const displayScore = (event:any) => ['live','final'].includes(event.state) ? String(event.score || '').trim() : '';
 ---
 <section class="today-widget" aria-labelledby="today-sports-title" data-today-widget>
   <div class="today-head">
     <div>
-      <span class="section-kicker">Live Sports Radar</span>
+      <span class="section-kicker">رادار الرياضة المباشر</span>
       <h2 id="today-sports-title">مباريات وأحداث اليوم</h2>
       <p>{todayArabic} • بتوقيت السعودية</p>
     </div>
@@ -42,11 +42,12 @@ const todayArabic = (() => {
 
   {visibleEvents.length ? (
     <div class="today-events" data-event-list>
-      {visibleEvents.map((event:any) => (
-        <a
+      {visibleEvents.map((event:any) => {
+        const score = displayScore(event);
+        return <a
           class:list={["today-event", { live: event.state === 'live' }]}
           data-sport-event={event.sport}
-          href={event.url || '#'}
+          href={event.url || '/matches/today'}
           target={event.internal ? undefined : '_blank'}
           rel={event.internal ? undefined : 'nofollow noopener'}
         >
@@ -57,11 +58,11 @@ const todayArabic = (() => {
           <h3>{event.title}</h3>
           <p>{event.subtitle}</p>
           <div class="event-bottom">
-            <b>{event.score || eventTime(event.start)}</b>
-            <small>{event.score ? eventTime(event.start) : event.source}</small>
+            <b>{score || eventTime(event.start)}</b>
+            <small>{score ? eventTime(event.start) : event.source}</small>
           </div>
-        </a>
-      ))}
+        </a>;
+      })}
     </div>
   ) : (
     <div class="today-empty"><strong>لا توجد أحداث مسجلة اليوم حتى الآن</strong><p>يتم تحديث كرة القدم وNBA وMMA وWWE تلقائيًا مع كل تحديث للموقع.</p></div>
@@ -97,7 +98,7 @@ const todayArabic = (() => {
 </script>
 
 <style>
-.today-widget{margin:18px 0 8px;border:1px solid #294763;border-radius:24px;background:linear-gradient(145deg,#0f2237,#091523);padding:24px;box-shadow:0 22px 55px #0003}.today-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.today-head h2{font-size:30px;margin:3px 0}.today-head p{margin:0;color:var(--muted);font-size:12px}.today-more{font-size:12px;color:var(--accent);font-weight:800}.sport-tabs{display:flex;gap:8px;overflow:auto;padding-bottom:12px;scrollbar-width:none}.sport-tabs button{border:1px solid var(--line);background:#081522;color:#c8d7e6;border-radius:999px;padding:8px 11px;white-space:nowrap;cursor:pointer;font:inherit;font-size:11px}.sport-tabs button b{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:999px;background:#14283b;color:var(--accent);font-size:9px;margin-inline-start:4px}.sport-tabs button.active{border-color:#5de8c388;background:#12322f;color:#f4fffb}.today-events{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.today-event{display:flex;flex-direction:column;min-height:158px;padding:15px;border:1px solid var(--line);border-radius:16px;background:#091725;color:inherit}.today-event:hover{color:inherit;border-color:#3c6384;transform:translateY(-1px)}.today-event.live{border-color:#ff5b665e;box-shadow:inset 0 0 0 1px #ff5b6618}.event-top,.event-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}.sport-chip{font-size:9px;color:var(--accent);font-weight:900}.event-state{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}.event-state.live{color:#ff8a92}.event-state i{width:6px;height:6px;border-radius:50%;background:#ff5b66;box-shadow:0 0 0 4px #ff5b661c}.today-event h3{font-size:15px;line-height:1.5;margin:10px 0 4px}.today-event p{font-size:10px;color:var(--muted);margin:0 0 auto}.event-bottom{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}.event-bottom b{font-size:15px}.event-bottom small{font-size:9px;color:var(--muted)}.today-foot{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px;margin-top:13px}.today-empty{border:1px dashed var(--line);border-radius:15px;padding:22px;text-align:center;color:var(--muted)}.today-empty strong{color:#d7e4f1}.today-empty p{margin:5px 0 0;font-size:11px}.filtered-empty{margin-top:4px}
+.today-widget{margin:18px 0 8px;border:1px solid #294763;border-radius:24px;background:linear-gradient(145deg,#0f2237,#091523);padding:24px;box-shadow:0 22px 55px #0003}.today-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.today-head h2{font-size:30px;margin:3px 0}.today-head p{margin:0;color:var(--muted);font-size:12px}.today-more{font-size:12px;color:var(--accent);font-weight:800}.sport-tabs{display:flex;gap:8px;overflow:auto;padding-bottom:12px;scrollbar-width:none}.sport-tabs button{border:1px solid var(--line);background:#081522;color:#c8d7e6;border-radius:999px;padding:8px 11px;white-space:nowrap;cursor:pointer;font:inherit;font-size:11px}.sport-tabs button b{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:999px;background:#14283b;color:var(--accent);font-size:9px;margin-inline-start:4px}.sport-tabs button.active{border-color:#5de8c388;background:#12322f;color:#f4fffb}.today-events{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.today-event{display:flex;flex-direction:column;min-height:158px;padding:15px;border:1px solid var(--line);border-radius:16px;background:#091725;color:inherit;transition:.18s transform,.18s border-color}.today-event:hover{color:inherit;border-color:#3c6384;transform:translateY(-1px)}.today-event.live{border-color:#ff5b665e;box-shadow:inset 0 0 0 1px #ff5b6618}.event-top,.event-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}.sport-chip{font-size:9px;color:var(--accent);font-weight:900}.event-state{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}.event-state.live{color:#ff8a92}.event-state i{width:6px;height:6px;border-radius:50%;background:#ff5b66;box-shadow:0 0 0 4px #ff5b661c}.today-event h3{font-size:15px;line-height:1.5;margin:10px 0 4px}.today-event p{font-size:10px;color:var(--muted);margin:0 0 auto}.event-bottom{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}.event-bottom b{font-size:15px}.event-bottom small{font-size:9px;color:var(--muted)}.today-foot{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px;margin-top:13px}.today-empty{border:1px dashed var(--line);border-radius:15px;padding:22px;text-align:center;color:var(--muted)}.today-empty strong{color:#d7e4f1}.today-empty p{margin:5px 0 0;font-size:11px}.filtered-empty{margin-top:4px}
 @media(max-width:980px){.today-events{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.today-widget{padding:17px;border-radius:20px}.today-head{align-items:start;flex-direction:column}.today-head h2{font-size:25px}.today-events{grid-template-columns:1fr}.today-event{min-height:135px}.today-more{display:none}}
 </style>
