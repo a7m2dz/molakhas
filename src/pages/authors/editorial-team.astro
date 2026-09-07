@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import stories from '../../data/stories.json';
-const recent = stories.filter((s)=>s.status==='approved').sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,12);
+const recent = stories.filter((s)=>s.status==='approved' && s.sourceId!=='molakhas-editorial').sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,12);
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const schema = {
   '@context':'https://schema.org',
