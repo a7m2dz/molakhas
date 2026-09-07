@@ -5,38 +5,69 @@ const {
   position = 'site',
   storySlug = '',
   keyword = '',
-  storyTitle = ''
+  storyTitle = '',
+  context = '',
+  competition = ''
 } = Astro.props;
 
 const copy: Record<string, { eyebrow: string; text: string; cta: string }> = {
   football: { eyebrow: 'المباراة أهم من الخبر', text: 'تابع أهم الدوريات والبطولات والمباريات بجودة 4K عبر لورفيو.', cta: 'تابع المباريات' },
   saudi: { eyebrow: 'عيش الموسم كامل', text: 'تابع دوري روشن والكرة السعودية والمباريات بجودة 4K عبر لورفيو.', cta: 'تابع دوري روشن' },
   transfers: { eyebrow: 'من الخبر إلى الملعب', text: 'تابع النجوم بعد الصفقات وأهم الدوريات والمباريات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
+  basketball: { eyebrow: 'السلة ما توقف', text: 'تابع مباريات NBA وأهم الأحداث الرياضية بجودة عالية عبر لورفيو.', cta: 'تابع NBA' },
+  sports: { eyebrow: 'كل الرياضة في مكان واحد', text: 'تابع أهم المباريات والأحداث الرياضية والترفيهية عبر لورفيو.', cta: 'اكتشف الباقات' },
   ufc: { eyebrow: 'لا تفوت سهرة النزالات', text: 'تابع بطاقات UFC والنزالات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
-  wwe: { eyebrow: 'رياضة وترفيه في مكان واحد', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي عبر لورفيو.', cta: 'اكتشف الباقات' },
+  wwe: { eyebrow: 'رياضة وترفيه في مكان واحد', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي عبر لورفيو.', cta: 'تابع العروض' },
   boxing: { eyebrow: 'ليلة النزال على شاشة كبيرة', text: 'تابع بطاقات الملاكمة والنزالات والرياضة بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
   general: { eyebrow: 'كل الرياضة في مكان واحد', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'ابدأ الآن' }
 };
 
-const item = copy[section] ?? copy.general;
+const normalizedContext = String(context || '').toLowerCase();
+const normalizedCompetition = String(competition || '').toLowerCase();
+const normalizedTitle = String(storyTitle || '').toLowerCase();
+const matchPlacement = String(position).includes('match-center');
+const live = normalizedContext === 'live';
+const final = normalizedContext === 'final';
+const upcoming = matchPlacement && !live && !final;
+const champions = /champions|دوري أبطال|الأبطال/u.test(`${normalizedCompetition} ${normalizedTitle}`);
+const nba = section === 'basketball' || /\bnba\b|ليكرز|سيلتكس|ووريورز/u.test(normalizedTitle);
+
+let item = copy[section] ?? copy.general;
+let conversionContext = normalizedContext || section || 'general';
+
+if (matchPlacement && live) {
+  item = { eyebrow: '🔴 المباراة شغالة الآن', text: champions ? 'لا تفوت لحظات دوري الأبطال — تابع السهرة الرياضية بجودة 4K عبر لورفيو.' : 'لا تفوت بقية المباراة — تابع أهم المباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'تابع الآن' };
+  conversionContext = 'match-live';
+} else if (matchPlacement && upcoming) {
+  item = { eyebrow: champions ? 'ليلة دوري الأبطال ⭐' : section === 'saudi' ? 'مواجهة سعودية منتظرة 🇸🇦' : 'المواجهة قربت 🔥', text: champions ? 'جهز سهرتك لمباريات دوري الأبطال وبقية البطولات بجودة 4K عبر لورفيو.' : 'جهز سهرتك وتابع المباراة وأهم البطولات الرياضية بجودة 4K عبر لورفيو.', cta: 'جهز اشتراكك' };
+  conversionContext = 'match-upcoming';
+} else if (matchPlacement && final) {
+  item = { eyebrow: 'المباراة انتهت.. والرياضة مستمرة', text: 'تابع المواجهات القادمة والدوريات والأحداث الرياضية والترفيهية عبر لورفيو.', cta: 'شوف الباقات' };
+  conversionContext = 'match-final';
+} else if (nba) {
+  item = copy.basketball;
+  conversionContext = 'nba';
+}
+
 const url = new URL('https://lurvue.com');
 url.searchParams.set('utm_source', 'molakhas');
 url.searchParams.set('utm_medium', 'referral');
-url.searchParams.set('utm_campaign', `content-${section || 'general'}`);
+url.searchParams.set('utm_campaign', `conversion-${conversionContext}`.slice(0, 100));
 url.searchParams.set('utm_content', [position, storySlug].filter(Boolean).join('-').slice(0, 120));
 if (keyword) url.searchParams.set('utm_term', String(keyword).slice(0, 80));
-const aria = storyTitle ? `عرض لورفيو المرتبط بخبر ${storyTitle}` : 'عرض متجر لورفيو';
+if (competition) url.searchParams.set('utm_id', String(competition).replace(/\s+/g, '-').slice(0, 80));
+const aria = storyTitle ? `عرض لورفيو المرتبط بـ ${storyTitle}` : 'عرض متجر لورفيو';
 const eyebrow = compact ? '4K • خصم 10% • Hala10' : item.eyebrow;
 ---
-<aside class:list={["lurvue", { compact }]} aria-label={aria} data-lurvue-position={position}>
+<aside class:list={["lurvue", { compact, live }]} aria-label={aria} data-lurvue-position={position} data-lurvue-context={conversionContext}>
   <div>
     <span class="lurvue-eyebrow"><span class="ad-label">إعلان</span> {eyebrow}</span>
     <strong>{item.text}</strong>
     <small><span class="lurvue-proof">تجربة 24 ساعة • رياضة وترفيه</span> <span>• خصم <b>10%</b> بالكود <code>Hala10</code></span></small>
   </div>
-  <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener" data-lurvue-cta={position}>{item.cta} ←</a>
+  <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener" data-lurvue-cta={position} data-lurvue-context={conversionContext}>{item.cta} ←</a>
 </aside>
 
 <style>
-  .ad-label{display:inline-flex;align-items:center;padding:1px 6px;border:1px solid #ffffff24;border-radius:999px;color:#b8c9da;font-size:9px;letter-spacing:.2px;margin-inline-end:5px}.lurvue code{font-family:inherit;font-weight:900;color:#fff;background:#06131f;border:1px dashed #59e6a866;padding:1px 6px;border-radius:7px}.lurvue a{transition:transform .18s ease,box-shadow .18s ease}.lurvue a:hover{transform:translateY(-1px);box-shadow:0 8px 24px #59e6a833}.lurvue-proof{font-weight:700;color:#d9e8f4}
+  .ad-label{display:inline-flex;align-items:center;padding:1px 6px;border:1px solid #ffffff24;border-radius:999px;color:#b8c9da;font-size:9px;letter-spacing:.2px;margin-inline-end:5px}.lurvue code{font-family:inherit;font-weight:900;color:#fff;background:#06131f;border:1px dashed #59e6a866;padding:1px 6px;border-radius:7px}.lurvue a{transition:transform .18s ease,box-shadow .18s ease}.lurvue a:hover{transform:translateY(-1px);box-shadow:0 8px 24px #59e6a833}.lurvue-proof{font-weight:700;color:#d9e8f4}.lurvue.live{border-color:#ff5b6655}.lurvue.live .lurvue-eyebrow{color:#ff9ba2}
 </style>
