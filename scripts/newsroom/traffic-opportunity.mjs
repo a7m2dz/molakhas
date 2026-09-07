@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+
 const SECTION_WEIGHT = {
   saudi: 11,
   transfers: 9,
@@ -52,6 +54,23 @@ const INTENT_SIGNALS = [
 
 const CONVERSION_SIGNAL = /(?:مباراة|مواجهة|دوري|بطولة|نهائي|نزال|عرض|match|fixture|game|league|championship|fight|card|NBA|UFC|WWE)/iu;
 const LOW_VALUE_SIGNAL = /(?:ورشة|اجتماع|مجلس\s+الإدارة|تحت\s+(?:14|15)|معسكر\s+تدريبي|شراكة\s+إدارية|workshop|board\s+meeting|under[-\s]?(?:14|15)|training\s+camp)/iu;
+const FOTMOB_SNAPSHOT = new URL('../../src/data/fotmob-radar.json', import.meta.url);
+
+function readFotMobRadar(now) {
+  try {
+    const list = JSON.parse(fs.readFileSync(FOTMOB_SNAPSHOT, 'utf8'));
+    if (!Array.isArray(list)) return [];
+    return list.filter((item) => {
+      if (!item?.fotmobSignal || !item?.title || !item?.section) return false;
+      const time = +new Date(item.pubDate || now);
+      if (!Number.isFinite(time)) return false;
+      const ageHours = (now - time) / 3_600_000;
+      return ageHours <= 30 && ageHours >= -2;
+    });
+  } catch {
+    return [];
+  }
+}
 
 export function normalizeTrafficText(value = '') {
   return String(value)
@@ -179,6 +198,12 @@ function scoreCandidate(item, context) {
   score += coveragePoints;
   if (context.sourceCoverage > 1 || context.radarCoverage > 0) signals.push(`coverage:${context.sourceCoverage}/radar:${context.radarCoverage}`);
 
+  if (context.fotmobCoverage > 0) {
+    const fotmobPoints = Math.min(12, 5 + (context.fotmobCoverage - 1) * 3);
+    score += fotmobPoints;
+    signals.push(`fotmob:${context.fotmobCoverage}+${fotmobPoints}`);
+  }
+
   const sourcePoints = Math.max(0, Math.min(10, Math.round(((item.priority || 50) - 50) / 5)));
   score += sourcePoints;
   if ((item.trust || 0) >= 92) score += 5;
@@ -195,26 +220,30 @@ function scoreCandidate(item, context) {
 
   return {
     trafficScore: Math.max(0, Math.min(100, Math.round(score))),
-    trafficSignals: signals.slice(0, 8)
+    trafficSignals: signals.slice(0, 9)
   };
 }
 
 export function rankTrafficCandidates(rawCandidates, { now = Date.now() } = {}) {
-  const momentum = entityMomentum(rawCandidates);
+  const fotmobRadar = readFotMobRadar(now);
+  const allCandidates = [...rawCandidates, ...fotmobRadar];
+  const momentum = entityMomentum(allCandidates);
   const ranked = [];
 
-  for (const cluster of clusterCandidates(rawCandidates)) {
+  for (const cluster of clusterCandidates(allCandidates)) {
     const representative = chooseRepresentative(cluster.members);
     if (!representative?.autoPublish || representative.discoveryOnly) continue;
 
     const sourceCoverage = new Set(cluster.members.map((item) => item.sourceId || item.sourceName || item.link)).size;
     const radarCoverage = cluster.members.filter((item) => item.discoveryOnly).length;
-    const scored = scoreCandidate(representative, { now, momentum, sourceCoverage, radarCoverage });
+    const fotmobCoverage = cluster.members.filter((item) => item.fotmobSignal || String(item.sourceId || '').startsWith('fotmob-')).length;
+    const scored = scoreCandidate(representative, { now, momentum, sourceCoverage, radarCoverage, fotmobCoverage });
     ranked.push({
       ...representative,
       ...scored,
       sourceCoverage,
       radarCoverage,
+      fotmobCoverage,
       clusterSize: cluster.members.length
     });
   }
