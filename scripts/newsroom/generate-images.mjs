@@ -44,6 +44,21 @@ function stripHtml(value = '') {
   return String(value).replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/\s+/g, ' ').trim();
 }
 
+function archiveSubject(story) {
+  const arabicTags = (story.tags || []).filter((tag) => /\p{Script=Arabic}/u.test(String(tag))).slice(0, 2);
+  if (arabicTags.length) return arabicTags.join(' و');
+  const section = sectionNames[story.section] || 'الخبر الرياضي';
+  return section;
+}
+
+function archivalCopy(story) {
+  const subject = archiveSubject(story);
+  return {
+    alt: `صورة أرشيفية مرتبطة بـ${subject} من Wikimedia Commons`,
+    caption: `صورة أرشيفية مرتبطة بـ${subject}؛ لا تمثل بالضرورة الحدث المذكور في الخبر.`
+  };
+}
+
 function wrapArabic(text, maxChars = 33, maxLines = 4) {
   const words = String(text || '').trim().split(/\s+/).filter(Boolean);
   const lines = [];
@@ -87,7 +102,7 @@ async function searchCommons(query) {
   url.searchParams.set('format', 'json');
   url.searchParams.set('origin', '*');
 
-  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/1.0 (https://molakhas.a7asmari.workers.dev)' } });
+  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/1.1 (https://molakhas.a7asmari.workers.dev)' } });
   if (!response.ok) throw new Error(`Commons search ${response.status}`);
   const data = await response.json();
   const pages = Object.values(data?.query?.pages || {});
@@ -117,7 +132,7 @@ async function searchCommons(query) {
 }
 
 async function downloadBuffer(url) {
-  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/1.0 (https://molakhas.a7asmari.workers.dev)' } });
+  const response = await fetch(url, { headers: { 'user-agent': 'MolakhasImageBot/1.1 (https://molakhas.a7asmari.workers.dev)' } });
   if (!response.ok) throw new Error(`Image download ${response.status}`);
   const arr = await response.arrayBuffer();
   if (arr.byteLength > 15 * 1024 * 1024) throw new Error('Image too large');
@@ -176,6 +191,11 @@ for (const story of stories.filter((s) => s?.status === 'approved' && s?.slug &&
     await fs.access(outPath);
     if (!manifest[story.slug]) {
       manifest[story.slug] = { src: `/news-images/${story.slug}.webp`, kind: 'existing', alt: story.image?.alt || story.title };
+    } else if (manifest[story.slug].kind === 'wikimedia') {
+      const copy = archivalCopy(story);
+      manifest[story.slug].alt = copy.alt;
+      manifest[story.slug].caption = copy.caption;
+      manifest[story.slug].archival = true;
     }
     continue;
   } catch {}
@@ -195,21 +215,24 @@ for (const story of stories.filter((s) => s?.status === 'approved' && s?.slug &&
         .composite([{ input: brandOverlay(section, accent), top: 0, left: 0 }])
         .webp({ quality: 82, effort: 5 })
         .toFile(outPath);
+      const copy = archivalCopy(story);
       manifest[story.slug] = {
         src: `/news-images/${story.slug}.webp`,
         kind: 'wikimedia',
-        alt: story.image?.alt || story.title,
-        caption: story.image?.caption || commons.description || story.excerpt,
+        archival: true,
+        alt: copy.alt,
+        caption: copy.caption,
         creator: commons.creator,
         license: commons.license,
         licenseUrl: commons.licenseUrl,
         sourceUrl: commons.sourceUrl,
         sourceTitle: commons.title,
+        sourceDescription: commons.description,
         query
       };
       licensed += 1;
       generated += 1;
-      console.log(`[Images] Licensed photo: ${story.slug} ← ${commons.title}`);
+      console.log(`[Images] Licensed archival photo: ${story.slug} ← ${commons.title}`);
       continue;
     } catch (error) {
       console.warn(`[Images] Licensed photo failed for ${story.slug}: ${error.message}`);
@@ -229,4 +252,4 @@ for (const story of stories.filter((s) => s?.status === 'approved' && s?.slug &&
 }
 
 await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-console.log(`[Images] Generated ${generated} missing WebP images (${licensed} licensed photos, ${fallback} branded fallbacks).`);
+console.log(`[Images] Generated ${generated} missing WebP images (${licensed} licensed archival photos, ${fallback} branded fallbacks).`);
