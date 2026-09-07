@@ -1,25 +1,37 @@
 ---
-const { section = 'general', compact = false } = Astro.props;
+const {
+  section = 'general',
+  compact = false,
+  position = 'site',
+  storySlug = '',
+  keyword = '',
+  storyTitle = ''
+} = Astro.props;
+
 const copy: Record<string, { eyebrow: string; text: string; cta: string }> = {
-  football: { eyebrow: 'تابع الموسم كامل', text: 'مبارياتك وبطولاتك المفضلة بجودة 4K في مكان واحد عبر لورفيو.', cta: 'شاهد الباقات' },
-  saudi: { eyebrow: 'الكرة السعودية على شاشة واحدة', text: 'تابع مباريات الموسم والبطولات بجودة 4K عبر متجر لورفيو.', cta: 'تابع الموسم' },
-  transfers: { eyebrow: 'من الصفقة إلى الملعب', text: 'بعد أخبار الانتقالات، تابع المباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
-  ufc: { eyebrow: 'سهرة النزالات', text: 'تابع بطاقات UFC والنزالات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
-  wwe: { eyebrow: 'رياضة وترفيه', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي من مكان واحد عبر لورفيو.', cta: 'اكتشف الباقات' },
-  boxing: { eyebrow: 'ليالي الملاكمة', text: 'استمتع بمتابعة البطاقات والنزالات والرياضة بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
+  football: { eyebrow: 'المباراة أهم من الخبر', text: 'تابع الدوريات والبطولات والمباريات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
+  saudi: { eyebrow: 'عيش الموسم كامل', text: 'تابع الكرة السعودية والمباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'تابع الموسم' },
+  transfers: { eyebrow: 'من الخبر إلى الملعب', text: 'تابع النجوم بعد الصفقات والمباريات والبطولات بجودة 4K عبر لورفيو.', cta: 'شاهد الباقات' },
+  ufc: { eyebrow: 'لا تفوت سهرة النزالات', text: 'تابع بطاقات UFC والنزالات والمحتوى الرياضي بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
+  wwe: { eyebrow: 'رياضة وترفيه في مكان واحد', text: 'تابع عروض WWE والمحتوى الرياضي والترفيهي عبر لورفيو.', cta: 'اكتشف الباقات' },
+  boxing: { eyebrow: 'ليلة النزال على شاشة كبيرة', text: 'تابع بطاقات الملاكمة والنزالات والرياضة بجودة 4K عبر لورفيو.', cta: 'تابع النزالات' },
   general: { eyebrow: 'متجر لورفيو', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K ⭐', cta: 'زيارة لورفيو' }
 };
+
 const item = copy[section] ?? copy.general;
 const url = new URL('https://lurvue.com');
 url.searchParams.set('utm_source', 'molakhas');
 url.searchParams.set('utm_medium', 'referral');
-url.searchParams.set('utm_campaign', section || 'general');
+url.searchParams.set('utm_campaign', `content-${section || 'general'}`);
+url.searchParams.set('utm_content', [position, storySlug].filter(Boolean).join('-').slice(0, 120));
+if (keyword) url.searchParams.set('utm_term', String(keyword).slice(0, 80));
+const aria = storyTitle ? `عرض لورفيو المرتبط بخبر ${storyTitle}` : 'عرض متجر لورفيو';
 ---
-<aside class:list={["lurvue", { compact }]} aria-label="عرض متجر لورفيو">
+<aside class:list={["lurvue", { compact }]} aria-label={aria} data-lurvue-position={position}>
   <div>
     <span class="lurvue-eyebrow">{item.eyebrow}</span>
     <strong>{item.text}</strong>
-    <small>خصم إضافي باستخدام الكود <b>Hala10</b></small>
+    <small><span class="lurvue-proof">4K • رياضة وترفيه</span> <span>• خصم بالكود <b>Hala10</b></span></small>
   </div>
-  <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener">{item.cta} ←</a>
+  <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener" data-lurvue-cta={position}>{item.cta} ←</a>
 </aside>
