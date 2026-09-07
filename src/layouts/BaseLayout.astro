@@ -50,7 +50,7 @@ const schema = {
       name: 'ملخص',
       alternateName: 'Molakhas',
       url: siteUrl,
-      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.svg`}
+      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-mark.svg`}
     },
     {
       '@type': 'WebSite',
@@ -112,7 +112,10 @@ const schema = {
     <div class="top-promo"><LurvuePromo section={section} compact position="topbar" /></div>
     <header class="site-header-wrap">
       <div class="site-header">
-        <a class="brand" href="/" aria-label="ملخص - الرئيسية"><img src="/brand/molakhas-logo.svg" width="215" height="55" alt="ملخص Molakhas" /></a>
+        <a class="brand brand-lockup" href="/" aria-label="ملخص - الرئيسية">
+          <span class="brand-copy"><strong>ملخص</strong><small>MOLAKHAS</small></span>
+          <img class="brand-mark" src="/brand/molakhas-mark.svg" width="58" height="58" alt="" aria-hidden="true" />
+        </a>
         <nav aria-label="التنقل الرئيسي">
           {primaryNav.map((item) => <a class:list={[{ active: Astro.url.pathname === item.href || (item.href !== '/' && Astro.url.pathname.startsWith(item.href)) }]} href={item.href}>{item.label}</a>)}
         </nav>
@@ -123,7 +126,13 @@ const schema = {
     <footer class="site-footer">
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
       <div class="footer-main">
-        <div class="footer-brand"><img src="/brand/molakhas-logo.svg" width="240" height="62" alt="ملخص Molakhas" /><p>SPORTS × ENTERTAINMENT × A BRIGHTER FEED</p><small>الأهم أولًا. بدون حشو.</small></div>
+        <div class="footer-brand">
+          <a class="footer-brand-lockup" href="/" aria-label="ملخص - الرئيسية">
+            <span class="brand-copy"><strong>ملخص</strong><small>MOLAKHAS</small></span>
+            <img class="brand-mark" src="/brand/molakhas-mark.svg" width="66" height="66" alt="" aria-hidden="true" />
+          </a>
+          <p>SPORTS × ENTERTAINMENT × A BRIGHTER FEED</p><small>الأهم أولًا. بدون حشو.</small>
+        </div>
         <div class="footer-col"><b>روابط سريعة</b><a href="/">الرئيسية</a><a href="/latest">آخر الأخبار</a><a href="/matches/today">مباريات اليوم</a><a href="/teams">الفرق</a><a href="/competitions">البطولات</a></div>
         <div class="footer-col"><b>الأقسام</b>{sections.slice(0,6).map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}</div>
         <div class="footer-col"><b>عن ملخص</b><a href="/about">من نحن</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a></div>
