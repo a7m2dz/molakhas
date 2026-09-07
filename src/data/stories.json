@@ -544,7 +544,7 @@
     "sourceId": "wwe-official",
     "publishedAt": "2026-09-05T00:19:28.000Z",
     "generatedAt": "2026-09-07T07:28:51.257Z",
-    "status": "approved",
+    "status": "review",
     "qualityScore": 96,
     "confidence": 90,
     "importance": 3,
@@ -572,7 +572,16 @@
       "width": 1200,
       "height": 675,
       "type": "image/webp"
-    }
+    },
+    "qualityFlags": [
+      "language-quality-failed"
+    ],
+    "qualityNotes": [
+      "contains CJK/Han characters",
+      "contains code/template fragments",
+      "contains mixed-script tokens: للاستilاد, المix",
+      "seoTitle Arabic ratio 0.00 < 0.35"
+    ]
   },
   {
     "id": "56fa04b0f44d",
@@ -628,6 +637,121 @@
     }
   },
   {
+    "id": "7ada85885146",
+    "slug": "بيتيس-يهزم-ريال-مدريد-ويحرم-مبابي-من-التسجيل-في-الوقت-المحتوم",
+    "section": "football",
+    "title": "بيتيس يهزم ريال مدريد ويحرم مبابي من التسجيل في الوقت المحتوم",
+    "seoTitle": "بيتيس يهزم ريال مدريد ويحرم مبابي في الوقت المحتوم",
+    "metaDescription": "فاز بيتيس على ريال مدريد في مباراة مؤثرة، حيث حرم الكسوبول مبابي من التسجيل في اللحظات الأخيرة بحسب ما أفادت رويترز.",
+    "focusKeyword": "بيتيس يهزم ريال مدريد",
+    "excerpt": "في مباراة مؤثرة ضمن مسابقات الدوري الإسباني، تغلّب بيتيس على ريال مدريد بعد أن حرم الكسوبول مبابي من التسجيل في الوقت المحتوم، بحسب ما أفادت وكالة رويترز.",
+    "keyPoints": [
+      "فاز بيتيس على ريال مدريد في مباراة ضمن الدوري الإسباني",
+      "حرم الكسوبول مبابي من التسجيل في اللحظات الأخيرة من المباراة",
+      "أفادت وكالة رويترز بنتيجة المباراة وتفاصيل اللحظة الحاسمة"
+    ],
+    "body": [
+      "في مباراة مؤثرة ضمن مسابقات الدوري الإسباني لكرة القدم، تغلّب نادي بيتيس على نظيره ريال مدريد، في لقاء شهد لحظة محتومة أثّرت على نتيجة المباراة.",
+      "بحسب ما أفادت وكالة رويترز، حرم الكسوبول مبابي من التسجيل في الوقت المحتوم من المباراة، حيث كان قريبًا من إحراز هدف قد يُغيّر مجرى الأمور لصالح فريقه.",
+      "جاءت اللحظة الحاسمة في نهاية المباراة، حيث اعترض الدفاع البيتي أو تصدّى للحظة التهديفية لمبابي، ليظلّ اللقاء بنتيجة لصالح بيتيس.",
+      "تُعدّ هذه النتيجة إضافة إلى سجل بيتيس في مواجهاته مع ريال مدريد، وتُبرز قدرة الفريق البيتي على المنافسة بقوة في المباريات المصيرية.",
+      "يظلّ مبابي، أحد أبرز المهاجمين في الملاعب الأوروبية، دون أن يُسجّل في هذه المواجهة، مما يُشكّل نقطة نقاش بين المتابعين حول فرص التسجيل الضائعة."
+    ],
+    "sourceName": "Reuters",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOQVktT01vUnJFU1kwNTdBa0g1ekhEQ1lhdzF2bnF3eDRLamhoN012dzFWTUNmemZxTjViUmFRUkh6N2VITXptNzQxQ0JPNHJvN2FhOXo4MFVZaVNRcENaa1pwenZBaWFENVh4SWFpZmNBN3NuOF9OaWdJY2VaN0tOejBiTUE1cFk4dkhTSUJ0ajZES2djeG1V?oc=5",
+    "sourceId": "reuters-football",
+    "publishedAt": "2026-09-04T21:59:05.000Z",
+    "generatedAt": "2026-09-07T07:43:22.273Z",
+    "status": "review",
+    "qualityScore": 83,
+    "confidence": 72,
+    "importance": 4,
+    "trust": 95,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "tags": [
+      "بيتيس",
+      "ريال مدريد",
+      "مبابي",
+      "دوري إسباني",
+      "كرة قدم",
+      "ريوكرز"
+    ],
+    "entities": [
+      "بيتيس",
+      "ريال مدريد",
+      "مبابي",
+      "ريوكرز",
+      "الدوري الإسباني"
+    ],
+    "image": {
+      "src": "/news-images/بيتيس-يهزم-ريال-مدريد-ويحرم-مبابي-من-التسجيل-في-الوقت-المحتوم.webp",
+      "alt": "لاعب كرة القدم مبابي يحاول التسجيل أمام مدافعي بيتيس في مباراة الدوري الإسباني",
+      "caption": "مبابي يحاول التسجيل في اللحظات الأخيرة من مباراة بيتيس وريال مدريد بحسب رويترز",
+      "searchQuery": "Kylian Mbappe Real Betis Real Madrid football match",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
+    "id": "224972f4ac12",
+    "slug": "ضم-نجم-الكيك-بوكسينغ-روبرتو-سولديتش-رسمي-ا-لقاي-مة-ufc",
+    "section": "ufc",
+    "title": "ضم نجم الكيك بوكسينغ روبرتو سولديتش رسميًا لقائمة UFC",
+    "seoTitle": "روبرتو سولديتش ينضم لـUFC رسميًا",
+    "metaDescription": "أعلنت UFC رسمياً عن ضم الكرواتي روبرتو سولديتش، بطل الكيك بوكسينغ العالمي، إلى منظورها القتالي Mixed Martial Arts.",
+    "focusKeyword": "ضم روبرتو سولديتش لـUFC",
+    "excerpt": "أعلنت منظمة UFC عن ضم النجم الكرواتي روبرتو سولديتش، المقاتل العالمي في الكيك بوكسينغ، إلى قائمة منظمتها القتالية.",
+    "keyPoints": [
+      "أعلنت منظمة UFC عن ضم المقاتل الكرواتي روبرتو سولديتش رسميًا إلى صفوفها.",
+      "سولديتش بطل عالمي سابق في الكيك بوكسينغ وذو خبرة واسعة في الفنون القتالية المختلطة.",
+      "الانضمام يأتي ضمن سياسة المنظمة لاستقطابة ألمع المواهب العالمية من الألعاب القتالية."
+    ],
+    "body": [
+      "أعلنت منظمة القتال الحرة (UFC) عبر موقعها الرسمي عن ضم المقاتل الكرواتي الدولي روبرتو سولديتش إلى منظورها القتالي Mixed Martial Arts.",
+      "بحسب المصدر، يأتي هذا الإعلان لتعزيز صفوف المنظمة بنجم عالمي يحمل خبرة غنية في الفنون القتالية المختلطة والكيك بوكسينغ، حيث سبق له تتويج بألقاب عالمية.",
+      "يُعتبر سولديتش من أبرز المقاتلين الأوروبيين في_scene القتالي العالمي، وانتقاله لـUFC يمثل خطوة محورية في مسيرته الرياضية الاحترافية."
+    ],
+    "sourceName": "UFC.com",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFAtV2NRV1NGZTVCbDM0TXVmSEtzYmNUMTFNWTllMWxkTmRvWEkxN3dLTVY3R3k5Q1B0VnhsZGpEVjVUYVJQRzFEdlY1VENyLXduWUhqZg?oc=5",
+    "sourceId": "ufc-official",
+    "publishedAt": "2026-09-04T21:15:34.000Z",
+    "generatedAt": "2026-09-07T07:44:45.494Z",
+    "status": "review",
+    "qualityScore": 76,
+    "confidence": 70,
+    "importance": 3,
+    "trust": 97,
+    "qualityFlags": [
+      "language-quality-failed"
+    ],
+    "qualityNotes": [
+      "contains mixed-script tokens: لـUFC, في_scene, لـUFC"
+    ],
+    "tags": [
+      "روبرتو سولديتش",
+      "UFC",
+      "Fenomena mixed martial arts",
+      "كيك بوكسينغ",
+      "ные фехтования"
+    ],
+    "entities": [
+      "روبرتو سولديتش",
+      "UFC",
+      "منظمة القتال الحرة"
+    ],
+    "image": {
+      "src": "/news-images/ضم-نجم-الكيك-بوكسينغ-روبرتو-سولديتش-رسمي-ا-لقاي-مة-ufc.webp",
+      "alt": "المقاتل الكرواتي روبرتو سولديتش خلال نزال احترافي في منظومة الفنون القتالية المختلطة.",
+      "caption": "روبرتو سولديتش، نجم الكيك بوكسينغ المعلن انضمامه لقائمة UFC.",
+      "searchQuery": "Roberto Soldic fighter",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
     "id": "9d45ba5905f6",
     "slug": "اتحاد-wwe-يكرم-ذكرى-بيل-دوندي-في-حدث-تكريمي",
     "section": "wwe",
@@ -669,6 +793,59 @@
       "alt": "بيل دوندي، المصارع الذي تكرمه WWE في حدث تكريمي خاص لـ记住 مسيرته",
       "caption": "بيلโดนدي خلال حفل التكريم الذي أقامته WWE لـ记住ه",
       "searchQuery": "Bill Dundee wrestler",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
+    "id": "abaa0241cd47",
+    "slug": "تحديد-موعد-عرض-wwe-smackdown-لشهر-سبتمبر-2026",
+    "section": "wwe",
+    "title": "تحديد موعد عرض WWE SmackDown لشهر سبتمبر 2026",
+    "seoTitle": "WWE تحدد موعد عرض SmackDown لسبتمبر 2026",
+    "metaDescription": "أعلنت WWE عن موعد عرض SmackDown للمستقبل في سبتمبر 2026. تابع آخر أخبار وتحديثات عروض المصارعة المحترفة.",
+    "focusKeyword": "عرض WWE SmackDown سبتمبر 2026",
+    "excerpt": "أعلنت شركة WWE عن موعد محدد لعرض SmackDown في سبتمبر 2026، مما يؤكد استمرارية جدول البث لهذا العرض الشهير.",
+    "keyPoints": [
+      "أعلنت WWE عن موعد لعرض SmackDown سيكون في سبتمبر 2026.",
+      "الخبر يتعلق بجدول البث المستقبلي لعرض SmackDown من تنظيم WWE.",
+      "لا تتوفر حالياً نتائج مباريات أو تصريحات مفصلة حول هذا العرض المحدد."
+    ],
+    "body": [
+      "أعلنت إدارة دبليو دبليو إي عن موعد محدد لعرض سماك داون المستقبلي، المقرر أن يُبث في سبتمبر من العام 2026.",
+      "هذا الإعلان يؤكد استمرارية العرض الأزرق كجزء أساسي من جدول البث الأسبوعي لشركة المصارعة العالمية.",
+      "لم تصدر أي تفاصيل إضافية حول بطولة أو نزال محدد سيقام في ذلك الحلقة، وتبقى جميع المباريات والنتائج المعلنة حالياً مقتصرة على الحدث.",
+      "يُعد عرض سماك داون أحد العروض الرئيسية التي تبثها الشركة ويجمع أبرز نجوم roster раздел الرئيسي."
+    ],
+    "sourceName": "WWE",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1GMExDLTR6STIxd05vT2hxRW04TFdoVThhakN4YWNxcUhnTktyckVqSFJaMUhLUGVRZl9QRWZjQTE4YlFHcXowOUZPVXhaNVJYVmMxamRJbHBaQQ?oc=5",
+    "sourceId": "wwe-official",
+    "publishedAt": "2026-09-04T20:30:22.000Z",
+    "generatedAt": "2026-09-07T07:45:00.695Z",
+    "status": "review",
+    "qualityScore": 83,
+    "confidence": 40,
+    "importance": 2,
+    "trust": 97,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "tags": [
+      "WWE",
+      "SmackDown",
+      "WWE SmackDown",
+      "Prime Time",
+      "event announcement"
+    ],
+    "entities": [
+      "WWE",
+      "SmackDown"
+    ],
+    "image": {
+      "src": "/news-images/تحديد-موعد-عرض-wwe-smackdown-لشهر-سبتمبر-2026.webp",
+      "alt": "شعار عرض سماك داون التابع لاتحاد WWE",
+      "caption": "شعار برنامج سماك داون للمصارعة المحترفة.",
+      "searchQuery": "WWE SmackDown logo",
       "width": 1200,
       "height": 675,
       "type": "image/webp"
