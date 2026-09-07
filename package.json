@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,8 +14,10 @@
     "events:quality": "node scripts/newsroom/event-snapshot-quality.mjs",
     "sports:refresh": "npm run fotmob:refresh && npm run matches:enrich && npm run events:refresh && npm run events:quality",
     "search:feedback": "node scripts/newsroom/search-console-feedback.mjs",
-    "newsroom": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs",
-    "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run",
+    "entertainment": "node scripts/newsroom/entertainment-run.mjs",
+    "entertainment:dry": "node scripts/newsroom/entertainment-run.mjs --dry-run",
+    "newsroom": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs && node scripts/newsroom/entertainment-run.mjs",
+    "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run && node scripts/newsroom/entertainment-run.mjs --dry-run",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
     "images:generate": "node scripts/newsroom/source-images.mjs",
     "indexnow": "node scripts/newsroom/indexnow.mjs",
