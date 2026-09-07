@@ -5,14 +5,20 @@ const OUTPUT = new URL('../../src/data/today-events.json', import.meta.url);
 const MATCHES = new URL('../../src/data/matches.json', import.meta.url);
 const TIMEOUT_MS = Number(process.env.SPORTS_EVENTS_TIMEOUT_MS || 8000);
 const MAX_PER_SPORT = Math.max(4, Math.min(30, Number(process.env.SPORTS_EVENTS_MAX_PER_SPORT || 14)));
+const UPCOMING_DAYS = Math.max(2, Math.min(14, Number(process.env.SPORTS_EVENTS_UPCOMING_DAYS || 8)));
+const TONIGHT_HOURS = Math.max(6, Math.min(18, Number(process.env.SPORTS_EVENTS_TONIGHT_HOURS || 12)));
 
 function clean(value = '') {
   return String(value)
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&quot;/gi, '"')
+    .replace(/&ndash;/gi, '–')
+    .replace(/&mdash;/gi, '—')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -36,6 +42,17 @@ function compactDate(value) {
 
 function offsetCompactDate(now, days) {
   return compactDate(new Date(+new Date(now) + days * 86_400_000));
+}
+
+function inUpcomingWindow(start, now, days = UPCOMING_DAYS) {
+  const diff = +new Date(start) - +new Date(now);
+  return diff >= -4 * 3_600_000 && diff <= days * 86_400_000;
+}
+
+function inTodayOrTonightWindow(start, now) {
+  if (localDate(start) === localDate(now)) return true;
+  const diff = +new Date(start) - +new Date(now);
+  return diff >= 0 && diff <= TONIGHT_HOURS * 3_600_000;
 }
 
 function stateFromEspn(event = {}) {
@@ -113,7 +130,8 @@ function normalizeFootball(match) {
     importance: Number(match.opportunityScore || 0),
     source: 'FotMob',
     url: `/matches/${match.slug}/`,
-    internal: true
+    internal: true,
+    scope: 'today'
   };
 }
 
@@ -135,8 +153,10 @@ async function footballEvents(today) {
   }
 }
 
-async function espnEvents({ sport, league, label, now, sourceName }) {
-  const dates = [offsetCompactDate(now, -1), offsetCompactDate(now, 0), offsetCompactDate(now, 1)];
+async function espnEvents({ sport, league, label, now, sourceName, horizonHours = 24 }) {
+  const days = Math.max(1, Math.ceil(horizonHours / 24));
+  const dates = [];
+  for (let offset = -1; offset <= days; offset++) dates.push(offsetCompactDate(now, offset));
   const seen = new Set();
   const events = [];
   for (const date of dates) {
@@ -147,7 +167,9 @@ async function espnEvents({ sport, league, label, now, sourceName }) {
         if (!event?.id || seen.has(String(event.id))) continue;
         seen.add(String(event.id));
         const start = new Date(event.date || now);
-        if (Number.isNaN(+start) || localDate(start) !== localDate(now)) continue;
+        if (Number.isNaN(+start)) continue;
+        const diff = +start - +new Date(now);
+        if (diff < -6 * 3_600_000 || diff > horizonHours * 3_600_000) continue;
         const competition = Array.isArray(event?.competitions) ? event.competitions[0] : null;
         const subtitle = clean(
           competition?.notes?.[0]?.headline ||
@@ -167,20 +189,15 @@ async function espnEvents({ sport, league, label, now, sourceName }) {
           importance: stateFromEspn(event) === 'live' ? 95 : stateFromEspn(event) === 'final' ? 80 : 72,
           source: sourceName,
           url: eventUrl(event, league === 'nba' ? 'https://www.espn.com/nba/schedule' : 'https://www.espn.com/mma/schedule'),
-          internal: false
+          internal: false,
+          scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
         });
       }
     } catch (error) {
       console.warn(`[Events] ${label} ${date} unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}`);
     }
   }
-  return events
-    .sort((a, b) => {
-      const aLive = a.state === 'live' ? 1 : 0;
-      const bLive = b.state === 'live' ? 1 : 0;
-      return (bLive - aLive) || (+new Date(a.start) - +new Date(b.start));
-    })
-    .slice(0, MAX_PER_SPORT);
+  return events.sort((a, b) => +new Date(a.start) - +new Date(b.start)).slice(0, MAX_PER_SPORT);
 }
 
 const MONTHS = {
@@ -205,6 +222,73 @@ function easternToUtc(year, month, day, hour, minute = 0) {
   return utc;
 }
 
+function parseEtDate(text, now) {
+  const match = clean(text).match(/(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+)?(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:[,]?\s+(20\d{2}))?.*?(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)\s*ET/iu);
+  if (!match) return null;
+  const month = MONTHS[String(match[1]).toLowerCase().replace('.', '')];
+  if (month === undefined) return null;
+  const day = Number(match[2]);
+  let year = Number(match[3] || new Date(now).getUTCFullYear());
+  let hour = Number(match[4]);
+  const minute = Number(match[5] || 0);
+  const ap = String(match[6]).toLowerCase();
+  if (ap.startsWith('p') && hour !== 12) hour += 12;
+  if (ap.startsWith('a') && hour === 12) hour = 0;
+  let start = easternToUtc(year, month, day, hour, minute);
+  if (!match[3] && +start < +new Date(now) - 45 * 86_400_000) {
+    year += 1;
+    start = easternToUtc(year, month, day, hour, minute);
+  }
+  return start;
+}
+
+function parseTapologyUfc(html, now) {
+  const out = [];
+  const seen = new Set();
+  const anchorRe = /<a[^>]+href=["'](\/fightcenter\/events\/[^"'#?]+)["'][^>]*>([\s\S]*?)<\/a>/giu;
+  for (const match of html.matchAll(anchorRe)) {
+    const urlPath = match[1];
+    const title = clean(match[2]);
+    if (!/^UFC\b/i.test(title) || seen.has(urlPath)) continue;
+    const context = clean(html.slice(Math.max(0, match.index - 500), Math.min(html.length, match.index + 1800)));
+    const start = parseEtDate(context, now);
+    if (!start || !inUpcomingWindow(start, now)) continue;
+    seen.add(urlPath);
+    const locationMatch = context.match(/(?:MMA\s*[•·-]\s*|Image\s+)([^•·|]{2,70})(?:\s*[•·|]|$)/i);
+    out.push({
+      id: `tapology-${urlPath.split('/').filter(Boolean).pop()}`,
+      sport: 'mma',
+      sportLabel: 'MMA / UFC',
+      title,
+      subtitle: clean(locationMatch?.[1] || 'UFC'),
+      start: start.toISOString(),
+      state: +start <= +now && +now - +start < 6 * 3_600_000 ? 'live' : +start < +now ? 'final' : 'upcoming',
+      score: '',
+      importance: /^UFC\s+\d+/i.test(title) ? 96 : 92,
+      source: 'Tapology',
+      url: `https://www.tapology.com${urlPath}`,
+      internal: false,
+      scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
+    });
+  }
+  return out.sort((a, b) => +new Date(a.start) - +new Date(b.start)).slice(0, MAX_PER_SPORT);
+}
+
+async function ufcEvents(now) {
+  try {
+    const html = await fetchText('https://www.tapology.com/fightcenter?group=ufc');
+    const tapology = parseTapologyUfc(html, now);
+    if (tapology.length) {
+      console.log(`[Events] Tapology UFC radar: ${tapology.length} upcoming event(s) within ${UPCOMING_DAYS} days.`);
+      return tapology;
+    }
+    console.warn('[Events] Tapology returned no UFC events in the configured window; using ESPN fallback.');
+  } catch (error) {
+    console.warn(`[Events] Tapology UFC unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}; using ESPN fallback.`);
+  }
+  return espnEvents({ sport: 'mma', league: 'ufc', label: 'MMA / UFC', now, sourceName: 'ESPN fallback', horizonHours: UPCOMING_DAYS * 24 });
+}
+
 function parseWweLines(html, now) {
   const text = html
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -215,9 +299,9 @@ function parseWweLines(html, now) {
     .replace(/&amp;/gi, '&')
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&quot;/gi, '"');
-  const lines = text.split(/\n+/).map(clean).filter((x) => x.length >= 3 && x.length <= 240);
-  const targetDate = localDate(now);
+  const lines = text.split(/\n+/).map(clean).filter((x) => x.length >= 3 && x.length <= 260);
   const out = [];
+  const seen = new Set();
   const dateRegex = /(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+)?(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?[,]?\s+(20\d{2}).*?(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)\s*ET/iu;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -233,16 +317,19 @@ function parseWweLines(html, now) {
     if (ap.startsWith('p') && hour !== 12) hour += 12;
     if (ap.startsWith('a') && hour === 12) hour = 0;
     const start = easternToUtc(year, month, day, hour, minute);
-    if (localDate(start) !== targetDate) continue;
+    if (!inUpcomingWindow(start, now)) continue;
 
     const dateIndex = line.search(dateRegex);
     let title = clean(line.slice(0, dateIndex).replace(/[•–—-]+$/g, ''));
     if (!title || title.length < 3 || /^(this week|upcoming)$/i.test(title)) title = clean(lines[i - 1] || 'WWE');
     title = title.replace(/^(this week|upcoming)\s*/i, '').trim();
-    if (!title || title.length > 110) title = 'WWE';
+    if (!title || title.length > 120) title = 'WWE';
+    const key = `${title.toLowerCase()}-${start.toISOString()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
     const venueMatch = line.match(/,\s*([^,]+(?:Arena|Center|Stadium|Centre|Garden|Performance Center)[^–—-]*)\s*[–—-]/i);
     out.push({
-      id: `wwe-${year}${String(month + 1).padStart(2, '0')}${String(day).padStart(2, '0')}-${i}`,
+      id: `wwe-${year}${String(month + 1).padStart(2, '0')}${String(day).padStart(2, '0')}-${out.length}`,
       sport: 'wwe',
       sportLabel: 'WWE',
       title,
@@ -250,19 +337,22 @@ function parseWweLines(html, now) {
       start: start.toISOString(),
       state: +start <= +now && +now - +start < 4 * 3_600_000 ? 'live' : +start < +now ? 'final' : 'upcoming',
       score: '',
-      importance: /Raw|SmackDown|NXT|WrestleMania|SummerSlam|Survivor|Money in the Bank|Royal Rumble|Crown Jewel|Night of Champions/i.test(title) ? 88 : 72,
-      source: 'WWE',
+      importance: /Raw|SmackDown|NXT|WrestleMania|SummerSlam|Survivor|Money in the Bank|Royal Rumble|Crown Jewel|Night of Champions|TripleMania|Worlds Collide/i.test(title) ? 90 : 74,
+      source: 'WWE.com',
       url: 'https://www.wwe.com/article/wwe-upcoming-events',
-      internal: false
+      internal: false,
+      scope: inTodayOrTonightWindow(start, now) ? 'today' : 'upcoming'
     });
   }
-  return out;
+  return out.sort((a, b) => +new Date(a.start) - +new Date(b.start));
 }
 
 async function wweEvents(now) {
   try {
     const html = await fetchText('https://www.wwe.com/article/wwe-upcoming-events');
-    return parseWweLines(html, now).slice(0, MAX_PER_SPORT);
+    const events = parseWweLines(html, now).slice(0, MAX_PER_SPORT);
+    console.log(`[Events] WWE official radar: ${events.length} event(s) within ${UPCOMING_DAYS} days.`);
+    return events;
   } catch (error) {
     console.warn(`[Events] WWE schedule unavailable: ${error.name === 'AbortError' ? 'timeout' : error.message}`);
     return [];
@@ -273,8 +363,8 @@ const now = new Date();
 const today = localDate(now);
 const [football, nba, mma, wwe] = await Promise.all([
   footballEvents(today),
-  espnEvents({ sport: 'basketball', league: 'nba', label: 'NBA', now, sourceName: 'ESPN' }),
-  espnEvents({ sport: 'mma', league: 'ufc', label: 'MMA / UFC', now, sourceName: 'ESPN' }),
+  espnEvents({ sport: 'basketball', league: 'nba', label: 'NBA', now, sourceName: 'ESPN', horizonHours: 36 }),
+  ufcEvents(now),
   wweEvents(now)
 ]);
 
@@ -282,22 +372,30 @@ const events = [...football, ...nba, ...mma, ...wwe]
   .sort((a, b) => {
     const aLive = a.state === 'live' ? 1 : 0;
     const bLive = b.state === 'live' ? 1 : 0;
-    return (bLive - aLive) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(a.start) - +new Date(b.start));
+    if (aLive !== bLive) return bLive - aLive;
+    const aSoon = inTodayOrTonightWindow(a.start, now) ? 1 : 0;
+    const bSoon = inTodayOrTonightWindow(b.start, now) ? 1 : 0;
+    if (aSoon !== bSoon) return bSoon - aSoon;
+    return (+new Date(a.start) - +new Date(b.start)) || (Number(b.importance || 0) - Number(a.importance || 0));
   });
 
 const output = {
   generatedAt: new Date().toISOString(),
   date: today,
   timezone: TIMEZONE,
+  upcomingDays: UPCOMING_DAYS,
+  tonightHours: TONIGHT_HOURS,
   counts: {
     football: football.length,
     nba: nba.length,
     mma: mma.length,
     wwe: wwe.length,
-    total: events.length
+    total: events.length,
+    today: events.filter((event) => event.scope === 'today').length,
+    upcoming: events.filter((event) => event.scope === 'upcoming').length
   },
   events
 };
 
 await fs.writeFile(OUTPUT, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`[Events] Today ${today}: football=${football.length}, NBA=${nba.length}, MMA=${mma.length}, WWE=${wwe.length}, total=${events.length}.`);
+console.log(`[Events] Today + upcoming ${today}: football=${football.length}, NBA=${nba.length}, MMA=${mma.length}, WWE=${wwe.length}, total=${events.length}, today/tonight=${output.counts.today}, upcoming=${output.counts.upcoming}.`);
