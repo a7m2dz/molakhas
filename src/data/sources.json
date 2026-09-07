@@ -81,7 +81,7 @@
     "enabled": true,
     "autoPublish": false,
     "discoveryOnly": true,
-    "scanLimit": 24
+    "scanLimit": 28
   },
   {
     "id": "google-football-radar",
@@ -90,6 +90,30 @@
     "section": "football",
     "trust": 72,
     "priority": 55,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 28
+  },
+  {
+    "id": "google-football-stars-radar",
+    "name": "Google News Big Clubs Radar",
+    "url": "https://news.google.com/rss/search?q=%28Real%20Madrid%20OR%20Barcelona%20OR%20Liverpool%20OR%20Arsenal%20OR%20Manchester%20City%20OR%20Manchester%20United%29%20football&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "football",
+    "trust": 70,
+    "priority": 52,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "google-transfers-radar",
+    "name": "Google News Transfers Radar",
+    "url": "https://news.google.com/rss/search?q=%28football%20transfer%20OR%20signing%20OR%20transfer%20window%29%20%28Arsenal%20OR%20Liverpool%20OR%20Real%20Madrid%20OR%20Barcelona%20OR%20Al%20Hilal%20OR%20Al%20Nassr%29&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "transfers",
+    "trust": 70,
+    "priority": 52,
     "enabled": true,
     "autoPublish": false,
     "discoveryOnly": true,
@@ -102,6 +126,30 @@
     "section": "ufc",
     "trust": 72,
     "priority": 55,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "google-wwe-radar",
+    "name": "Google News WWE Radar",
+    "url": "https://news.google.com/rss/search?q=WWE%20OR%20SmackDown%20OR%20Raw%20OR%20WrestleMania%20OR%20Crown%20Jewel&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "wwe",
+    "trust": 70,
+    "priority": 52,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "google-boxing-radar",
+    "name": "Google News Boxing Radar",
+    "url": "https://news.google.com/rss/search?q=boxing%20OR%20heavyweight%20OR%20title%20fight&hl=en-US&gl=US&ceid=US%3Aen",
+    "section": "boxing",
+    "trust": 70,
+    "priority": 52,
     "enabled": true,
     "autoPublish": false,
     "discoveryOnly": true,
