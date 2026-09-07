@@ -92,5 +92,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — spl.com.sa.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "نتاي-ج-البطاقات-التمهيدية-لليلة-ufc-باريس-هوكر-ضد-بارناس": {
+    "src": "https://www.ufc.com/images/styles/card/s3/2026-09/GettyImages-2293670159.jpg?itok=DDj4u2Du",
+    "fallbackSrc": "/news-images/نتاي-ج-البطاقات-التمهيدية-لليلة-ufc-باريس-هوكر-ضد-بارناس.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "UFC.com",
+    "sourceUrl": "https://www.ufc.com/news/ufc-paris-prelim-results-hooker-vs-parnasse",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9aaXZXU1FqZjJZMFo4QnJHbXU4SDhOUmxCVkNuZEhGS2hTQmt4S1NuX2RXRURGTTAzaG54RmRkZXVXVW1RbEg2VnNOMTMtSnVoUDJRTmNndEg1UHhLSmFzQXV6YVk0SUFBeXgtcUFQV2xaTzJidGxN?oc=5",
+    "type": "image/avif",
+    "width": 780,
+    "height": 440,
+    "alt": "رياضيو UFC يقاتلون في صالة Accor Arena بباريس خلال ليلة UFC Fight Night",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — UFC.com.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
