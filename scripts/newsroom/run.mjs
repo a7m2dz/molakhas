@@ -55,7 +55,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.4 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.5 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -98,7 +98,7 @@ candidates.sort((a, b) => (b.priority - a.priority) || (+new Date(b.pubDate) - +
 function selectDiverse(items, limit) {
   const selected = [];
   const perSection = new Map();
-  const maxPerSection = Math.max(2, Math.ceil(limit / 3));
+  const maxPerSection = Math.min(2, Math.max(1, Math.ceil(limit / 4)));
   for (const item of items) {
     const count = perSection.get(item.section) || 0;
     if (count >= maxPerSection) continue;
@@ -130,18 +130,21 @@ if (!configured()) {
 function qualityScore(rewritten, item) {
   const wordCount = rewritten.body.join(' ').split(/\s+/).filter(Boolean).length;
   const paragraphCount = rewritten.body.length;
-  let score = 35;
-  if (wordCount >= 120) score += 10;
+  let score = 36;
+  if (wordCount >= 120) score += 8;
   if (wordCount >= 180) score += 8;
-  if (paragraphCount >= 4) score += 8;
+  if (paragraphCount >= 4) score += 7;
   if (rewritten.title.length >= 25 && rewritten.title.length <= 95) score += 7;
   if (rewritten.excerpt.length >= 80 && rewritten.excerpt.length <= 220) score += 7;
   if (rewritten.seoTitle.length >= 25 && rewritten.seoTitle.length <= 70) score += 5;
-  if (rewritten.metaDescription.length >= 120 && rewritten.metaDescription.length <= 180) score += 5;
-  if (rewritten.imageAlt.length >= 35 && rewritten.imageAlt.length <= 150) score += 5;
+  if (rewritten.metaDescription.length >= 120 && rewritten.metaDescription.length <= 180) score += 6;
   if (rewritten.focusKeyword.length >= 4) score += 3;
-  if (rewritten.confidence >= 80) score += 5;
-  if (item.trust >= 92) score += 2;
+  if (rewritten.imageAlt.length >= 35) score += 3;
+  if (rewritten.imageSearchQuery.length >= 3) score += 2;
+  if (rewritten.keyPoints.length >= 2) score += 5;
+  if (rewritten.entities.length >= 2) score += 3;
+  if (rewritten.confidence >= 80) score += 7;
+  if (item.trust >= 92) score += 5;
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
@@ -159,19 +162,12 @@ for (const item of selected) {
       slug,
       section: item.section,
       title: rewritten.title,
-      seoTitle: rewritten.seoTitle || rewritten.title,
-      metaDescription: rewritten.metaDescription || rewritten.excerpt,
+      seoTitle: rewritten.seoTitle,
+      metaDescription: rewritten.metaDescription,
       focusKeyword: rewritten.focusKeyword,
       excerpt: rewritten.excerpt || rewritten.body[0].slice(0, 180),
+      keyPoints: rewritten.keyPoints,
       body: rewritten.body.slice(0, 8),
-      image: {
-        src: `/news-images/${slug}.webp`,
-        alt: rewritten.imageAlt || rewritten.title,
-        caption: rewritten.imageCaption || rewritten.excerpt,
-        width: 1200,
-        height: 675,
-        type: 'image/webp'
-      },
       sourceName: item.sourceName,
       sourceUrl: item.link,
       sourceId: item.sourceId,
@@ -182,7 +178,17 @@ for (const item of selected) {
       confidence: rewritten.confidence,
       importance: rewritten.importance,
       trust: item.trust,
-      tags: rewritten.tags.slice(0, 8)
+      tags: rewritten.tags.slice(0, 6),
+      entities: rewritten.entities.slice(0, 6),
+      image: {
+        src: `/news-images/${slug}.webp`,
+        alt: rewritten.imageAlt,
+        caption: rewritten.imageCaption,
+        searchQuery: rewritten.imageSearchQuery,
+        width: 1200,
+        height: 675,
+        type: 'image/webp'
+      }
     });
     existingLinks.add(item.link);
     existingTitles.push(rewritten.title);
