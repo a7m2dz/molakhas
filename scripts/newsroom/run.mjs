@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { XMLParser } from 'fast-xml-parser';
-import { configured, rewriteStory } from './fcc-client.mjs';
+import { configured, rewriteStory } from './omniroute-client.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const maxStories = Number(process.env.NEWSROOM_MAX_STORIES || 8);
@@ -55,7 +55,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   try {
     const response = await fetch(source.url, {
       headers: {
-        'user-agent': 'MolakhasNewsroom/0.3 (+https://molakhas.a7asmari.workers.dev)',
+        'user-agent': 'MolakhasNewsroom/0.4 (+https://molakhas.a7asmari.workers.dev)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.7'
       }
     });
@@ -123,7 +123,7 @@ if (dryRun) {
   process.exit(0);
 }
 if (!configured()) {
-  console.log('FCC is not configured; no stories written.');
+  console.log('OmniRoute is not configured; no stories written.');
   process.exit(0);
 }
 
