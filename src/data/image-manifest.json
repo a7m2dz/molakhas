@@ -140,5 +140,47 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Football Italia.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "كيف-يجعل-تحرك-كاي-هافيرتز-الجانب-الا-يمن-لا-رسنال-ا-كثر-خطورة": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/07073746/Arsenal_Chelsea_Havertz_12-1.png?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/كيف-يجعل-تحرك-كاي-هافيرتز-الجانب-الا-يمن-لا-رسنال-ا-كثر-خطورة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7571574/2026/09/07/kai-havertz-right-hand-side-roaming-arsenal-premier-league/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7571574/2026/09/07/kai-havertz-right-hand-side-roaming-arsenal-premier-league/",
+    "type": "image/png",
+    "alt": "كاي هافيرتز يسدد الكرة خلال مباراة أرسنال وتشيلسي في الدوري الإنجليزي الممتاز",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "برشلونة-يهزم-فالنسيا-خمسة-ا-هداف-مقابل-لا-شيء-ويسج-ل-17-هدف-ا-في-ا-ول-ا-ربع-مباريات-بالدور": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/07050847/GettyImages-2293349881-scaled.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/برشلونة-يهزم-فالنسيا-خمسة-ا-هداف-مقابل-لا-شيء-ويسج-ل-17-هدف-ا-في-ا-ول-ا-ربع-مباريات-بالدور.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7571607/2026/09/07/barcelona-raphinha-yamal-strikers-flick/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7571607/2026/09/07/barcelona-raphinha-yamal-strikers-flick/",
+    "type": "image/jpeg",
+    "alt": "لاعبو برشلونة يحتفلون بأحد أهداف الفوز خمسة أهداف مقابل لا شيء على فالنسيا في مباراة الدوري الإسباني",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "دوري-ا-بطال-ا-وروبا-يعود-تقييم-شامل-لجميع-الفرق-الـ36-المشاركة": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/04110526/GettyImages-2279027415-scaled.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/دوري-ا-بطال-ا-وروبا-يعود-تقييم-شامل-لجميع-الفرق-الـ36-المشاركة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic Football",
+    "sourceUrl": "https://www.nytimes.com/athletic/7565300/2026/09/07/champions-league-league-phase-team-rankings/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7565300/2026/09/07/champions-league-league-phase-team-rankings/",
+    "type": "image/jpeg",
+    "alt": "جماهير باريس سان جيرمان تحتفل بلقب دوري أبطال أوروبا في ملعب حديقة الأمراء",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
