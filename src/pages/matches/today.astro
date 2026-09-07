@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LurvuePromo from '../../components/LurvuePromo.astro';
+import { groupByLeague, matchStateArabic, matchTimeArabic, todayMatches } from '../../lib/matches';
+
+const matches = todayMatches().sort((a, b) => {
+  const stateWeight = (value: string) => value === 'live' ? 3 : value === 'upcoming' || value === 'scheduled' ? 2 : 1;
+  return stateWeight(b.state) - stateWeight(a.state)
+    || (b.opportunityScore || 0) - (a.opportunityScore || 0)
+    || +new Date(a.kickoff) - +new Date(b.kickoff);
+});
+const groups = groupByLeague(matches);
+const liveCount = matches.filter((item) => item.state === 'live').length;
+const title = 'مباريات اليوم | المواعيد والنتائج المباشرة - ملخص';
+const description = `جدول مباريات اليوم بتوقيت السعودية مع النتائج المباشرة وأهم مباريات الدوري السعودي والدوريات الأوروبية الكبرى. ${matches.length ? `${matches.length} مباراة متاحة الآن.` : ''}`;
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const schemaExtra = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${siteUrl}/matches/today/#page`,
+    name: 'مباريات اليوم',
+    url: `${siteUrl}/matches/today/`,
+    inLanguage: 'ar-SA',
+    description
+  },
+  {
+    '@type': 'ItemList',
+    itemListElement: matches.slice(0, 40).map((match, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${siteUrl}/matches/${match.slug}/`,
+      name: `${match.home.name} ضد ${match.away.name}`
+    }))
+  }
+];
+---
+<BaseLayout title={title} description={description} section="football" schemaExtra={schemaExtra}>
+  <section class="shell match-hero">
+    <div>
+      <span class="section-kicker">مركز المباريات</span>
+      <h1>مباريات اليوم</h1>
+      <p>المواعيد والنتائج بتوقيت السعودية — تتحدث البيانات تلقائيًا مع كل بناء للموقع.</p>
+    </div>
+    <div class="match-stats">
+      <strong>{matches.length}</strong><span>مباراة</span>
+      {liveCount > 0 && <b><i></i>{liveCount} مباشر</b>}
+    </div>
+  </section>
+
+  <div class="shell"><LurvuePromo section="football" position="matches-today-top" /></div>
+
+  <section class="shell match-day">
+    {groups.length ? groups.map(([league, leagueMatches]) => (
+      <div class="league-block">
+        <div class="league-head"><h2>{league}</h2><span>{leagueMatches.length} مباراة</span></div>
+        <div class="match-list">
+          {leagueMatches.map((match) => (
+            <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+              <div class="match-status">
+                <strong>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</strong>
+                <small>{matchStateArabic(match.state)}</small>
+              </div>
+              <div class="teams">
+                <div><b>{match.home.name}</b>{match.home.score !== null && match.home.score !== undefined && match.state !== 'upcoming' && <span>{match.home.score}</span>}</div>
+                <div><b>{match.away.name}</b>{match.away.score !== null && match.away.score !== undefined && match.state !== 'upcoming' && <span>{match.away.score}</span>}</div>
+              </div>
+              <div class="row-cta">التفاصيل ←</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )) : (
+      <div class="empty compact-empty"><h2>لا توجد مباريات كبرى مسجلة اليوم حتى الآن</h2><p>سيتم تحديث الصفحة تلقائيًا عند وصول بيانات جديدة من الرادار.</p></div>
+    )}
+  </section>
+
+  <div class="shell"><LurvuePromo section="football" position="matches-today-bottom" /></div>
+</BaseLayout>
+
+<style>
+  .match-hero{padding:58px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.match-hero h1{font-size:clamp(42px,7vw,72px);line-height:1;margin:0}.match-hero p{color:var(--muted);max-width:660px}.match-stats{display:flex;align-items:baseline;gap:8px;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:18px}.match-stats>strong{font-size:34px;color:var(--accent)}.match-stats>span{color:var(--muted)}.match-stats b{display:flex;align-items:center;gap:7px;margin-inline-start:12px;color:#fff}.match-stats i{width:8px;height:8px;border-radius:50%;background:#ff5b66;box-shadow:0 0 0 5px #ff5b6622}.match-day{padding:20px 0 60px}.league-block{margin:0 0 28px}.league-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.league-head h2{font-size:22px;margin:0}.league-head span{font-size:11px;color:var(--muted)}.match-list{display:grid;gap:8px}.match-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:18px;padding:16px 18px;background:linear-gradient(180deg,var(--panel),#0a1625);border:1px solid var(--line);border-radius:16px;transition:.18s transform,.18s border-color}.match-row:hover{transform:translateY(-1px);border-color:#345778;color:inherit}.match-row.live{border-color:#ff5b6655}.match-status{display:flex;flex-direction:column;text-align:center;border-inline-end:1px solid var(--line);padding-inline-end:16px}.match-status strong{font-size:17px}.match-status small{font-size:10px;color:var(--accent)}.live .match-status small{color:#ff7a83}.teams{display:grid;gap:5px}.teams>div{display:flex;align-items:center;justify-content:space-between;gap:16px}.teams b{font-size:15px}.teams span{font-weight:900;font-size:17px}.row-cta{font-size:12px;color:var(--accent);font-weight:900;white-space:nowrap}@media(max-width:650px){.match-hero{align-items:flex-start;flex-direction:column}.match-row{grid-template-columns:78px 1fr}.row-cta{display:none}.match-status{padding-inline-end:10px}.match-stats{width:100%;justify-content:center}}
+</style>
