@@ -17,7 +17,7 @@ const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${st
 const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
 ---
 <BaseLayout title={`${section.name} - آخر الأخبار | ملخص`} description={`${section.description} آخر الأخبار مرتبة من الأحدث مع صور ومصادر واضحة.`} section={section.slug}>
-  <header class="section-hero shell"><span>{section.icon}</span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p><div class="section-count">{items.length} خبر منشور</div></div></header>
+  <header class="section-hero shell"><span><img src={section.icon} width="44" height="44" alt="" /></span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p><div class="section-count">{items.length} خبر منشور</div></div></header>
   <section class="shell"><LurvuePromo section={section.slug} position="section-top" /></section>
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>آخر أخبار {section.name}</h2></div></div>
