@@ -196,5 +196,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "كولين-سيكستون-فرصة-الفوز-مع-ليكرز-هي-ما-جذبتني": {
+    "src": "/news-images/كولين-سيكستون-فرصة-الفوز-مع-ليكرز-هي-ما-جذبتني.webp",
+    "fallbackSrc": "/news-images/كولين-سيكستون-فرصة-الفوز-مع-ليكرز-هي-ما-جذبتني.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "كولين سيكستون خلال مقابلة مع ESPN LA يتحدث عن انضمامه إلى لوس أنجلوس ليكرز",
+    "caption": "كولين سيكستون في أول ظهور إعلامي مع ليكرز",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287199/Collin-Sexton-Says-Opportunity-To-Win-Attracted-Him-To-Lakers",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
