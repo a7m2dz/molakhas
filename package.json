@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/newsroom/source-images.mjs && astro build",
+    "build": "npm run fotmob:refresh && node scripts/newsroom/source-images.mjs && astro build",
     "preview": "astro preview",
     "fotmob:radar": "node scripts/newsroom/fotmob-radar.mjs",
     "fotmob:refresh": "node scripts/newsroom/fotmob-radar.mjs --write",
