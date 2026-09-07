@@ -4,6 +4,7 @@ import imageManifest from '../data/image-manifest.json';
 import { sections } from '../data/sections';
 import { topicCounts } from '../lib/content';
 import { buildTeamHubs, buildCompetitionHubs } from '../lib/hubs';
+import { competitionHubQuality, isHubIndexable, teamHubQuality } from '../lib/index-quality';
 export const prerender = true;
 const base = (import.meta.env.PUBLIC_SITE_URL || 'https://molakhas.a7asmari.workers.dev').replace(/\/$/, '');
 const esc = (v='') => String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&apos;');
@@ -29,10 +30,14 @@ export function GET() {
     };
   });
   const matchUrls = (matches as any[])
-    .filter((m)=>m?.slug && m.indexable !== false && Number(m.opportunityScore || 0) >= 55)
+    .filter((m)=>m?.slug && m.indexable !== false && Number(m.indexQualityScore || 0) >= 55 && Number(m.opportunityScore || 0) >= 55)
     .map((m)=>({ path:`/matches/${m.slug}`, lastmod:m.updatedAt || m.kickoff }));
-  const teamUrls = buildTeamHubs().map((hub)=>({ path:`/teams/${hub.slug}`, lastmod:hub.updatedAt }));
-  const competitionUrls = buildCompetitionHubs().map((hub)=>({ path:`/competitions/${hub.slug}`, lastmod:hub.updatedAt }));
+  const teamUrls = buildTeamHubs()
+    .filter((hub)=>isHubIndexable(teamHubQuality(hub)))
+    .map((hub)=>({ path:`/teams/${hub.slug}`, lastmod:hub.updatedAt }));
+  const competitionUrls = buildCompetitionHubs()
+    .filter((hub)=>isHubIndexable(competitionHubQuality(hub)))
+    .map((hub)=>({ path:`/competitions/${hub.slug}`, lastmod:hub.updatedAt }));
   const topics = [...topicCounts(publicStories as any[]).entries()]
     .filter(([,data])=>data.count>=2)
     .map(([slug])=>({ path:`/topic/${slug}` }));
