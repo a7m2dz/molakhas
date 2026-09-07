@@ -9,32 +9,70 @@ export function getStaticPaths() {
 }
 const { story } = Astro.props;
 const section = sectionMap[story.section];
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const canonical = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
+const imageSrc = story.image?.src || `/news-images/${story.slug}.webp`;
+const imageUrl = new URL(imageSrc, `${siteUrl}/`).toString();
+const imageAlt = story.image?.alt || `ملخص بصري لخبر ${story.title}`;
+const imageCaption = story.image?.caption || story.excerpt;
+const seoTitle = story.seoTitle || story.title;
+const metaDescription = story.metaDescription || story.excerpt;
 const related = stories.filter((s) => s.status === 'approved' && s.section === story.section && s.slug !== story.slug).sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt)).slice(0,3);
+const wordCount = story.body.join(' ').split(/\s+/).filter(Boolean).length;
 const schema = {
   '@context':'https://schema.org',
   '@type':'NewsArticle',
   headline:story.title,
-  description:story.excerpt,
+  description:metaDescription,
+  image:[imageUrl],
+  thumbnailUrl:imageUrl,
   datePublished:story.publishedAt,
   dateModified:story.generatedAt || story.publishedAt,
   inLanguage:'ar',
-  mainEntityOfPage:canonical,
-  author:{'@type':'Organization',name:'ملخص'},
-  publisher:{'@type':'Organization',name:'ملخص',url:(Astro.site ?? new URL(Astro.url.origin)).toString()},
+  articleSection:section?.name ?? 'رياضة',
+  keywords:(story.tags || []).join(', '),
+  wordCount,
+  mainEntityOfPage:{'@type':'WebPage','@id':canonical},
+  author:{'@type':'Organization',name:'ملخص',url:siteUrl},
+  publisher:{'@type':'Organization',name:'ملخص',url:siteUrl},
   isBasedOn:story.sourceUrl
 };
+const breadcrumbSchema = {
+  '@context':'https://schema.org',
+  '@type':'BreadcrumbList',
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:'الرئيسية',item:`${siteUrl}/`},
+    {'@type':'ListItem',position:2,name:section?.name ?? 'رياضة',item:`${siteUrl}/${story.section}`},
+    {'@type':'ListItem',position:3,name:story.title,item:canonical}
+  ]
+};
 ---
-<BaseLayout title={`${story.title} | ملخص`} description={story.excerpt} section={story.section} type="article" publishedAt={story.publishedAt}>
+<BaseLayout
+  title={`${seoTitle} | ملخص`}
+  description={metaDescription}
+  section={story.section}
+  type="article"
+  publishedAt={story.publishedAt}
+  modifiedAt={story.generatedAt || story.publishedAt}
+  image={imageSrc}
+  imageAlt={imageAlt}
+  tags={story.tags || []}
+>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <article class="article shell">
-    <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>←</span><a href={`/${story.section}`}>{section?.name ?? 'رياضة'}</a></nav>
+    <nav class="breadcrumbs" aria-label="مسار التنقل"><a href="/">الرئيسية</a><span>←</span><a href={`/${story.section}`}>{section?.name ?? 'رياضة'}</a></nav>
     <header>
       <span class="article-section">{section?.name ?? 'رياضة'}</span>
       <h1>{story.title}</h1>
       <p class="article-deck">{story.excerpt}</p>
       <div class="article-meta"><span>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</span><span>المصدر: <a href={story.sourceUrl} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
     </header>
+
+    <figure class="article-hero">
+      <img src={imageSrc} alt={imageAlt} width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" />
+      {imageCaption && <figcaption>{imageCaption}</figcaption>}
+    </figure>
 
     <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} />}<p>{paragraph}</p></>)}</div>
 
