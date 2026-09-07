@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import LurvuePromo from '../components/LurvuePromo.astro';
+import { sections } from '../data/sections';
+const { title = 'ملخص | أخبار الرياضة', description = 'ملخص لأهم الأخبار الرياضية العربية والعالمية.', section = 'general' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#07101d" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="top-promo"><LurvuePromo section={section} compact /></div>
+    <header class="site-header">
+      <a class="brand" href="/"><span>مُلخّص</span><small>الرياضة بدون حشو</small></a>
+      <nav aria-label="الأقسام">
+        {sections.map((item) => <a href={`/${item.slug}`}>{item.name}</a>)}
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <LurvuePromo section={section} />
+      <div class="footer-row">
+        <div><b>مُلخّص</b><p>أخبار رياضية مختصرة، واضحة، ومحدثة.</p></div>
+        <div class="footer-links"><a href="/about">عن ملخص</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a></div>
+      </div>
+      <small>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</small>
+    </footer>
+  </body>
+</html>

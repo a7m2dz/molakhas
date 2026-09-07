@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LurvuePromo from '../components/LurvuePromo.astro';
+import { sections, sectionMap } from '../data/sections';
+import stories from '../data/stories.json';
+const approved = stories.filter((story) => story.status === 'approved').sort((a,b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+const lead = approved[0];
+---
+<BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، الكرة السعودية والعالمية، الانتقالات، UFC، WWE والملاكمة.">
+  <section class="hero shell">
+    <div class="hero-copy"><span class="kicker">الخبر المهم، بسرعة</span><h1>كل الرياضة.<br/><em>بلا حشو.</em></h1><p>ملخص يجمع أهم الأخبار الرياضية، يزيل التكرار، ويعرض لك ما يستحق القراءة أولًا.</p></div>
+    {lead && <a class="lead-card" href={`/${lead.section}/${lead.slug}`}><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><h2>{lead.title}</h2><p>{lead.excerpt}</p><b>اقرأ الخبر ←</b></a>}
+  </section>
+  <section class="ticker shell"><span>الأقسام</span>{sections.map((s) => <a href={`/${s.slug}`}>{s.icon} {s.name}</a>)}</section>
+  <section class="shell section-block"><div class="section-title"><h2>آخر الأخبار</h2><a href="/football">عرض المزيد</a></div><div class="story-grid">{approved.slice(0,6).map((story) => <article class="story-card"><span>{sectionMap[story.section]?.name ?? 'رياضة'}</span><h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3><p>{story.excerpt}</p><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small></article>)}</div></section>
+  <section class="shell"><LurvuePromo section="general" /></section>
+  <section class="shell section-block"><div class="section-title"><h2>اختر رياضتك</h2></div><div class="category-grid">{sections.map((s)=><a class="category-card" href={`/${s.slug}`}><span>{s.icon}</span><div><h3>{s.name}</h3><p>{s.description}</p></div></a>)}</div></section>
+</BaseLayout>

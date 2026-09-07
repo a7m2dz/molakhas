@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "newsroom": "node scripts/newsroom/run.mjs",
+    "newsroom:dry": "node scripts/newsroom/run.mjs --dry-run",
+    "fcc:test": "node scripts/newsroom/fcc-test.mjs"
   },
   "dependencies": {
-    "astro": "^5.13.5"
+    "astro": "^5.13.5",
+    "fast-xml-parser": "^5.2.5"
   },
   "devDependencies": {
     "wrangler": "^4.33.1"
   },
-  "engines": {"node": ">=22"}
+  "engines": { "node": ">=22" }
 }

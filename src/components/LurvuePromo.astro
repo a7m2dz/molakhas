@@ -1,0 +1,21 @@
+---
+const { section = 'general', compact = false } = Astro.props;
+const copy: Record<string, { eyebrow: string; text: string }> = {
+  football: { eyebrow: 'تابع الموسم كامل', text: 'مبارياتك وبطولاتك المفضلة بجودة 4K في مكان واحد.' },
+  saudi: { eyebrow: 'متابعة الكرة السعودية', text: 'تابع مباريات الموسم والبطولات بجودة 4K عبر لورفيو.' },
+  transfers: { eyebrow: 'من الخبر إلى المباراة', text: 'بعد أخبار الصفقات، تابع الموسم والبطولات بجودة 4K.' },
+  ufc: { eyebrow: 'سهرة النزالات', text: 'تابع النزالات والبطاقات الرياضية بجودة 4K عبر لورفيو.' },
+  wwe: { eyebrow: 'رياضة وترفيه', text: 'تابع العروض والمحتوى الرياضي والترفيهي من مكان واحد.' },
+  boxing: { eyebrow: 'ليالي الملاكمة', text: 'استمتع بمتابعة البطاقات والنزالات بجودة 4K.' },
+  general: { eyebrow: 'متجر لورفيو', text: 'تابع جميع الدوريات والمحتوى الرياضي بجودة 4K ⭐' }
+};
+const item = copy[section] ?? copy.general;
+---
+<aside class:list={["lurvue", { compact }]} aria-label="عرض متجر لورفيو">
+  <div>
+    <span class="lurvue-eyebrow">{item.eyebrow}</span>
+    <strong>{item.text}</strong>
+    <small>استخدم كود الخصم <b>Hala10</b></small>
+  </div>
+  <a href="https://lurvue.com" target="_blank" rel="sponsored noopener">زيارة لورفيو ←</a>
+</aside>
