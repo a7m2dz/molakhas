@@ -9,7 +9,8 @@ const TIMEOUT_MS = Number(process.env.FOTMOB_TIMEOUT_MS || 9000);
 const TRENDING_LIMIT = Number(process.env.FOTMOB_TRENDING_LIMIT || 24);
 const MATCH_WINDOW_HOURS = Number(process.env.FOTMOB_MATCH_WINDOW_HOURS || 18);
 const ENABLED = String(process.env.FOTMOB_RADAR_ENABLED || 'true').toLowerCase() !== 'false';
-const SNAPSHOT_PATH = new URL('../../src/data/fotmob-radar.json', import.meta.url);
+const CACHE_DIR = new URL('../../.cache/', import.meta.url);
+const SNAPSHOT_PATH = new URL('../../.cache/fotmob-radar.json', import.meta.url);
 
 const IMPORTANT_LEAGUE = /(?:Saudi Pro League|Roshn Saudi League|Premier League|Champions League|Europa League|LaLiga|La Liga|Bundesliga|Serie A|Ligue 1|FA Cup|EFL Cup|Copa del Rey|Super Cup|Club World Cup|World Cup|AFC Champions League|MLS)/iu;
 const BIG_TEAM = /(?:Al Hilal|Al Nassr|Al Ittihad|Al Ahli|الهلال|النصر|الاتحاد|الأهلي|Real Madrid|Barcelona|Liverpool|Arsenal|Manchester City|Manchester United|Chelsea|Tottenham|Paris Saint-Germain|PSG|Bayern Munich|Inter|AC Milan|Juventus|Atletico Madrid|Borussia Dortmund)/iu;
@@ -212,6 +213,7 @@ async function main() {
   console.log(`[FotMob] Radar: ${result.stats.trending || 0} trending + ${result.stats.matches || 0} match signals = ${result.stats.total || 0}.`);
 
   if (process.argv.includes('--write')) {
+    await fs.mkdir(CACHE_DIR, { recursive: true });
     await fs.writeFile(SNAPSHOT_PATH, `${JSON.stringify(result.candidates, null, 2)}\n`, 'utf8');
     console.log(`[FotMob] Snapshot updated: ${result.candidates.length} radar signals.`);
   } else {
@@ -225,7 +227,12 @@ async function main() {
 }
 
 const isDirect = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isDirect) main().catch((error) => {
-  console.error(`[FotMob] Radar failed: ${error.message}`);
-  process.exitCode = 1;
+if (isDirect) main().catch(async (error) => {
+  console.warn(`[FotMob] Radar failed non-fatally: ${error.message}`);
+  if (process.argv.includes('--write')) {
+    try {
+      await fs.mkdir(CACHE_DIR, { recursive: true });
+      await fs.writeFile(SNAPSHOT_PATH, '[]\n', 'utf8');
+    } catch {}
+  }
 });
