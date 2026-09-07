@@ -11,10 +11,14 @@
       "خلال الفترة التجريبية سيتم توسيع المصادر وتحسين سرعة التغطية وترتيب الأخبار بحسب أهميتها للقارئ السعودي والعربي."
     ],
     "sourceName": "ملخص",
-    "sourceUrl": "https://molakhas.com",
+    "sourceUrl": "https://molakhas.a7asmari.workers.dev",
+    "sourceId": "molakhas-editorial",
     "publishedAt": "2026-09-07T05:15:00.000Z",
+    "generatedAt": "2026-09-07T05:15:00.000Z",
     "status": "approved",
     "qualityScore": 100,
+    "confidence": 100,
+    "importance": 3,
     "trust": 100,
     "tags": ["ملخص", "رياضة"]
   }
