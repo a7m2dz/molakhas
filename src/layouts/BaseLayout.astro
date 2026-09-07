@@ -20,12 +20,26 @@ const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/
 const imageUrl = image ? new URL(image, `${siteUrl}/`).toString() : null;
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'ملخص',
-  alternateName: 'Molakhas',
-  url: siteUrl,
-  inLanguage: 'ar',
-  description: 'منصة رياضية عربية تركز على الأخبار المهمة بدون حشو.'
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'ملخص',
+      alternateName: 'Molakhas',
+      url: siteUrl,
+      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      name: 'ملخص',
+      alternateName: 'Molakhas',
+      url: siteUrl,
+      inLanguage: 'ar',
+      publisher: {'@id': `${siteUrl}/#organization`},
+      description: 'منصة رياضية عربية تركز على الأخبار المهمة بدون حشو.'
+    }
+  ]
 };
 ---
 <!doctype html>
@@ -37,10 +51,11 @@ const schema = {
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="theme-color" content="#07101d" />
     <meta name="generator" content="Astro" />
-    <meta name="author" content="ملخص" />
+    <meta name="author" content="فريق تحرير ملخص" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="ar" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="ملخص RSS" href="/rss.xml" />
+    {imageUrl && <link rel="preload" as="image" href={imageUrl} fetchpriority="high" />}
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="ملخص" />
     <meta property="og:title" content={title} />
@@ -48,12 +63,14 @@ const schema = {
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
     {imageUrl && <meta property="og:image" content={imageUrl} />}
+    {imageUrl && <meta property="og:image:secure_url" content={imageUrl} />}
     {imageUrl && <meta property="og:image:type" content="image/webp" />}
     {imageUrl && <meta property="og:image:width" content="1200" />}
     {imageUrl && <meta property="og:image:height" content="675" />}
     {imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
     {publishedAt && <meta property="article:published_time" content={publishedAt} />}
     {modifiedAt && <meta property="article:modified_time" content={modifiedAt} />}
+    {type === 'article' && <meta property="article:author" content={`${siteUrl}/authors/editorial-team`} />}
     {type === 'article' && section && <meta property="article:section" content={section} />}
     {type === 'article' && tags.map((tag) => <meta property="article:tag" content={tag} />)}
     <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
@@ -66,7 +83,7 @@ const schema = {
   </head>
   <body>
     <a class="skip-link" href="#content">تجاوز إلى المحتوى</a>
-    <div class="top-promo"><LurvuePromo section={section} compact /></div>
+    <div class="top-promo"><LurvuePromo section={section} compact position="topbar" /></div>
     <header class="site-header">
       <a class="brand" href="/" aria-label="ملخص - الرئيسية"><span>مُلخّص</span><small>الرياضة بدون حشو</small></a>
       <nav aria-label="الأقسام">
@@ -75,10 +92,10 @@ const schema = {
     </header>
     <main id="content"><slot /></main>
     <footer class="site-footer">
-      <LurvuePromo section={section} />
+      {type !== 'article' && <LurvuePromo section={section} position="footer" />}
       <div class="footer-row">
         <div><b>مُلخّص</b><p>أخبار رياضية مختصرة، واضحة، ومحدثة.</p></div>
-        <div class="footer-links"><a href="/about">عن ملخص</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
+        <div class="footer-links"><a href="/about">عن ملخص</a><a href="/editorial-policy">سياسة التحرير</a><a href="/corrections">التصحيحات</a><a href="/contact">تواصل</a><a href="/privacy">الخصوصية</a><a href="/disclosure">الإفصاح الإعلاني</a><a href="/rss.xml">RSS</a></div>
       </div>
       <small>© {new Date().getFullYear()} ملخص. جميع الحقوق محفوظة.</small>
     </footer>
