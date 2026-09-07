@@ -5,6 +5,7 @@ import { configured, rewriteStory } from './omniroute-client.mjs';
 import { languageIssues } from './quality-gate.mjs';
 import { enrichCandidate } from './source-enrichment.mjs';
 import { rankTrafficCandidates, selectTrafficCandidates } from './traffic-opportunity.mjs';
+import { applySearchFeedback } from './search-feedback-boost.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const maxStories = Number(process.env.NEWSROOM_MAX_STORIES || 8);
@@ -111,7 +112,7 @@ for (const source of sources.filter((item) => item.enabled)) {
   }
 }
 
-const rankedCandidates = rankTrafficCandidates(candidates, { now });
+const rankedCandidates = applySearchFeedback(rankTrafficCandidates(candidates, { now }));
 const strongTraffic = rankedCandidates.filter((item) => item.trafficScore >= minTrafficScore);
 const trafficPool = strongTraffic.length >= Math.min(3, maxStories) ? strongTraffic : rankedCandidates;
 const selected = selectTrafficCandidates(trafficPool, maxStories);
@@ -205,6 +206,7 @@ for (const rawItem of selected) {
       sourceEnrichment: item.enrichmentMethod || 'rss-only',
       trafficScore: rawItem.trafficScore || 0,
       trafficSignals: rawItem.trafficSignals || [],
+      searchFeedback: rawItem.searchFeedback || undefined,
       sourceCoverage: rawItem.sourceCoverage || 1,
       radarCoverage: rawItem.radarCoverage || 0,
       publishedAt: safeDate(item.pubDate).toISOString(),
