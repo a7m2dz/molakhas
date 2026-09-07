@@ -22,6 +22,7 @@ const finalCount = hub.matches.filter((m) => m.state === 'final').length;
 const title = `مباريات وأخبار ${hub.name} اليوم | النتائج والمواعيد - ملخص`;
 const description = `تابع مباريات ${hub.name} اليوم والقادمة، النتائج، المواعيد بتوقيت السعودية وآخر الأخبار المرتبطة بالفريق في صفحة واحدة محدثة.`;
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const isSaudi = ['الهلال','النصر','الاتحاد','الأهلي','القادسية','الشباب'].includes(hub.name);
 const schemaExtra = [
   {
     '@type': 'SportsTeam',
@@ -41,7 +42,7 @@ const schemaExtra = [
   }
 ];
 ---
-<BaseLayout title={title} description={description} section={hub.name === 'الهلال' || hub.name === 'النصر' || hub.name === 'الاتحاد' || hub.name === 'الأهلي' || hub.name === 'القادسية' || hub.name === 'الشباب' ? 'saudi' : 'football'} schemaExtra={schemaExtra} modifiedAt={hub.updatedAt}>
+<BaseLayout title={title} description={description} section={isSaudi ? 'saudi' : 'football'} schemaExtra={schemaExtra} modifiedAt={hub.updatedAt}>
   <article class="shell entity-hub">
     <nav class="breadcrumbs"><a href="/">الرئيسية</a><span>/</span><a href="/teams">الفرق</a><span>/</span><span>{hub.name}</span></nav>
 
@@ -57,17 +58,19 @@ const schemaExtra = [
       </div>
     </header>
 
-    <LurvuePromo section={hub.name === 'الهلال' || hub.name === 'النصر' || hub.name === 'الاتحاد' || hub.name === 'الأهلي' ? 'saudi' : 'football'} position="team-hub-top" storySlug={hub.slug} storyTitle={hub.name} keyword={`مباريات ${hub.name}`} />
+    <LurvuePromo section={isSaudi ? 'saudi' : 'football'} position="team-hub-top" storySlug={hub.slug} storyTitle={hub.name} keyword={`مباريات ${hub.name}`} />
 
     <section class="hub-section">
       <div class="section-title"><div><span class="section-kicker">الموعد والنتيجة</span><h2>مباريات {hub.name}</h2></div><a href="/matches/today">مباريات اليوم</a></div>
       {matches.length ? <div class="hub-match-grid">
         {matches.map((match) => (
-          <a class:list={["hub-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
-            <div class="hub-match-top"><span>{matchStateArabic(match.state)}</span><small><a href={competitionHref(match.league.name)}>{match.league.name}</a></small></div>
-            <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
-            <div class="hub-match-bottom"><b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b><small>{matchDateArabic(match.kickoff)}</small></div>
-          </a>
+          <article class:list={["hub-match", { live: match.state === 'live' }]}>
+            <div class="hub-match-top"><span>{matchStateArabic(match.state)}</span><a class="competition-link" href={competitionHref(match.league.name)}>{match.league.name}</a></div>
+            <a class="match-main-link" href={`/matches/${match.slug}/`}>
+              <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
+              <div class="hub-match-bottom"><b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b><small>{matchDateArabic(match.kickoff)}</small></div>
+            </a>
+          </article>
         ))}
       </div> : <div class="empty compact-empty"><h3>لا توجد مباريات محفوظة حاليًا</h3></div>}
     </section>
@@ -84,10 +87,10 @@ const schemaExtra = [
       <p>تجمع هذه الصفحة مواعيد مباريات <strong>{hub.name}</strong> ونتائجه وآخر الأخبار المرتبطة به. تتحدث بيانات المباريات تلقائيًا، لذلك يبقى رابط الفريق ثابتًا قبل المباراة وأثناءها وبعد نهايتها.</p>
     </section>
 
-    <LurvuePromo section="football" position="team-hub-end" storySlug={hub.slug} storyTitle={hub.name} keyword={`مشاهدة مباريات ${hub.name}`} />
+    <LurvuePromo section={isSaudi ? 'saudi' : 'football'} position="team-hub-end" storySlug={hub.slug} storyTitle={hub.name} keyword={`مشاهدة مباريات ${hub.name}`} />
   </article>
 </BaseLayout>
 
 <style>
-.entity-hub{max-width:1060px;padding:38px 0 75px}.entity-hero{padding:18px 0 12px}.entity-kicker{color:var(--accent);font-size:11px;font-weight:900}.entity-hero h1{font-size:clamp(44px,7vw,76px);line-height:1.05;margin:8px 0}.entity-hero>p{color:var(--muted);font-size:17px}.entity-hero .alternate{font-size:12px;margin:0;color:#b8c9da}.entity-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.entity-stats>div{min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 15px;display:flex;flex-direction:column}.entity-stats b{font-size:22px;color:var(--accent)}.entity-stats span{font-size:10px;color:var(--muted)}.hub-section{padding:32px 0}.hub-match-grid,.hub-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hub-match{background:linear-gradient(150deg,#10233a,#091624);border:1px solid var(--line);border-radius:16px;padding:17px;color:inherit}.hub-match:hover{color:inherit;border-color:#356086}.hub-match.live{border-color:#ff5b6655}.hub-match-top,.hub-match-bottom{display:flex;justify-content:space-between;gap:10px;align-items:center}.hub-match-top span{font-size:10px;color:var(--accent);font-weight:900}.hub-match-top small,.hub-match-bottom small{font-size:10px;color:var(--muted)}.hub-match h3{font-size:17px;line-height:1.5;margin:12px 0}.hub-match h3 em{font-style:normal;color:var(--muted);font-size:10px}.hub-match-bottom{border-top:1px solid var(--line);padding-top:10px}.hub-match-bottom b{font-size:18px}.hub-news-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.hub-news-grid span{font-size:10px;color:var(--accent)}.hub-news-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.hub-news-grid p{font-size:12px;color:var(--muted);margin:0}.seo-copy{padding:24px 0;border-top:1px solid var(--line);font-size:17px;line-height:2}.seo-copy p{color:#c7d5e7}@media(max-width:850px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr}.entity-stats>div{flex:1}.entity-hero h1{font-size:48px}}
+.entity-hub{max-width:1060px;padding:38px 0 75px}.entity-hero{padding:18px 0 12px}.entity-kicker{color:var(--accent);font-size:11px;font-weight:900}.entity-hero h1{font-size:clamp(44px,7vw,76px);line-height:1.05;margin:8px 0}.entity-hero>p{color:var(--muted);font-size:17px}.entity-hero .alternate{font-size:12px;margin:0;color:#b8c9da}.entity-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.entity-stats>div{min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 15px;display:flex;flex-direction:column}.entity-stats b{font-size:22px;color:var(--accent)}.entity-stats span{font-size:10px;color:var(--muted)}.hub-section{padding:32px 0}.hub-match-grid,.hub-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hub-match{background:linear-gradient(150deg,#10233a,#091624);border:1px solid var(--line);border-radius:16px;padding:17px;color:inherit}.hub-match:hover{border-color:#356086}.hub-match.live{border-color:#ff5b6655}.hub-match-top,.hub-match-bottom{display:flex;justify-content:space-between;gap:10px;align-items:center}.hub-match-top span{font-size:10px;color:var(--accent);font-weight:900}.competition-link,.hub-match-bottom small{font-size:10px;color:var(--muted)}.competition-link:hover{color:var(--accent)}.match-main-link{display:block;color:inherit}.match-main-link:hover{color:inherit}.hub-match h3{font-size:17px;line-height:1.5;margin:12px 0}.hub-match h3 em{font-style:normal;color:var(--muted);font-size:10px}.hub-match-bottom{border-top:1px solid var(--line);padding-top:10px}.hub-match-bottom b{font-size:18px}.hub-news-grid>a{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.hub-news-grid span{font-size:10px;color:var(--accent)}.hub-news-grid h3{font-size:17px;line-height:1.5;margin:6px 0}.hub-news-grid p{font-size:12px;color:var(--muted);margin:0}.seo-copy{padding:24px 0;border-top:1px solid var(--line);font-size:17px;line-height:2}.seo-copy p{color:#c7d5e7}@media(max-width:850px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hub-match-grid,.hub-news-grid{grid-template-columns:1fr}.entity-stats>div{flex:1}.entity-hero h1{font-size:48px}}
 </style>
