@@ -55,11 +55,11 @@ async function chatWithModel(model, prompt) {
         messages: [
           {
             role: 'system',
-            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وعدم حشو الكلمات المفتاحية. التزم بتعليمات المستخدم وأعد فقط المخرجات المطلوبة.'
+            content: 'أنت محرر أخبار رياضية عربي وخبير SEO تقني وتحريري. الأولوية للدقة، نية البحث، الوضوح، وإضافة قيمة حقيقية للقارئ بدون حشو أو اختلاق. التزم بتعليمات المستخدم وأعد فقط المخرجات المطلوبة.'
           },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.2,
+        temperature: 0.15,
         stream: false
       }),
       signal: controller.signal
@@ -102,7 +102,7 @@ function parseJson(raw) {
 }
 
 export async function rewriteStory(item) {
-  const prompt = `أنت محرر رياضي عربي محترف وخبير SEO لمنصة "ملخص". صغ خبرًا أصليًا ودقيقًا اعتمادًا فقط على البيانات أدناه.
+  const prompt = `أنت محرر رياضي عربي محترف وخبير SEO لمنصة "ملخص". صغ خبرًا أصليًا ومفيدًا اعتمادًا فقط على البيانات أدناه.
 
 قواعد التحرير:
 - لا تخترع أي رقم أو تصريح أو نتيجة أو اسم غير موجود.
@@ -110,27 +110,29 @@ export async function rewriteStory(item) {
 - لا تنسخ صياغة المصدر حرفيًا، ولا تستخدم أكثر من 8 كلمات متتالية من النص الأصلي.
 - اكتب بالعربية الفصحى السهلة المناسبة للقارئ السعودي والعربي.
 - لا تبالغ ولا تستخدم عنوانًا مضللًا.
-- H1 بين 25 و95 حرفًا، ويصف الحدث مباشرة.
+- H1 بين 25 و95 حرفًا ويصف الحدث مباشرة.
 - الملخص المرئي excerpt بين 80 و220 حرفًا.
-- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 420 كلمة عندما تسمح الحقائق.
-- اذكر الكيان أو البطولة الرئيسية طبيعيًا في أول فقرة عندما يكون ذلك مناسبًا.
+- اكتب 4 إلى 7 فقرات قصيرة، 180 إلى 420 كلمة عندما تسمح الحقائق، ولا تطل إذا كانت المعلومات محدودة.
+- اذكر الكيان أو البطولة الرئيسية طبيعيًا في أول فقرة عندما يكون مناسبًا.
 - لا تحشو الكلمات المفتاحية ولا تكررها صناعيًا.
-- إذا كانت المعلومات محدودة فلا تطل ولا تملأ الفراغ بتخمينات.
+- أضف keyPoints من نقطتين إلى أربع نقاط سريعة تلخص أهم ما يعرفه القارئ، وكل نقطة يجب أن تكون مدعومة بالبيانات المتاحة.
 - لا تضف إعلان لورفيو داخل النص؛ الموقع يضيف الإعلان تلقائيًا.
 - لا تذكر أنك نموذج ذكاء اصطناعي أو تشرح تفكيرك.
 
-قواعد SEO:
+قواعد SEO والصور:
 - seoTitle عنوان نتائج البحث، طبيعي وجذاب، بحد أقصى 60 حرفًا تقريبًا، ولا تضف "| ملخص" لأن الموقع يضيف العلامة.
 - metaDescription وصف بحث عربي من 130 إلى 160 حرفًا تقريبًا، يلخص القيمة الخبرية دون clickbait.
 - focusKeyword عبارة بحث واحدة طبيعية من كلمتين إلى خمس كلمات مرتبطة مباشرة بالخبر.
-- imageAlt وصف عربي دقيق للصورة التحريرية المصاحبة، من 50 إلى 125 حرفًا تقريبًا؛ لا تبدأ بـ"صورة لـ" ولا تحشو كلمات مفتاحية.
+- imageAlt وصف عربي دقيق للصورة المصاحبة، من 50 إلى 125 حرفًا تقريبًا؛ لا تبدأ بـ"صورة لـ" ولا تحشو كلمات مفتاحية.
 - imageCaption تعليق قصير للصورة من 35 إلى 110 أحرف.
+- imageSearchQuery عبارة بحث بالإنجليزية من 2 إلى 6 كلمات للعثور على صورة حقيقية مرخصة في Wikimedia Commons. استخدم أسماء اللاعب/الفريق/المقاتل/البطولة الأساسية فقط، ولا تستخدم كلمات عامة مثل news أو photo.
+- entities من 2 إلى 6 أسماء كيانات أساسية في الخبر مثل لاعب، فريق، بطولة أو مدينة، بدون تكرار.
 - tags من 2 إلى 6 وسوم حقيقية مرتبطة بالكيانات أو البطولة أو الموضوع.
 
 أعد JSON صالحًا فقط، بلا Markdown وبلا أي نص قبله أو بعده.
 
 الشكل المطلوب حرفيًا:
-{"title":"","seoTitle":"","metaDescription":"","focusKeyword":"","excerpt":"","body":[""],"tags":[""],"imageAlt":"","imageCaption":"","confidence":0,"importance":1}
+{"title":"","seoTitle":"","metaDescription":"","focusKeyword":"","excerpt":"","keyPoints":[""],"body":[""],"tags":[""],"entities":[""],"imageAlt":"","imageCaption":"","imageSearchQuery":"","confidence":0,"importance":1}
 
 confidence من 0 إلى 100 ويعكس كفاية المعلومات ودقتها.
 importance من 1 إلى 5 لأهمية الخبر رياضيًا.
@@ -143,6 +145,7 @@ importance من 1 إلى 5 لأهمية الخبر رياضيًا.
 
   const parsed = parseJson(await omniRequest(prompt));
   const body = Array.isArray(parsed.body) ? parsed.body.map((p) => String(p).trim()).filter(Boolean) : [];
+  const keyPoints = Array.isArray(parsed.keyPoints) ? parsed.keyPoints.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 4) : [];
   if (!parsed.title || body.length < 2) throw new Error('OmniRoute JSON incomplete');
 
   const title = String(parsed.title).trim();
@@ -153,10 +156,13 @@ importance من 1 إلى 5 لأهمية الخبر رياضيًا.
     metaDescription: String(parsed.metaDescription || excerpt).trim().slice(0, 180),
     focusKeyword: String(parsed.focusKeyword || '').trim().slice(0, 80),
     excerpt,
+    keyPoints,
     body,
-    tags: Array.isArray(parsed.tags) ? parsed.tags.map(String).map((x) => x.trim()).filter(Boolean) : [],
+    tags: Array.isArray(parsed.tags) ? parsed.tags.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 6) : [],
+    entities: Array.isArray(parsed.entities) ? parsed.entities.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 6) : [],
     imageAlt: String(parsed.imageAlt || title).trim().slice(0, 150),
     imageCaption: String(parsed.imageCaption || excerpt || title).trim().slice(0, 150),
+    imageSearchQuery: String(parsed.imageSearchQuery || parsed.focusKeyword || title).trim().slice(0, 120),
     confidence: Math.max(0, Math.min(100, Number(parsed.confidence) || 0)),
     importance: Math.max(1, Math.min(5, Number(parsed.importance) || 1))
   };
