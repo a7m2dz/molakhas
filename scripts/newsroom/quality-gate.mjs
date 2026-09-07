@@ -1,6 +1,7 @@
 const HAN_RE = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/u;
 const REPLACEMENT_RE = /\uFFFD/u;
 const CODE_RE = /(?:\.AppendFormat\b|\b(?:function|const|let|var)\s+[A-Za-z_$]|<\/?[A-Za-z][^>]*>|\{\s*"?[A-Za-z_$][\w$]*"?\s*:)/u;
+const MACHINE_FRAGMENT_RE = /\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+\b/u;
 const GENERIC_ENGLISH_RE = /\b(?:trademark|updates?|accessible|availability|available|partnership|website|article|content|source|report|highlights|officially|worldwide|globally)\b/giu;
 
 function letters(text = '') {
@@ -51,6 +52,7 @@ export function languageIssues(item = {}) {
   if (HAN_RE.test(all)) issues.push('contains CJK/Han characters');
   if (REPLACEMENT_RE.test(all)) issues.push('contains Unicode replacement characters');
   if (CODE_RE.test(all)) issues.push('contains code/template fragments');
+  if (MACHINE_FRAGMENT_RE.test(all)) issues.push('contains machine/helper fragments with underscores');
 
   const foreign = foreignScriptLetters(all);
   if (foreign.length) issues.push(`contains unsupported foreign-script letters: ${[...new Set(foreign)].slice(0, 6).join('')}`);
