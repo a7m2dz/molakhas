@@ -7,7 +7,7 @@ import imageManifest from '../../data/image-manifest.json';
 import { topicCounts, topicSlug } from '../../lib/content';
 
 export function getStaticPaths() {
-  return stories.filter((s) => s.status === 'approved').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
+  return stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
 }
 const { story } = Astro.props;
 const section = sectionMap[story.section];
@@ -27,10 +27,11 @@ const seoTitle = story.seoTitle || story.title;
 const metaDescription = story.metaDescription || story.excerpt;
 const words = story.body.join(' ').split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.ceil(words / 180));
-const counts = topicCounts(stories as any[]);
+const publicStories = stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial');
+const counts = topicCounts(publicStories as any[]);
 const sharedTags = (candidate) => (candidate.tags || []).filter((tag) => (story.tags || []).includes(tag)).length;
-const related = stories
-  .filter((s) => s.status === 'approved' && s.slug !== story.slug)
+const related = publicStories
+  .filter((s) => s.slug !== story.slug)
   .map((s) => ({ story: s, score: sharedTags(s) * 4 + (s.section === story.section ? 2 : 0) + (s.importance || 1) * 0.2 }))
   .filter((x) => x.score > 0)
   .sort((a,b)=>b.score-a.score || +new Date(b.story.publishedAt)-+new Date(a.story.publishedAt))
@@ -84,6 +85,9 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
     {story.keyPoints?.length >= 2 && <aside class="key-points" aria-label="أهم نقاط الخبر"><strong>الزبدة</strong><ul>{story.keyPoints.map((point)=><li>{point}</li>)}</ul></aside>}
     <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}<p>{paragraph}</p></>)}</div>
     <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
+
+    <LurvuePromo section={story.section} position="article-end" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />
+
     {story.tags?.length > 0 && <div class="tag-list" aria-label="مواضيع الخبر">{story.tags.map((tag) => { const slug = topicSlug(tag); const available = (counts.get(slug)?.count || 0) >= 2; return available ? <a href={`/topic/${slug}`}>#{tag}</a> : <span>#{tag}</span>; })}</div>}
     <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر. يمكنك الرجوع إلى المصدر الأصلي للتحقق من التفاصيل والسياق الكامل.</p><div><a href={story.sourceUrl} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a><a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div></div>
     {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={imageFor(item)} alt={altFor(item)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(item).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(item)}'`}/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
