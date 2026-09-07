@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,7 +11,8 @@
     "fotmob:refresh": "node scripts/newsroom/fotmob-radar.mjs --write",
     "matches:enrich": "node scripts/newsroom/match-enrichment.mjs",
     "events:refresh": "node scripts/newsroom/today-events.mjs",
-    "sports:refresh": "npm run fotmob:refresh && npm run matches:enrich && npm run events:refresh",
+    "events:quality": "node scripts/newsroom/event-snapshot-quality.mjs",
+    "sports:refresh": "npm run fotmob:refresh && npm run matches:enrich && npm run events:refresh && npm run events:quality",
     "search:feedback": "node scripts/newsroom/search-console-feedback.mjs",
     "newsroom": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs",
     "newsroom:dry": "npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run",
