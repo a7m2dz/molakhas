@@ -50,5 +50,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — spl.com.sa.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "المنتخب-السعودي-للسيدات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام": {
+    "src": "https://www.saff.com.sa/uploadcenter/saffnews3QjGl1787827089.jpeg",
+    "fallbackSrc": "/news-images/المنتخب-السعودي-للسيدات-تحت-15-عام-ا-يدشن-معسكر-ا-تدريبي-ا-في-الدمام.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "الاتحاد السعودي لكرة القدم",
+    "sourceUrl": "https://www.saff.com.sa/news.php?id\\=4339",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFA5aFhTWFZhVDQtLTJCNmVFV0xLc0E3bWM0dTdGZlBUZlluQTdsSXVvRnFiVERiR0Fjc2pvTWh6dTI2bks4RC1GS0YyVnVra2p4T3c?oc=5",
+    "type": "image/jpeg",
+    "alt": "لاعبات المنتخب السعودي للسيدات يدربن على أرضية ملعب تحت إشراف الجهاز الفني",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — الاتحاد السعودي لكرة القدم.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
