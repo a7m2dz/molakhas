@@ -1,6 +1,6 @@
 {
   "name": "molakhas",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "newsroom": "node scripts/newsroom/run.mjs",
     "newsroom:dry": "node scripts/newsroom/run.mjs --dry-run",
-    "fcc:test": "node scripts/newsroom/fcc-test.mjs"
+    "omniroute:test": "node scripts/newsroom/omniroute-test.mjs"
   },
   "dependencies": {
     "astro": "^5.13.5",
