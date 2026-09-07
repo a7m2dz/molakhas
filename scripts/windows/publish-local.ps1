@@ -35,9 +35,7 @@ $env:AUTO_PUBLISH_MIN_CONFIDENCE = '78'
 
 # Optional local secrets/settings. This file is ignored by Git.
 $localEnv = Join-Path $RepoPath '.env.local.ps1'
-if (Test-Path $localEnv) {
-  . $localEnv
-}
+if (Test-Path $localEnv) { . $localEnv }
 
 function Test-OmniRoutePort {
   try {
@@ -53,9 +51,7 @@ function Test-OmniRoutePort {
 if (-not (Test-OmniRoutePort)) {
   Write-Host '[Molakhas] OmniRoute is not running. Trying to start it...'
   $omni = Get-Command omniroute -ErrorAction SilentlyContinue
-  if (-not $omni) {
-    throw 'omniroute is not available in PATH. Start OmniRoute manually, then rerun this script.'
-  }
+  if (-not $omni) { throw 'omniroute is not available in PATH. Start OmniRoute manually, then rerun this script.' }
   Start-Process -FilePath $omni.Source -WindowStyle Hidden
   $ready = $false
   for ($i = 0; $i -lt 30; $i++) {
@@ -69,21 +65,27 @@ Invoke-Checked 'Updating repository...' { git pull --rebase --autostash origin m
 Invoke-Checked 'Syncing dependencies...' { npm install --no-audit --no-fund }
 Invoke-Checked 'Testing OmniRoute...' { npm run omniroute:test }
 Invoke-Checked 'Scanning and generating stories...' { npm run newsroom }
-Invoke-Checked 'Verifying production build and WebP images...' { npm run build }
+Invoke-Checked 'Generating/ensuring licensed WebP images...' { npm run images:generate }
+Invoke-Checked 'Verifying production build...' { npm run build }
 
-$changes = git status --porcelain -- src/data/stories.json
+$changes = git status --porcelain -- src/data/stories.json src/data/image-manifest.json public/news-images public/brand
 if (-not $changes) {
-  Write-Host '[Molakhas] No new story changes. Nothing to push.'
+  Write-Host '[Molakhas] No publishable changes. Nothing to push.'
   exit 0
 }
 
-Write-Host '[Molakhas] Publishing generated stories to GitHub...'
+Write-Host '[Molakhas] Publishing newsroom package to GitHub...'
 git config user.name 'molakhas-local-newsroom'
 git config user.email 'molakhas-local@users.noreply.github.com'
-git add src/data/stories.json
+git add src/data/stories.json src/data/image-manifest.json public/news-images public/brand
 git commit -m "newsroom: OmniRoute batch $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 if ($LASTEXITCODE -ne 0) { throw "git commit failed with exit code $LASTEXITCODE" }
 git push origin main
 if ($LASTEXITCODE -ne 0) { throw "git push failed with exit code $LASTEXITCODE" }
 
-Write-Host '[Molakhas] Done. Cloudflare will deploy the new commit and generate WebP images automatically.'
+Write-Host '[Molakhas] GitHub updated. Cloudflare will deploy automatically.'
+Write-Host '[Molakhas] Notifying IndexNow (non-blocking)...'
+npm run indexnow
+if ($LASTEXITCODE -ne 0) { Write-Warning 'IndexNow notification failed; publishing itself succeeded.' }
+
+Write-Host '[Molakhas] Done.'
