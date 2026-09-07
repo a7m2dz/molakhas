@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LurvuePromo from '../components/LurvuePromo.astro';
 import { sections, sectionMap } from '../data/sections';
 import stories from '../data/stories.json';
+import imageManifest from '../data/image-manifest.json';
 import { topicCounts } from '../lib/content';
 
 const approved = stories.filter((story) => story.status === 'approved').sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
@@ -11,6 +12,11 @@ const latest = approved.slice(1, 7);
 const lastUpdated = approved[0]?.publishedAt;
 const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug, approved.filter((story) => story.section === section.slug).length]));
 const topics = [...topicCounts(stories as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
+const mediaMap = imageManifest as Record<string, any>;
+const mediaFor = (story) => mediaMap[story.slug] || {};
+const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-images/${story.slug}.webp`;
+const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${story.slug}.webp`;
+const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
 ---
 <BaseLayout title="ملخص | أهم الأخبار الرياضية" description="آخر الأخبار الرياضية، الكرة السعودية والعالمية، الانتقالات، UFC، WWE والملاكمة بصياغة عربية سريعة ومصادر واضحة.">
   <section class="hero shell">
@@ -21,7 +27,7 @@ const topics = [...topicCounts(stories as any[]).entries()].filter(([,v])=>v.cou
       <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
     </div>
     {lead ? <a class="lead-card lead-card-image" href={`/${lead.section}/${lead.slug}`}>
-      <img src={lead.image?.src || `/news-images/${lead.slug}.webp`} alt={lead.image?.alt || ''} width="1200" height="675" fetchpriority="high" decoding="async" />
+      <img src={imageFor(lead)} alt={altFor(lead)} width="1200" height="675" fetchpriority="high" decoding="async" referrerpolicy={mediaFor(lead).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(lead)}'`} />
       <div class="lead-overlay"><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><h2>{lead.title}</h2><p>{lead.excerpt}</p><b>اقرأ الخبر ←</b></div>
     </a> : <div class="lead-card lead-placeholder"><span>غرفة الأخبار</span><h2>الأخبار الجديدة في الطريق</h2><p>يتم فحص المصادر وإزالة التكرار قبل نشر الأخبار التي تستحق القراءة.</p></div>}
   </section>
@@ -33,7 +39,7 @@ const topics = [...topicCounts(stories as any[]).entries()].filter(([,v])=>v.cou
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>آخر الأخبار</h2></div><a href="/football">كرة القدم ←</a></div>
     {latest.length ? <div class="story-grid">{latest.map((story) => <article class="story-card story-card-media">
-      <a class="story-image-link" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={story.image?.src || `/news-images/${story.slug}.webp`} alt={story.image?.alt || ''} width="1200" height="675" loading="lazy" decoding="async" /></a>
+      <a class="story-image-link" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
       <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
       <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
       <p>{story.excerpt}</p>
