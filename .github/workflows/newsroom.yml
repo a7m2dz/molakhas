@@ -87,15 +87,18 @@ jobs:
       - name: Build production site and media
         run: npm run build
 
+      - name: Run prelaunch quality audit
+        run: npm run audit:prelaunch
+
       - name: Commit cloud-generated newsroom package
         if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome == 'success'
         run: |
-          if git diff --quiet -- src/data/stories.json src/data/image-manifest.json public/news-images public/brand; then
+          if git diff --quiet -- src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand; then
             echo "No newsroom changes."
             exit 0
           fi
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
-          git add src/data/stories.json src/data/image-manifest.json public/news-images public/brand
-          git commit -m "newsroom: publish scheduled OmniRoute batch"
+          git add src/data/stories.json src/data/image-manifest.json src/data/matches.json src/data/today-events.json src/data/search-feedback.json public/news-images public/brand
+          git commit -m "newsroom: publish scheduled OmniRoute + sports batch"
           git push
