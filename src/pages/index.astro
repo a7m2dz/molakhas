@@ -9,8 +9,12 @@ import { topicCounts } from '../lib/content';
 const approved = stories
   .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
   .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-const lead = approved[0];
-const latest = approved.slice(1, 10);
+const now = Date.now();
+const trafficLeadPool = approved
+  .filter((story) => Number(story.trafficScore || 0) > 0 && (now - +new Date(story.publishedAt)) <= 36 * 60 * 60 * 1000)
+  .sort((a, b) => (Number(b.trafficScore || 0) - Number(a.trafficScore || 0)) || (Number(b.importance || 0) - Number(a.importance || 0)) || (+new Date(b.publishedAt) - +new Date(a.publishedAt)));
+const lead = trafficLeadPool[0] || approved[0];
+const latest = approved.filter((story) => story.slug !== lead?.slug).slice(0, 9);
 const lastUpdated = approved[0]?.publishedAt;
 const sectionCounts = Object.fromEntries(sections.map((section) => [section.slug, approved.filter((story) => story.section === section.slug).length]));
 const topics = [...topicCounts(approved as any[]).entries()].filter(([,v])=>v.count>=2).sort((a,b)=>b[1].count-a[1].count).slice(0,8);
@@ -26,7 +30,7 @@ const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
       <img src={imageFor(lead)} alt={altFor(lead)} width="1200" height="675" fetchpriority="high" decoding="async" referrerpolicy={mediaFor(lead).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(lead)}'`} />
       <div class="lead-shade"></div>
       <div class="lead-content">
-        <div class="lead-meta"><span class="latest-pill">الأحدث</span><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><time datetime={lead.publishedAt}>{new Date(lead.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</time></div>
+        <div class="lead-meta"><span class="latest-pill">{Number(lead.trafficScore || 0) > 0 ? 'الأهم الآن' : 'الأحدث'}</span><span>{sectionMap[lead.section]?.name ?? 'رياضة'}</span><time datetime={lead.publishedAt}>{new Date(lead.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</time></div>
         <h1>{lead.title}</h1>
         <p>{lead.excerpt}</p>
         <b>اقرأ الخبر كاملًا ←</b>
