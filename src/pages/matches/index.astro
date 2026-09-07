@@ -2,19 +2,22 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
 import { allMatches, matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
+import { competitionMeta, teamMeta } from '../../lib/hubs';
 
 const now = Date.now();
 const featured = allMatches
   .filter((item) => +new Date(item.kickoff) >= now - 12 * 3_600_000 && +new Date(item.kickoff) <= now + 48 * 3_600_000)
   .sort((a, b) => (b.opportunityScore || 0) - (a.opportunityScore || 0) || +new Date(a.kickoff) - +new Date(b.kickoff))
   .slice(0, 12);
+const teamName = (value:string) => teamMeta(value).name || value;
+const leagueName = (value:string) => competitionMeta(value).name || value;
 const title = 'مركز المباريات | أهم مباريات اليوم والقادمة - ملخص';
 const description = 'مركز مباريات ملخص: أهم مباريات اليوم والقادمة في الدوري السعودي والدوريات الأوروبية والبطولات القارية مع المواعيد والنتائج.';
 ---
 <BaseLayout title={title} description={description} section="football">
   <section class="shell section-hero">
     <span>⚽</span>
-    <div><small>Match Center</small><h1>مركز المباريات</h1><p>المباريات الأعلى اهتمامًا الآن، مع تحديث الحالة والنتيجة.</p></div>
+    <div><small>مركز المباريات</small><h1>مركز المباريات</h1><p>المباريات الأعلى اهتمامًا الآن، مع تحديث الحالة والنتيجة.</p></div>
   </section>
 
   <div class="shell hub-cta"><a class="button" href="/matches/today">عرض جميع مباريات اليوم ←</a></div>
@@ -25,8 +28,8 @@ const description = 'مركز مباريات ملخص: أهم مباريات ا�
     <div class="feature-grid">
       {featured.length ? featured.map((match) => (
         <a class:list={["feature-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
-          <span>{match.league.name}</span>
-          <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
+          <span>{leagueName(match.league.name)}</span>
+          <h3>{teamName(match.home.name)} <em>ضد</em> {teamName(match.away.name)}</h3>
           <div class="fixture-info">
             <b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b>
             <small>{matchStateArabic(match.state)} • {matchDateArabic(match.kickoff)}</small>
