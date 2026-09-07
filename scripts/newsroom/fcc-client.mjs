@@ -8,7 +8,7 @@ let cachedModel = configuredModel || '';
 function headers(extra = {}) {
   return {
     'content-type': 'application/json',
-    accept: 'application/json, text/event-stream',
+    accept: 'text/event-stream, application/json',
     ...(key ? { authorization: `Bearer ${key}` } : {}),
     ...extra
   };
@@ -42,6 +42,10 @@ function outputTextFromSse(raw) {
       lastObject = event;
 
       if (typeof event?.delta === 'string') deltas.push(event.delta);
+      if (typeof event?.text === 'string' && /output_text/i.test(String(event?.type || ''))) {
+        deltas.push(event.text);
+      }
+
       const chatDelta = event?.choices?.[0]?.delta?.content;
       if (typeof chatDelta === 'string') deltas.push(chatDelta);
 
@@ -118,7 +122,7 @@ export async function fccRequest(prompt) {
     const response = await fetch(`${base}/responses`, {
       method: 'POST',
       headers: headers(),
-      body: JSON.stringify({ model, input: prompt, stream: false }),
+      body: JSON.stringify({ model, input: prompt, stream: true }),
       signal: controller.signal
     });
     const text = await response.text();
