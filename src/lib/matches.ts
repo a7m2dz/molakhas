@@ -1,5 +1,18 @@
 import matches from '../data/matches.json';
 
+export type MatchEventDetail = {
+  minute?: string;
+  type?: string;
+  player?: string;
+  assist?: string;
+  teamId?: number | null;
+  team?: string;
+  score?: string;
+  description?: string;
+};
+
+export type MatchStatDetail = { title: string; home: string; away: string };
+
 export type MolakhasMatch = {
   id: number;
   slug: string;
@@ -15,9 +28,25 @@ export type MolakhasMatch = {
   section: string;
   opportunityScore: number;
   indexable?: boolean;
+  indexQualityScore?: number;
   source?: string;
   sourceUrl?: string;
   updatedAt?: string;
+  details?: {
+    venue?: string;
+    referee?: string;
+    attendance?: number | null;
+    round?: string;
+    events?: MatchEventDetail[];
+    stats?: MatchStatDetail[];
+    lineups?: { home?: string[]; away?: string[] };
+    topPlayers?: { name: string; team?: string; rating?: number | null }[];
+    xg?: { home?: string; away?: string } | null;
+    hasDetails?: boolean;
+    detailProvider?: string;
+    detailUpdatedAt?: string;
+    fetchMethod?: string;
+  };
 };
 
 export const allMatches = (matches as MolakhasMatch[])
@@ -68,6 +97,26 @@ export function groupByLeague(items: MolakhasMatch[]) {
   });
 }
 
+export function matchIndexQualityScore(match: MolakhasMatch) {
+  if (Number.isFinite(Number(match.indexQualityScore))) return Number(match.indexQualityScore);
+  let score = 20;
+  const opportunity = Number(match.opportunityScore || 0);
+  if (opportunity >= 55) score += 20;
+  if (opportunity >= 75) score += 15;
+  if (opportunity >= 90) score += 10;
+  if (match.state === 'live' || match.state === 'final') score += 8;
+  if (match.details?.hasDetails) score += 10;
+  if (match.details?.venue) score += 3;
+  if ((match.details?.events?.length || 0) >= 2) score += 5;
+  if ((match.details?.stats?.length || 0) >= 3) score += 5;
+  if ((match.details?.lineups?.home?.length || 0) >= 8 && (match.details?.lineups?.away?.length || 0) >= 8) score += 4;
+  return Math.max(0, Math.min(100, score));
+}
+
+export function isMatchIndexable(match: MolakhasMatch) {
+  return match.indexable !== false && matchIndexQualityScore(match) >= 55;
+}
+
 export function indexableMatches() {
-  return allMatches.filter((item) => item.indexable !== false && (item.opportunityScore || 0) >= 55);
+  return allMatches.filter(isMatchIndexable);
 }
