@@ -618,5 +618,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "يامال-يتحدث-عن-طموحاته-في-دوري-ابطال-اوروبا-وقيادة-برشلونة-وتوقعاته-بالبالون-دور": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/08083055/GettyImages-2293811814-scaled-e1788870676497.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/يامال-يتحدث-عن-طموحاته-في-دوري-ابطال-اوروبا-وقيادة-برشلونة-وتوقعاته-بالبالون-دور.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7574284/2026/09/08/lamine-yamal-barcelona-champions-league-ballon-dor/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7574284/2026/09/08/lamine-yamal-barcelona-champions-league-ballon-dor/",
+    "type": "image/jpeg",
+    "alt": "لامين يامال يتحدث أمام الصحفيين في مؤتمر صحفي قبل مباراة برشلونة في دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "اسطورة-الـ-nba-يقول-ان-اسلوب-جيمس-هاردن-لا-يحقق-البطولات-ويقارنه-بتراسي-مكريدي": {
+    "src": "https://imgcdn.basketballnews.com/James-Harden.jpg",
+    "fallbackSrc": "/news-images/اسطورة-الـ-nba-يقول-ان-اسلوب-جيمس-هاردن-لا-يحقق-البطولات-ويقارنه-بتراسي-مكريدي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/nba-legend-says-james-hardens-style-never-wins-championships-compares-him-to-tracy-mcgrady/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/nba-legend-says-james-hardens-style-never-wins-championships-compares-him-to-tracy-mcgrady/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "صورة لجيمس هاردن، لاعب كليفلاند كافالييرز، على الملعب خلال مباراة ضد أورلاندو ماجيك في مركز كيا.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
