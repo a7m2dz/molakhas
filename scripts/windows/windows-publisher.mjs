@@ -11,7 +11,7 @@ const logPath = path.join(runtime, 'publisher.log');
 
 process.env.PUBLIC_SITE_URL ||= 'https://mulakhas.com';
 process.env.OMNIROUTE_BASE_URL ||= 'http://127.0.0.1:20128/v1';
-if (process.env.OMNIROUTE_API_KEY === undefined) process.env.OMNIROUTE_API_KEY = 'sk_omniroute';
+process.env.OMNIROUTE_API_KEY = '';
 process.env.OMNIROUTE_MODEL = 'auto/best-free';
 process.env.OMNIROUTE_FALLBACK_MODEL ||= 'auto';
 process.env.OMNIROUTE_TIMEOUT_MS ||= '90000';
@@ -67,7 +67,7 @@ async function omniServerReady() {
 }
 
 async function main() {
-  log(`Windows publisher cycle start; model=${process.env.OMNIROUTE_MODEL}`);
+  log(`Windows publisher cycle start; model=${process.env.OMNIROUTE_MODEL}; auth=anonymous-loopback`);
   if (!(await omniServerReady())) throw new Error('OmniRoute server HEAD /v1/models is not ready.');
 
   log('Running deep OmniRoute test: model catalog + real inference.');
