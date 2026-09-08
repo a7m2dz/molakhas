@@ -1148,5 +1148,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "نتفليكس-يبدا-نشر-ايرادات-شباك-التذاكر-لستة-افلام-قادمة": {
+    "src": "https://deadline.com/wp-content/uploads/2026/03/the-Adventures-of-Cliff-Booth-The-Chronicles-of-Narnia-The-Lion-the-Witch-and-the-Wardrobe.jpg?w=1024",
+    "fallbackSrc": "/news-images/نتفليكس-يبدا-نشر-ايرادات-شباك-التذاكر-لستة-افلام-قادمة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/netflix-box-office-reporting-cliff-booth-narnia-1237071226/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNS2ZuT29pRGVKbERXUXQ1SHU5SElid1VydGtFN0ppUDVNcXlLeHc4cXBGMDJkQ2NjaG5qcXVHYTlrVUlVLXpyWXZJUkZfZDNIdWRPd0R6ejZGejZGQXZKSWhzLWVBX0tzN000dFZWU0xxTjN4Vm9kRUxGeU9qVzdqT29DNlBXWWtlbVN0UU1CT0NEQQ?oc=5",
+    "type": "image/webp",
+    "width": 1500,
+    "height": 845,
+    "alt": "شعار نتفليكس مع ملصقات ستة أفلام قادمة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }

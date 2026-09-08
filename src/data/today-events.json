@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T19:46:54.150Z",
+  "generatedAt": "2026-09-08T20:00:30.432Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -7,9 +7,9 @@
   "counts": {
     "football": 14,
     "nba": 0,
-    "mma": 3,
+    "mma": 1,
     "wwe": 6,
-    "total": 23
+    "total": 21
   },
   "events": [
     {
@@ -24,21 +24,6 @@
       "importance": 100,
       "source": "FotMob",
       "url": "/matches/al-qadsiah-al-ahli-2026-09-08-5970131/",
-      "internal": true,
-      "scope": "today"
-    },
-    {
-      "id": "football-5970130",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al Ittihad ضد Al-Fayha",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-08T18:00:00.000Z",
-      "state": "live",
-      "score": "2 - 1",
-      "importance": 100,
-      "source": "FotMob",
-      "url": "/matches/al-ittihad-al-fayha-2026-09-08-5970130/",
       "internal": true,
       "scope": "today"
     },
@@ -125,7 +110,7 @@
       "subtitle": "EFL Cup",
       "start": "2026-09-08T18:45:00.000Z",
       "state": "live",
-      "score": "1 - 0",
+      "score": "2 - 0",
       "importance": 60,
       "source": "FotMob",
       "url": "/matches/crystal-palace-middlesbrough-2026-09-08-6099328/",
@@ -178,6 +163,36 @@
       "scope": "today"
     },
     {
+      "id": "football-5970130",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Ittihad ضد Al-Fayha",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-08T18:00:00.000Z",
+      "state": "final",
+      "score": "2 - 1",
+      "importance": 97,
+      "source": "FotMob",
+      "url": "/matches/al-ittihad-al-fayha-2026-09-08-5970130/",
+      "internal": true,
+      "scope": "today"
+    },
+    {
+      "id": "ufc-official-2026-09-13-0",
+      "sport": "mma",
+      "sportLabel": "MMA / UFC",
+      "title": "UFC: Silva vs Delgado",
+      "subtitle": "Desert Diamond Arena",
+      "start": "2026-09-12T21:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 97,
+      "source": "UFC.com",
+      "url": "https://www.ufc.com/events",
+      "internal": false,
+      "scope": "upcoming"
+    },
+    {
       "id": "wwe-20260908-0",
       "sport": "wwe",
       "sportLabel": "WWE",
@@ -228,7 +243,7 @@
       "sportLabel": "WWE",
       "title": "AAA TripleMania 34 Night 2",
       "subtitle": "Arena CDMX, Mexico City, Mexico",
-      "start": "2026-09-14T02:00:00.000Z",
+      "start": "2026-09-14T01:00:00.000Z",
       "state": "upcoming",
       "score": "",
       "importance": 90,
@@ -296,51 +311,6 @@
       "url": "/matches/al-hazem-al-taawoun-2026-09-08-5970129/",
       "internal": true,
       "scope": "today"
-    },
-    {
-      "id": "ufc-600060736",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-08T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060736/league/ufc",
-      "internal": false,
-      "scope": "today"
-    },
-    {
-      "id": "ufc-600060772",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Noche UFC",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-12T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060772/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060737",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-15T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060737/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
     },
     {
       "id": "football-6106404",
