@@ -3,6 +3,7 @@ $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $Supervisor = Join-Path $PSScriptRoot 'molakhas-supervisor.ps1'
 $RuntimeDir = Join-Path $ProjectRoot '.runtime'
 $PidFile = Join-Path $RuntimeDir 'supervisor.pid'
+$LocalEnvFile = Join-Path $ProjectRoot '.env.local.ps1'
 $TaskName = 'Molakhas Supervisor'
 $User = "$env:USERDOMAIN\$env:USERNAME"
 
@@ -12,16 +13,21 @@ if (-not (Test-Path $Supervisor)) {
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 
-# Persist the currently working OmniRoute key for this Windows user without
-# writing the secret into the repository or logs.
+# Load the gitignored local environment first so installation works even in a fresh shell.
+if (Test-Path $LocalEnvFile) {
+  . $LocalEnvFile
+  Write-Host 'Loaded .env.local.ps1.' -ForegroundColor Green
+}
+
+# Persist the working OmniRoute key for this Windows user without writing it to GitHub/logs.
 $currentKey = String($env:OMNIROUTE_API_KEY).Trim()
 $storedKey = [Environment]::GetEnvironmentVariable('OMNIROUTE_API_KEY', 'User')
 if ($currentKey) {
   [Environment]::SetEnvironmentVariable('OMNIROUTE_API_KEY', $currentKey, 'User')
   $storedKey = $currentKey
-  Write-Host 'Stored OMNIROUTE_API_KEY securely in Windows User environment.' -ForegroundColor Green
+  Write-Host 'Stored OMNIROUTE_API_KEY in Windows User environment.' -ForegroundColor Green
 } elseif (-not $storedKey) {
-  throw 'OMNIROUTE_API_KEY is missing. Set it in this PowerShell session once, then rerun the installer.'
+  throw 'OMNIROUTE_API_KEY is missing from .env.local.ps1 and Windows User environment.'
 }
 
 try { Stop-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue } catch {}
@@ -38,8 +44,7 @@ Get-CimInstance Win32_Process -Filter "Name='powershell.exe' OR Name='pwsh.exe'"
     } catch {}
   }
 
-# Stop the entire stale OmniRoute CLI/server tree. Killing only the listener child
-# leaves bin/omniroute.mjs alive, which can respawn a server with its old environment.
+# Stop the full stale OmniRoute CLI/server tree before relaunching it cleanly.
 $omniProcesses = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
   Where-Object {
     $_.CommandLine -and (
@@ -57,7 +62,6 @@ $omniProcesses |
     } catch {}
   }
 
-# Catch any remaining listener that was not identifiable by command line.
 Get-NetTCPConnection -LocalPort 20128 -State Listen -ErrorAction SilentlyContinue |
   Select-Object -ExpandProperty OwningProcess -Unique |
   ForEach-Object {
@@ -92,7 +96,7 @@ Write-Host ''
 Write-Host 'Molakhas autostart installed successfully.' -ForegroundColor Green
 Write-Host "Task: $TaskName"
 Write-Host "Project: $ProjectRoot"
-Write-Host 'OmniRoute key: stored in Windows User environment (not in GitHub).'
+Write-Host 'OmniRoute config: .env.local.ps1 + Windows User fallback (secret never committed).'
 Write-Host 'Model: auto/best-free'
 Write-Host 'The supervisor is now running and will start automatically at every Windows logon.'
 Write-Host "Logs: $ProjectRoot\.runtime\supervisor.log"
