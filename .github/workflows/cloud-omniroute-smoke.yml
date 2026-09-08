@@ -43,15 +43,14 @@ jobs:
           echo $! > /tmp/omniroute.pid
 
           for attempt in $(seq 1 180); do
-            if curl -fsS --max-time 4 "http://127.0.0.1:20128/" > /tmp/omniroute-home.html 2>/dev/null; then
-              echo "OmniRoute HTTP server is ready."
-              tail -n 80 /tmp/omniroute.log || true
+            if curl -fsS --max-time 4 -H "Authorization: Bearer $RUNNER_API_KEY" "$OMNIROUTE_BASE_URL/models" > /tmp/omniroute-models.json 2>/dev/null; then
+              echo "OmniRoute authenticated API is ready."
               exit 0
             fi
             sleep 2
           done
 
-          echo "OmniRoute HTTP server did not become ready in time."
+          echo "OmniRoute authenticated API did not become ready in time."
           tail -n 200 /tmp/omniroute.log || true
           exit 1
       - name: Test authenticated models endpoint and real Arabic inference through auto
