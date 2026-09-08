@@ -43,6 +43,7 @@ if (-not $env:OMNIROUTE_API_KEY) { $env:OMNIROUTE_API_KEY = 'sk_omniroute' }
 $env:OMNIROUTE_MODEL = 'auto/best-free'
 if (-not $env:OMNIROUTE_FALLBACK_MODEL) { $env:OMNIROUTE_FALLBACK_MODEL = 'auto' }
 if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '60000' }
+$env:HOSTNAME = '127.0.0.1'
 $env:OMNIROUTE_SERVER_HOST = '127.0.0.1'
 $env:REQUIRE_API_KEY = 'false'
 
