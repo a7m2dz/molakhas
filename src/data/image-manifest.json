@@ -696,5 +696,49 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "غريزليز-تكتسب-جوردان-هاوكينز-وميشا-بيفي-مقابل-تاج-جيبسون-وايه-جي-جونسون": {
+    "src": "/news-images/غريزليز-تكتسب-جوردان-هاوكينز-وميشا-بيفي-مقابل-تاج-جيبسون-وايه-جي-جونسون.webp",
+    "fallbackSrc": "/news-images/غريزليز-تكتسب-جوردان-هاوكينز-وميشا-بيفي-مقابل-تاج-جيبسون-وايه-جي-جونسون.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "لاعبو فريق غريزليز وفريق بيلكانز أثناء التدريب في ملعب الدوري الأمريكي للمحترفين",
+    "caption": "لاعبو غريزليز خلال مواجهة مع بيلكانز في مباراة بدوري NBA",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287203/Grizzlies-Acquire-Jordan-Hawkins-Micah-Peavy-Second-Round-Pick-For-Taj-Gibson-AJ-Johnson",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
+  },
+  "تقرير-جديد-بيتون-واتسون-فضل-مستقبله-على-مساعدة-ناغتس-في-التصفيات": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-4-92.jpg",
+    "fallbackSrc": "/news-images/تقرير-جديد-بيتون-واتسون-فضل-مستقبله-على-مساعدة-ناغتس-في-التصفيات.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-active-basketball-news-peyton-watson-allegedly-put-nba-future-ahead-of-denver-nuggets-playoff-push-reveals-new-report/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-active-basketball-news-peyton-watson-allegedly-put-nba-future-ahead-of-denver-nuggets-playoff-push-reveals-new-report/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "بيتون واتسون بقميص ناغتس أثناء مباراة في دوري الـ NBA",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "لا-اهداف-لكن-اميري-يعرف-ان-مهاجمي-استون-فيلا-يحتاجون-الى-الوقت": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/024d/live/6ba67470-ab6a-11f1-9712-a14d469bace4.jpg",
+    "fallbackSrc": "/news-images/لا-اهداف-لكن-اميري-يعرف-ان-مهاجمي-استون-فيلا-يحتاجون-الى-الوقت.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/c5yegg8zz6no?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/c5yegg8zz6no?at_medium=RSS&at_campaign=rss",
+    "type": "image/jpeg",
+    "alt": "المدرب إميري يتحدث في مؤتمر صحفي عن أداء فريقه في الهجوم وتحديات التهديف",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
