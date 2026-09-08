@@ -9,6 +9,7 @@ $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $RuntimeDir = Join-Path $ProjectRoot '.runtime'
 $CycleScript = Join-Path $PSScriptRoot 'molakhas-cycle.ps1'
 $LogFile = Join-Path $RuntimeDir 'supervisor.log'
+$PidFile = Join-Path $RuntimeDir 'supervisor.pid'
 $HeartbeatRepo = Join-Path $RuntimeDir 'heartbeat-repo'
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
@@ -33,6 +34,7 @@ if (-not $hasMutex) {
   exit 0
 }
 
+[System.IO.File]::WriteAllText($PidFile, [string]$PID)
 Set-Location $ProjectRoot
 
 if (-not $env:PUBLIC_SITE_URL) { $env:PUBLIC_SITE_URL = 'https://mulakhas.com' }
@@ -44,18 +46,64 @@ if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '60000' }
 $env:OMNIROUTE_SERVER_HOST = '127.0.0.1'
 $env:REQUIRE_API_KEY = 'false'
 
-function Test-OmniRoute {
+function Test-OmniRoutePort {
   try {
-    $headers = @{ Authorization = "Bearer $($env:OMNIROUTE_API_KEY)" }
-    $null = Invoke-RestMethod -Uri "$($env:OMNIROUTE_BASE_URL)/models" -Headers $headers -Method Get -TimeoutSec 5
+    $client = New-Object System.Net.Sockets.TcpClient
+    $wait = $client.BeginConnect('127.0.0.1', 20128, $null, $null)
+    $ok = $wait.AsyncWaitHandle.WaitOne(1200, $false)
+    if (-not $ok) { $client.Close(); return $false }
+    $client.EndConnect($wait)
+    $client.Close()
     return $true
   } catch {
     return $false
   }
 }
 
+function Invoke-ModelsProbe {
+  param([AllowNull()][string]$ApiKey)
+  try {
+    $params = @{
+      Uri = "$($env:OMNIROUTE_BASE_URL)/models"
+      Method = 'Get'
+      TimeoutSec = 5
+      ErrorAction = 'Stop'
+    }
+    if ($ApiKey) { $params.Headers = @{ Authorization = "Bearer $ApiKey" } }
+    $response = Invoke-RestMethod @params
+    return $true
+  } catch {
+    return $false
+  }
+}
+
+function Resolve-OmniRouteAuth {
+  $candidates = New-Object System.Collections.Generic.List[string]
+  if ($env:OMNIROUTE_API_KEY) { $candidates.Add($env:OMNIROUTE_API_KEY) }
+  if (-not $candidates.Contains('sk_omniroute')) { $candidates.Add('sk_omniroute') }
+  $candidates.Add('')
+
+  foreach ($candidate in $candidates) {
+    if (Invoke-ModelsProbe -ApiKey $candidate) {
+      $env:OMNIROUTE_API_KEY = $candidate
+      if ($candidate) {
+        Write-Log "OmniRoute API is healthy using bearer authentication. Model=$($env:OMNIROUTE_MODEL)"
+      } else {
+        Write-Log "OmniRoute API is healthy without bearer authentication. Model=$($env:OMNIROUTE_MODEL)"
+      }
+      return $true
+    }
+  }
+  return $false
+}
+
 function Start-OmniRouteIfNeeded {
-  if (Test-OmniRoute) { return $true }
+  if (Resolve-OmniRouteAuth) { return $true }
+
+  if (Test-OmniRoutePort) {
+    Write-Log 'OmniRoute port 20128 is listening, but /v1/models authentication/readiness is not healthy yet. Not starting a duplicate process.'
+    return $false
+  }
 
   $command = Get-Command omniroute -ErrorAction SilentlyContinue
   if (-not $command) {
@@ -66,7 +114,7 @@ function Start-OmniRouteIfNeeded {
   $cmdExe = $env:ComSpec
   if (-not $cmdExe) { $cmdExe = "$env:SystemRoot\System32\cmd.exe" }
 
-  Write-Log 'OmniRoute is not responding. Starting local OmniRoute with --no-open.'
+  Write-Log 'OmniRoute is offline. Starting local OmniRoute with --no-open on 127.0.0.1.'
   try {
     Start-Process -FilePath $cmdExe -ArgumentList @('/d', '/s', '/c', 'omniroute --no-open') -WorkingDirectory $ProjectRoot -WindowStyle Hidden | Out-Null
   } catch {
@@ -76,17 +124,15 @@ function Start-OmniRouteIfNeeded {
 
   for ($attempt = 1; $attempt -le 90; $attempt++) {
     Start-Sleep -Seconds 2
-    if (Test-OmniRoute) {
-      Write-Log 'OmniRoute API is healthy.'
-      return $true
-    }
+    if (Resolve-OmniRouteAuth) { return $true }
   }
 
-  Write-Log 'OmniRoute did not become healthy within 180 seconds.'
+  Write-Log 'OmniRoute did not become API-ready within 180 seconds.'
   return $false
 }
 
 function Publish-Heartbeat {
+  param([bool]$OmniHealthy)
   try {
     New-Item -ItemType Directory -Force -Path $HeartbeatRepo | Out-Null
 
@@ -111,7 +157,8 @@ function Publish-Heartbeat {
       source = 'windows-primary'
       updatedAt = (Get-Date).ToUniversalTime().ToString('o')
       project = 'molakhas'
-      omnirouteHealthy = [bool](Test-OmniRoute)
+      omnirouteHealthy = [bool]$OmniHealthy
+      model = $env:OMNIROUTE_MODEL
     } | ConvertTo-Json -Depth 3
 
     $heartbeatPath = Join-Path $HeartbeatRepo 'heartbeat.json'
@@ -123,7 +170,7 @@ function Publish-Heartbeat {
 
     & git -C $HeartbeatRepo push --force origin HEAD:windows-heartbeat 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) {
-      Write-Log 'Published Windows-primary heartbeat.'
+      Write-Log "Published Windows-primary heartbeat. healthy=$OmniHealthy model=$($env:OMNIROUTE_MODEL)"
     } else {
       Write-Log 'Heartbeat push failed; cloud fallback will remain eligible.'
     }
@@ -132,24 +179,25 @@ function Publish-Heartbeat {
   }
 }
 
-Write-Log "Molakhas supervisor started. Project=$ProjectRoot Cycle=${CycleMinutes}m Heartbeat=${HeartbeatMinutes}m Model=$($env:OMNIROUTE_MODEL)"
+Write-Log "Molakhas supervisor started. Project=$ProjectRoot Cycle=${CycleMinutes}m Heartbeat=${HeartbeatMinutes}m Model=$($env:OMNIROUTE_MODEL) PID=$PID"
 
 $nextHealthCheck = Get-Date
 $nextHeartbeat = Get-Date
 $nextCycle = Get-Date
 $publisherProcess = $null
+$omniHealthy = $false
 
 try {
   while ($true) {
     $now = Get-Date
 
     if ($now -ge $nextHealthCheck) {
-      $null = Start-OmniRouteIfNeeded
+      $omniHealthy = [bool](Start-OmniRouteIfNeeded)
       $nextHealthCheck = (Get-Date).AddSeconds([Math]::Max(10, $HealthCheckSeconds))
     }
 
     if ($now -ge $nextHeartbeat) {
-      Publish-Heartbeat
+      Publish-Heartbeat -OmniHealthy $omniHealthy
       $nextHeartbeat = (Get-Date).AddMinutes([Math]::Max(2, $HeartbeatMinutes))
     }
 
@@ -160,8 +208,8 @@ try {
     }
 
     if (-not $publisherProcess -and $now -ge $nextCycle) {
-      if (Test-OmniRoute) {
-        Write-Log 'Starting publisher cycle.'
+      if ($omniHealthy) {
+        Write-Log "Starting publisher cycle with model=$($env:OMNIROUTE_MODEL)."
         $publisherProcess = Start-Process -FilePath 'powershell.exe' -ArgumentList @(
           '-NoProfile',
           '-ExecutionPolicy', 'Bypass',
@@ -169,7 +217,7 @@ try {
         ) -WorkingDirectory $ProjectRoot -WindowStyle Hidden -PassThru
         $nextCycle = (Get-Date).AddMinutes([Math]::Max(5, $CycleMinutes))
       } else {
-        Write-Log 'Publisher cycle postponed because OmniRoute is not healthy.'
+        Write-Log 'Publisher cycle postponed because OmniRoute API is not healthy.'
         $nextCycle = (Get-Date).AddMinutes(2)
       }
     }
@@ -177,6 +225,7 @@ try {
     Start-Sleep -Seconds 10
   }
 } finally {
+  Remove-Item $PidFile -Force -ErrorAction SilentlyContinue
   if ($hasMutex) {
     try { $mutex.ReleaseMutex() | Out-Null } catch {}
   }
