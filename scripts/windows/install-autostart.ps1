@@ -26,6 +26,17 @@ Get-CimInstance Win32_Process -Filter "Name='powershell.exe' OR Name='pwsh.exe'"
     } catch {}
   }
 
+# Restart only the process currently listening on OmniRoute's local port so the
+# new supervisor can relaunch it with the expected host/auth environment.
+Get-NetTCPConnection -LocalPort 20128 -State Listen -ErrorAction SilentlyContinue |
+  Select-Object -ExpandProperty OwningProcess -Unique |
+  ForEach-Object {
+    try {
+      Stop-Process -Id $_ -Force -ErrorAction Stop
+      Write-Host "Stopped stale OmniRoute listener PID $_ on port 20128." -ForegroundColor Yellow
+    } catch {}
+  }
+
 if (Test-Path $PidFile) { Remove-Item $PidFile -Force -ErrorAction SilentlyContinue }
 
 $PowerShellExe = (Get-Command powershell.exe -ErrorAction Stop).Source
