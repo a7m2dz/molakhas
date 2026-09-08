@@ -1132,5 +1132,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "جوش-هيوستون-يشارك-في-فيلم-ثروتلد-المستوحى-من-سلسلة-ديرتي-اير-على-امازون-م-جي-ام": {
+    "src": "https://www.hollywoodreporter.com/wp-content/uploads/2026/09/Josh-Heuston-Throttled-Book-Cover-Split-Getty-H-2026.jpg?w=1296&",
+    "fallbackSrc": "/news-images/جوش-هيوستون-يشارك-في-فيلم-ثروتلد-المستوحى-من-سلسلة-ديرتي-اير-على-امازون-م-جي-ام.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Hollywood Reporter",
+    "sourceUrl": "https://www.hollywoodreporter.com/movies/movie-news/josh-heuston-throttled-film-lauren-asher-book-1236689595/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQcTJjTGJZQlNiWWhhTk1EdmN0UnFTRER4YWt2MV8xM3ZOaHEyN3NFZldmbWpHckd3WTRGNTVMV2gxakxrVkVyQjJMdjV5bmtIdUVsZkJWMFFrOE13a2V5NzJvakJaVHdrVm5ydk1JOTNRSTh1LVkxR1FUTWZoa0FsaWZyeXc2VlNEejlRazREWlFpeHFZUEJkbE9nNjUtMXpSbW0yRldNRGh5TC0zMEE?oc=5",
+    "type": "image/webp",
+    "width": 1296,
+    "height": 730,
+    "alt": "جوش هيوستون يلتقط صورة في موقع تصوير فيلم ثروتلد",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
