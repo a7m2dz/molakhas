@@ -40,8 +40,9 @@ jobs:
       OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY || 'sk_omniroute' }}
       OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto' }}
       OMNIROUTE_FALLBACK_MODEL: ${{ vars.OMNIROUTE_FALLBACK_MODEL || 'auto' }}
-      OMNIROUTE_TIMEOUT_MS: ${{ vars.OMNIROUTE_TIMEOUT_MS || '120000' }}
-      NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
+      OMNIROUTE_TIMEOUT_MS: ${{ vars.OMNIROUTE_TIMEOUT_MS || '60000' }}
+      NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '6' }}
+      NEWSROOM_MAX_ENTERTAINMENT_STORIES: ${{ vars.NEWSROOM_MAX_ENTERTAINMENT_STORIES || '3' }}
       NEWSROOM_MAX_AGE_HOURS: ${{ vars.NEWSROOM_MAX_AGE_HOURS || '72' }}
       NEWSROOM_MIN_TRAFFIC_SCORE: ${{ vars.NEWSROOM_MIN_TRAFFIC_SCORE || '35' }}
       AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED || 'true' }}
@@ -74,6 +75,7 @@ jobs:
 
       - name: Rank traffic opportunities from RSS and radar
         continue-on-error: true
+        timeout-minutes: 8
         run: npm run newsroom:dry
 
       - name: Boot OmniRoute inside the cloud runner
@@ -147,6 +149,7 @@ jobs:
         id: generate
         if: steps.omni_boot.outputs.ready == 'true' && steps.omni.outcome == 'success'
         continue-on-error: true
+        timeout-minutes: 20
         run: npm run newsroom
 
       - name: OmniRoute fallback notice
@@ -154,6 +157,7 @@ jobs:
         run: echo "AI generation was unavailable in this cycle; sports snapshots, source images, build and the next scheduled cycle continue normally."
 
       - name: Build production site and media
+        timeout-minutes: 12
         shell: bash
         run: |
           for attempt in 1 2; do
@@ -166,6 +170,7 @@ jobs:
           exit 1
 
       - name: Run prelaunch quality audit
+        timeout-minutes: 6
         run: npm run audit:prelaunch
 
       - name: Persist cloud newsroom state
