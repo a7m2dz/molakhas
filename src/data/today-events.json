@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T15:23:57.257Z",
+  "generatedAt": "2026-09-08T15:43:58.077Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -12,6 +12,21 @@
     "total": 21
   },
   "events": [
+    {
+      "id": "football-5970128",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al-Ettifaq ضد Al-Faisaly",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-08T15:30:00.000Z",
+      "state": "live",
+      "score": "0 - 0",
+      "importance": 78,
+      "source": "FotMob",
+      "url": "/matches/al-ettifaq-al-faisaly-2026-09-08-5970128/",
+      "internal": true,
+      "scope": "today"
+    },
     {
       "id": "football-5970131",
       "sport": "football",
@@ -129,21 +144,6 @@
       "importance": 86,
       "source": "FotMob",
       "url": "/matches/real-madrid-inter-2026-09-08-6106242/",
-      "internal": true,
-      "scope": "today"
-    },
-    {
-      "id": "football-5970128",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al-Ettifaq ضد Al-Faisaly",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-08T15:30:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 75,
-      "source": "FotMob",
-      "url": "/matches/al-ettifaq-al-faisaly-2026-09-08-5970128/",
       "internal": true,
       "scope": "today"
     },

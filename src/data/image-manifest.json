@@ -954,5 +954,35 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287205/Sixers-Persistence-Calling-Celtics-Paved-Way-For-Jaylen-Brown-Trade",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "ماكسيما-روما-يعلن-مشروعه-لتسلق-القمة-في-كرة-السلة-الاوروبية": {
+    "src": "https://images.eurohoops.net/2026/09/c5ac0aba-roms-600x314.jpg",
+    "fallbackSrc": "/news-images/ماكسيما-روما-يعلن-مشروعه-لتسلق-القمة-في-كرة-السلة-الاوروبية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/es/euroleague-es/2005812/maxima-roma-quiere-jugar-en-la-euroliga-lo-antes-posible-pero-no-descarta-la-nba-europa/",
+    "originalStoryUrl": "https://www.eurohoops.net/es/euroleague-es/2005812/maxima-roma-quiere-jugar-en-la-euroliga-lo-antes-posible-pero-no-descarta-la-nba-europa/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "بول ماتياسيك وفرانشيسكو توتي يقدمان مشروع ماكسيما روما في مؤتمر صحفي في روما، مع خلفية شعار الفريق",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "من-سيحصل-على-جايزة-الكرة-الذهبية-للرجال-2026-اراء-كتابنا": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/08092624/ballon-dor-1.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/من-سيحصل-على-جايزة-الكرة-الذهبية-للرجال-2026-اراء-كتابنا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7574263/2026/09/08/ballon-dor-2026-shortlist-mens-winner-opinion/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7574263/2026/09/08/ballon-dor-2026-shortlist-mens-winner-opinion/",
+    "type": "image/jpeg",
+    "alt": "صورة للاعبين المتأهلين لجائزة الكرة الذهبية 2026 على خلفية كؤوس",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
