@@ -1,5 +1,72 @@
 [
   {
+    "id": "e46acb0e7313",
+    "slug": "مسلسل-the-gentleman-يعود-الى-netflix-بموسم-ثاني-يواجه-انخفاضا-45-في-المشاهدين",
+    "section": "tv",
+    "title": "مسلسل The Gentleman يعود إلى Netflix بموسم ثاني يواجه انخفاضاً 45% في المشاهدين",
+    "seoTitle": "عودة مسلسل The Gentleman لموسم ثاني على Netflix",
+    "metaDescription": "أُصدر الموسم الثاني من مسلسل The Gentleman على Netflix في 3 سبتمبر، وجمع 6.7 مليون مشاهدة في أربعة أيام، مسجلاً انخفاضاً يقارب 45% مقارنةً بالموسم الأول.",
+    "focusKeyword": "The Gentleman Netflix موسم ثاني",
+    "excerpt": "أعلن Netflix عن إطلاق الموسم الثاني من مسلسل The Gentleman في 3 سبتمبر، حيث سجل 6.7 مليون مشاهدة في أول أربعة أيام، لكنه شهد انخفاضاً يقارب 45% في عدد المشاهدين مقارنةً بالموسم الأول.",
+    "keyPoints": [
+      "الموسم الثاني من The Gentleman ظهر على Netflix في 3 سبتمبر.",
+      "حقق 6.7 مليون مشاهدة خلال أول أربعة أيام من الإطلاق.",
+      "انخفض عدد المشاهدين بنحو 45% مقارنةً بموسم الأول."
+    ],
+    "body": [
+      "أطلقت منصة Netflix الموسم الثاني من مسلسل The Gentleman في تاريخ 3 سبتمبر، في خطوة تُعيد السلسلة إلى قائمة العروض المتجددة على الخدمة.",
+      "خلال الأيام الأربعة الأولى من توفر الحلقة، سجلت السلسلة 6.7 مليون مشاهدة، ما وضعها في المرتبة الثالثة على قائمة المسلسلات الإنجليزية في Netflix للفترة من 31 أغسطس إلى 6 سبتمبر.",
+      "على الرغم من هذا الرقم، فقد أظهر التحليل أن عدد المشاهدين انخفض بنحو نصف مقارنةً بموعد موسم الأول، حيث كان الموسم الأول قد حقق 3.2 مليون مشاهدة في أسبوعه الأول.",
+      "تُشير البيانات إلى أن السلسلة لا تزال تحتفظ بمكانة متوسطة في تصنيفات المشاهدين، وقد تم تجديدها بالفعل لموسم ثالث، ما قد يساهم في استعادة بعض الجمهور على المدى الطويل.",
+      "تُظهر هذه الأرقام أن المشاهدين يواجهون تحديات في متابعة السلسلات المتتالية، خاصةً بعد الفجوة الزمنية بين الموسمين، لكن القائمين على الإنتاج يأملون في جذب مزيد من المتابعين في الأسابيع القادمة."
+    ],
+    "sourceName": "Deadline",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQRTZfYjk2a2lFa1JZSDRzWTNacV9BZFR0ZWRraDNoUDF3SlVjU1Fva1NOY096UW93cFgzVERwTkViOGVJdmhJVmZEUlFIRGhySV9Cb3VTVURLNkpKbHBTN3daRGtacGxzMkRnUG9iYnB2eUJOVU5KeGVWTFY1MGVEM051YVU5STVGRnp2cjdtNGdRcUZoWDM3UDVScWY0N2s?oc=5",
+    "publisherUrl": "https://deadline.com/2026/09/the-gentleman-season-2-premiere-viewership-netflix-top-10-1237071272/",
+    "sourceId": "deadline-entertainment",
+    "sourceEnrichment": "google-batch-signed",
+    "factChecked": true,
+    "trafficScore": 100,
+    "trafficSignals": [
+      "fresh<2h",
+      "section:tv+9",
+      "platform:Netflix",
+      "intent:موعد عرض+موسم/حلقة",
+      "lurvue-intent"
+    ],
+    "sourceCoverage": 1,
+    "radarCoverage": 0,
+    "publishedAt": "2026-09-08T19:14:00.000Z",
+    "generatedAt": "2026-09-08T21:05:59.407Z",
+    "status": "approved",
+    "qualityScore": 100,
+    "confidence": 90,
+    "importance": 80,
+    "trust": 92,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "factualNotes": [],
+    "tags": [
+      "tv",
+      "Netflix",
+      "The Gentleman",
+      "مسلسل"
+    ],
+    "entities": [
+      "The Gentleman",
+      "Netflix"
+    ],
+    "image": {
+      "src": "/news-images/مسلسل-the-gentleman-يعود-الى-netflix-بموسم-ثاني-يواجه-انخفاضا-45-في-المشاهدين.webp",
+      "alt": "ملصق مسلسل The Gentleman على Netflix",
+      "caption": "The Gentleman على Netflix",
+      "searchQuery": "The Gentleman Netflix",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
     "id": "9163ac7cb5ec",
     "slug": "نتفليكس-يبدا-نشر-ايرادات-شباك-التذاكر-لستة-افلام-قادمة",
     "section": "movies",
@@ -272,6 +339,77 @@
       "alt": "ملصق فيلم La Bola Negra مع نجمة بينيلوب كروز في مهرجان كان",
       "caption": "فيلم La Bola Negra يلفت الأنظار في مهرجان كان",
       "searchQuery": "La Bola Negra Cannes poster",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
+    "id": "ff70eb74dc7c",
+    "slug": "اكمال-تصوير-فيلم-the-bell-jar-بنجوم-بيللي-ايليش-وكاري-موليجان",
+    "section": "movies",
+    "title": "إكمال تصوير فيلم The Bell Jar بنجوم بيللي إيليش وكاري موليجان",
+    "seoTitle": "فيلم The Bell Jar ينتج بيللي إيليش وكاري موليجان",
+    "metaDescription": "أعلنت شركة Focus Features إكمال تصوير فيلم The Bell Jar المستوحى من رواية سيلفيا بلاث، ويشارك فيه بيللي إيليش وكاري موليجان إلى طاقم دعم مميز.",
+    "focusKeyword": "فيلم The Bell Jar",
+    "excerpt": "أغلقت شركة Focus Features مرحلة التصوير لفيلم The Bell Jar، الذي يجسد رواية سيلفيا بلاث الشهيرة، مع بيللي إيليش وكاري موليجان في الأدوار الرئيسية، إلى جانب مجموعة من الممثلين المميزين في أدوار الدعم.",
+    "keyPoints": [
+      "تم إكمال تصوير فيلم The Bell Jar من قبل شركة Focus Features.",
+      "يشارك في الأدوار الرئيسية بيللي إيليش وكاري موليجان.",
+      "يضم طاقم الدعم دانيل ديدوايلر، ديلان هوكو، ليلي تايلور، إيلا بيتتي، ماغي كونتز، إيك بارينهولتز، وكونور ستوري."
+    ],
+    "body": [
+      "أعلنت شركة Focus Features اليوم إكمال مرحلة التصوير لفيلم The Bell Jar، وهو اقتباس سينمائي لرواية سيلفيا بلاث الكلاسيكية. وقد أُنجز العمل في موقع تصوير محلي وتُعَدّ خطوة هامة نحو عرضه النهائي.",
+      "يتولى بيللي إيليش وكاري موليجان الأدوار الرئيسية في الفيلم، حيث يجسدان شخصيات محورية مستوحاة من النص الأصلي. يضيف وجودهما جاذبية خاصة للمشروع ويثير حماس الجمهور المتابع لأعمالهما.",
+      "يقدم طاقم الدعم مجموعة من الممثلين المميزين: دانيل ديدوايلر في دور \"Till\"، ديلان هوكو في دور \"Ice Cream Man\"، ليلي تايلور في دور \"Daredevil: Born Again\"، إيلا بيتتي التي تلعب دورًا في فيلم \"Monster: The Lizzie Borden Story\"، ماغي كونتز في دور \"Broadway’s John Proctor Is the Villain\"، إيك بارينهولتز في دور \"The Studio\"، وكونور ستوري في دور \"Heated Rivalry\".",
+      "كانت هناك تقارير سابقة تشير إلى مشاركة إيلا بيتتي في مفاوضات نهائية، بينما كان يُشاع أن كونور ستوري سيظهر في طاقم التمثيل. الآن تم تأكيد وجودهما رسميًا في الفيلم، ما يعزز توقعات الجمهور.",
+      "مع إكمال التصوير، تنتقل شركة Focus Features إلى مرحلة ما بعد الإنتاج، وتستعد لتحديد موعد عرض الفيلم في المستقبل القريب. يظل الجمهور متشوقًا لمعرفة موعد الانطلاق الرسمي وتوفره على الشاشات."
+    ],
+    "sourceName": "Deadline",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQdGp1UWs2bDBGNDZWeVhaMnJucVlKSllpQ294MlRteWE2VGRiU0VLNEhyekJ2YWtfS3dQX3UxNllFX3NweFc4c3J4RDI4dTFaMWtJeUkzLVlRSEswTUpieHFDYTJJakVlQzJ3NzVkbVhmTTdfWjd6WHBXaG9nNTJxbUsza29rZlVlZWpNRnViMXN3QmhUbHlnOUZSemJyZzQ?oc=5",
+    "publisherUrl": "https://deadline.com/2026/09/the-bell-jar-movie-connor-storrie-danielle-deadwyler-cast-1237070956/",
+    "sourceId": "deadline-entertainment",
+    "sourceEnrichment": "google-batch-signed",
+    "factChecked": true,
+    "trafficScore": 67,
+    "trafficSignals": [
+      "fresh<6h",
+      "section:movies+9",
+      "intent:طاقم/إنتاج",
+      "lurvue-intent"
+    ],
+    "sourceCoverage": 1,
+    "radarCoverage": 0,
+    "publishedAt": "2026-09-08T18:00:00.000Z",
+    "generatedAt": "2026-09-08T21:05:59.410Z",
+    "status": "approved",
+    "qualityScore": 100,
+    "confidence": 94,
+    "importance": 88,
+    "trust": 92,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "factualNotes": [],
+    "tags": [
+      "أفلام",
+      "سينما",
+      "The Bell Jar",
+      "Billie Eilish",
+      "Carey Mulligan"
+    ],
+    "entities": [
+      "Billie Eilish",
+      "Carey Mulligan",
+      "Danielle Deadwyler",
+      "Dylan Hawco",
+      "Lili Taylor",
+      "Ella Beatty"
+    ],
+    "image": {
+      "src": "/news-images/اكمال-تصوير-فيلم-the-bell-jar-بنجوم-بيللي-ايليش-وكاري-موليجان.webp",
+      "alt": "ملصق فيلم The Bell Jar مع أبطال بيللي إيليش وكاري موليجان",
+      "caption": "فيلم The Bell Jar",
+      "searchQuery": "The Bell Jar film poster",
       "width": 1200,
       "height": 675,
       "type": "image/webp"

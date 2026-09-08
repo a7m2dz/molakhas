@@ -1212,5 +1212,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "مسلسل-the-gentleman-يعود-الى-netflix-بموسم-ثاني-يواجه-انخفاضا-45-في-المشاهدين": {
+    "src": "https://deadline.com/wp-content/uploads/2026/08/The-Gentleman.jpg?w=1024",
+    "fallbackSrc": "/news-images/مسلسل-the-gentleman-يعود-الى-netflix-بموسم-ثاني-يواجه-انخفاضا-45-في-المشاهدين.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/the-gentleman-season-2-premiere-viewership-netflix-top-10-1237071272/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQRTZfYjk2a2lFa1JZSDRzWTNacV9BZFR0ZWRraDNoUDF3SlVjU1Fva1NOY096UW93cFgzVERwTkViOGVJdmhJVmZEUlFIRGhySV9Cb3VTVURLNkpKbHBTN3daRGtacGxzMkRnUG9iYnB2eUJOVU5KeGVWTFY1MGVEM051YVU5STVGRnp2cjdtNGdRcUZoWDM3UDVScWY0N2s?oc=5",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 675,
+    "alt": "ملصق مسلسل The Gentleman على Netflix",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "اكمال-تصوير-فيلم-the-bell-jar-بنجوم-بيللي-ايليش-وكاري-موليجان": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/Danielle-Deadwyler-Dylan-Hawco-Lili-Taylor-Ella-Beatty-Maggie-Kuntz-Ike-Barinholtz-and-Connor-Storrie.jpg?w=1024",
+    "fallbackSrc": "/news-images/اكمال-تصوير-فيلم-the-bell-jar-بنجوم-بيللي-ايليش-وكاري-موليجان.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/the-bell-jar-movie-connor-storrie-danielle-deadwyler-cast-1237070956/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQdGp1UWs2bDBGNDZWeVhaMnJucVlKSllpQ294MlRteWE2VGRiU0VLNEhyekJ2YWtfS3dQX3UxNllFX3NweFc4c3J4RDI4dTFaMWtJeUkzLVlRSEswTUpieHFDYTJJakVlQzJ3NzVkbVhmTTdfWjd6WHBXaG9nNTJxbUsza29rZlVlZWpNRnViMXN3QmhUbHlnOUZSemJyZzQ?oc=5",
+    "type": "image/webp",
+    "width": 1500,
+    "height": 845,
+    "alt": "ملصق فيلم The Bell Jar مع أبطال بيللي إيليش وكاري موليجان",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
