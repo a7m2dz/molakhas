@@ -740,5 +740,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "اكسافي-الونسو-يوكد-دور-استيفاو-ويليان-الكبير-مع-تشيلسي-رغم-قلة-مشاركاته": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/08094105/GettyImages-2292421410-scaled-e1788874898441.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/اكسافي-الونسو-يوكد-دور-استيفاو-ويليان-الكبير-مع-تشيلسي-رغم-قلة-مشاركاته.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7574514/2026/09/08/chelsea-estevao-willian-future/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7574514/2026/09/08/chelsea-estevao-willian-future/",
+    "type": "image/jpeg",
+    "alt": "إستيفاو ويليان يرتدي قميص تشيلسي الأزرق أثناء تدريبه في ملعب ستامفورد بريدج، يبتسم بثقة استعداداً للمشاركة في المباريات القادمة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "درايموند-جرين-يحذر-الدوري-من-عودة-داميان-ليارد-بعد-تدريبه-المذهل": {
+    "src": "https://imgcdn.basketballnews.com/Draymond-Green-and-Damian-Lillard.jpg",
+    "fallbackSrc": "/news-images/درايموند-جرين-يحذر-الدوري-من-عودة-داميان-ليارد-بعد-تدريبه-المذهل.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-i-dont-think-the-league-is-ready-draymond-green-sends-warning-after-damian-lillards-impeccable-off-season-work-goes-viral/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-i-dont-think-the-league-is-ready-draymond-green-sends-warning-after-damian-lillards-impeccable-off-season-work-goes-viral/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "درايموند جرين يتحدث عن أداء داميان ليارد في التدريب قبل عودة الموسم 2026‑27",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
