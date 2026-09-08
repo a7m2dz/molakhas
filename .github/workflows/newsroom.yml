@@ -107,7 +107,7 @@ jobs:
       REQUIRE_API_KEY: 'false'
       OMNIROUTE_BASE_URL: ${{ vars.OMNIROUTE_BASE_URL || 'http://127.0.0.1:20128/v1' }}
       OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY || 'sk_omniroute' }}
-      OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto/smart' }}
+      OMNIROUTE_MODEL: auto/best-free
       OMNIROUTE_FALLBACK_MODEL: ${{ vars.OMNIROUTE_FALLBACK_MODEL || 'auto' }}
       OMNIROUTE_TIMEOUT_MS: ${{ vars.OMNIROUTE_TIMEOUT_MS || '60000' }}
       NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '3' }}
