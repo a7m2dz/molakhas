@@ -1070,5 +1070,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "ريال-مدريد-يواجه-انتر-ميلان-في-افتتاح-دوري-الابطال-2026-27-مع-كيلان-مبابي": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/08125730/mbappe-lautaro-1200x740.webp",
+    "fallbackSrc": "/news-images/ريال-مدريد-يواجه-انتر-ميلان-في-افتتاح-دوري-الابطال-2026-27-مع-كيلان-مبابي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/is-kylian-mbappe-playing-projected-lineups-for-real-madrid-vs-inter-milan-at-2026-27-uefa-champions-league/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/is-kylian-mbappe-playing-projected-lineups-for-real-madrid-vs-inter-milan-at-2026-27-uefa-champions-league/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "ملعب سانتياغو برنابيو مستضيف مباراة ريال مدريد وإنتر ميلان في دوري الأبطال 2026/27",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
