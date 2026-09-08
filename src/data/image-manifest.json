@@ -304,5 +304,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "شباك-التذاكر-الصيفي-في-امريكا-يحطم-الرقم-القياسي-بـ-4-76-مليار-دولار": {
+    "src": "https://variety.com/wp-content/uploads/2026/07/MCDSPMA_SP145_caa72f.jpg?w=1000&",
+    "fallbackSrc": "/news-images/شباك-التذاكر-الصيفي-في-امريكا-يحطم-الرقم-القياسي-بـ-4-76-مليار-دولار.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Variety",
+    "sourceUrl": "https://variety.com/2026/film/box-office/summer-box-office-breaks-all-time-record-1236854175/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPV3ZuT0xkNmZfUWhRcHphaFNUMzlPY0l1RTBXd0IwYzcwcTVNMVhXNS1KdHZPdFNQZXNJMWFLenVzSlBmUlFRLUJJSWVEYko3UUVlQjRIbi13X2gyLV9hN05YUTBGN3dUTjhLRXZlY2ppbFo0RVF1Z1NYVlRrWmEyYnpsVzVJUkRTSGJsbWFBT2o3Tm9GN2haQw?oc=5",
+    "type": "image/webp",
+    "width": 1000,
+    "height": 563,
+    "alt": "جمهور يملأ صالة سينما أمريكية خلال موسم الصيف القياسي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
