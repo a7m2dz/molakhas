@@ -97,8 +97,8 @@ async function main() {
 
   run('git', ['config', 'user.name', 'molakhas-windows[bot]']);
   run('git', ['config', 'user.email', 'actions@users.noreply.github.com']);
-  const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
-  run('git', ['commit', '-m', `newsroom: windows refresh ${stamp} UTC`]);
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  run('git', ['commit', '-m', `newsroom-windows-refresh-${stamp}`]);
 
   let stashedLocalEdits = false;
   if (capture('git', ['status', '--porcelain'])) {
