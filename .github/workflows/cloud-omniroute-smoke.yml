@@ -15,7 +15,6 @@ jobs:
     timeout-minutes: 15
     env:
       OMNIROUTE_SERVER_HOST: 127.0.0.1
-      REQUIRE_API_KEY: 'false'
       OMNIROUTE_BASE_URL: http://127.0.0.1:20128/v1
       OMNIROUTE_MODEL: auto
       OMNIROUTE_FALLBACK_MODEL: auto
@@ -28,11 +27,18 @@ jobs:
           cache: npm
       - name: Install project dependencies
         run: npm install --no-audit --no-fund
-      - name: Install and start OmniRoute
+      - name: Install and start OmniRoute with ephemeral loopback key
         shell: bash
         run: |
           set -e
           npm install -g omniroute@3.8.50 --no-audit --no-fund
+
+          RUNNER_API_KEY="$(openssl rand -hex 32)"
+          echo "::add-mask::$RUNNER_API_KEY"
+          echo "OMNIROUTE_API_KEY=$RUNNER_API_KEY" >> "$GITHUB_ENV"
+          export API_KEY_1="$RUNNER_API_KEY"
+          export REQUIRE_API_KEY=true
+
           nohup omniroute --no-open > /tmp/omniroute.log 2>&1 &
           echo $! > /tmp/omniroute.pid
 
@@ -48,5 +54,5 @@ jobs:
           echo "OmniRoute HTTP server did not become ready in time."
           tail -n 200 /tmp/omniroute.log || true
           exit 1
-      - name: Test models endpoint and real Arabic inference through auto
+      - name: Test authenticated models endpoint and real Arabic inference through auto
         run: npm run omniroute:test
