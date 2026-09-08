@@ -2,5 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "molakhas",
   "compatibility_date": "2026-09-07",
+  "routes": [
+    {
+      "pattern": "mola5a9.com",
+      "custom_domain": true
+    }
+  ],
   "assets": { "directory": "./dist", "not_found_handling": "404-page" }
 }
