@@ -22,8 +22,7 @@ function log(message) {
   fs.appendFileSync(logPath, `${line}\n`);
 }
 
-function run(command, args, { allowFailure = false, timeout = 0 } = {}) {
-  log(`RUN ${command} ${args.join(' ')}`);
+function execute(command, args, { timeout = 0 } = {}) {
   const result = spawnSync(command, args, {
     cwd: root,
     env: process.env,
@@ -34,9 +33,25 @@ function run(command, args, { allowFailure = false, timeout = 0 } = {}) {
   });
   if (result.stdout) fs.appendFileSync(logPath, result.stdout);
   if (result.stderr) fs.appendFileSync(logPath, result.stderr);
-  const code = result.status ?? (result.error ? 1 : 0);
-  if (code !== 0 && !allowFailure) throw new Error(`${command} exited with ${code}: ${result.error?.message || ''}`);
-  return code;
+  return {
+    code: result.status ?? (result.error ? 1 : 0),
+    stdout: String(result.stdout || ''),
+    stderr: String(result.stderr || ''),
+    error: result.error
+  };
+}
+
+function run(command, args, { allowFailure = false, timeout = 0 } = {}) {
+  log(`RUN ${command} ${args.join(' ')}`);
+  const result = execute(command, args, { timeout });
+  if (result.code !== 0 && !allowFailure) {
+    throw new Error(`${command} exited with ${result.code}: ${result.error?.message || result.stderr.slice(-500)}`);
+  }
+  return result.code;
+}
+
+function capture(command, args) {
+  return execute(command, args).stdout.trim();
 }
 
 async function omniHealthy() {
@@ -78,16 +93,31 @@ async function main() {
   const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
   run('git', ['commit', '-m', `newsroom: windows refresh ${stamp} UTC`]);
 
-  let published = false;
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
-    const rebased = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
-    if (rebased === 0 && run('git', ['push', 'origin', 'HEAD:main'], { allowFailure: true }) === 0) {
-      published = true;
-      break;
-    }
-    run('git', ['rebase', '--abort'], { allowFailure: true });
-    await new Promise((resolve) => setTimeout(resolve, attempt * 10_000));
+  let stashedLocalEdits = false;
+  if (capture('git', ['status', '--porcelain'])) {
+    const stashCode = run('git', ['stash', 'push', '--include-untracked', '-m', `molakhas-publisher-${Date.now()}`], { allowFailure: true });
+    stashedLocalEdits = stashCode === 0;
+    if (stashedLocalEdits) log('Temporarily stashed non-newsroom local edits before publishing.');
   }
+
+  let published = false;
+  try {
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const rebased = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
+      if (rebased === 0 && run('git', ['push', 'origin', 'HEAD:main'], { allowFailure: true }) === 0) {
+        published = true;
+        break;
+      }
+      run('git', ['rebase', '--abort'], { allowFailure: true });
+      await new Promise((resolve) => setTimeout(resolve, attempt * 10_000));
+    }
+  } finally {
+    if (stashedLocalEdits) {
+      const restore = run('git', ['stash', 'pop'], { allowFailure: true });
+      log(restore === 0 ? 'Restored local edits after publishing.' : 'Local edits remain safely stored in git stash; manual restore may be needed.');
+    }
+  }
+
   if (!published) throw new Error('Push failed after three attempts; local commit is preserved.');
 
   log('Published changes to main.');
