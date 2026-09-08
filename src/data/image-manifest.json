@@ -1086,5 +1086,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "اعلان-عرض-المقتطف-التشويقي-لفيلم-artificial-من-لكا-غواداجنينو": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/Artificial.jpg?w=1024",
+    "fallbackSrc": "/news-images/اعلان-عرض-المقتطف-التشويقي-لفيلم-artificial-من-لكا-غواداجنينو.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "deadline.com",
+    "sourceUrl": "https://deadline.com/2026/09/artificial-trailer-andrew-garfield-luca-guadagnino-1237070971/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNTWJhRXQ3WE9ScXg0S1Y4VWIyWXdjWjBmMlNXVG1NVFJrdG45Njl1QkJ2OW5FdUNISGxESEljQnpWVE53cHFtQVhNUUZOZ0V5THFnTUxtRHJaZ0RJQ3JvMV9TU0VLeXdRSnl6MlJud3hCRG5HN0tRY1FMdTZkdWt2VFY1SEhZQmZPMHc0bnJ4TTFUdjNBTVE?oc=5",
+    "type": "image/webp",
+    "width": 1024,
+    "height": 682,
+    "alt": "أندرو غارفيلد يتجول في قاعة فاخرة في فيلم Artificial",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — deadline.com.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
