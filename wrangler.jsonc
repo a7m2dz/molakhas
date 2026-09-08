@@ -1,12 +1,22 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "molakhas",
+  "main": "worker/index.js",
   "compatibility_date": "2026-09-07",
   "routes": [
     {
       "pattern": "mulakhas.com",
       "custom_domain": true
+    },
+    {
+      "pattern": "www.mulakhas.com/*",
+      "zone_name": "mulakhas.com"
     }
   ],
-  "assets": { "directory": "./dist", "not_found_handling": "404-page" }
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  }
 }
