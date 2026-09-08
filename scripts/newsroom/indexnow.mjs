@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 
 const key = '4d5c8189e6697955fa6202bddfcc91a5';
-const base = (process.env.PUBLIC_SITE_URL || 'https://molakhas.a7asmari.workers.dev').replace(/\/$/, '');
+const base = (process.env.PUBLIC_SITE_URL || 'https://mulakhas.com').replace(/\/$/, '');
 const site = new URL(base);
 const stories = JSON.parse(await fs.readFile(new URL('../../src/data/stories.json', import.meta.url), 'utf8'));
 let matches = [];
