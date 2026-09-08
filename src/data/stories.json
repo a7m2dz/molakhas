@@ -74,6 +74,84 @@
     }
   },
   {
+    "id": "42a1153c1b6b",
+    "slug": "south-park-تغير-اسمها-الى-south-america-في-الموسم-29-سخرا-من-ترامب",
+    "section": "tv",
+    "title": "South Park تغير اسمها إلى South America في الموسم 29 سخرًا من ترامب",
+    "seoTitle": "South Park ت đổi tên إلى South America",
+    "metaDescription": "يعلن مبدعا South Park تغيير اسم المسلسل إلى South America في الموسم 29 سخرًا من محاولات ترامب تغيير أسماء المناطق الجغرافية.",
+    "focusKeyword": "South Park",
+    "excerpt": "أعلن مبدعا South Park تري باركر ومات ستوون أن المسلسل سي 변경 اسمه إلى South America في الموسم 29، في خطوة ساخرة من محاولات ترامب تغيير أسماء المناطق الجغرافية، حيث سيتم عرض الموسم الجديد في 16 سبتمبر على Comedy Central.",
+    "keyPoints": [
+      "South Park تغير اسمها إلى South America في الموسم 29",
+      "الخطوة تأتي سخرًا من محاولات ترامب تغيير أسماء المناطق الجغرافية",
+      "الموسم الجديد يعرض في 16 سبتمبر على Comedy Central وParamount+"
+    ],
+    "body": [
+      "أعلن مبدعا مسلسل South Park تري باركر ومات ستوون الثلاثاء عن تغيير اسم المسلسل إلى South America في الموسم التاسع والعشرين، في خطوة ساخرة من سياسات الرئيس الأمريكي السابق دونالد ترامب.",
+      "وجاء في البيان الصحفي أن الإلهام جاء من \"شجاعة وبطولة\" شركتي Apple وGoogle، مضيفين أنهم يريدون شكر شركة Paramount الأم، واصفين إياها بـ\"Skydance Capitulation\".",
+      "يُظهر تصميم الموسم 29 الذي نشرته South Park التغيير في الاسم، لكن لم يتضح بعد إن كان هذا مجرد نكتة ليوم واحد أم أن الإنتاج يخطط للاستمرار في هذه المزحة خلال الموسم الجديد.",
+      "تُحاكي هذه الخطوة محاولات ترامب لتغيير أسماء المعالم الجغرافية لتشمل كلمة \"أمريكا\"، مثل تسميته الخليج المكسيكي بـ\"خليج أمريكا\" وبحيرة أونتاريو بـ\"بحيرة أمريكا\".",
+      "يُذكر أن South Park عادت الأربعاء 16 سبتمبر على Comedy Central واليوم التالي على Paramount+. كما فاز المسلسل بجائزة إيمي لأفضل برنامج متحرك يوم الأحد الماضي، وهي أول جائزة في هذه الفئة منذ 2013."
+    ],
+    "sourceName": "The Hollywood Reporter",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZUxRTHVNQ0htVFF2VUxZcHZBSWowSE1NTzExODdPT2VQYVVCN3IydTlHSmlWMFVpZGtGSFhtWGczeUQwQllONkN4cC1JRjl0U3h3RW9fUVRoYjVDYUNCLVRfNWNXalNvOXhEVG1fSXFUMWFEcjRRTm1XSUZyeURLdXFQa2FqbldFOGZPa2RVNlR3SmlQSC1Xbk40Y3FhLUd0cUE?oc=5",
+    "publisherUrl": "https://www.hollywoodreporter.com/tv/tv-news/south-park-changing-name-season-29-premiere-1236694350/",
+    "sourceId": "thr-entertainment",
+    "sourceEnrichment": "google-batch-signed",
+    "factChecked": true,
+    "trafficScore": 73,
+    "trafficSignals": [
+      "fresh<6h",
+      "section:tv+9",
+      "intent:موسم/حلقة",
+      "lurvue-intent"
+    ],
+    "sourceCoverage": 1,
+    "radarCoverage": 0,
+    "publishedAt": "2026-09-08T20:42:05.000Z",
+    "generatedAt": "2026-09-08T23:00:16.768Z",
+    "status": "review",
+    "qualityScore": 100,
+    "confidence": 9,
+    "importance": 8,
+    "trust": 92,
+    "qualityFlags": [
+      "language-quality-failed"
+    ],
+    "qualityNotes": [
+      "contains unsupported foreign-script letters: 변경",
+      "contains mixed-script tokens: وParamount+, وGoogle",
+      "seoTitle Arabic ratio 0.13 < 0.35"
+    ],
+    "factualNotes": [],
+    "tags": [
+      "South Park",
+      "Season 29",
+      "Comedy Central",
+      "Paramount+",
+      "Trey Parker",
+      "Matt Stone"
+    ],
+    "entities": [
+      "South Park",
+      "South America",
+      "Trey Parker",
+      "Matt Stone",
+      "Comedy Central",
+      "Paramount+"
+    ],
+    "image": {
+      "src": "/news-images/south-park-تغير-اسمها-الى-south-america-في-الموسم-29-سخرا-من-ترامب.webp",
+      "alt": "تصميم موسم 29 من South Park مع تغيير الاسم إلى South America",
+      "caption": "الاسم الجديد للموسم 29",
+      "searchQuery": "South Park season 29 name change",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
     "id": "e6b459e67017",
     "slug": "قايمة-حفلات-ايمي-2026-تنتقل-الى-مركز-التصميم-الهادي",
     "section": "tv",
