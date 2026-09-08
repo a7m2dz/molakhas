@@ -20,7 +20,7 @@ if (Test-Path $LocalEnvFile) {
 }
 
 # Persist the working OmniRoute key for this Windows user without writing it to GitHub/logs.
-$currentKey = String($env:OMNIROUTE_API_KEY).Trim()
+$currentKey = ([string]$env:OMNIROUTE_API_KEY).Trim()
 $storedKey = [Environment]::GetEnvironmentVariable('OMNIROUTE_API_KEY', 'User')
 if ($currentKey) {
   [Environment]::SetEnvironmentVariable('OMNIROUTE_API_KEY', $currentKey, 'User')
