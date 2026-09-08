@@ -1260,5 +1260,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "قايمة-حفلات-ايمي-2026-تنتقل-الى-مركز-التصميم-الهادي": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/GettyImages-2235538687.jpg?w=1024",
+    "fallbackSrc": "/news-images/قايمة-حفلات-ايمي-2026-تنتقل-الى-مركز-التصميم-الهادي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/emmys-party-list-2026-guide-1237064945/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBNNVVRTmVGTEdGaVRJQnY2NjNIWG8yNFdiY1l1cU9NQ1o0bnNpNzluZG8tc0JhTEhzZGczdExHd3BvQU5kOFlmNkh5Q3pwVWhodEJDcE9MT3dOSThnaDhfczZGNE5xaG9yQ2JGc044MU1vOUFBM2pV?oc=5",
+    "type": "image/webp",
+    "width": 3000,
+    "height": 2000,
+    "alt": "مركز التصميم الهادئ يستضيف احتفال إيمي 2026",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
