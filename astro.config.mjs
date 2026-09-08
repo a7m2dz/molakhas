@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-const site = process.env.PUBLIC_SITE_URL || 'https://molakhas.a7asmari.workers.dev';
+const site = process.env.PUBLIC_SITE_URL || 'https://mulakhas.com';
 
 export default defineConfig({
   site,
