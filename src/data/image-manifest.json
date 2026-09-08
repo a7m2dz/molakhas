@@ -588,5 +588,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic Football.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "فريق-مينيسوتا-تمبروولفز-يبحث-عن-توقيع-ساشا-فيزينكوف-ثم-يوقع-جوناثان-كومينغا": {
+    "src": "/news-images/فريق-مينيسوتا-تمبروولفز-يبحث-عن-توقيع-ساشا-فيزينكوف-ثم-يوقع-جوناثان-كومينغا.webp",
+    "fallbackSrc": "/news-images/فريق-مينيسوتا-تمبروولفز-يبحث-عن-توقيع-ساشا-فيزينكوف-ثم-يوقع-جوناثان-كومينغا.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "صورة لاعب ساشا فيزينكوف يرتدي زي فريق تمبروولفز في محاولة التعاقد",
+    "caption": "ساشا فيزينكوف في إطار محادثات تمبروولفز",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287201/Wolves-Explored-Signing-Sasha-Vezenkov-",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
+  },
+  "انطوني-جوردون-ينضم-الى-ليو-ميسي-واساطير-ريال-مدريد-في-سجل-التمريرات-الحاسمة-بالدوري-الاسبا": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/07143310/anthony-gordon-lionel-messi-fc-barcelona-1200x740.webp",
+    "fallbackSrc": "/news-images/انطوني-جوردون-ينضم-الى-ليو-ميسي-واساطير-ريال-مدريد-في-سجل-التمريرات-الحاسمة-بالدوري-الاسبا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/anthony-gordon-joins-lionel-messi-and-two-real-madrid-icons-in-la-liga-assist-record/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/anthony-gordon-joins-lionel-messi-and-two-real-madrid-icons-in-la-liga-assist-record/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "أنطوني جوردن يمرر الكرة في مباراة برشلونة ضد فالنسيا ضمن الجولة الرابعة من الدوري الإسباني",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
