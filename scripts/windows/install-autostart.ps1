@@ -1,12 +1,32 @@
 $ErrorActionPreference = 'Stop'
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $Supervisor = Join-Path $PSScriptRoot 'molakhas-supervisor.ps1'
+$RuntimeDir = Join-Path $ProjectRoot '.runtime'
+$PidFile = Join-Path $RuntimeDir 'supervisor.pid'
 $TaskName = 'Molakhas Supervisor'
 $User = "$env:USERDOMAIN\$env:USERNAME"
 
 if (-not (Test-Path $Supervisor)) {
   throw "Supervisor script not found: $Supervisor"
 }
+
+New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
+
+try { Stop-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue } catch {}
+Start-Sleep -Seconds 2
+
+# Stop only stale Molakhas supervisor processes, never unrelated PowerShell sessions.
+$escapedSupervisor = [Regex]::Escape($Supervisor)
+Get-CimInstance Win32_Process -Filter "Name='powershell.exe' OR Name='pwsh.exe'" -ErrorAction SilentlyContinue |
+  Where-Object { $_.CommandLine -and $_.CommandLine -match $escapedSupervisor } |
+  ForEach-Object {
+    try {
+      Stop-Process -Id $_.ProcessId -Force -ErrorAction Stop
+      Write-Host "Stopped stale Molakhas supervisor PID $($_.ProcessId)." -ForegroundColor Yellow
+    } catch {}
+  }
+
+if (Test-Path $PidFile) { Remove-Item $PidFile -Force -ErrorAction SilentlyContinue }
 
 $PowerShellExe = (Get-Command powershell.exe -ErrorAction Stop).Source
 $Arguments = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$Supervisor`""
