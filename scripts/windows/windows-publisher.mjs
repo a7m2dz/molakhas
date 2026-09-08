@@ -14,7 +14,7 @@ process.env.OMNIROUTE_BASE_URL ||= 'http://127.0.0.1:20128/v1';
 if (process.env.OMNIROUTE_API_KEY === undefined) process.env.OMNIROUTE_API_KEY = 'sk_omniroute';
 process.env.OMNIROUTE_MODEL = 'auto/best-free';
 process.env.OMNIROUTE_FALLBACK_MODEL ||= 'auto';
-process.env.OMNIROUTE_TIMEOUT_MS ||= '60000';
+process.env.OMNIROUTE_TIMEOUT_MS ||= '90000';
 
 function log(message) {
   const line = `[${new Date().toISOString()}] ${message}`;
@@ -54,11 +54,10 @@ function capture(command, args) {
   return execute(command, args).stdout.trim();
 }
 
-async function omniHealthy() {
+async function omniServerReady() {
   try {
-    const key = String(process.env.OMNIROUTE_API_KEY || '').trim();
     const response = await fetch(`${process.env.OMNIROUTE_BASE_URL.replace(/\/$/, '')}/models`, {
-      headers: key ? { authorization: `Bearer ${key}` } : {},
+      method: 'HEAD',
       signal: AbortSignal.timeout(5000)
     });
     return response.ok;
@@ -69,7 +68,11 @@ async function omniHealthy() {
 
 async function main() {
   log(`Windows publisher cycle start; model=${process.env.OMNIROUTE_MODEL}`);
-  if (!(await omniHealthy())) throw new Error('OmniRoute is unavailable or authentication is not ready; supervisor will retry later.');
+  if (!(await omniServerReady())) throw new Error('OmniRoute server HEAD /v1/models is not ready.');
+
+  log('Running deep OmniRoute test: model catalog + real inference.');
+  run('node', ['scripts/newsroom/omniroute-test.mjs'], { timeout: 3 * 60_000 });
+  log(`Deep OmniRoute test passed with model=${process.env.OMNIROUTE_MODEL}.`);
 
   run('git', ['fetch', 'origin', 'main']);
   const pull = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
