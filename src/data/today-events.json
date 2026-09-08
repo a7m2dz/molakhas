@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T22:52:54.064Z",
+  "generatedAt": "2026-09-08T04:46:38.040Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -8,8 +8,8 @@
     "football": 14,
     "nba": 0,
     "mma": 1,
-    "wwe": 7,
-    "total": 22
+    "wwe": 6,
+    "total": 21
   },
   "events": [
     {
@@ -58,22 +58,7 @@
       "scope": "today"
     },
     {
-      "id": "wwe-20260907-0",
-      "sport": "wwe",
-      "sportLabel": "WWE",
-      "title": "Raw on Netflix",
-      "subtitle": "Legacy Arena, Birmingham, Alabama",
-      "start": "2026-09-08T00:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 90,
-      "source": "WWE.com",
-      "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
-      "scope": "today"
-    },
-    {
-      "id": "wwe-20260908-1",
+      "id": "wwe-20260908-0",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "NXT",
@@ -88,7 +73,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260911-4",
+      "id": "wwe-20260911-3",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "Friday Night SmackDown",
@@ -103,7 +88,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260911-5",
+      "id": "wwe-20260911-4",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "AAA TripleMania 34 Night 1",
@@ -118,7 +103,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260913-6",
+      "id": "wwe-20260913-5",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "AAA TripleMania 34 Night 2",
@@ -148,36 +133,6 @@
       "scope": "today"
     },
     {
-      "id": "wwe-20260909-2",
-      "sport": "wwe",
-      "sportLabel": "WWE",
-      "title": "WWE Evolve",
-      "subtitle": "عرض WWE",
-      "start": "2026-09-10T00:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 74,
-      "source": "WWE.com",
-      "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "wwe-20260910-3",
-      "sport": "wwe",
-      "sportLabel": "WWE",
-      "title": "WWE Main Event",
-      "subtitle": "عرض WWE",
-      "start": "2026-09-11T00:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 74,
-      "source": "WWE.com",
-      "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
       "id": "football-5970128",
       "sport": "football",
       "sportLabel": "كرة القدم",
@@ -186,7 +141,7 @@
       "start": "2026-09-08T15:30:00.000Z",
       "state": "upcoming",
       "score": "",
-      "importance": 71,
+      "importance": 75,
       "source": "FotMob",
       "url": "/matches/al-ettifaq-al-faisaly-2026-09-08-5970128/",
       "internal": true,
@@ -201,11 +156,41 @@
       "start": "2026-09-08T15:55:00.000Z",
       "state": "upcoming",
       "score": "",
-      "importance": 71,
+      "importance": 75,
       "source": "FotMob",
       "url": "/matches/al-hazem-al-taawoun-2026-09-08-5970129/",
       "internal": true,
       "scope": "today"
+    },
+    {
+      "id": "wwe-20260909-1",
+      "sport": "wwe",
+      "sportLabel": "WWE",
+      "title": "WWE Evolve",
+      "subtitle": "عرض WWE",
+      "start": "2026-09-10T00:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 74,
+      "source": "WWE.com",
+      "url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "internal": false,
+      "scope": "upcoming"
+    },
+    {
+      "id": "wwe-20260910-2",
+      "sport": "wwe",
+      "sportLabel": "WWE",
+      "title": "WWE Main Event",
+      "subtitle": "عرض WWE",
+      "start": "2026-09-11T00:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 74,
+      "source": "WWE.com",
+      "url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "internal": false,
+      "scope": "upcoming"
     },
     {
       "id": "football-6106404",
@@ -216,7 +201,7 @@
       "start": "2026-09-08T16:45:00.000Z",
       "state": "upcoming",
       "score": "",
-      "importance": 58,
+      "importance": 62,
       "source": "FotMob",
       "url": "/matches/aek-athens-lask-2026-09-08-6106404/",
       "internal": true,
@@ -231,7 +216,7 @@
       "start": "2026-09-08T16:45:00.000Z",
       "state": "upcoming",
       "score": "",
-      "importance": 58,
+      "importance": 62,
       "source": "FotMob",
       "url": "/matches/club-brugge-aston-villa-2026-09-08-6106295/",
       "internal": true,
