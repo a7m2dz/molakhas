@@ -648,5 +648,53 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "لوسين-كيتا-يحتفل-باغرب-طريقة-بعد-ضربة-قاضية-في-ufc-باريس": {
+    "src": "https://images.deadspin.com/tr:w-1200,h-675,fo-auto/1788781915370",
+    "fallbackSrc": "/news-images/لوسين-كيتا-يحتفل-باغرب-طريقة-بعد-ضربة-قاضية-في-ufc-باريس.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadspin",
+    "sourceUrl": "https://deadspin.com/losene-keita-delivered-the-greatest-post-fight-celebration-in-ufc-history/",
+    "originalStoryUrl": "https://deadspin.com/losene-keita-delivered-the-greatest-post-fight-celebration-in-ufc-history/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "لوسين كيتا يجلس على كرسي ويصفق لنفسه بعد ضربة قاضية في UFC باريس",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadspin.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "خسرت-كل-شيء-والد-جايلين-براون-يكشف-قصة-ماساوية-عن-السطو-عليه-واطلاق-النار": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Jaylen-Brown-1-2-4.jpg",
+    "fallbackSrc": "/news-images/خسرت-كل-شيء-والد-جايلين-براون-يكشف-قصة-ماساوية-عن-السطو-عليه-واطلاق-النار.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-active-basketball-news-i-lost-everything-jaylen-brown-s-father-reveals-heartbreaking-story-of-being-robbed-and-shot-in-life-changing-ordeal-quenton-marselles-brown/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-active-basketball-news-i-lost-everything-jaylen-brown-s-father-reveals-heartbreaking-story-of-being-robbed-and-shot-in-life-changing-ordeal-quenton-marselles-brown/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "كونتون براون senior والد لاعب كرة السلة جايلين براون يتحدث في مقابلة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ديريك-فيشر-يحذر-من-فراغ-ليبرون-ويقيم-مسيرة-لوكا-دونتشيتش-مع-الليكرز": {
+    "src": "https://imgcdn.basketballnews.com/imago1059045248.jpg-e1785526303147.webp",
+    "fallbackSrc": "/news-images/ديريك-فيشر-يحذر-من-فراغ-ليبرون-ويقيم-مسيرة-لوكا-دونتشيتش-مع-الليكرز.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-derek-fisher-raises-alarm-over-lebron-james-void-gives-blunt-assessment-on-luka-doncics-lakers/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-derek-fisher-raises-alarm-over-lebron-james-void-gives-blunt-assessment-on-luka-doncics-lakers/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "لوكا دونتشيتش يرتدي قميص الليكرز أثناء المباريات في الموسم الجديد",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
