@@ -1,0 +1,43 @@
+name: Windows Automation Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/windows-automation-smoke.yml'
+      - 'scripts/windows/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate Node publisher syntax
+        shell: pwsh
+        run: node --check scripts/windows/windows-publisher.mjs
+      - name: Validate PowerShell syntax
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $files = @(
+            'scripts/windows/molakhas-supervisor.ps1',
+            'scripts/windows/molakhas-cycle.ps1',
+            'scripts/windows/install-autostart.ps1'
+          )
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $file), [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error "$file :: $($_.Message)" }
+              exit 1
+            }
+            Write-Host "Syntax OK: $file"
+          }
