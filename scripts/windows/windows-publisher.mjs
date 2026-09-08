@@ -12,7 +12,7 @@ const logPath = path.join(runtime, 'publisher.log');
 process.env.PUBLIC_SITE_URL ||= 'https://mulakhas.com';
 process.env.OMNIROUTE_BASE_URL ||= 'http://127.0.0.1:20128/v1';
 process.env.OMNIROUTE_API_KEY ||= 'sk_omniroute';
-process.env.OMNIROUTE_MODEL ||= 'auto/smart';
+process.env.OMNIROUTE_MODEL ||= 'auto/best-free';
 process.env.OMNIROUTE_FALLBACK_MODEL ||= 'auto';
 process.env.OMNIROUTE_TIMEOUT_MS ||= '60000';
 
