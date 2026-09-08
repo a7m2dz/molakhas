@@ -1276,5 +1276,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "قايمة-الافلام-التي-حققت-ايرادات-تفوق-المليار-دولار-عالميا-وفقا-لتقارير-هوليوود-ريبورتر": {
+    "src": "https://www.hollywoodreporter.com/wp-content/uploads/2026/08/Top-Eight-Box-Office-Main-2026.jpg?w=1296&",
+    "fallbackSrc": "/news-images/قايمة-الافلام-التي-حققت-ايرادات-تفوق-المليار-دولار-عالميا-وفقا-لتقارير-هوليوود-ريبورتر.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Hollywood Reporter",
+    "sourceUrl": "https://www.hollywoodreporter.com/lists/highest-grossing-movies-all-time-worldwide-box-office/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdTJld1R3Q1FQZzVkWVNoTk51OEFkbV9rLW1KdHBMRFFDWkI1QXBpcXB3WDRCUjJXLWxIOS1hUGZBcjNac1pudXdCcV9uWTc0QjZ1aFE5TklGNTJDUUlORjVMS1pvQzRRZmNmR2Y5WmJVMHpjUE5TUGQ0NFB6VlZDQ19kWjJ0RXVTaEdZaUJfMUl1anhFYVQtVUtB?oc=5",
+    "type": "image/webp",
+    "width": 1296,
+    "height": 730,
+    "alt": "ملصق أحد الأفلام التي تجاوزت إيراداتها مليار دولار عالميًا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "سيفيلا-هوكس-تنضم-الى-مسلسل-apple-tv-disavowed-كعضو-ثابت": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/Sylvia-Hoeks-.jpg?w=1024",
+    "fallbackSrc": "/news-images/سيفيلا-هوكس-تنضم-الى-مسلسل-apple-tv-disavowed-كعضو-ثابت.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/sylvia-hoeks-cast-apple-tvs-disavowed-1237066905/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNX2FkS29IQ0ItdjdXdkxkZm5ELUJJcF9sZ0Y2b205LTMtbFEySHh5a29UNlZIa3VaVENPMGxXZ0tzY0I3WjFIR3pONktpWVo0b2lQNFBHQlFwLW5IeHFoY1RIUFZ2b3NfMzdHRGRJaW5HLVRsdkEySUdoZkV2WU5xN21GVDc?oc=5",
+    "type": "image/webp",
+    "width": 1500,
+    "height": 845,
+    "alt": "سيفيلا هوكس في صورة عملها الجديد لمسلسل Disavowed",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
