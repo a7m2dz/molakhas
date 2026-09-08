@@ -11,7 +11,7 @@ const logPath = path.join(runtime, 'publisher.log');
 
 process.env.PUBLIC_SITE_URL ||= 'https://mulakhas.com';
 process.env.OMNIROUTE_BASE_URL ||= 'http://127.0.0.1:20128/v1';
-process.env.OMNIROUTE_API_KEY ||= 'sk_omniroute';
+if (process.env.OMNIROUTE_API_KEY === undefined) process.env.OMNIROUTE_API_KEY = 'sk_omniroute';
 process.env.OMNIROUTE_MODEL = 'auto/best-free';
 process.env.OMNIROUTE_FALLBACK_MODEL ||= 'auto';
 process.env.OMNIROUTE_TIMEOUT_MS ||= '60000';
@@ -56,8 +56,9 @@ function capture(command, args) {
 
 async function omniHealthy() {
   try {
+    const key = String(process.env.OMNIROUTE_API_KEY || '').trim();
     const response = await fetch(`${process.env.OMNIROUTE_BASE_URL.replace(/\/$/, '')}/models`, {
-      headers: { authorization: `Bearer ${process.env.OMNIROUTE_API_KEY}` },
+      headers: key ? { authorization: `Bearer ${key}` } : {},
       signal: AbortSignal.timeout(5000)
     });
     return response.ok;
@@ -68,7 +69,7 @@ async function omniHealthy() {
 
 async function main() {
   log(`Windows publisher cycle start; model=${process.env.OMNIROUTE_MODEL}`);
-  if (!(await omniHealthy())) throw new Error('OmniRoute is unavailable; supervisor will retry later.');
+  if (!(await omniHealthy())) throw new Error('OmniRoute is unavailable or authentication is not ready; supervisor will retry later.');
 
   run('git', ['fetch', 'origin', 'main']);
   const pull = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
