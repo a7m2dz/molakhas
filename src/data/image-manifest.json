@@ -484,5 +484,49 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQV0JNdlpaWHk3ejlvM3M3eWx0ZXRhaEVtZlpPbGpaWE40aHRSRnlCQ3UwY0hjbGYwZzE1R1BuODdlREdqUDk3bjJCMGhQYXkzdmRnc3VWdjM2NDdOYnpjcGN2ZzJ0WDVUVnVpNmxZRll4M0lTLXc4cl84b0N3OEdWTkZRZmhONGZ0TG1Ec2Z2QnBaRDdCZ3dObmp3UTFNRXJaN0lPNWV6ckV6ZFVnbGl1Yk8zMWNkMU9aTklPM1lxdEc?oc=5",
     "resolverVersion": 4,
     "rejectionReason": "publisher resolved (google-page-link) but no usable source image found"
+  },
+  "تجدد-الكوميديا-البريطانية-small-prophets-لموسم-ثان-بعد-نجاح-ملحوظ-وتعاقد-مع-apple-tv": {
+    "src": "/news-images/تجدد-الكوميديا-البريطانية-small-prophets-لموسم-ثان-بعد-نجاح-ملحوظ-وتعاقد-مع-apple-tv.webp",
+    "fallbackSrc": "/news-images/تجدد-الكوميديا-البريطانية-small-prophets-لموسم-ثان-بعد-نجاح-ملحوظ-وتعاقد-مع-apple-tv.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "ملصق مسلسل Small Prophets الكوميدي",
+    "caption": "ملصق الموسم الثاني من Small Prophets",
+    "provider": "Deadline",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZ0l4VDF0SklrRlFrcFJXOHVSaGtEZVBCQ3ZMcE10WS1uMU9UdlNCNXVkMDJ4V0ZubnJlUkxPRVFFQkZwbzEtanRvSWdnNmo0akxsYmZkVTVwM0otQlhZeGtobVR6ZGQyMzdCQVNaSjItQktkZW1XaDlwQlFEczVWVWlFQVNNSHNoOE5xM1EyY0l0UThzdDZZ?oc=5",
+    "resolverVersion": 4,
+    "rejectionReason": "publisher resolved (google-page-link) but no usable source image found"
+  },
+  "سوخان-يسخر-من-هارت-بعد-خسارة-تشيلسي-امام-ارسنال": {
+    "src": "https://imgcdn.basketballnews.com/imago1078779439h.jpg",
+    "fallbackSrc": "/news-images/سوخان-يسخر-من-هارت-بعد-خسارة-تشيلسي-امام-ارسنال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-someone-check-on-josh-hart-new-york-knicks-star-gets-mocked-by-own-teammate-over-teams-misfortune-chelsea-arsenal/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-someone-check-on-josh-hart-new-york-knicks-star-gets-mocked-by-own-teammate-over-teams-misfortune-chelsea-arsenal/",
+    "type": "image/webp",
+    "width": 2560,
+    "height": 1707,
+    "alt": "لاعب نيويورك نيكس جوش هارت خلال مباراة في الدوري الأمريكي للمحترفين",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "كوري-ايدا-هيروكازو-يتحدث-عن-تحويل-مانجا-فوجيموتو-تاتسكي-الى-فيلم-لوك-باك-في-مسابقة-مهرجان-": {
+    "src": "/news-images/كوري-ايدا-هيروكازو-يتحدث-عن-تحويل-مانجا-فوجيموتو-تاتسكي-الى-فيلم-لوك-باك-في-مسابقة-مهرجان-.webp",
+    "fallbackSrc": "/news-images/كوري-ايدا-هيروكازو-يتحدث-عن-تحويل-مانجا-فوجيموتو-تاتسكي-الى-فيلم-لوك-باك-في-مسابقة-مهرجان-.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "المخرج كوري-إيدا هيروكازو يتحدث عن فيلم \"لوك باك\" المستند إلى مانجا",
+    "caption": "كوري-إيدا يشرح تحويل المانجا إلى فيلم في مهرجان البندقية",
+    "provider": "Variety",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOUEwtSGNhd1UwWlNldTBYTUdhb0NxU0MxUmJwT2VzX2xUUkJnbTE3cllZVVBramJqZTZDTXp4YVZyTU5STVdmbHNpdWlfeGxnalJkemFGYy1FVEdrd3lWWGktY1JPOWJKZGxIVEx5dFBhQVdTSWxJbVY0WlZRM3VuSTBQajR6YmkydVdTaFpmMlA?oc=5",
+    "resolverVersion": 4,
+    "rejectionReason": "publisher resolved (google-page-link) but no usable source image found"
   }
 }
