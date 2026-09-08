@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 function Write-Log {
   param([string]$Message)
   $line = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Message"
-  $line | Tee-Object -FilePath $LogFile -Append
+  $line | Tee-Object -FilePath $LogFile -Append | Out-Null
 }
 
 $mutexName = 'Global\MolakhasSupervisor'
@@ -70,7 +70,7 @@ function Invoke-ModelsProbe {
       ErrorAction = 'Stop'
     }
     if ($ApiKey) { $params.Headers = @{ Authorization = "Bearer $ApiKey" } }
-    $response = Invoke-RestMethod @params
+    $null = Invoke-RestMethod @params
     return $true
   } catch {
     return $false
