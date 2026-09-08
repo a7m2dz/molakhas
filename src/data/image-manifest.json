@@ -1054,5 +1054,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SoccerNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "العرض-الاول-لفيلم-dau-في-مهرجان-البندقية-السينمايي-يثير-جدلا-سياسيا": {
+    "src": "https://www.hollywoodreporter.com/wp-content/uploads/2026/09/photo_DAU25162.jpeg?w=1440&",
+    "fallbackSrc": "/news-images/العرض-الاول-لفيلم-dau-في-مهرجان-البندقية-السينمايي-يثير-جدلا-سياسيا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Hollywood Reporter",
+    "sourceUrl": "https://www.hollywoodreporter.com/movies/movie-news/dau-venice-film-festival-ilya-khrzhanovsky-1236686499/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQc0R3Q01XeklXdVg1SE9JTGhqa3NsVXp5UDg5N0VxdlV5OEYybTlTR1U0X1hqckl5V09pdHktZ3drM01Val9zVEFaS09Ob2hiRG14U0JIM2hUUWlKc2hDeUQxYjIyRk1yVHZVdW9Sb1Yxc0pzeWx3ZjZVZmVrcTNUbUsybW5Qc1d2bVBHcWVhMDAwcGN0TlRELVpYNEhCMnEzenlFRXRlc0lHQQ?oc=5",
+    "type": "image/webp",
+    "width": 1600,
+    "height": 881,
+    "alt": "ملصق فيلم DAU يعرض في مهرجان البندقية السينمائي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
