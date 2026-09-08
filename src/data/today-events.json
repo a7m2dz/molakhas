@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T17:27:31.038Z",
+  "generatedAt": "2026-09-08T17:41:39.521Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -12,21 +12,6 @@
     "total": 21
   },
   "events": [
-    {
-      "id": "football-5970128",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al-Ettifaq ضد Al-Faisaly",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-08T15:30:00.000Z",
-      "state": "live",
-      "score": "0 - 0",
-      "importance": 78,
-      "source": "FotMob",
-      "url": "/matches/al-ettifaq-al-faisaly-2026-09-08-5970128/",
-      "internal": true,
-      "scope": "today"
-    },
     {
       "id": "football-5970129",
       "sport": "football",
@@ -65,7 +50,7 @@
       "subtitle": "Champions League",
       "start": "2026-09-08T16:45:00.000Z",
       "state": "live",
-      "score": "1 - 2",
+      "score": "1 - 3",
       "importance": 65,
       "source": "FotMob",
       "url": "/matches/club-brugge-aston-villa-2026-09-08-6106295/",
@@ -221,6 +206,21 @@
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
       "internal": false,
       "scope": "upcoming"
+    },
+    {
+      "id": "football-5970128",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al-Ettifaq ضد Al-Faisaly",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-08T15:30:00.000Z",
+      "state": "final",
+      "score": "0 - 0",
+      "importance": 73,
+      "source": "FotMob",
+      "url": "/matches/al-ettifaq-al-faisaly-2026-09-08-5970128/",
+      "internal": true,
+      "scope": "today"
     },
     {
       "id": "football-6106272",
