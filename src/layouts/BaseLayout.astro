@@ -95,6 +95,14 @@ const schema = {
     <meta name="theme-color" content="#080B0F" />
     <meta name="generator" content="Astro" />
     <meta name="author" content="فريق تحرير ملخص" />
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-X85PYZYJ76"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X85PYZYJ76');
+    </script>
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="ar" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="ملخص RSS" href="/rss.xml" />
