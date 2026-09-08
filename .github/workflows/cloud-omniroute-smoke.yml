@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           npm install -g omniroute@3.8.50 --no-audit --no-fund
-          nohup omniroute --no-open --non-interactive > /tmp/omniroute.log 2>&1 &
+          nohup omniroute --no-open > /tmp/omniroute.log 2>&1 &
           echo $! > /tmp/omniroute.pid
           for attempt in $(seq 1 75); do
             if curl -fsS --max-time 4 "$OMNIROUTE_BASE_URL/models" > /tmp/models.json 2>/dev/null; then
