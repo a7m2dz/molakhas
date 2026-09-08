@@ -1038,5 +1038,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "مانشستر-سيتي-يراقب-اللاعب-اليكس-باينا": {
+    "src": "https://www.soccernews.com/wp-content/uploads/2026/09/baena-atm.jpg",
+    "fallbackSrc": "/news-images/مانشستر-سيتي-يراقب-اللاعب-اليكس-باينا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "SoccerNews",
+    "sourceUrl": "https://www.soccernews.com/manchester-city-monitor-alex-baena/404555/",
+    "originalStoryUrl": "https://www.soccernews.com/manchester-city-monitor-alex-baena/404555/",
+    "type": "image/jpeg",
+    "width": 888,
+    "height": 498,
+    "alt": "أليكس باينا يرتدي قميص أتلتيك مدريد وهو يجرى في أحد مباريات لا ليجا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SoccerNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
