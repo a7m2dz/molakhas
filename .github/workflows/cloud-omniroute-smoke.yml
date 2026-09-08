@@ -1,0 +1,50 @@
+name: Cloud OmniRoute Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cloud-omniroute-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      OMNIROUTE_BASE_URL: http://127.0.0.1:20128/v1
+      OMNIROUTE_MODEL: auto
+      OMNIROUTE_FALLBACK_MODEL: auto
+      OMNIROUTE_TIMEOUT_MS: 120000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install project dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install and start OmniRoute
+        shell: bash
+        run: |
+          npm install -g omniroute@3.8.50 --no-audit --no-fund
+          nohup omniroute --no-open --non-interactive > /tmp/omniroute.log 2>&1 &
+          echo $! > /tmp/omniroute.pid
+          for attempt in $(seq 1 75); do
+            if curl -fsS --max-time 4 "$OMNIROUTE_BASE_URL/models" > /tmp/models.json 2>/dev/null; then
+              echo "OmniRoute models endpoint is ready."
+              exit 0
+            fi
+            if ! kill -0 "$(cat /tmp/omniroute.pid)" 2>/dev/null; then
+              echo "OmniRoute exited early."
+              tail -n 200 /tmp/omniroute.log || true
+              exit 1
+            fi
+            sleep 2
+          done
+          tail -n 200 /tmp/omniroute.log || true
+          exit 1
+      - name: Test real Arabic inference through auto
+        run: npm run omniroute:test
