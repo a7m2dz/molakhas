@@ -1180,5 +1180,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — variety.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "ميراكس-يبدا-انتاج-فيلم-everything-we-never-said-المستند-الى-رواية-سلاون-هارلو": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/Amy-Andelson-Emily-Meyer-Everything-We-Never-Said-.jpg?w=1024",
+    "fallbackSrc": "/news-images/ميراكس-يبدا-انتاج-فيلم-everything-we-never-said-المستند-الى-رواية-سلاون-هارلو.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/everything-we-never-said-sloan-harlow-movie-adaptation-1237071141/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOXdsTWFkdHJVVWdtMGkzeWtQMHJMUl9Db1ZTQlBkSEZOWTNNSFF0MW1TSTQyMGJUaWFDREFNNUtfZS1XV1NBWEFOZGhqSnFUM244cER6NktBaksxTEFNaDQyU3d2RXpER3FXTUhEWnk2WWtubFZNS1lCYXdsYjI5MkRZTGg0TmxGZGJYakdNNG9GOWs5YVhMRzJoaw?oc=5",
+    "type": "image/webp",
+    "width": 1500,
+    "height": 845,
+    "alt": "ملصق فيلم Everything We Never Said من إنتاج ميراكس",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "dexter-resurrection-يحدد-موعد-عرض-الموسم-الثاني-في-30-اكتوبر-على-paramount": {
+    "src": "https://deadline.com/wp-content/uploads/2026/07/DXR_202_MI_0519_0138_RT.jpg?w=1024",
+    "fallbackSrc": "/news-images/dexter-resurrection-يحدد-موعد-عرض-الموسم-الثاني-في-30-اكتوبر-على-paramount.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/dexter-resurrection-season-2-premiere-date-teaser-trailer-1237070553/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPSjU0V0VqTHBZV21SRXF0eUtCYzVoVFkxSkhSNXFxZVJKa3dQSER5c1ZUUGVGeUJRZFZuSlQ1dklQTWJYdXd3S0JnQkR4UlF5Y2pfNXRYTThpWl9pR01JSUY1S1VwLUJJMG9EMlFWLTZFV01UTkZUakxUMGdzUmJvRDN6SVlIV2tNUzc4Szl4Vm9UdzBXazdqR0xGNExfRDg?oc=5",
+    "type": "image/webp",
+    "width": 6000,
+    "height": 4000,
+    "alt": "مايكل سي هول في دور دكستر مورغان يجرى فحصًا بصريًا في إعلان تشويقي للموسم الثاني",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }

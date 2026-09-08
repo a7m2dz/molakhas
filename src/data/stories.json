@@ -217,6 +217,76 @@
     }
   },
   {
+    "id": "296d9d4507d3",
+    "slug": "ميراكس-يبدا-انتاج-فيلم-everything-we-never-said-المستند-الى-رواية-سلاون-هارلو",
+    "section": "movies",
+    "title": "ميراكس يبدأ إنتاج فيلم \"Everything We Never Said\" المستند إلى رواية سلاون هارلو",
+    "seoTitle": "ميراكس يطوّر فيلم Everything We Never Said من رواية سلاون هارلو",
+    "metaDescription": "ميراكس تُعلن عن تطوير فيلم مستند إلى رواية YA الرومانسية \"Everything We Never Said\" للكاتبة سلاون هارلو، مع كتابة السيناريو من قبل إيمي أندلسون وإميلي ماير.",
+    "focusKeyword": "ميراكس فيلم Everything We Never Said",
+    "excerpt": "أعلنت شركة ميراكس عن بدء تطوير فيلم مستند إلى رواية YA الرومانسية \"Everything We Never Said\" للكاتبة سلاون هارلو، مع إشراك إيمي أندلسون وإميلي ماير في كتابة السيناريو لتفاصيل القصة تتبع إيلا غراهام التي تكتشف أسرار صديقتها المتوفاة وتواجه مخاطر أظلم مما توقعت.",
+    "keyPoints": [
+      "ميراكس تعمل على تحويل رواية \"Everything We Never Said\" إلى فيلم طويل.",
+      "السيناريو سيُكتب من قبل إيمي أندلسون وإميلي ماير.",
+      "الرواية من تأليف سلاون هارلو نشرت عام 2024 لدى دار النشر G.P. Putnam's Sons."
+    ],
+    "body": [
+      "كشفت شركة ميراكس عن إطلاق مشروع فيلم جديد مستند إلى رواية الشباب الرومانسية \"Everything We Never Said\" للكاتبة سلاون هارلو، وهو عمل سيجمع بين عناصر التشويق والرومانسية في إطار درامي حديث.",
+      "ستتولى إيمي أندلسون وإميلي ماير مسؤولية تحويل النص الروائي إلى سيناريو، ما يضيف خبرة كتابية مميزة إلى عملية الإنتاج ويؤكد إلتزام الاستوديو بتقديم قصة متقنة ومؤثرة.",
+      "نُشرت الرواية في عام 2024 من قبل دار النشر G.P. Putnam's Sons، وتدور أحداثها حول إيلا غراهام التي تتعامل مع فقدان صديقتها المقربة هيلّي، وتجد نفسها منجذبة إلى صديقها السابق سويفر، بينما تكشف مذكراتها عن أسرار مظلمة قد تغير مجرى حياتها.",
+      "تُبرز القصة صراعات داخلية وعواطف متشابكة، ما يجعلها مادة غنية لتصوير سينمائي يجذب فئات الشباب الباحثين عن قصص ذات عمق عاطفي وإثارة.",
+      "لم تُعلن ميراكس بعد عن موعد الإطلاق أو تفاصيل إضافية حول طاقم التمثيل، لكن المشروع يُعَدّ خطوة جديدة في مسار الشركة لتوسيع محفظتها من الأفلام التي تستند إلى أعمال أدبية معاصرة."
+    ],
+    "sourceName": "Deadline",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOXdsTWFkdHJVVWdtMGkzeWtQMHJMUl9Db1ZTQlBkSEZOWTNNSFF0MW1TSTQyMGJUaWFDREFNNUtfZS1XV1NBWEFOZGhqSnFUM244cER6NktBaksxTEFNaDQyU3d2RXpER3FXTUhEWnk2WWtubFZNS1lCYXdsYjI5MkRZTGg0TmxGZGJYakdNNG9GOWs5YVhMRzJoaw?oc=5",
+    "publisherUrl": "https://deadline.com/2026/09/everything-we-never-said-sloan-harlow-movie-adaptation-1237071141/",
+    "sourceId": "deadline-entertainment",
+    "sourceEnrichment": "google-batch-signed",
+    "factChecked": true,
+    "trafficScore": 61,
+    "trafficSignals": [
+      "fresh<6h",
+      "section:movies+9",
+      "lurvue-intent"
+    ],
+    "sourceCoverage": 1,
+    "radarCoverage": 0,
+    "publishedAt": "2026-09-08T17:55:00.000Z",
+    "generatedAt": "2026-09-08T20:33:29.436Z",
+    "status": "approved",
+    "qualityScore": 94,
+    "confidence": 94,
+    "importance": 88,
+    "trust": 92,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "factualNotes": [],
+    "tags": [
+      "أفلام",
+      "ميراكس",
+      "تكييف",
+      "رواية",
+      "شباب"
+    ],
+    "entities": [
+      "Miramox",
+      "Sloan Harlow",
+      "Amy Andelson",
+      "Emily Meyer",
+      "G.P. Putnam's Sons",
+      "Everything We Never Said"
+    ],
+    "image": {
+      "src": "/news-images/ميراكس-يبدا-انتاج-فيلم-everything-we-never-said-المستند-الى-رواية-سلاون-هارلو.webp",
+      "alt": "ملصق فيلم Everything We Never Said من إنتاج ميراكس",
+      "caption": "ملصق فيلم Everything We Never Said",
+      "searchQuery": "Everything We Never Said film poster",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
     "id": "902315cac294",
     "slug": "ريال-مدريد-يواجه-انتر-ميلان-في-افتتاح-دوري-الابطال-2026-27-مع-كيلان-مبابي",
     "section": "football",
@@ -1304,6 +1374,76 @@
       "alt": "مشهد من مقطع تشويقي لمسلسل Dexter: Resurrection يُظهر البطل بين فحص عينيه وتلميع سلاحه",
       "caption": "دكستر يجهز سلاحه في المشهد التشويقي",
       "searchQuery": "Dexter Resurrection teaser",
+      "width": 1200,
+      "height": 675,
+      "type": "image/webp"
+    }
+  },
+  {
+    "id": "96dbfdc494a3",
+    "slug": "dexter-resurrection-يحدد-موعد-عرض-الموسم-الثاني-في-30-اكتوبر-على-paramount",
+    "section": "tv",
+    "title": "‘Dexter: Resurrection’ يحدد موعد عرض الموسم الثاني في 30 أكتوبر على Paramount+",
+    "seoTitle": "Dexter Resurrection يعلن موعد الموسم الثاني في 30 أكتوبر",
+    "metaDescription": "أعلنت شبكة Showtime أن الموسم الثاني من مسلسل \"Dexter: Resurrection\" سيُعرض في 30 أكتوبر عبر منصة Paramount+، مع إطلاق إعلان تشويقي جديد يبرز عودة دكستر.",
+    "focusKeyword": "Dexter Resurrection الموسم الثاني",
+    "excerpt": "حددت شبكة Showtime موعد عرض الموسم الثاني من مسلسل \"Dexter: Resurrection\" في 30 أكتوبر عبر منصة Paramount+، وأطلقت إعلانًا تشويقيًا يُظهر دكستر في عيادة فحص البصر مع عبارات \"He's Back\" و\"He's Sharper Than Ever\".",
+    "keyPoints": [
+      "Showtime أعلنت عن موعد عرض الموسم الثاني في 30 أكتوبر عبر Paramount+",
+      "تم إطلاق إعلان تشويقي جديد يُظهر دكستر في عيادة فحص البصر",
+      "في الإعلان تظهر عبارات \"He's Back\" و\"He's Sharper Than Ever\" لتأكيد عودة الشخصية"
+    ],
+    "body": [
+      "أعلنت شبكة Showtime أن الموسم الثاني من مسلسل \"Dexter: Resurrection\" سيُعرض في 30 أكتوبر، وذلك عبر منصة البث الرقمية Paramount+. يأتي هذا الإعلان كجزء من التحضيرات لبدء عطلة الهالوين، حيث يُتوقع أن يتضمن الموسم الجديد جرائم متسلسلة وأشباحًا تضيف جوًا من التشويق.",
+      "تُعَدّ منصة Paramount+ هي الناقل الحصري للمسلسل في هذه الدورة، ما يتيح للمشاهدين في المنطقة العربية والعالمية متابعة الأحداث الجديدة بسهولة. يسلط الموسم الثاني الضوء على عودة دكستر مورغان إلى عالم الجريمة، مع تعزيز عناصر الرعب والدراما لتناسب أجواء أكتوبر.",
+      "في الوقت نفسه، أُصدر إعلان تشويقي جديد يُظهر البطل دكستر (مايكل سي هول) وهو يجري فحصًا بصريًا في عيادة. خلال الفحص، تظهر على الشاشة كلمات وأرقام تتضمن تاريخ العرض، إلى جانب عبارات مثل \"He's Back\" و\"He's Sharper Than Ever\"، ما يضيف لمسة من الغموض والإثارة.",
+      "تُظهر هذه العبارات الترويجية أن دكستر يعود أقوى وأكثر حدة من ذي قبل، ما يثير حماس المتابعين الذين انتظروا عودة الشخصية بعد انتهاء الموسم الأول. يُتوقع أن يجذب الموسم الثاني جمهورًا واسعًا بفضل الجمع بين القصة المشوقة والإنتاج المتقن.",
+      "مع اقتراب موعد البث في 30 أكتوبر، يتطلع الجمهور إلى مشاهدة ما سيقدمه دكستر من جرائم جديدة وتحديات معقدة، في إطار يدمج بين الرعب والدراما لتقديم تجربة تلفزيونية متميزة."
+    ],
+    "sourceName": "Deadline",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPSjU0V0VqTHBZV21SRXF0eUtCYzVoVFkxSkhSNXFxZVJKa3dQSER5c1ZUUGVGeUJRZFZuSlQ1dklQTWJYdXd3S0JnQkR4UlF5Y2pfNXRYTThpWl9pR01JSUY1S1VwLUJJMG9EMlFWLTZFV01UTkZUakxUMGdzUmJvRDN6SVlIV2tNUzc4Szl4Vm9UdzBXazdqR0xGNExfRDg?oc=5",
+    "publisherUrl": "https://deadline.com/2026/09/dexter-resurrection-season-2-premiere-date-teaser-trailer-1237070553/",
+    "sourceId": "deadline-entertainment",
+    "sourceEnrichment": "google-batch-signed",
+    "factChecked": true,
+    "trafficScore": 85,
+    "trafficSignals": [
+      "fresh<6h",
+      "section:tv+9",
+      "intent:موعد عرض+موسم/حلقة",
+      "lurvue-intent"
+    ],
+    "sourceCoverage": 1,
+    "radarCoverage": 0,
+    "publishedAt": "2026-09-08T14:35:00.000Z",
+    "generatedAt": "2026-09-08T20:33:29.438Z",
+    "status": "approved",
+    "qualityScore": 100,
+    "confidence": 100,
+    "importance": 90,
+    "trust": 92,
+    "qualityFlags": [],
+    "qualityNotes": [],
+    "factualNotes": [],
+    "tags": [
+      "Dexter",
+      "Dexter: Resurrection",
+      "Paramount+",
+      "Showtime",
+      "مسلسل"
+    ],
+    "entities": [
+      "Dexter: Resurrection",
+      "Paramount+",
+      "Showtime",
+      "Michael C. Hall",
+      "Dexter Morgan"
+    ],
+    "image": {
+      "src": "/news-images/dexter-resurrection-يحدد-موعد-عرض-الموسم-الثاني-في-30-اكتوبر-على-paramount.webp",
+      "alt": "مايكل سي هول في دور دكستر مورغان يجرى فحصًا بصريًا في إعلان تشويقي للموسم الثاني",
+      "caption": "دكستر في عيادة الفحص البصري يكتشف تاريخ العرض",
+      "searchQuery": "Dexter Resurrection teaser October 30",
       "width": 1200,
       "height": 675,
       "type": "image/webp"
