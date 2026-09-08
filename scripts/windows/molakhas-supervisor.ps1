@@ -42,7 +42,7 @@ if (-not $env:OMNIROUTE_BASE_URL) { $env:OMNIROUTE_BASE_URL = 'http://127.0.0.1:
 if (-not $env:OMNIROUTE_API_KEY) { $env:OMNIROUTE_API_KEY = 'sk_omniroute' }
 $env:OMNIROUTE_MODEL = 'auto/best-free'
 if (-not $env:OMNIROUTE_FALLBACK_MODEL) { $env:OMNIROUTE_FALLBACK_MODEL = 'auto' }
-if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '60000' }
+if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '90000' }
 $env:HOSTNAME = '127.0.0.1'
 $env:OMNIROUTE_SERVER_HOST = '127.0.0.1'
 $env:REQUIRE_API_KEY = 'false'
@@ -61,48 +61,20 @@ function Test-OmniRoutePort {
   }
 }
 
-function Invoke-ModelsProbe {
-  param([AllowNull()][string]$ApiKey)
+function Test-OmniRouteHead {
   try {
-    $params = @{
-      Uri = "$($env:OMNIROUTE_BASE_URL)/models"
-      Method = 'Get'
-      TimeoutSec = 5
-      ErrorAction = 'Stop'
-    }
-    if ($ApiKey) { $params.Headers = @{ Authorization = "Bearer $ApiKey" } }
-    $null = Invoke-RestMethod @params
+    $null = Invoke-WebRequest -Uri "$($env:OMNIROUTE_BASE_URL)/models" -Method Head -TimeoutSec 5 -UseBasicParsing -ErrorAction Stop
     return $true
   } catch {
     return $false
   }
 }
 
-function Resolve-OmniRouteAuth {
-  $candidates = New-Object System.Collections.Generic.List[string]
-  if ($env:OMNIROUTE_API_KEY) { $candidates.Add($env:OMNIROUTE_API_KEY) }
-  if (-not $candidates.Contains('sk_omniroute')) { $candidates.Add('sk_omniroute') }
-  $candidates.Add('')
-
-  foreach ($candidate in $candidates) {
-    if (Invoke-ModelsProbe -ApiKey $candidate) {
-      $env:OMNIROUTE_API_KEY = $candidate
-      if ($candidate) {
-        Write-Log "OmniRoute API is healthy using bearer authentication. Model=$($env:OMNIROUTE_MODEL)"
-      } else {
-        Write-Log "OmniRoute API is healthy without bearer authentication. Model=$($env:OMNIROUTE_MODEL)"
-      }
-      return $true
-    }
-  }
-  return $false
-}
-
 function Start-OmniRouteIfNeeded {
-  if (Resolve-OmniRouteAuth) { return $true }
+  if (Test-OmniRouteHead) { return $true }
 
   if (Test-OmniRoutePort) {
-    Write-Log 'OmniRoute port 20128 is listening, but /v1/models authentication/readiness is not healthy yet. Not starting a duplicate process.'
+    Write-Log 'OmniRoute port 20128 is listening, but HEAD /v1/models is not ready yet. Not starting a duplicate process.'
     return $false
   }
 
@@ -125,10 +97,13 @@ function Start-OmniRouteIfNeeded {
 
   for ($attempt = 1; $attempt -le 90; $attempt++) {
     Start-Sleep -Seconds 2
-    if (Resolve-OmniRouteAuth) { return $true }
+    if (Test-OmniRouteHead) {
+      Write-Log "OmniRoute HEAD /v1/models is ready. Model=$($env:OMNIROUTE_MODEL)"
+      return $true
+    }
   }
 
-  Write-Log 'OmniRoute did not become API-ready within 180 seconds.'
+  Write-Log 'OmniRoute did not become HEAD-ready within 180 seconds.'
   return $false
 }
 
@@ -203,9 +178,14 @@ try {
     }
 
     if ($publisherProcess -and $publisherProcess.HasExited) {
-      Write-Log "Publisher cycle exited with code $($publisherProcess.ExitCode)."
+      $exitCode = $publisherProcess.ExitCode
+      Write-Log "Publisher cycle exited with code $exitCode."
       $publisherProcess.Dispose()
       $publisherProcess = $null
+      if ($exitCode -ne 0) {
+        $nextCycle = (Get-Date).AddMinutes(2)
+        Write-Log 'Failed publisher cycle will retry in about 2 minutes.'
+      }
     }
 
     if (-not $publisherProcess -and $now -ge $nextCycle) {
@@ -218,7 +198,7 @@ try {
         ) -WorkingDirectory $ProjectRoot -WindowStyle Hidden -PassThru
         $nextCycle = (Get-Date).AddMinutes([Math]::Max(5, $CycleMinutes))
       } else {
-        Write-Log 'Publisher cycle postponed because OmniRoute API is not healthy.'
+        Write-Log 'Publisher cycle postponed because OmniRoute HEAD probe is not healthy.'
         $nextCycle = (Get-Date).AddMinutes(2)
       }
     }
