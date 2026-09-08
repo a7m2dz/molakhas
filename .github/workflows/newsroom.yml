@@ -9,14 +9,13 @@ on:
     paths:
       - '.github/workflows/newsroom.yml'
       - 'package.json'
+      - 'package-lock.json'
       - 'scripts/newsroom/**'
-      - 'src/data/**'
       - 'src/lib/**'
       - 'src/pages/**'
       - 'src/layouts/**'
       - 'src/components/**'
       - 'src/styles/**'
-      - 'public/**'
       - 'astro.config.mjs'
       - 'worker/**'
       - 'wrangler.jsonc'
@@ -29,7 +28,77 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  primary-check:
+    runs-on: ubuntu-latest
+    outputs:
+      active: ${{ steps.heartbeat.outputs.active }}
+      age_minutes: ${{ steps.heartbeat.outputs.age_minutes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Check Windows primary heartbeat
+        id: heartbeat
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "age_minutes=forced" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch forces a cloud cycle."
+            exit 0
+          fi
+
+          if ! git fetch --quiet --depth=1 origin windows-heartbeat; then
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "age_minutes=missing" >> "$GITHUB_OUTPUT"
+            echo "No Windows heartbeat branch; cloud fallback is active."
+            exit 0
+          fi
+
+          if ! git show FETCH_HEAD:heartbeat.json > /tmp/molakhas-heartbeat.json 2>/dev/null; then
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "age_minutes=missing" >> "$GITHUB_OUTPUT"
+            echo "Heartbeat file missing; cloud fallback is active."
+            exit 0
+          fi
+
+          python3 - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+
+          try:
+              with open('/tmp/molakhas-heartbeat.json', 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+              updated = datetime.fromisoformat(str(data.get('updatedAt', '')).replace('Z', '+00:00'))
+              age = max(0.0, (datetime.now(timezone.utc) - updated.astimezone(timezone.utc)).total_seconds() / 60.0)
+              healthy = data.get('source') == 'windows-primary' and data.get('omnirouteHealthy') is True
+              active = healthy and age <= 20.0
+              age_value = f'{age:.1f}'
+          except Exception as exc:
+              active = False
+              age_value = 'invalid'
+              print(f'Heartbeat parse error: {exc}')
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
+              out.write(f"active={'true' if active else 'false'}\n")
+              out.write(f"age_minutes={age_value}\n")
+          print(f"Windows primary active={active}; heartbeat age={age_value} minutes")
+          PY
+
+      - name: Primary/fallback decision
+        run: |
+          echo "Windows primary active: ${{ steps.heartbeat.outputs.active }}"
+          echo "Heartbeat age: ${{ steps.heartbeat.outputs.age_minutes }} minutes"
+          if [ "${{ steps.heartbeat.outputs.active }}" = "true" ]; then
+            echo "Windows is healthy; cloud newsroom stands by."
+          else
+            echo "Windows is unavailable/stale; cloud newsroom will take over."
+          fi
+
   newsroom:
+    needs: primary-check
+    if: needs.primary-check.outputs.active != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
@@ -212,7 +281,8 @@ jobs:
         if: always()
         shell: bash
         run: |
-          echo "Molakhas cloud newsroom cycle finished at $(date -u +'%Y-%m-%d %H:%M:%S UTC')."
+          echo "Molakhas cloud fallback cycle finished at $(date -u +'%Y-%m-%d %H:%M:%S UTC')."
+          echo "Windows heartbeat age: ${{ needs.primary-check.outputs.age_minutes }} minutes"
           echo "OmniRoute ready: ${{ steps.omni_boot.outputs.ready }}"
           echo "Inference outcome: ${{ steps.omni.outcome }}"
           echo "News generation outcome: ${{ steps.generate.outcome }}"
