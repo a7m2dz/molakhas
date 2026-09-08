@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T19:16:52.059Z",
+  "generatedAt": "2026-09-08T19:30:52.034Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -7,9 +7,9 @@
   "counts": {
     "football": 14,
     "nba": 0,
-    "mma": 3,
+    "mma": 1,
     "wwe": 6,
-    "total": 23
+    "total": 21
   },
   "events": [
     {
@@ -20,7 +20,7 @@
       "subtitle": "Saudi Pro League",
       "start": "2026-09-08T18:00:00.000Z",
       "state": "live",
-      "score": "3 - 0",
+      "score": "3 - 1",
       "importance": 100,
       "source": "FotMob",
       "url": "/matches/al-qadsiah-al-ahli-2026-09-08-5970131/",
@@ -50,7 +50,7 @@
       "subtitle": "Champions League",
       "start": "2026-09-08T19:00:00.000Z",
       "state": "live",
-      "score": "0 - 0",
+      "score": "2 - 0",
       "importance": 89,
       "source": "FotMob",
       "url": "/matches/real-madrid-inter-2026-09-08-6106242/",
@@ -125,7 +125,7 @@
       "subtitle": "EFL Cup",
       "start": "2026-09-08T18:45:00.000Z",
       "state": "live",
-      "score": "0 - 0",
+      "score": "1 - 0",
       "importance": 60,
       "source": "FotMob",
       "url": "/matches/crystal-palace-middlesbrough-2026-09-08-6099328/",
@@ -140,7 +140,7 @@
       "subtitle": "EFL Cup",
       "start": "2026-09-08T18:45:00.000Z",
       "state": "live",
-      "score": "0 - 0",
+      "score": "1 - 0",
       "importance": 60,
       "source": "FotMob",
       "url": "/matches/leyton-orient-bradford-2026-09-08-6099339/",
@@ -176,6 +176,21 @@
       "url": "/matches/millwall-newcastle-2026-09-08-6099336/",
       "internal": true,
       "scope": "today"
+    },
+    {
+      "id": "ufc-official-2026-09-13-0",
+      "sport": "mma",
+      "sportLabel": "MMA / UFC",
+      "title": "UFC: Silva vs Delgado",
+      "subtitle": "Desert Diamond Arena",
+      "start": "2026-09-12T21:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 97,
+      "source": "UFC.com",
+      "url": "https://www.ufc.com/events",
+      "internal": false,
+      "scope": "upcoming"
     },
     {
       "id": "wwe-20260908-0",
@@ -296,51 +311,6 @@
       "url": "/matches/al-hazem-al-taawoun-2026-09-08-5970129/",
       "internal": true,
       "scope": "today"
-    },
-    {
-      "id": "ufc-600060736",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-08T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060736/league/ufc",
-      "internal": false,
-      "scope": "today"
-    },
-    {
-      "id": "ufc-600060772",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Noche UFC",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-12T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060772/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060737",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-15T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060737/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
     },
     {
       "id": "football-6106404",

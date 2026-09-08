@@ -1102,5 +1102,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — deadline.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "جيمس-هاردن-يوقع-عقدا-ثلاثي-السنوات-بقيمة-97-مليون-دولار-مع-كليفلر": {
+    "src": "/news-images/جيمس-هاردن-يوقع-عقدا-ثلاثي-السنوات-بقيمة-97-مليون-دولار-مع-كليفلر.webp",
+    "fallbackSrc": "/news-images/جيمس-هاردن-يوقع-عقدا-ثلاثي-السنوات-بقيمة-97-مليون-دولار-مع-كليفلر.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "جيمس هاردن يرتدي قميص كليفلر أثناء توقيع عقده الجديد",
+    "caption": "هاردن يوقع عقدًا ثلاثي السنوات مع كليفلر",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287209/James-Harden-Officially-Signs-Three-Year-$97M-Contract-With-Cavaliers",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
+  },
+  "مسلسل-dexter-resurrection-يعود-بموسم-جديد-على-paramount-في-30-اكتوبر": {
+    "src": "https://variety.com/wp-content/uploads/2026/07/DXR_201_MI_0610_0227_RT.jpg?w=1000&",
+    "fallbackSrc": "/news-images/مسلسل-dexter-resurrection-يعود-بموسم-جديد-على-paramount-في-30-اكتوبر.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Variety",
+    "sourceUrl": "https://variety.com/2026/tv/news/dexter-resurrection-season-2-release-date-1236851973/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOY0RvSTZRTEVBZHVCT2ZMZ29rWUhLaTA0cy1BS2J0MXFlanpfaXgzc09aNWIxcDlmU2lFVFIyQ1F0ZmJSdGcxUEFvd1NhSUlnemJoaGIycHhjVTRwUnFscFBPbml5VUNBOFlLMzFQc1ZNRGkwd1VxS0xubTByZDc0V1NWazJLay1ubkM3RmM3WQ?oc=5",
+    "type": "image/webp",
+    "width": 1000,
+    "height": 563,
+    "alt": "مشهد من مقطع تشويقي لمسلسل Dexter: Resurrection يُظهر البطل بين فحص عينيه وتلميع سلاحه",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
