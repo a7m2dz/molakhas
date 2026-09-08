@@ -18,6 +18,8 @@ on:
       - 'src/styles/**'
       - 'public/**'
       - 'astro.config.mjs'
+      - 'worker/**'
+      - 'wrangler.jsonc'
 
 permissions:
   contents: write
@@ -29,11 +31,12 @@ concurrency:
 jobs:
   newsroom:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
-      OMNIROUTE_BASE_URL: ${{ secrets.OMNIROUTE_BASE_URL || vars.OMNIROUTE_BASE_URL }}
+      PUBLIC_SITE_URL: https://mulakhas.com
+      OMNIROUTE_BASE_URL: ${{ vars.OMNIROUTE_BASE_URL || 'http://127.0.0.1:20128/v1' }}
       OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
-      OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto/best-free' }}
+      OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto' }}
       OMNIROUTE_FALLBACK_MODEL: ${{ vars.OMNIROUTE_FALLBACK_MODEL || 'auto' }}
       OMNIROUTE_TIMEOUT_MS: ${{ vars.OMNIROUTE_TIMEOUT_MS || '120000' }}
       NEWSROOM_MAX_STORIES: ${{ vars.NEWSROOM_MAX_STORIES || '8' }}
@@ -47,42 +50,83 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - name: Install dependencies
+      - name: Install project dependencies
         run: npm install --no-audit --no-fund
 
       - name: Rank traffic opportunities from RSS and radar
         run: npm run newsroom:dry
 
-      - name: Check cloud OmniRoute configuration
-        id: omni_config
+      - name: Boot OmniRoute inside the cloud runner
+        id: omni_boot
+        if: github.event_name != 'push'
+        shell: bash
         run: |
-          if [ -n "$OMNIROUTE_BASE_URL" ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-            echo "Cloud OmniRoute endpoint configured."
-          else
+          set +e
+
+          case "$OMNIROUTE_BASE_URL" in
+            http://127.0.0.1:*|http://localhost:*)
+              echo "Starting ephemeral OmniRoute on this GitHub runner..."
+              ;;
+            *)
+              echo "Using configured remote OmniRoute endpoint: $OMNIROUTE_BASE_URL"
+              echo "ready=true" >> "$GITHUB_OUTPUT"
+              echo "mode=remote" >> "$GITHUB_OUTPUT"
+              exit 0
+              ;;
+          esac
+
+          npm install -g omniroute@3.8.50 --no-audit --no-fund
+          if [ $? -ne 0 ]; then
+            echo "OmniRoute install failed; sports/data refresh will continue without AI story generation."
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "Cloud OmniRoute endpoint not configured; Windows local publisher remains the primary story-generation path. Sports snapshots will still be refreshed in CI."
+            exit 0
           fi
 
-      - name: Verify cloud OmniRoute connection
+          nohup omniroute --no-open --non-interactive > /tmp/omniroute.log 2>&1 &
+          echo $! > /tmp/omniroute.pid
+
+          for attempt in $(seq 1 75); do
+            if curl -fsS --max-time 4 "$OMNIROUTE_BASE_URL/models" > /tmp/omniroute-models.json 2>/dev/null; then
+              echo "OmniRoute is ready on the GitHub runner."
+              echo "ready=true" >> "$GITHUB_OUTPUT"
+              echo "mode=ephemeral" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            if ! kill -0 "$(cat /tmp/omniroute.pid)" 2>/dev/null; then
+              echo "OmniRoute process exited before becoming ready."
+              break
+            fi
+
+            sleep 2
+          done
+
+          echo "OmniRoute did not become ready; continuing with non-AI refresh only."
+          tail -n 200 /tmp/omniroute.log || true
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Verify OmniRoute inference
         id: omni
-        if: steps.omni_config.outputs.ready == 'true'
+        if: github.event_name != 'push' && steps.omni_boot.outputs.ready == 'true'
         continue-on-error: true
         run: npm run omniroute:test
 
       - name: Generate newsroom batch in cloud
-        if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome == 'success'
+        if: github.event_name != 'push' && steps.omni_boot.outputs.ready == 'true' && steps.omni.outcome == 'success'
+        continue-on-error: true
         run: npm run newsroom
 
-      - name: Cloud OmniRoute unavailable notice
-        if: steps.omni_config.outputs.ready == 'true' && steps.omni.outcome != 'success'
-        run: echo "Cloud OmniRoute is unreachable; skipping cloud story generation. Local publisher can still use 127.0.0.1:20128."
+      - name: OmniRoute fallback notice
+        if: github.event_name != 'push' && (steps.omni_boot.outputs.ready != 'true' || steps.omni.outcome != 'success')
+        run: echo "AI generation was unavailable in this run; sports snapshots and site build continue normally."
 
       - name: Build production site and media
         run: npm run build
@@ -90,20 +134,27 @@ jobs:
       - name: Run prelaunch quality audit
         run: npm run audit:prelaunch
 
-      # Single-writer rule:
-      # - Windows publisher owns OmniRoute stories + article media.
-      # - Scheduled/manual GitHub Actions owns match/event snapshots.
-      # Push-triggered validation must never write generated data back to main,
-      # otherwise a local publisher run can race the bot and create rebase conflicts.
-      - name: Persist scheduled sports snapshots
+      - name: Persist cloud newsroom state
         if: github.event_name != 'push'
+        shell: bash
         run: |
-          if git diff --quiet -- src/data/matches.json src/data/today-events.json; then
-            echo "No sports snapshot changes."
-            exit 0
-          fi
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
-          git add src/data/matches.json src/data/today-events.json
-          git commit -m "newsroom: refresh sports snapshots"
-          git push
+
+          # The runner starts from a clean checkout, so any changes under these
+          # generated-data/media paths were produced by this newsroom run.
+          git add -A src/data public/news-images public/brand
+
+          if git diff --cached --quiet; then
+            echo "No publishable newsroom changes."
+            exit 0
+          fi
+
+          git commit -m "newsroom: cloud refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Notify search engines with IndexNow
+        if: github.event_name != 'push'
+        continue-on-error: true
+        run: npm run indexnow
