@@ -61,9 +61,12 @@ function Start-OmniRouteIfNeeded {
     return $false
   }
 
-  Write-Log "OmniRoute is not responding. Starting $($command.Source) --no-open"
+  $cmdExe = $env:ComSpec
+  if (-not $cmdExe) { $cmdExe = "$env:SystemRoot\System32\cmd.exe" }
+
+  Write-Log 'OmniRoute is not responding. Starting local OmniRoute with --no-open.'
   try {
-    Start-Process -FilePath $command.Source -ArgumentList '--no-open' -WindowStyle Hidden | Out-Null
+    Start-Process -FilePath $cmdExe -ArgumentList @('/d', '/s', '/c', 'omniroute --no-open') -WorkingDirectory $ProjectRoot -WindowStyle Hidden | Out-Null
   } catch {
     Write-Log "Failed to start OmniRoute: $($_.Exception.Message)"
     return $false
