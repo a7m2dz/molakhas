@@ -7,7 +7,7 @@ import { buildTeamHubs, buildCompetitionHubs } from '../lib/hubs';
 import { competitionHubQuality, isHubIndexable, teamHubQuality } from '../lib/index-quality';
 import { isMatchIndexable } from '../lib/matches';
 export const prerender = true;
-const base = (import.meta.env.PUBLIC_SITE_URL || 'https://mulakhas.com').replace(/\/$/, '');
+const base = 'https://mulakhas.com';
 const esc = (v='') => String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&apos;');
 const absolute = (value='') => /^https?:\/\//i.test(String(value)) ? String(value) : `${base}${String(value).startsWith('/') ? '' : '/'}${value}`;
 export function GET() {
