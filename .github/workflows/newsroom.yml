@@ -89,7 +89,7 @@ jobs:
             exit 0
           fi
 
-          nohup omniroute --no-open --non-interactive > /tmp/omniroute.log 2>&1 &
+          nohup omniroute --no-open > /tmp/omniroute.log 2>&1 &
           echo $! > /tmp/omniroute.pid
 
           for attempt in $(seq 1 75); do
