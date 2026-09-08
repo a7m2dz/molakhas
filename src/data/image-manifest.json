@@ -1244,5 +1244,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "هالاند-يحقق-رقما-قياسيا-في-دوري-ابطال-اوروبا-بـ-59-هدفا-في-59-مباراة": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/08171121/haaland-messi-1-1200x740.webp",
+    "fallbackSrc": "/news-images/هالاند-يحقق-رقما-قياسيا-في-دوري-ابطال-اوروبا-بـ-59-هدفا-في-59-مباراة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/erling-haaland-surpasses-lionel-messis-pace-to-set-new-champions-league-goalscoring-record/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/erling-haaland-surpasses-lionel-messis-pace-to-set-new-champions-league-goalscoring-record/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "إيرلنج هالاند يحتفل بعد تسجيل هدفين في مباراة مانشستر سيتي ضد بورتو بدوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
