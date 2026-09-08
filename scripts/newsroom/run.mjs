@@ -52,6 +52,11 @@ const entryLink = (entry) => {
   return entry?.link?.['@_href'] ?? entry?.guid?.['#text'] ?? entry?.guid ?? '';
 };
 
+async function persistStoryState() {
+  stories.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+  await fs.writeFile(storiesPath, `${JSON.stringify(stories.slice(0, 1500), null, 2)}\n`);
+}
+
 let auditedExisting = false;
 for (const story of stories) {
   if (story.status !== 'approved') continue;
@@ -136,10 +141,7 @@ if (dryRun) {
   process.exit(0);
 }
 if (!configured()) {
-  if (auditedExisting) {
-    stories.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-    await fs.writeFile(storiesPath, `${JSON.stringify(stories.slice(0, 1500), null, 2)}\n`);
-  }
+  if (auditedExisting) await persistStoryState();
   console.log('OmniRoute is not configured; no new stories written.');
   process.exit(0);
 }
@@ -250,6 +252,8 @@ for (const rawItem of selected) {
     existingLinks.add(item.link);
     publishedTitles.push(rewritten.title);
     changed = true;
+    await persistStoryState();
+    console.log(`[Checkpoint] Saved ${rewritten.title}`);
     console.log(`${approved ? 'APPROVED' : 'REVIEW'} [Q${score}/C${rewritten.confidence}/T${rawItem.trafficScore || 0}]${languageClean ? '' : ' [LANGUAGE BLOCKED]'}${factualClean ? '' : ' [FACT BLOCKED]'}: ${rewritten.title}`);
     if (facts.length) console.warn(`[Facts] ${rewritten.title}: ${facts.join('; ')}`);
   } catch (error) {
@@ -257,7 +261,4 @@ for (const rawItem of selected) {
   }
 }
 
-if (changed) {
-  stories.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  await fs.writeFile(storiesPath, `${JSON.stringify(stories.slice(0, 1500), null, 2)}\n`);
-}
+if (changed) await persistStoryState();
