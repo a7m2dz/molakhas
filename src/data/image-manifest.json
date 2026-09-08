@@ -1164,5 +1164,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "نتفليكس-يعلن-عن-تقديم-ارقام-شباك-التذاكر-لستة-افلام-قادمة-ضمن-توسع-خططها-السينمايية": {
+    "src": "https://variety.com/wp-content/uploads/2025/12/Ted-Sarandos.jpg?crop=0px%2C523px%2C1920px%2C1078px&",
+    "fallbackSrc": "/news-images/نتفليكس-يعلن-عن-تقديم-ارقام-شباك-التذاكر-لستة-افلام-قادمة-ضمن-توسع-خططها-السينمايية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "variety.com",
+    "sourceUrl": "https://variety.com/2026/film/news/netflix-report-box-office-theatrical-releases-1236854834/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNUU9sOXJLbUF5bHl5dFhjWV96cUo0aHFuTDB0b202SmxLaVd2TGl6eUxFLW5TX0JaX0JMZGFyS1VvWmtsTWNTa2VCZWRxSzJNY0Z0aG85QkVtUklGRnprWGhRVWRIamZOTjJxTmU3Mm1Gc0dSd1VSNHdSeTZHdmc2bFNqZUl2MDdJbW1FMUg0Wm1EVm9VR0hn?oc=5",
+    "type": "image/webp",
+    "width": 1000,
+    "height": 563,
+    "alt": "ملصق فيلم La Bola Negra مع نجمة بينيلوب كروز في مهرجان كان",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — variety.com.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
