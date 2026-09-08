@@ -274,5 +274,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ميرينيو-يقود-ريال-مدريد-امام-انتر-في-دوري-ابطال-اوروبا": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/df01/live/9bb70e90-aad4-11f1-aa35-df10e5ff32f4.jpg",
+    "fallbackSrc": "/news-images/ميرينيو-يقود-ريال-مدريد-امام-انتر-في-دوري-ابطال-اوروبا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/c4gqd5l72j8o?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/c4gqd5l72j8o?at_medium=RSS&at_campaign=rss",
+    "type": "image/jpeg",
+    "alt": "خوسيه ميرينيو خلال مؤتمر صحفي قبل مباراة ريال مدريد وإنتر في دوري الأبطال",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "فيلم-the-odyssey-يتصدر-شباك-تذاكر-كوريا-باكثر-من-10-ملايين-مشاهد": {
+    "src": "https://variety.com/wp-content/uploads/2026/08/Odyssey-Spider-Man.jpg?w=1000&",
+    "fallbackSrc": "/news-images/فيلم-the-odyssey-يتصدر-شباك-تذاكر-كوريا-باكثر-من-10-ملايين-مشاهد.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Variety",
+    "sourceUrl": "https://variety.com/2026/film/box-office/korea-box-office-the-odyssey-spider-man-brand-new-day-the-intern-1236854398/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOVmU5NzdmMjFqTTRPcDRWbVJBZ2s0TGlkOGd3bVpkRWNEbDhwWlNoVlN4U25xVEVHVVpVWHRTbXduMW5nOU9KMExrNGxiVk56b1dkYjJiT2p2azBmU1UxTm55LTRRSUlvcDZ0aXcxaDg4S2FiTXM4eGtyaEdBNFdUanFjOTRjZmV4T0tWeV81RGFVRzd0dXNuT0dfeVh4R01ndENhSHBzZW1HZUlyTmdUeGxja1dIeEtv?oc=5",
+    "type": "image/webp",
+    "width": 1000,
+    "height": 563,
+    "alt": "مشهد من فيلم The Odyssey للمخرج كريستوفر نولان",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
