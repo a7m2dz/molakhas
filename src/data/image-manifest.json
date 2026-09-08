@@ -574,5 +574,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "دوري-ابطال-اوروبا-2026-27-فرق-جديدة-وتحديات-باريس-سان-جيرمان-للثلاثية": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/05/30150608/GettyImages-2278277864-scaled-e1780167983142.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/دوري-ابطال-اوروبا-2026-27-فرق-جديدة-وتحديات-باريس-سان-جيرمان-للثلاثية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic Football",
+    "sourceUrl": "https://www.nytimes.com/athletic/7571566/2026/09/08/champions-league-what-to-expect/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7571566/2026/09/08/champions-league-what-to-expect/",
+    "type": "image/jpeg",
+    "alt": "ملعب أولد ترافورد يضج بجماهير خلال مباراة دوري أبطال أوروبا 2026-27 بين مانشستر يونايتد وساباح",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
