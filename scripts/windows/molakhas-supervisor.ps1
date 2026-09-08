@@ -38,9 +38,11 @@ Set-Location $ProjectRoot
 if (-not $env:PUBLIC_SITE_URL) { $env:PUBLIC_SITE_URL = 'https://mulakhas.com' }
 if (-not $env:OMNIROUTE_BASE_URL) { $env:OMNIROUTE_BASE_URL = 'http://127.0.0.1:20128/v1' }
 if (-not $env:OMNIROUTE_API_KEY) { $env:OMNIROUTE_API_KEY = 'sk_omniroute' }
-if (-not $env:OMNIROUTE_MODEL) { $env:OMNIROUTE_MODEL = 'auto/best-free' }
+$env:OMNIROUTE_MODEL = 'auto/best-free'
 if (-not $env:OMNIROUTE_FALLBACK_MODEL) { $env:OMNIROUTE_FALLBACK_MODEL = 'auto' }
 if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '60000' }
+$env:OMNIROUTE_SERVER_HOST = '127.0.0.1'
+$env:REQUIRE_API_KEY = 'false'
 
 function Test-OmniRoute {
   try {
@@ -130,7 +132,7 @@ function Publish-Heartbeat {
   }
 }
 
-Write-Log "Molakhas supervisor started. Project=$ProjectRoot Cycle=${CycleMinutes}m Heartbeat=${HeartbeatMinutes}m"
+Write-Log "Molakhas supervisor started. Project=$ProjectRoot Cycle=${CycleMinutes}m Heartbeat=${HeartbeatMinutes}m Model=$($env:OMNIROUTE_MODEL)"
 
 $nextHealthCheck = Get-Date
 $nextHeartbeat = Get-Date
