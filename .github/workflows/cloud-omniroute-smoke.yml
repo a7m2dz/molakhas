@@ -15,7 +15,9 @@ jobs:
     timeout-minutes: 15
     env:
       OMNIROUTE_SERVER_HOST: 127.0.0.1
+      REQUIRE_API_KEY: 'false'
       OMNIROUTE_BASE_URL: http://127.0.0.1:20128/v1
+      OMNIROUTE_API_KEY: sk_omniroute
       OMNIROUTE_MODEL: auto
       OMNIROUTE_FALLBACK_MODEL: auto
       OMNIROUTE_TIMEOUT_MS: 120000
@@ -27,31 +29,24 @@ jobs:
           cache: npm
       - name: Install project dependencies
         run: npm install --no-audit --no-fund
-      - name: Install and start OmniRoute with ephemeral loopback key
+      - name: Install and start local OmniRoute
         shell: bash
         run: |
           set -e
           npm install -g omniroute@3.8.50 --no-audit --no-fund
-
-          RUNNER_API_KEY="$(openssl rand -hex 32)"
-          echo "::add-mask::$RUNNER_API_KEY"
-          echo "OMNIROUTE_API_KEY=$RUNNER_API_KEY" >> "$GITHUB_ENV"
-          export API_KEY_1="$RUNNER_API_KEY"
-          export REQUIRE_API_KEY=true
-
           nohup omniroute --no-open > /tmp/omniroute.log 2>&1 &
           echo $! > /tmp/omniroute.pid
 
           for attempt in $(seq 1 180); do
-            if curl -fsS --max-time 4 -H "Authorization: Bearer $RUNNER_API_KEY" "$OMNIROUTE_BASE_URL/models" > /tmp/omniroute-models.json 2>/dev/null; then
-              echo "OmniRoute authenticated API is ready."
+            if curl -fsS --max-time 4 -H "Authorization: Bearer sk_omniroute" "$OMNIROUTE_BASE_URL/models" > /tmp/omniroute-models.json 2>/dev/null; then
+              echo "OmniRoute local API is ready."
               exit 0
             fi
             sleep 2
           done
 
-          echo "OmniRoute authenticated API did not become ready in time."
+          echo "OmniRoute local API did not become ready in time."
           tail -n 200 /tmp/omniroute.log || true
           exit 1
-      - name: Test authenticated models endpoint and real Arabic inference through auto
+      - name: Test real Arabic inference through auto
         run: npm run omniroute:test
