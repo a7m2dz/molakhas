@@ -830,5 +830,53 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "جاستن-روبنسون-ينضم-الى-حراسة-برشلونة-ويستلم-مفاتيح-الفريق": {
+    "src": "https://images.eurohoops.net/2025/12/1e809572-justin-robinson-dribbles-paris-euroleague-600x314.jpg",
+    "fallbackSrc": "/news-images/جاستن-روبنسون-ينضم-الى-حراسة-برشلونة-ويستلم-مفاتيح-الفريق.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/tr/euroleague-tr/2005779/barcelonanin-yeni-guardi-bana-takimin-anahtarlarini-verdiler/",
+    "originalStoryUrl": "https://www.eurohoops.net/tr/euroleague-tr/2005779/barcelonanin-yeni-guardi-bana-takimin-anahtarlarini-verdiler/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "جاستن روبنسون يرتدي قميص برشلونة الأزرق في جلسة تصوير قبل الموسم",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "الشرطة-تكشف-تفاصيل-عمليتها-الامنية-في-مباراة-ارسنال-وتشيلسي": {
+    "src": "https://i.guim.co.uk/img/media/26b13769d08500e52c3f5fe3045597719fc82c83/446_36_2516_2014/master/2516.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=5d969e8af51dd38e14d75aa22dd6477d",
+    "fallbackSrc": "/news-images/الشرطة-تكشف-تفاصيل-عمليتها-الامنية-في-مباراة-ارسنال-وتشيلسي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/07/safety-security-and-service-behind-the-scenes-with-police-at-arsenal-v-chelsea",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/07/safety-security-and-service-behind-the-scenes-with-police-at-arsenal-v-chelsea",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 961,
+    "alt": "شرطة تراقب مدخل ملعب الإمارات أثناء مباراة آرسنال وتشيلسي باستخدام تقنية التعرف على الوجوه",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "اسطورة-شيكاغو-بولز-ديريك-روز-يعترف-بان-الاجيال-القادمة-لن-تتذكره": {
+    "src": "https://imgcdn.basketballnews.com/Derrick-Rose.jpg",
+    "fallbackSrc": "/news-images/اسطورة-شيكاغو-بولز-ديريك-روز-يعترف-بان-الاجيال-القادمة-لن-تتذكره.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-chicago-bulls-legend-derrick-rose-makes-heartbreaking-confession-on-future-theyre-not-going-to-remember-me/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-chicago-bulls-legend-derrick-rose-makes-heartbreaking-confession-on-future-theyre-not-going-to-remember-me/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "صورة لديريك روز أسطورة شيكاغو بولز السابقة أثناء تأمله في مسيرته الرياضية بعد الاعتزال",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
