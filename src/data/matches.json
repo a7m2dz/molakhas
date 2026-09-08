@@ -29,7 +29,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bayern%20M%C3%BCnchen-vs-Bod%C3%B8%2FGlimt#6106240",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -62,7 +62,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Como-vs-RB%20Leipzig#6106411",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -95,7 +95,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Man%20United-vs-Sabah%20FK#6106293",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -128,7 +128,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Slavia%20Prague-vs-Lens#6106392",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -161,7 +161,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Fenerbah%C3%A7e-vs-Roma#6106331",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -194,7 +194,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSV%20Eindhoven-vs-Shakhtar%20Donetsk#6106304",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 20
   },
   {
@@ -227,7 +227,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Liverpool-vs-Atl%C3%A9tico%20Madrid#6106246",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 55
   },
   {
@@ -260,7 +260,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSG-vs-Slovan%20Bratislava#6106237",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 55
   },
   {
@@ -293,7 +293,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sporting%20CP-vs-Galatasaray#6106280",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 40
   },
   {
@@ -326,7 +326,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Napoli-vs-Arsenal#6106318",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 55
   },
   {
@@ -359,7 +359,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Chelsea-vs-Leeds#6099342",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 55
   },
   {
@@ -392,7 +392,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Fateh%20FC-vs-Al%20Diriyah#5970133",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 40
   },
   {
@@ -425,55 +425,8 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Nassr%20FC-vs-Abha#5970134",
-    "updatedAt": "2026-09-08T19:02:56.541Z",
-    "details": {
-      "venue": "Al-Awwal Park",
-      "referee": "",
-      "attendance": null,
-      "round": "6",
-      "events": [],
-      "stats": [],
-      "lineups": {
-        "home": [
-          "Nawaf Al-Aqidi",
-          "Nawaf Al-Boushail",
-          "Mohamed Simakan",
-          "Abdulelah Al Amri",
-          "Salem Al Najdi",
-          "Kingsley Coman",
-          "Ângelo",
-          "Samú",
-          "Sadio Mané",
-          "Joao Félix",
-          "Cristiano Ronaldo"
-        ],
-        "away": [
-          "Donovan Léon",
-          "Mohammed Al-Zaid",
-          "Juriën Gaari",
-          "Abdulbasit Hindi",
-          "Safwan Al-Johani",
-          "Feras Al-Ghamdi",
-          "Abdullah Al Fahad",
-          "Alimami Gory",
-          "Nabil Fekir",
-          "Koshaim Al Karani",
-          "Michy Batshuayi"
-        ]
-      },
-      "topPlayers": [],
-      "xg": null,
-      "hasDetails": true,
-      "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.541Z",
-      "detailGeneral": {
-        "matchId": "5970134",
-        "matchName": "Al Nassr FC-vs-Abha_Wed, Sep 9, 2026, 18:00 UTC",
-        "leagueName": "Saudi Arabian League"
-      },
-      "fetchMethod": "api-data"
-    },
-    "indexQualityScore": 82
+    "updatedAt": "2026-09-08T19:16:43.466Z",
+    "indexQualityScore": 65
   },
   {
     "scopeVersion": 2,
@@ -505,7 +458,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Barcelona-vs-Feyenoord#6106264",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 55
   },
   {
@@ -538,7 +491,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/VfB%20Stuttgart-vs-Viking#6106400",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 40
   },
   {
@@ -571,55 +524,8 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Kholood-vs-Al%20Shabab#5970132",
-    "updatedAt": "2026-09-08T19:02:56.532Z",
-    "details": {
-      "venue": "Ar-Rass Stadium (Al Hazm Club Stadium)",
-      "referee": "",
-      "attendance": null,
-      "round": "6",
-      "events": [],
-      "stats": [],
-      "lineups": {
-        "home": [
-          "Hamed Al-Shanqiti",
-          "Ramzi Solan",
-          "Edgaras Utkus",
-          "Mansour Camara",
-          "Shaquille Pinas",
-          "Iker Kortajarena",
-          "Seydouba Cissé",
-          "John Buckley",
-          "Abdulaziz Al Aliwa",
-          "Julien Domingues",
-          "Coba da Costa"
-        ],
-        "away": [
-          "Mory Diaw",
-          "Mohammed Al-Thani",
-          "Tin Jedvaj",
-          "Mamadou Barry",
-          "Ali Al Asmari",
-          "Hammam Al-Hammami",
-          "Josh Brownhill",
-          "Yacine Adli",
-          "Yannick Carrasco",
-          "Daniel Podence",
-          "Roger Martínez"
-        ]
-      },
-      "topPlayers": [],
-      "xg": null,
-      "hasDetails": true,
-      "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.532Z",
-      "detailGeneral": {
-        "matchId": "5970132",
-        "matchName": "Al Kholood-vs-Al Shabab_Wed, Sep 9, 2026, 15:55 UTC",
-        "leagueName": "Saudi Arabian League"
-      },
-      "fetchMethod": "api-data"
-    },
-    "indexQualityScore": 82
+    "updatedAt": "2026-09-08T19:16:43.466Z",
+    "indexQualityScore": 65
   },
   {
     "scopeVersion": 2,
@@ -651,14 +557,60 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Dortmund-vs-Villarreal#6106272",
-    "updatedAt": "2026-09-08T19:02:55.565Z",
+    "updatedAt": "2026-09-08T19:16:44.907Z",
     "details": {
       "venue": "SIGNAL IDUNA PARK",
       "referee": "Simone Sozza",
       "attendance": null,
       "round": "1",
       "events": [],
-      "stats": [],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "55",
+          "away": "45"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "0.02",
+          "away": "0.17"
+        },
+        {
+          "title": "Total shots",
+          "home": "1",
+          "away": "1"
+        },
+        {
+          "title": "Shots on target",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances",
+          "home": "0",
+          "away": "1"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "0",
+          "away": "1"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "67 (92%)",
+          "away": "50 (83%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Corners",
+          "home": "1",
+          "away": "1"
+        }
+      ],
       "lineups": {
         "home": [
           "Gregor Kobel",
@@ -667,10 +619,10 @@
           "Daniel Svensson",
           "Julian Ryerson",
           "Joey Veerman",
-          "Marcel Sabitzer",
+          "Felix Nmecha",
           "Maximilian Beier",
           "Konstantinos Karetsas",
-          "Felix Nmecha",
+          "Marcel Sabitzer",
           "Serhou Guirassy"
         ],
         "away": [
@@ -680,18 +632,21 @@
           "Renato Veiga",
           "Sergi Cardona",
           "Tajon Buchanan",
+          "Santi Comesaña",
           "Pape Gueye",
           "Nathan Saliba",
-          "Santi Comesaña",
           "Tani Oluwaseyi",
           "Georges Mikautadze"
         ]
       },
       "topPlayers": [],
-      "xg": null,
+      "xg": {
+        "home": "0.02",
+        "away": "0.17"
+      },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:55.565Z",
+      "detailUpdatedAt": "2026-09-08T19:16:44.907Z",
       "detailGeneral": {
         "matchId": "6106272",
         "matchName": "Borussia Dortmund-vs-Villarreal_Tue, Sep 8, 2026, 19:00 UTC",
@@ -699,7 +654,7 @@
       },
       "fetchMethod": "api-data"
     },
-    "indexQualityScore": 65
+    "indexQualityScore": 70
   },
   {
     "scopeVersion": 2,
@@ -708,7 +663,7 @@
     "date": "2026-09-08",
     "kickoff": "2026-09-08T19:00:00.000Z",
     "timezone": "Asia/Riyadh",
-    "state": "scheduled",
+    "state": "live",
     "score": "0 - 0",
     "league": {
       "id": 943230,
@@ -727,12 +682,105 @@
     },
     "tournamentStage": "1",
     "section": "football",
-    "opportunityScore": 62,
-    "indexable": false,
+    "opportunityScore": 65,
+    "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/FC%20Porto-vs-Man%20City#6106286",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
-    "indexQualityScore": 40
+    "updatedAt": "2026-09-08T19:16:45.073Z",
+    "details": {
+      "venue": "Estádio Do Dragão",
+      "referee": "Szymon Marciniak",
+      "attendance": null,
+      "round": "1",
+      "events": [],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "32",
+          "away": "68"
+        },
+        {
+          "title": "Total shots",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Shots on target",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "33 (85%)",
+          "away": "74 (89%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Corners",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Passes",
+          "home": "",
+          "away": ""
+        }
+      ],
+      "lineups": {
+        "home": [
+          "Diogo Costa",
+          "Alberto Costa",
+          "Jakub Kiwior",
+          "Nehuén Pérez",
+          "Martim Fernandes",
+          "Pablo Rosario",
+          "Alan Varela",
+          "Gabriel Veiga",
+          "William Gomes",
+          "André Silva",
+          "Pepê"
+        ],
+        "away": [
+          "Gianluigi Donnarumma",
+          "Matheus Nunes",
+          "Rúben Dias",
+          "Marc Guéhi",
+          "Joško Gvardiol",
+          "Ayyoub Bouaddi",
+          "Enzo Fernández",
+          "Phil Foden",
+          "Rayan Cherki",
+          "Antoine Semenyo",
+          "Erling Haaland"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-08T19:16:45.073Z",
+      "detailGeneral": {
+        "matchId": "6106286",
+        "matchName": "FC Porto-vs-Manchester City_Tue, Sep 8, 2026, 19:00 UTC",
+        "leagueName": "Champions League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 70
   },
   {
     "scopeVersion": 2,
@@ -742,7 +790,7 @@
     "kickoff": "2026-09-08T19:00:00.000Z",
     "timezone": "Asia/Riyadh",
     "state": "live",
-    "score": "0 - 0",
+    "score": "1 - 0",
     "league": {
       "id": 943230,
       "name": "Champions League",
@@ -751,7 +799,7 @@
     "home": {
       "id": 8639,
       "name": "Lille",
-      "score": 0
+      "score": 1
     },
     "away": {
       "id": 8603,
@@ -764,14 +812,71 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Lille-vs-Real%20Betis#6106311",
-    "updatedAt": "2026-09-08T19:02:55.699Z",
+    "updatedAt": "2026-09-08T19:16:45.251Z",
     "details": {
       "venue": "Decathlon Arena - Stade Pierre-Mauroy",
       "referee": "Georgi Kabakov",
       "attendance": null,
       "round": "1",
-      "events": [],
-      "stats": [],
+      "events": [
+        {
+          "minute": "12",
+          "type": "Goal",
+          "player": "Ayase Ueda",
+          "assist": "Ethan Mbappé",
+          "teamId": null,
+          "team": "",
+          "score": "1,0",
+          "description": ""
+        }
+      ],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "49",
+          "away": "51"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "0.72",
+          "away": "0.18"
+        },
+        {
+          "title": "Total shots",
+          "home": "3",
+          "away": "5"
+        },
+        {
+          "title": "Shots on target",
+          "home": "1",
+          "away": "0"
+        },
+        {
+          "title": "Big chances",
+          "home": "1",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "66 (94%)",
+          "away": "67 (92%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Corners",
+          "home": "0",
+          "away": "1"
+        }
+      ],
       "lineups": {
         "home": [
           "Berke Özer",
@@ -782,8 +887,8 @@
           "Benjamin André",
           "Nabil Bentaleb",
           "Ethan Mbappé",
-          "Gaëtan Perrin",
           "Hákon Arnar Haraldsson",
+          "Gaëtan Perrin",
           "Ayase Ueda"
         ],
         "away": [
@@ -801,10 +906,13 @@
         ]
       },
       "topPlayers": [],
-      "xg": null,
+      "xg": {
+        "home": "0.72",
+        "away": "0.18"
+      },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:55.699Z",
+      "detailUpdatedAt": "2026-09-08T19:16:45.251Z",
       "detailGeneral": {
         "matchId": "6106311",
         "matchName": "Lille-vs-Real Betis_Tue, Sep 8, 2026, 19:00 UTC",
@@ -812,7 +920,7 @@
       },
       "fetchMethod": "api-data"
     },
-    "indexQualityScore": 65
+    "indexQualityScore": 70
   },
   {
     "scopeVersion": 2,
@@ -821,7 +929,7 @@
     "date": "2026-09-08",
     "kickoff": "2026-09-08T19:00:00.000Z",
     "timezone": "Asia/Riyadh",
-    "state": "scheduled",
+    "state": "live",
     "score": "0 - 0",
     "league": {
       "id": 943230,
@@ -840,12 +948,108 @@
     },
     "tournamentStage": "1",
     "section": "football",
-    "opportunityScore": 86,
+    "opportunityScore": 89,
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Real%20Madrid-vs-Inter#6106242",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
-    "indexQualityScore": 55
+    "updatedAt": "2026-09-08T19:16:44.750Z",
+    "details": {
+      "venue": "Estadio Bernabéu",
+      "referee": "Michael Oliver",
+      "attendance": null,
+      "round": "1",
+      "events": [],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "33",
+          "away": "67"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "0.00",
+          "away": "0.13"
+        },
+        {
+          "title": "Total shots",
+          "home": "0",
+          "away": "3"
+        },
+        {
+          "title": "Shots on target",
+          "home": "0",
+          "away": "1"
+        },
+        {
+          "title": "Big chances",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "36 (84%)",
+          "away": "80 (94%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Corners",
+          "home": "1",
+          "away": "2"
+        }
+      ],
+      "lineups": {
+        "home": [
+          "Thibaut Courtois",
+          "Denzel Dumfries",
+          "Ibrahima Konaté",
+          "Dean Huijsen",
+          "Marc Cucurella",
+          "Trent Alexander-Arnold",
+          "Federico Valverde",
+          "Brahim Díaz",
+          "Jude Bellingham",
+          "Vinícius Júnior",
+          "Kylian Mbappé"
+        ],
+        "away": [
+          "Josep Martínez",
+          "Benjamin Pavard",
+          "Yann Aurel Bisseck",
+          "Alessandro Bastoni",
+          "Andy Diouf",
+          "Nicolò Barella",
+          "Hakan Çalhanoglu",
+          "Curtis Jones",
+          "Carlos Augusto",
+          "Lautaro Martínez",
+          "Marcus Thuram"
+        ]
+      },
+      "topPlayers": [],
+      "xg": {
+        "home": "0.00",
+        "away": "0.13"
+      },
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-08T19:16:44.750Z",
+      "detailGeneral": {
+        "matchId": "6106242",
+        "matchName": "Real Madrid-vs-Inter_Tue, Sep 8, 2026, 19:00 UTC",
+        "leagueName": "Champions League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 85
   },
   {
     "scopeVersion": 2,
@@ -877,27 +1081,73 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Millwall-vs-Newcastle#6099336",
-    "updatedAt": "2026-09-08T19:02:55.830Z",
+    "updatedAt": "2026-09-08T19:16:45.404Z",
     "details": {
       "venue": "The Den",
       "referee": "Craig Pawson",
       "attendance": null,
       "round": "3",
       "events": [],
-      "stats": [],
+      "stats": [
+        {
+          "title": "Ball possession",
+          "home": "34",
+          "away": "66"
+        },
+        {
+          "title": "Expected goals (xG)",
+          "home": "0.00",
+          "away": "0.05"
+        },
+        {
+          "title": "Total shots",
+          "home": "0",
+          "away": "1"
+        },
+        {
+          "title": "Shots on target",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Big chances missed",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Accurate passes",
+          "home": "41 (72%)",
+          "away": "100 (93%)"
+        },
+        {
+          "title": "Yellow cards",
+          "home": "0",
+          "away": "0"
+        },
+        {
+          "title": "Corners",
+          "home": "0",
+          "away": "1"
+        }
+      ],
       "lineups": {
         "home": [
           "Filip Marschall",
           "Jordi Osei-Tutu",
-          "Jake Cooper",
           "Caleb Taylor",
+          "Jake Cooper",
           "Elkan Baggott",
           "Daniel Kelly",
           "Jenson Metcalfe",
           "Romain Esse",
+          "Lyndon Dykes",
           "Camiel Neghli",
-          "Zak Lovelace",
-          "Lyndon Dykes"
+          "Zak Lovelace"
         ],
         "away": [
           "Lukás Hornícek",
@@ -914,10 +1164,13 @@
         ]
       },
       "topPlayers": [],
-      "xg": null,
+      "xg": {
+        "home": "0.00",
+        "away": "0.05"
+      },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:55.830Z",
+      "detailUpdatedAt": "2026-09-08T19:16:45.404Z",
       "detailGeneral": {
         "matchId": "6099336",
         "matchName": "Millwall-vs-Newcastle United_Tue, Sep 8, 2026, 19:00 UTC",
@@ -925,7 +1178,7 @@
       },
       "fetchMethod": "api-data"
     },
-    "indexQualityScore": 65
+    "indexQualityScore": 70
   },
   {
     "scopeVersion": 2,
@@ -957,13 +1210,23 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bournemouth-vs-Lincoln#6099334",
-    "updatedAt": "2026-09-08T19:02:56.001Z",
+    "updatedAt": "2026-09-08T19:16:45.560Z",
     "details": {
       "venue": "Vitality Stadium",
       "referee": "Elliot Bell",
       "attendance": null,
       "round": "3",
       "events": [
+        {
+          "minute": "27",
+          "type": "Card",
+          "player": "Callum Elder",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
         {
           "minute": "7",
           "type": "Goal",
@@ -978,86 +1241,86 @@
       "stats": [
         {
           "title": "Ball possession",
-          "home": "62",
-          "away": "38"
+          "home": "68",
+          "away": "32"
         },
         {
           "title": "Expected goals (xG)",
-          "home": "0.26",
-          "away": "0.00"
+          "home": "0.36",
+          "away": "0.32"
         },
         {
           "title": "Total shots",
-          "home": "2",
-          "away": "0"
+          "home": "5",
+          "away": "2"
         },
         {
           "title": "Shots on target",
-          "home": "1",
-          "away": "0"
+          "home": "2",
+          "away": "1"
         },
         {
           "title": "Big chances",
           "home": "1",
-          "away": "0"
+          "away": "2"
         },
         {
           "title": "Big chances missed",
           "home": "0",
-          "away": "0"
+          "away": "2"
         },
         {
           "title": "Accurate passes",
-          "home": "94 (85%)",
-          "away": "51 (75%)"
+          "home": "178 (87%)",
+          "away": "70 (74%)"
         },
         {
           "title": "Yellow cards",
           "home": "0",
-          "away": "0"
+          "away": "1"
         },
         {
           "title": "Corners",
-          "home": "0",
+          "home": "1",
           "away": "0"
         }
       ],
       "lineups": {
         "home": [
           "Michele Di Gregorio",
-          "Bafodé Diakité",
           "James Hill",
+          "Bafodé Diakité",
           "António Silva",
           "Julio Soler",
-          "Ben Gannon-Doak",
-          "Ryan Christie",
           "Lewis Cook",
+          "Ryan Christie",
+          "David Brooks",
           "Justin Kluivert",
-          "Álvaro Rodriguez",
-          "David Brooks"
+          "Ben Gannon-Doak",
+          "Álvaro Rodriguez"
         ],
         "away": [
           "Joe Gauci",
-          "Daniel Oyegoke",
           "Dom Jefferies",
+          "Daniel Oyegoke",
           "Ryley Towler",
           "Callum Elder",
           "Chiedozie Ogbene",
           "Tom Bayliss",
           "Yunus Emre Konak",
           "Joshua Honohan",
-          "Reeco Hackett",
-          "Mikkel Ladefoged"
+          "Mikkel Ladefoged",
+          "Reeco Hackett"
         ]
       },
       "topPlayers": [],
       "xg": {
-        "home": "0.26",
-        "away": "0.00"
+        "home": "0.36",
+        "away": "0.32"
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.001Z",
+      "detailUpdatedAt": "2026-09-08T19:16:45.560Z",
       "detailGeneral": {
         "matchId": "6099334",
         "matchName": "AFC Bournemouth-vs-Lincoln City_Tue, Sep 8, 2026, 18:45 UTC",
@@ -1065,7 +1328,7 @@
       },
       "fetchMethod": "api-data"
     },
-    "indexQualityScore": 70
+    "indexQualityScore": 75
   },
   {
     "scopeVersion": 2,
@@ -1097,7 +1360,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Crystal%20Palace-vs-Middlesbrough#6099328",
-    "updatedAt": "2026-09-08T19:02:56.160Z",
+    "updatedAt": "2026-09-08T19:16:45.865Z",
     "details": {
       "venue": "Selhurst Park",
       "referee": "Tony Harrington",
@@ -1107,23 +1370,23 @@
       "stats": [
         {
           "title": "Ball possession",
-          "home": "37",
-          "away": "63"
+          "home": "36",
+          "away": "64"
         },
         {
           "title": "Expected goals (xG)",
-          "home": "0.08",
-          "away": "0.08"
+          "home": "0.35",
+          "away": "0.21"
         },
         {
           "title": "Total shots",
-          "home": "1",
-          "away": "1"
+          "home": "4",
+          "away": "5"
         },
         {
           "title": "Shots on target",
-          "home": "1",
-          "away": "1"
+          "home": "2",
+          "away": "2"
         },
         {
           "title": "Big chances",
@@ -1137,8 +1400,8 @@
         },
         {
           "title": "Accurate passes",
-          "home": "63 (81%)",
-          "away": "125 (91%)"
+          "home": "99 (78%)",
+          "away": "206 (91%)"
         },
         {
           "title": "Yellow cards",
@@ -1147,7 +1410,7 @@
         },
         {
           "title": "Corners",
-          "home": "0",
+          "home": "1",
           "away": "1"
         }
       ],
@@ -1157,11 +1420,11 @@
           "Takehiro Tomiyasu",
           "Axel Disasi",
           "Honest Ahanor",
-          "Ben Chilwell",
           "Óscar Mingueza",
-          "Will Hughes",
+          "Ben Chilwell",
           "Darío Osorio",
           "Quinten Timber",
+          "Will Hughes",
           "Yéremi Pino",
           "Jørgen Strand Larsen"
         ],
@@ -1181,12 +1444,12 @@
       },
       "topPlayers": [],
       "xg": {
-        "home": "0.08",
-        "away": "0.08"
+        "home": "0.35",
+        "away": "0.21"
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.160Z",
+      "detailUpdatedAt": "2026-09-08T19:16:45.865Z",
       "detailGeneral": {
         "matchId": "6099328",
         "matchName": "Crystal Palace-vs-Middlesbrough_Tue, Sep 8, 2026, 18:45 UTC",
@@ -1226,27 +1489,38 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Leyton%20Orient-vs-Bradford#6099339",
-    "updatedAt": "2026-09-08T19:02:56.317Z",
+    "updatedAt": "2026-09-08T19:16:46.028Z",
     "details": {
       "venue": "BetWright Stadium",
       "referee": "Edward Duckworth",
       "attendance": null,
       "round": "3",
-      "events": [],
+      "events": [
+        {
+          "minute": "23",
+          "type": "Card",
+          "player": "Theo Archibald",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        }
+      ],
       "stats": [
         {
           "title": "Ball possession",
-          "home": "55",
-          "away": "45"
+          "home": "51",
+          "away": "49"
         },
         {
           "title": "Expected goals (xG)",
-          "home": "0.52",
+          "home": "0.59",
           "away": "0.15"
         },
         {
           "title": "Total shots",
-          "home": "2",
+          "home": "4",
           "away": "3"
         },
         {
@@ -1266,28 +1540,28 @@
         },
         {
           "title": "Accurate passes",
-          "home": "63 (76%)",
-          "away": "48 (71%)"
+          "home": "99 (77%)",
+          "away": "90 (72%)"
         },
         {
           "title": "Yellow cards",
-          "home": "0",
+          "home": "1",
           "away": "0"
         },
         {
           "title": "Corners",
-          "home": "1",
+          "home": "2",
           "away": "2"
         }
       ],
       "lineups": {
         "home": [
           "Noah Phillips",
-          "Sean Clare",
+          "Isaac Hayden",
           "William Forrester",
           "Phillip Chinedu",
           "James Morris",
-          "Isaac Hayden",
+          "Sean Clare",
           "Idris El Mizouni",
           "Theo Archibald",
           "Armando Dobra",
@@ -1299,23 +1573,23 @@
           "Reece Welch",
           "Hayden Matthews",
           "Macaulay Gillesphey",
-          "Corey O'Keeffe",
+          "Kayden Jackson",
           "Kieran Morgan",
           "Henry Cartwright",
+          "Corey O'Keeffe",
           "George Lapslie",
-          "Kayden Jackson",
           "Will Swan",
           "Stephen Humphrys"
         ]
       },
       "topPlayers": [],
       "xg": {
-        "home": "0.52",
+        "home": "0.59",
         "away": "0.15"
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.317Z",
+      "detailUpdatedAt": "2026-09-08T19:16:46.028Z",
       "detailGeneral": {
         "matchId": "6099339",
         "matchName": "Leyton Orient-vs-Bradford City_Tue, Sep 8, 2026, 18:45 UTC",
@@ -1355,7 +1629,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sunderland-vs-Hull#6099331",
-    "updatedAt": "2026-09-08T19:02:56.512Z",
+    "updatedAt": "2026-09-08T19:16:46.286Z",
     "details": {
       "venue": "Stadium of Light",
       "referee": "Paul Tierney",
@@ -1365,18 +1639,18 @@
       "stats": [
         {
           "title": "Ball possession",
-          "home": "81",
-          "away": "19"
+          "home": "58",
+          "away": "42"
         },
         {
           "title": "Expected goals (xG)",
-          "home": "0.09",
-          "away": "0.20"
+          "home": "0.13",
+          "away": "0.21"
         },
         {
           "title": "Total shots",
-          "home": "2",
-          "away": "1"
+          "home": "3",
+          "away": "2"
         },
         {
           "title": "Shots on target",
@@ -1395,8 +1669,8 @@
         },
         {
           "title": "Accurate passes",
-          "home": "87 (91%)",
-          "away": "14 (61%)"
+          "home": "164 (90%)",
+          "away": "114 (86%)"
         },
         {
           "title": "Yellow cards",
@@ -1406,7 +1680,7 @@
         {
           "title": "Corners",
           "home": "2",
-          "away": "0"
+          "away": "2"
         }
       ],
       "lineups": {
@@ -1439,12 +1713,12 @@
       },
       "topPlayers": [],
       "xg": {
-        "home": "0.09",
-        "away": "0.20"
+        "home": "0.13",
+        "away": "0.21"
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.512Z",
+      "detailUpdatedAt": "2026-09-08T19:16:46.286Z",
       "detailGeneral": {
         "matchId": "6099331",
         "matchName": "Sunderland-vs-Hull City_Tue, Sep 8, 2026, 18:45 UTC",
@@ -1484,13 +1758,23 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Qadsiah-vs-Al%20Ahli#5970131",
-    "updatedAt": "2026-09-08T19:02:55.231Z",
+    "updatedAt": "2026-09-08T19:16:44.408Z",
     "details": {
       "venue": "Prince Mohammed Bin Fahd Stadium",
       "referee": "Ismail Elfath",
       "attendance": null,
       "round": "6",
       "events": [
+        {
+          "minute": "46",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
         {
           "minute": "45",
           "type": "Half",
@@ -1565,8 +1849,8 @@
       "stats": [
         {
           "title": "Ball possession",
-          "home": "60",
-          "away": "40"
+          "home": "63",
+          "away": "37"
         },
         {
           "title": "Expected goals (xG)",
@@ -1575,7 +1859,7 @@
         },
         {
           "title": "Total shots",
-          "home": "6",
+          "home": "7",
           "away": "2"
         },
         {
@@ -1595,8 +1879,8 @@
         },
         {
           "title": "Accurate passes",
-          "home": "233 (87%)",
-          "away": "137 (79%)"
+          "home": "297 (88%)",
+          "away": "156 (80%)"
         },
         {
           "title": "Yellow cards",
@@ -1644,7 +1928,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:55.231Z",
+      "detailUpdatedAt": "2026-09-08T19:16:44.407Z",
       "detailGeneral": {
         "matchId": "5970131",
         "matchName": "Al Qadsiah-vs-Al Ahli_Tue, Sep 8, 2026, 18:00 UTC",
@@ -1684,13 +1968,23 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Ittihad-vs-Al-Fayha#5970130",
-    "updatedAt": "2026-09-08T19:02:55.415Z",
+    "updatedAt": "2026-09-08T19:16:44.588Z",
     "details": {
       "venue": "Alinma Bank Stadium at King Abdullah Sport City",
       "referee": "Faisal Al-Balawi",
       "attendance": null,
       "round": "6",
       "events": [
+        {
+          "minute": "46",
+          "type": "Substitution",
+          "player": "",
+          "assist": "",
+          "teamId": null,
+          "team": "",
+          "score": "",
+          "description": ""
+        },
         {
           "minute": "45",
           "type": "Half",
@@ -1735,18 +2029,18 @@
       "stats": [
         {
           "title": "Ball possession",
-          "home": "50",
-          "away": "50"
+          "home": "54",
+          "away": "46"
         },
         {
           "title": "Expected goals (xG)",
-          "home": "1.25",
-          "away": "0.25"
+          "home": "1.47",
+          "away": "0.33"
         },
         {
           "title": "Total shots",
-          "home": "10",
-          "away": "6"
+          "home": "14",
+          "away": "7"
         },
         {
           "title": "Shots on target",
@@ -1765,8 +2059,8 @@
         },
         {
           "title": "Accurate passes",
-          "home": "249 (93%)",
-          "away": "239 (92%)"
+          "home": "302 (92%)",
+          "away": "247 (90%)"
         },
         {
           "title": "Yellow cards",
@@ -1775,7 +2069,7 @@
         },
         {
           "title": "Corners",
-          "home": "1",
+          "home": "2",
           "away": "1"
         }
       ],
@@ -1809,12 +2103,12 @@
       },
       "topPlayers": [],
       "xg": {
-        "home": "1.25",
-        "away": "0.25"
+        "home": "1.47",
+        "away": "0.33"
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:55.415Z",
+      "detailUpdatedAt": "2026-09-08T19:16:44.588Z",
       "detailGeneral": {
         "matchId": "5970130",
         "matchName": "Al Ittihad-vs-Al-Fayha_Tue, Sep 8, 2026, 18:00 UTC",
@@ -1854,7 +2148,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/AEK%20Athens-vs-LASK#6106404",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -1887,7 +2181,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Club%20Brugge-vs-Aston%20Villa#6106295",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -1920,7 +2214,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Hazem-vs-Al-Taawoun#5970129",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -1953,7 +2247,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al-Ettifaq-vs-Al-Faisaly#5970128",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -1986,7 +2280,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Elche-vs-Real%20Sociedad#5868044",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -2019,7 +2313,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Udinese-vs-Lazio#5749669",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -2052,7 +2346,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Hilal-vs-Neom%20SC#5970127",
-    "updatedAt": "2026-09-08T19:02:56.523Z",
+    "updatedAt": "2026-09-08T19:16:46.298Z",
     "details": {
       "venue": "Kingdom Arena",
       "referee": "Sascha Stegemann",
@@ -2372,7 +2666,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T19:02:56.523Z",
+      "detailUpdatedAt": "2026-09-08T19:16:46.298Z",
       "detailGeneral": {
         "matchId": "5970127",
         "matchName": "Al Hilal-vs-Neom SC_Mon, Sep 7, 2026, 18:00 UTC",
@@ -2412,7 +2706,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Getafe-vs-Celta%20Vigo#5868046",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -2445,7 +2739,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Cagliari-vs-Lecce#5749662",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
@@ -2478,7 +2772,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Khaleej-vs-Al%20Riyadh#5970126",
-    "updatedAt": "2026-09-08T19:02:54.290Z",
+    "updatedAt": "2026-09-08T19:16:43.466Z",
     "indexQualityScore": 48
   },
   {
