@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:57:05.708Z",
+  "generatedAt": "2026-09-08T12:06:09.559Z",
   "date": "2026-09-08",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -70,7 +70,7 @@
       "source": "WWE.com",
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
       "internal": false,
-      "scope": "upcoming"
+      "scope": "today"
     },
     {
       "id": "wwe-20260911-3",

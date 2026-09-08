@@ -528,5 +528,51 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOUEwtSGNhd1UwWlNldTBYTUdhb0NxU0MxUmJwT2VzX2xUUkJnbTE3cllZVVBramJqZTZDTXp4YVZyTU5STVdmbHNpdWlfeGxnalJkemFGYy1FVEdrd3lWWGktY1JPOWJKZGxIVEx5dFBhQVdTSWxJbVY0WlZRM3VuSTBQajR6YmkydVdTaFpmMlA?oc=5",
     "resolverVersion": 4,
     "rejectionReason": "publisher resolved (google-page-link) but no usable source image found"
+  },
+  "michael-porter-jr-يوضح-تفاصيل-لقطة-مع-موثرة-متحولة-جنسيا-في-تايوان": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-1-146.jpg",
+    "fallbackSrc": "/news-images/michael-porter-jr-يوضح-تفاصيل-لقطة-مع-موثرة-متحولة-جنسيا-في-تايوان.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-active-basketball-news-i-had-no-idea-she-was-transgender-nba-champion-addresses-viral-taiwan-encounter/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-active-basketball-news-i-had-no-idea-she-was-transgender-nba-champion-addresses-viral-taiwan-encounter/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "Michael Porter Jr. في مباراة كرة السلة الأمريكية",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ليفربول-يوقع-عقد-رعاية-قميص-بقيمة-تفوق-60-مليون-جنيه-استرليني-سنويا-مع-الخطوط-التركية": {
+    "src": "https://i.guim.co.uk/img/media/c6565f80fb6336e1b80556d5ffb422e98176b938/305_85_2939_2351/master/2939.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=c0c3a51e7851b8367489717eb4944372",
+    "fallbackSrc": "/news-images/ليفربول-يوقع-عقد-رعاية-قميص-بقيمة-تفوق-60-مليون-جنيه-استرليني-سنويا-مع-الخطوط-التركية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/08/liverpool-agree-shirt-sponsorship-deal-turkish-airlines",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/08/liverpool-agree-shirt-sponsorship-deal-turkish-airlines",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 960,
+    "alt": "قميص ليفربول يحمل شعار الخطوط التركية على الصدر في إطار إعلان الرعاية الجديدة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "فرانشيسكو-فاريولي-يواجه-مانشستر-سيتي-في-اول-مباراة-له-بدوري-الابطال": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/471c/live/a87c95b0-55d8-11f1-bb1a-df2243910f20.jpg",
+    "fallbackSrc": "/news-images/فرانشيسكو-فاريولي-يواجه-مانشستر-سيتي-في-اول-مباراة-له-بدوري-الابطال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/c072j1r4e2do?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/c072j1r4e2do?at_medium=RSS&at_campaign=rss",
+    "type": "image/jpeg",
+    "alt": "فرانشيسكو فاريولي على مقاعد البدلاء يحدق في ملعب دراجاو قبل مباراة بورتو ضد مانشستر سيتي في دوري الأبطال",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
