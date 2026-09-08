@@ -29,18 +29,18 @@ const robots = hubRobots(qualityScore);
 const schemaExtra = [
   {
     '@type': 'SportsTeam',
-    '@id': `${siteUrl}/teams/${hub.slug}/#team`,
+    '@id': `${siteUrl}/teams/${hub.slug}#team`,
     name: hub.name,
     alternateName: hub.alternateName !== hub.name ? hub.alternateName : undefined,
     sport: 'Football',
-    url: `${siteUrl}/teams/${hub.slug}/`
+    url: `${siteUrl}/teams/${hub.slug}`
   },
   {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
-      { '@type': 'ListItem', position: 2, name: 'الفرق', item: `${siteUrl}/teams/` },
-      { '@type': 'ListItem', position: 3, name: hub.name, item: `${siteUrl}/teams/${hub.slug}/` }
+      { '@type': 'ListItem', position: 2, name: 'الفرق', item: `${siteUrl}/teams` },
+      { '@type': 'ListItem', position: 3, name: hub.name, item: `${siteUrl}/teams/${hub.slug}` }
     ]
   }
 ];
@@ -69,7 +69,7 @@ const schemaExtra = [
         {matches.map((match) => (
           <article class:list={["hub-match", { live: match.state === 'live' }]}>
             <div class="hub-match-top"><span>{matchStateArabic(match.state)}</span><a class="competition-link" href={competitionHref(match.league.name)}>{match.league.name}</a></div>
-            <a class="match-main-link" href={`/matches/${match.slug}/`}>
+            <a class="match-main-link" href={`/matches/${match.slug}`}>
               <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
               <div class="hub-match-bottom"><b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b><small>{matchDateArabic(match.kickoff)}</small></div>
             </a>

@@ -13,7 +13,7 @@ const description = 'صفحات الفرق في ملخص: مواعيد ونتا�
   <div class="shell"><LurvuePromo section="football" position="teams-directory" /></div>
   <section class="shell directory-section">
     <div class="section-title"><div><span class="section-kicker">الأكثر أهمية الآن</span><h2>أهم الفرق</h2></div><a href="/matches/today">مباريات اليوم ←</a></div>
-    {meaningful.length ? <div class="directory-grid">{meaningful.map((hub) => <a href={`/teams/${hub.slug}/`}><span>{hub.opportunityScore}/100</span><h3>{hub.name}</h3>{hub.alternateName !== hub.name && <small>{hub.alternateName}</small>}<p>{hub.matches.length} مباراة • {hub.stories.length} خبر</p></a>)}</div> : <div class="empty"><h2>جاري تجهيز صفحات الفرق</h2><p>تظهر الصفحات بعد تحديث مركز المباريات.</p></div>}
+    {meaningful.length ? <div class="directory-grid">{meaningful.map((hub) => <a href={`/teams/${hub.slug}`}><span>{hub.opportunityScore}/100</span><h3>{hub.name}</h3>{hub.alternateName !== hub.name && <small>{hub.alternateName}</small>}<p>{hub.matches.length} مباراة • {hub.stories.length} خبر</p></a>)}</div> : <div class="empty"><h2>جاري تجهيز صفحات الفرق</h2><p>تظهر الصفحات بعد تحديث مركز المباريات.</p></div>}
   </section>
 </BaseLayout>
 <style>

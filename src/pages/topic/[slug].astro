@@ -6,14 +6,15 @@ import { sectionMap } from '../../data/sections';
 import { topicCounts, topicSlug } from '../../lib/content';
 
 export function getStaticPaths() {
-  const counts = topicCounts(stories as any[]);
+  const publicStories = (stories as any[]).filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial');
+  const counts = topicCounts(publicStories);
   return [...counts.entries()]
     .filter(([, value]) => value.count >= 2)
     .map(([slug, value]) => ({
       params: { slug },
       props: {
         tag: value.name,
-        items: stories.filter((s) => s.status === 'approved' && (s.tags || []).some((t) => topicSlug(t) === slug))
+        items: publicStories.filter((s) => (s.tags || []).some((t) => topicSlug(t) === slug))
       }
     }));
 }
@@ -33,7 +34,7 @@ const description = `آخر أخبار ${tag} وتحديثاته في ملخص،
       <span>{sectionMap[story.section]?.name ?? 'رياضة'}</span>
       <h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3>
       <p>{story.excerpt}</p>
-      <div class="card-footer"><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small><a href={`/${story.section}/${story.slug}`}>اقرأ ←</a></div>
+      <div class="card-footer"><small>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</small><a href={`/${story.section}/${story.slug}`}>اقرأ ←</a></div>
     </article>)}</div>
   </section>
 </BaseLayout>

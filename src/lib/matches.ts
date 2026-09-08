@@ -72,13 +72,13 @@ export function matchStateArabic(state: MolakhasMatch['state']) {
 }
 
 export function matchTimeArabic(kickoff: string) {
-  return new Intl.DateTimeFormat('ar-SA', {
+  return new Intl.DateTimeFormat('ar-SA-u-nu-latn', {
     timeZone: 'Asia/Riyadh', hour: 'numeric', minute: '2-digit'
   }).format(new Date(kickoff));
 }
 
 export function matchDateArabic(kickoff: string) {
-  return new Intl.DateTimeFormat('ar-SA', {
+  return new Intl.DateTimeFormat('ar-SA-u-nu-latn', {
     timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   }).format(new Date(kickoff));
 }

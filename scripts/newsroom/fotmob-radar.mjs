@@ -43,7 +43,7 @@ const clean = (value = '') => String(value).replace(/<[^>]+>/g, ' ').replace(/&n
 const slugify = (value = '') => clean(value)
   .toLowerCase()
   .normalize('NFKD')
-  .replace(/[\u0300-\u036f]/g, '')
+  .replace(/\p{M}/gu, '')
   .replace(/[^\p{L}\p{N}]+/gu, '-')
   .replace(/^-|-$/g, '')
   .slice(0, 115);

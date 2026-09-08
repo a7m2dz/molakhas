@@ -22,7 +22,7 @@ const parser = new XMLParser({ ignoreAttributes: false, trimValues: true, proces
 
 const clean = (value = '') => String(value).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ').trim();
 const hash = (value) => crypto.createHash('sha1').update(String(value)).digest('hex').slice(0, 12);
-const slugify = (text) => clean(text).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 90);
+const slugify = (text) => clean(text).toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 90);
 const safeDate = (value) => {
   const date = new Date(value || Date.now());
   return Number.isNaN(+date) ? new Date() : date;

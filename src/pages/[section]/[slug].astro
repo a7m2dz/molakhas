@@ -46,21 +46,21 @@ const fallbackFor = (item) => mediaFor(item).fallbackSrc || `/news-images/${item
 const altFor = (item) => mediaFor(item).alt || item.image?.alt || '';
 
 const aboutEntities = [
-  ...graph.teams.map((hub) => ({ '@type':'SportsTeam', name:hub.name, url:`${siteUrl}/teams/${hub.slug}/` })),
-  ...graph.competitions.map((hub) => ({ '@type':'Thing', name:hub.name, url:`${siteUrl}/competitions/${hub.slug}/` }))
+  ...graph.teams.map((hub) => ({ '@type':'SportsTeam', name:hub.name, url:`${siteUrl}/teams/${hub.slug}` })),
+  ...graph.competitions.map((hub) => ({ '@type':'Thing', name:hub.name, url:`${siteUrl}/competitions/${hub.slug}` }))
 ];
 const schema = {
-  '@context':'https://schema.org', '@type':'NewsArticle', headline:story.title, description:metaDescription,
+  '@type':'NewsArticle', headline:story.title, description:metaDescription,
   image:[imageUrl], thumbnailUrl:imageUrl, datePublished:story.publishedAt, dateModified:story.generatedAt || story.publishedAt,
   inLanguage:'ar', isAccessibleForFree:true, articleSection:section?.name ?? 'رياضة', keywords:(story.tags || []).join(', '), wordCount:words,
   mainEntityOfPage:{'@type':'WebPage','@id':canonical},
-  author:{'@type':'Organization',name:'فريق تحرير ملخص',url:`${siteUrl}/authors/editorial-team`},
-  publisher:{'@type':'Organization',name:'ملخص',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}},
+  author:{'@type':'Organization','@id':`${siteUrl}/authors/editorial-team`,name:'فريق تحرير ملخص',url:`${siteUrl}/authors/editorial-team`},
+  publisher:{'@type':'Organization','@id':`${siteUrl}/#organization`,name:'ملخص',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}},
   about: aboutEntities.length ? aboutEntities : (story.entities || story.tags || []).slice(0,6).map((name)=>({'@type':'Thing',name})),
   isBasedOn:sourceHref
 };
 const breadcrumbSchema = {
-  '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[
+  '@type':'BreadcrumbList', itemListElement:[
     {'@type':'ListItem',position:1,name:'الرئيسية',item:`${siteUrl}/`},
     {'@type':'ListItem',position:2,name:section?.name ?? 'رياضة',item:`${siteUrl}/${story.section}`},
     {'@type':'ListItem',position:3,name:story.title,item:canonical}
@@ -70,16 +70,14 @@ const xShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(story
 const waShare = `https://wa.me/?text=${encodeURIComponent(`${story.title}\n${canonical}`)}`;
 const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&text=${encodeURIComponent(story.title)}`;
 ---
-<BaseLayout title={`${seoTitle} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} imageType={imageType} imageWidth={imageWidth} imageHeight={imageHeight} tags={story.tags || []}>
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<BaseLayout title={`${seoTitle} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} imageType={imageType} imageWidth={imageWidth} imageHeight={imageHeight} tags={story.tags || []} schemaExtra={[schema, breadcrumbSchema]}>
   <article class="article shell">
     <nav class="breadcrumbs" aria-label="مسار التنقل"><a href="/">الرئيسية</a><span>←</span><a href={`/${story.section}`}>{section?.name ?? 'رياضة'}</a></nav>
     <header>
       <span class="article-section">{section?.name ?? 'رياضة'}</span>
       <h1>{story.title}</h1>
       <p class="article-deck">{story.excerpt}</p>
-      <div class="article-meta"><span>بقلم <a href="/authors/editorial-team">فريق تحرير ملخص</a></span><time datetime={story.publishedAt}>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'full',timeStyle:'short'})}</time><span>{readingMinutes} د قراءة</span><span>المصدر: <a href={sourceHref} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
+      <div class="article-meta"><span>بقلم <a href="/authors/editorial-team">فريق تحرير ملخص</a></span><time datetime={story.publishedAt}>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'full',timeStyle:'short'})}</time><span>{readingMinutes} د قراءة</span><span>المصدر: <a href={sourceHref} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
     </header>
 
     <figure class="article-hero">
@@ -94,13 +92,13 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
 
     {(graph.teams.length > 0 || graph.competitions.length > 0) && <nav class="entity-links" aria-label="روابط مرتبطة بالخبر">
       <span>مرتبط بـ</span>
-      {graph.teams.map((hub)=><a href={`/teams/${hub.slug}/`}>⚽ {hub.name}</a>)}
-      {graph.competitions.map((hub)=><a href={`/competitions/${hub.slug}/`}>🏆 {hub.name}</a>)}
+      {graph.teams.map((hub)=><a href={`/teams/${hub.slug}`}>⚽ {hub.name}</a>)}
+      {graph.competitions.map((hub)=><a href={`/competitions/${hub.slug}`}>🏆 {hub.name}</a>)}
     </nav>}
 
     {graph.matches.length > 0 && <section class="story-match-links" aria-label="مباريات مرتبطة بالخبر">
-      <div class="story-match-title"><strong>مباريات مرتبطة</strong><a href="/matches/today/">مباريات اليوم ←</a></div>
-      <div class="story-match-grid">{graph.matches.map((match)=><a class:list={["story-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+      <div class="story-match-title"><strong>مباريات مرتبطة</strong><a href="/matches/today">مباريات اليوم ←</a></div>
+      <div class="story-match-grid">{graph.matches.map((match)=><a class:list={["story-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}`}>
         <div><span>{match.league.name}</span><small>{matchStateArabic(match.state)}</small></div>
         <b>{match.home.name} <em>ضد</em> {match.away.name}</b>
         <footer><strong>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</strong><small>{matchDateArabic(match.kickoff)}</small></footer>
@@ -114,7 +112,7 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
 
     {story.tags?.length > 0 && <div class="tag-list" aria-label="مواضيع الخبر">{story.tags.map((tag) => { const slug = topicSlug(tag); const available = (counts.get(slug)?.count || 0) >= 2; return available ? <a href={`/topic/${slug}`}>#{tag}</a> : <span>#{tag}</span>; })}</div>}
     <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر. يمكنك الرجوع إلى صفحة الناشر الأصلية للتحقق من التفاصيل والسياق الكامل.</p><div><a href={sourceHref} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a><a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div></div>
-    {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={imageFor(item)} alt={altFor(item)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(item).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(item)}'`}/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
+    {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={imageFor(item)} alt={altFor(item)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(item).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(item)}'`}/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA-u-nu-latn',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
   </article>
 </BaseLayout>
 

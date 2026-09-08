@@ -27,18 +27,18 @@ const robots = hubRobots(qualityScore);
 const schemaExtra = [
   {
     '@type': 'SportsOrganization',
-    '@id': `${siteUrl}/competitions/${hub.slug}/#competition`,
+    '@id': `${siteUrl}/competitions/${hub.slug}#competition`,
     name: hub.name,
     alternateName: hub.alternateName !== hub.name ? hub.alternateName : undefined,
     sport: 'Football',
-    url: `${siteUrl}/competitions/${hub.slug}/`
+    url: `${siteUrl}/competitions/${hub.slug}`
   },
   {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
-      { '@type': 'ListItem', position: 2, name: 'البطولات', item: `${siteUrl}/competitions/` },
-      { '@type': 'ListItem', position: 3, name: hub.name, item: `${siteUrl}/competitions/${hub.slug}/` }
+      { '@type': 'ListItem', position: 2, name: 'البطولات', item: `${siteUrl}/competitions` },
+      { '@type': 'ListItem', position: 3, name: hub.name, item: `${siteUrl}/competitions/${hub.slug}` }
     ]
   }
 ];
@@ -65,7 +65,7 @@ const schemaExtra = [
       <div class="section-title"><div><span class="section-kicker">جدول البطولة</span><h2>مباريات {hub.name}</h2></div><a href="/matches/today">مباريات اليوم</a></div>
       {matches.length ? <div class="hub-match-grid">
         {matches.map((match) => (
-          <a class:list={["hub-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+          <a class:list={["hub-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}`}>
             <div class="hub-match-top"><span>{matchStateArabic(match.state)}</span><small>{match.tournamentStage || hub.name}</small></div>
             <h3>{match.home.name} <em>ضد</em> {match.away.name}</h3>
             <div class="hub-match-bottom"><b>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</b><small>{matchDateArabic(match.kickoff)}</small></div>

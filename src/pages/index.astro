@@ -47,7 +47,7 @@ const categorySections = categoryOrder.map((slug) => sections.find((item) => ite
         <div><b>{sections.length}</b><span>أقسام نشطة</span></div>
         <div><b>2</b><span>رياضة + ترفيه</span></div>
       </div>
-      <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
+      <div class="home-status"><span class="live-dot"></span>{lastUpdated ? `آخر تحديث ${new Date(lastUpdated).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}` : 'غرفة الأخبار جاهزة للتحديث'}</div>
     </div>
 
     {lead ? <a class="featured-lead" href={`/${lead.section}/${lead.slug}`} aria-label={lead.title}>
@@ -73,7 +73,7 @@ const categorySections = categoryOrder.map((slug) => sections.find((item) => ite
     <div class="section-title"><div><span class="section-kicker">🎬 جديد الترفيه</span><h2>أفلام ومسلسلات</h2></div><div class="entertainment-links"><a href="/movies">الأفلام</a><a href="/tv">المسلسلات</a></div></div>
     <div class="latest-grid">{entertainmentStories.map((story:any) => <article class="latest-card">
       <a class="latest-image" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
-      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'ترفيه'}</span><h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small></div>
+      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'ترفيه'}</span><h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</small></div>
     </article>)}</div>
   </section>}
 
@@ -86,7 +86,7 @@ const categorySections = categoryOrder.map((slug) => sections.find((item) => ite
         <img src={imageFor(hotStories[0])} alt={altFor(hotStories[0])} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(hotStories[0]).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(hotStories[0])}'`} />
         <div class="hot-main-shade"></div><div class="hot-main-copy"><span>{sectionMap[hotStories[0].section]?.name ?? 'الأخبار'} • {hotStories[0].trafficScore || 0}/100</span><h3>{hotStories[0].title}</h3><p>{hotStories[0].excerpt}</p></div>
       </a>}
-      <div class="hot-stack">{hotStories.slice(1,5).map((story:any)=><a href={`/${story.section}/${story.slug}`}><span>{sectionMap[story.section]?.name ?? 'الأخبار'}</span><h3>{story.title}</h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small></a>)}</div>
+      <div class="hot-stack">{hotStories.slice(1,5).map((story:any)=><a href={`/${story.section}/${story.slug}`}><span>{sectionMap[story.section]?.name ?? 'الأخبار'}</span><h3>{story.title}</h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</small></a>)}</div>
     </div>
   </section>}
 
@@ -94,7 +94,7 @@ const categorySections = categoryOrder.map((slug) => sections.find((item) => ite
     <div class="section-title"><div><span class="section-kicker">محدث تلقائيًا</span><h2>أحدث الأخبار</h2></div><a href="/latest">عرض جميع الأخبار ←</a></div>
     <div class="latest-grid">{latestDisplay.map((story:any) => <article class="latest-card">
       <a class="latest-image" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
-      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'الأخبار'}</span><h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</small></div>
+      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'الأخبار'}</span><h3><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h3><small>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</small></div>
     </article>)}</div>
   </section>}
 

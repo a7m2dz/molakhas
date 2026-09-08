@@ -25,11 +25,11 @@ const visibleEvents = events;
 const generatedAt = (snapshot as any)?.generatedAt;
 const localDate = (value:any) => new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Riyadh',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value));
 const eventTime = (value='') => {
-  try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(value)); }
+  try { return new Intl.DateTimeFormat('ar-SA-u-nu-latn',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(value)); }
   catch { return ''; }
 };
 const eventDay = (value='') => {
-  try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',weekday:'short',day:'numeric',month:'short'}).format(new Date(value)); }
+  try { return new Intl.DateTimeFormat('ar-SA-u-nu-latn',{timeZone:'Asia/Riyadh',weekday:'short',day:'numeric',month:'short'}).format(new Date(value)); }
   catch { return ''; }
 };
 const stateLabel = (event:any) => {
@@ -39,7 +39,7 @@ const stateLabel = (event:any) => {
   return eventDay(event.start) || 'قريبًا';
 };
 const todayArabic = (() => {
-  try { return new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',weekday:'long',day:'numeric',month:'long'}).format(new Date(`${date}T12:00:00+03:00`)); }
+  try { return new Intl.DateTimeFormat('ar-SA-u-nu-latn',{timeZone:'Asia/Riyadh',weekday:'long',day:'numeric',month:'long'}).format(new Date(`${date}T12:00:00+03:00`)); }
   catch { return 'اليوم'; }
 })();
 const displayScore = (event:any) => ['live','final'].includes(event.state) ? String(event.score || '').trim() : '';

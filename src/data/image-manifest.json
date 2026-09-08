@@ -244,18 +244,20 @@
     "resolutionMethod": "direct-source"
   },
   "نتفليكس-تو-كد-رسمي-ا-فيلم-ا-عادة-الاتحاد-ذا-ا-ن-بيندرز": {
-    "src": "/news-images/نتفليكس-تو-كد-رسمي-ا-فيلم-ا-عادة-الاتحاد-ذا-ا-ن-بيندرز.webp",
+    "src": "https://deadline.com/wp-content/uploads/2026/09/Unknown-9.jpeg?w=1024",
     "fallbackSrc": "/news-images/نتفليكس-تو-كد-رسمي-ا-فيلم-ا-عادة-الاتحاد-ذا-ا-ن-بيندرز.webp",
-    "kind": "branded-fallback",
-    "type": "image/webp",
-    "width": 1200,
-    "height": 675,
-    "alt": "فيلم إعادة الاتحاد ذا إن بيندرز على منصة نتفليكس",
-    "caption": "الفيلم الرسمي لإعادة الاتحاد",
+    "kind": "source-remote",
+    "external": true,
     "provider": "deadline.com",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQYW5rOGZ2N0hrOElwNnFha3JBV3dyY3hIUktNbTJJTEt1RDVxRlZ0czNUam9zQUIzOUxjWHNqaWJWT3U1UHl2Q25EdldlWUpyYVpFSmZuWFhCdktKaVpOc0pMemFkYkFwMW00NFRUZnpfSjk2bmwyb2xXZTlIVGNEWjd6azRpSTlyRnlHQmdvaFBfSUk?oc=5",
+    "sourceUrl": "https://deadline.com/2026/09/netflix-confirms-inbetweeners-reunion-movie-cast-1237070074/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQYW5rOGZ2N0hrOElwNnFha3JBV3dyY3hIUktNbTJJTEt1RDVxRlZ0czNUam9zQUIzOUxjWHNqaWJWT3U1UHl2Q25EdldlWUpyYVpFSmZuWFhCdktKaVpOc0pMemFkYkFwMW00NFRUZnpfSjk2bmwyb2xXZTlIVGNEWjd6azRpSTlyRnlHQmdvaFBfSUk?oc=5",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 699,
+    "alt": "فيلم إعادة الاتحاد ذا إن بيندرز على منصة نتفليكس",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — deadline.com.",
     "resolverVersion": 4,
-    "rejectionReason": "publisher resolved (google-page-link) but no usable source image found"
+    "resolutionMethod": "google-batch-signed"
   },
   "جاك-غريليش-يعود-لا-يفرتون-ويمنح-الفريق-طاقة-هجومية-في-تعادل-مثير-مع-مانشستر-يونايتد": {
     "src": "https://i.guim.co.uk/img/media/f771da918d6305721c0db0205896ca2500f8c3bd/0_0_5000_4000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=a72c6136dc5b0856542790c6f9248ec2",

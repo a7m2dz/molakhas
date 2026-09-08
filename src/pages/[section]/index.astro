@@ -16,14 +16,14 @@ const imageFor = (story) => mediaFor(story).src || story.image?.src || `/news-im
 const fallbackFor = (story) => mediaFor(story).fallbackSrc || `/news-images/${story.slug}.webp`;
 const altFor = (story) => mediaFor(story).alt || story.image?.alt || '';
 ---
-<BaseLayout title={`${section.name} - آخر الأخبار | ملخص`} description={`${section.description} آخر الأخبار مرتبة من الأحدث مع صور ومصادر واضحة.`} section={section.slug}>
+<BaseLayout title={`${section.name} - آخر الأخبار | ملخص`} description={`${section.description} آخر الأخبار مرتبة من الأحدث مع صور ومصادر واضحة.`} section={section.slug} robots={items.length ? undefined : 'noindex,follow'}>
   <header class="section-hero shell"><span><img src={section.icon} width="44" height="44" alt="" /></span><div><small>قسم ملخص</small><h1>{section.name}</h1><p>{section.description}</p><div class="section-count">{items.length} خبر منشور</div></div></header>
   <section class="shell"><LurvuePromo section={section.slug} position="section-top" /></section>
   <section class="shell section-block">
     <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>آخر أخبار {section.name}</h2></div></div>
     <div class="story-list media-list">{items.length ? items.map((story) => <article>
       <a class="list-thumb" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
-      <div class="list-copy"><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
+      <div class="list-copy"><span class="story-meta">{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
       <a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a>
     </article>) : <div class="empty"><h2>نجهّز لك التغطية 👀</h2><p>سيظهر أحدث محتوى هذا القسم هنا فور اجتيازه بوابة الجودة.</p></div>}</div>
   </section>

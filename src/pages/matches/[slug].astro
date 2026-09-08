@@ -59,13 +59,13 @@ const eventStatus = isFinal
 const schemaExtra = [
   {
     '@type': 'SportsEvent',
-    '@id': `${siteUrl}/matches/${match.slug}/#event`,
+    '@id': `${siteUrl}/matches/${match.slug}#event`,
     name: `${home} ضد ${away} - ${competition}`,
     startDate: match.kickoff,
     eventStatus,
     sport: 'Football',
     description,
-    url: `${siteUrl}/matches/${match.slug}/`,
+    url: `${siteUrl}/matches/${match.slug}`,
     homeTeam: { '@type': 'SportsTeam', name: home, url: `${siteUrl}${homeUrl}` },
     awayTeam: { '@type': 'SportsTeam', name: away, url: `${siteUrl}${awayUrl}` },
     superEvent: { '@type': 'SportsEvent', name: competition, url: `${siteUrl}${competitionUrl}` },
@@ -75,8 +75,8 @@ const schemaExtra = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
-      { '@type': 'ListItem', position: 2, name: 'مباريات اليوم', item: `${siteUrl}/matches/today/` },
-      { '@type': 'ListItem', position: 3, name: `${home} ضد ${away}`, item: `${siteUrl}/matches/${match.slug}/` }
+      { '@type': 'ListItem', position: 2, name: 'مباريات اليوم', item: `${siteUrl}/matches/today` },
+      { '@type': 'ListItem', position: 3, name: `${home} ضد ${away}`, item: `${siteUrl}/matches/${match.slug}` }
     ]
   }
 ];
@@ -122,7 +122,7 @@ const schemaExtra = [
         {details.venue && <div><span>الملعب</span><b>{details.venue}</b></div>}
         {details.referee && <div><span>الحكم</span><b>{details.referee}</b></div>}
         {details.round && <div><span>الجولة</span><b>{details.round}</b></div>}
-        {details.attendance && <div><span>الحضور</span><b>{new Intl.NumberFormat('ar-SA').format(details.attendance)}</b></div>}
+        {details.attendance && <div><span>الحضور</span><b>{new Intl.NumberFormat('ar-SA-u-nu-latn').format(details.attendance)}</b></div>}
       </div>
     </section>
 
@@ -180,7 +180,7 @@ const schemaExtra = [
     <div class="match-data-note">
       <span>جودة صفحة الفهرسة: {qualityScore}/100 {indexable ? '• مؤهلة للفهرسة' : '• noindex مؤقتًا حتى تكتمل البيانات'}</span>
       {match.sourceUrl && <span>بيانات المباراة: <a href={match.sourceUrl} target="_blank" rel="nofollow noopener">FotMob</a></span>}
-      {details.detailUpdatedAt && <span>آخر تحديث تفصيلي: {new Intl.DateTimeFormat('ar-SA',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(details.detailUpdatedAt))}</span>}
+      {details.detailUpdatedAt && <span>آخر تحديث تفصيلي: {new Intl.DateTimeFormat('ar-SA-u-nu-latn',{timeZone:'Asia/Riyadh',hour:'numeric',minute:'2-digit'}).format(new Date(details.detailUpdatedAt))}</span>}
     </div>
 
     <LurvuePromo section={match.section || 'football'} position="match-center-end" storySlug={match.slug} storyTitle={`${home} ضد ${away}`} keyword={`مباراة ${home} ${away}`} context={match.state} competition={competition} />

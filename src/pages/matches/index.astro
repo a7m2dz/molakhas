@@ -28,7 +28,7 @@ const description = 'مركز مباريات ملخص: أهم مباريات ا�
         const home = teamMeta(match.home.name).name || match.home.name;
         const away = teamMeta(match.away.name).name || match.away.name;
         const competition = competitionMeta(match.league.name).name || match.league.name;
-        return <a class:list={["feature-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+        return <a class:list={["feature-match", { live: match.state === 'live' }]} href={`/matches/${match.slug}`}>
           <span>{competition}</span>
           <h3>{home} <em>ضد</em> {away}</h3>
           <div class="fixture-info">

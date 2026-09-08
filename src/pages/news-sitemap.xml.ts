@@ -12,8 +12,8 @@ export function GET() {
     const media = mediaMap[s.slug] || {};
     const image = absolute(media.src || s.image?.src || `/news-images/${s.slug}.webp`);
     const alt = media.alt || s.image?.alt || s.title;
-    return `<url><loc>${esc(`${base}/${s.section}/${s.slug}`)}</loc><news:news><news:publication><news:name>ملخص</news:name><news:language>ar</news:language></news:publication><news:publication_date>${new Date(s.publishedAt).toISOString()}</news:publication_date><news:title>${esc(s.title)}</news:title></news:news><image:image><image:loc>${esc(image)}</image:loc><image:title>${esc(alt)}</image:title></image:image></url>`;
+    return `<url><loc>${esc(`${base}/${s.section}/${s.slug}`)}</loc><news:news><news:publication><news:name>ملخص</news:name><news:language>ar</news:language></news:publication><news:publication_date>${new Date(s.publishedAt).toISOString()}</news:publication_date><news:title>${esc(s.title)}</news:title></news:news><image:image><image:loc>${esc(encodeURI(image))}</image:loc><image:title>${esc(alt)}</image:title></image:image></url>`;
   }).join('');
   const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">${urls}</urlset>`;
-  return new Response(xml,{headers:{'Content-Type':'application/xml; charset=utf-8'}});
+  return new Response(xml,{headers:{'Content-Type':'application/xml; charset=utf-8','Cache-Control':'public,max-age=900'}});
 }

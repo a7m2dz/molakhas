@@ -103,7 +103,7 @@ function slugify(value = '') {
   return String(value)
     .toLowerCase()
     .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\p{M}/gu, '')
     .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-|-$/g, '')
     .slice(0, 90);
@@ -216,10 +216,10 @@ export function buildCompetitionHubs(): CompetitionHub[] {
 
 export function teamHref(name: string) {
   const meta = teamMeta(name);
-  return meta.slug ? `/teams/${meta.slug}/` : '/teams/';
+  return meta.slug ? `/teams/${meta.slug}` : '/teams';
 }
 
 export function competitionHref(name: string) {
   const meta = competitionMeta(name);
-  return meta.slug ? `/competitions/${meta.slug}/` : '/competitions/';
+  return meta.slug ? `/competitions/${meta.slug}` : '/competitions';
 }

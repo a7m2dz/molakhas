@@ -12,7 +12,7 @@ const description = 'صفحات البطولات في ملخص: دوري روش�
   <div class="shell"><LurvuePromo section="football" position="competitions-directory" /></div>
   <section class="shell directory-section">
     <div class="section-title"><div><span class="section-kicker">محدثة من مركز المباريات</span><h2>أهم البطولات</h2></div><a href="/matches/today">مباريات اليوم ←</a></div>
-    {hubs.length ? <div class="directory-grid">{hubs.map((hub) => <a href={`/competitions/${hub.slug}/`}><span>{hub.opportunityScore}/100</span><h3>{hub.name}</h3>{hub.alternateName !== hub.name && <small>{hub.alternateName}</small>}<p>{hub.matches.length} مباراة • {hub.teams.length} فريق</p></a>)}</div> : <div class="empty"><h2>جاري تجهيز صفحات البطولات</h2><p>تظهر الصفحات بعد تحديث مركز المباريات.</p></div>}
+    {hubs.length ? <div class="directory-grid">{hubs.map((hub) => <a href={`/competitions/${hub.slug}`}><span>{hub.opportunityScore}/100</span><h3>{hub.name}</h3>{hub.alternateName !== hub.name && <small>{hub.alternateName}</small>}<p>{hub.matches.length} مباراة • {hub.teams.length} فريق</p></a>)}</div> : <div class="empty"><h2>جاري تجهيز صفحات البطولات</h2><p>تظهر الصفحات بعد تحديث مركز المباريات.</p></div>}
   </section>
 </BaseLayout>
 <style>

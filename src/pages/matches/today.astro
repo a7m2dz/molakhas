@@ -20,7 +20,7 @@ const schemaExtra = [
     '@type': 'CollectionPage',
     '@id': `${siteUrl}/matches/today/#page`,
     name: 'مباريات اليوم',
-    url: `${siteUrl}/matches/today/`,
+    url: `${siteUrl}/matches/today`,
     inLanguage: 'ar-SA',
     description
   },
@@ -29,7 +29,7 @@ const schemaExtra = [
     itemListElement: matches.slice(0, 40).map((match, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: `${siteUrl}/matches/${match.slug}/`,
+      url: `${siteUrl}/matches/${match.slug}`,
       name: `${teamMeta(match.home.name).name || match.home.name} ضد ${teamMeta(match.away.name).name || match.away.name}`
     }))
   }
@@ -59,7 +59,7 @@ const schemaExtra = [
           {leagueMatches.map((match) => {
             const home = teamMeta(match.home.name).name || match.home.name;
             const away = teamMeta(match.away.name).name || match.away.name;
-            return <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}/`}>
+            return <a class:list={["match-row", { live: match.state === 'live' }]} href={`/matches/${match.slug}`}>
               <div class="match-status">
                 <strong>{match.state === 'live' || match.state === 'final' ? (match.score || '—') : matchTimeArabic(match.kickoff)}</strong>
                 <small>{matchStateArabic(match.state)}</small>

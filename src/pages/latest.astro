@@ -19,14 +19,14 @@ const schemaExtra = {
   '@type':'CollectionPage',
   '@id':`${siteUrl}/latest/#collection`,
   name:'آخر الأخبار الرياضية - ملخص',
-  url:`${siteUrl}/latest/`,
+  url:`${siteUrl}/latest`,
   inLanguage:'ar',
   mainEntity:{
     '@type':'ItemList',
     itemListElement:items.slice(0,20).map((story,index)=>({
       '@type':'ListItem',
       position:index+1,
-      url:`${siteUrl}/${story.section}/${story.slug}/`,
+      url:`${siteUrl}/${story.section}/${story.slug}`,
       name:story.title
     }))
   }
@@ -39,7 +39,7 @@ const schemaExtra = {
     <div class="section-title"><div><span class="section-kicker">الأحدث أولًا</span><h2>كل الأخبار</h2></div><a href="/matches/today">مباريات اليوم ←</a></div>
     <div class="latest-list">{items.length ? items.map((story) => <article>
       <a class="latest-thumb" href={`/${story.section}/${story.slug}`} aria-label={story.title}><img src={imageFor(story)} alt={altFor(story)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(story).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(story)}'`} /></a>
-      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'رياضة'} • {new Date(story.publishedAt).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
+      <div class="latest-copy"><span>{sectionMap[story.section]?.name ?? 'رياضة'} • {new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}</span><h2><a href={`/${story.section}/${story.slug}`}>{story.title}</a></h2><p>{story.excerpt}</p></div>
       <a class="read-more" href={`/${story.section}/${story.slug}`}>اقرأ ←</a>
     </article>) : <div class="empty"><h2>بانتظار الأخبار</h2><p>تظهر هنا الأخبار المعتمدة من جميع الأقسام فور نشرها.</p></div>}</div>
   </section>
