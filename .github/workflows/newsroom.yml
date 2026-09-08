@@ -3,7 +3,7 @@ name: Molakhas Newsroom
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 */2 * * *'
+    - cron: '7,37 * * * *'
   push:
     branches: [main]
     paths:
@@ -26,12 +26,12 @@ permissions:
 
 concurrency:
   group: molakhas-newsroom
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   newsroom:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 55
     env:
       PUBLIC_SITE_URL: https://mulakhas.com
       OMNIROUTE_SERVER_HOST: 127.0.0.1
@@ -60,14 +60,24 @@ jobs:
           cache: npm
 
       - name: Install project dependencies
-        run: npm install --no-audit --no-fund
+        shell: bash
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            if npm install --no-audit --no-fund; then
+              exit 0
+            fi
+            echo "Project dependency install attempt $attempt failed; retrying..."
+            sleep $((attempt * 10))
+          done
+          exit 1
 
       - name: Rank traffic opportunities from RSS and radar
+        continue-on-error: true
         run: npm run newsroom:dry
 
       - name: Boot OmniRoute inside the cloud runner
         id: omni_boot
-        if: github.event_name != 'push'
         shell: bash
         run: |
           set +e
@@ -84,9 +94,18 @@ jobs:
               ;;
           esac
 
-          npm install -g omniroute@3.8.50 --no-audit --no-fund
-          if [ $? -ne 0 ]; then
-            echo "OmniRoute install failed; sports/data refresh will continue without AI story generation."
+          installed=false
+          for attempt in 1 2 3; do
+            if npm install -g omniroute@3.8.50 --no-audit --no-fund; then
+              installed=true
+              break
+            fi
+            echo "OmniRoute install attempt $attempt failed; retrying..."
+            sleep $((attempt * 15))
+          done
+
+          if [ "$installed" != "true" ]; then
+            echo "OmniRoute install failed; data refresh and site build will continue without AI story generation."
             echo "ready=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -111,44 +130,85 @@ jobs:
 
       - name: Verify OmniRoute inference
         id: omni
-        if: github.event_name != 'push' && steps.omni_boot.outputs.ready == 'true'
+        if: steps.omni_boot.outputs.ready == 'true'
         continue-on-error: true
-        run: npm run omniroute:test
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            if npm run omniroute:test; then
+              exit 0
+            fi
+            echo "OmniRoute inference attempt $attempt failed; retrying..."
+            sleep $((attempt * 10))
+          done
+          exit 1
 
       - name: Generate newsroom batch in cloud
-        if: github.event_name != 'push' && steps.omni_boot.outputs.ready == 'true' && steps.omni.outcome == 'success'
+        id: generate
+        if: steps.omni_boot.outputs.ready == 'true' && steps.omni.outcome == 'success'
         continue-on-error: true
         run: npm run newsroom
 
       - name: OmniRoute fallback notice
-        if: github.event_name != 'push' && (steps.omni_boot.outputs.ready != 'true' || steps.omni.outcome != 'success')
-        run: echo "AI generation was unavailable in this run; sports snapshots and site build continue normally."
+        if: steps.omni_boot.outputs.ready != 'true' || steps.omni.outcome != 'success'
+        run: echo "AI generation was unavailable in this cycle; sports snapshots, source images, build and the next scheduled cycle continue normally."
 
       - name: Build production site and media
-        run: npm run build
+        shell: bash
+        run: |
+          for attempt in 1 2; do
+            if npm run build; then
+              exit 0
+            fi
+            echo "Production build attempt $attempt failed; retrying once..."
+            sleep 15
+          done
+          exit 1
 
       - name: Run prelaunch quality audit
         run: npm run audit:prelaunch
 
       - name: Persist cloud newsroom state
-        if: github.event_name != 'push'
+        id: persist
         shell: bash
         run: |
+          set -e
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
 
           git add -A src/data public/news-images public/brand
 
           if git diff --cached --quiet; then
-            echo "No publishable newsroom changes."
+            echo "No publishable newsroom changes in this cycle."
+            echo "published=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git commit -m "newsroom: cloud refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "published=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Publish attempt $attempt failed; retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 10))
+          done
+
+          exit 1
 
       - name: Notify search engines with IndexNow
-        if: github.event_name != 'push'
+        if: steps.persist.outputs.published == 'true'
         continue-on-error: true
         run: npm run indexnow
+
+      - name: Cycle status
+        if: always()
+        shell: bash
+        run: |
+          echo "Molakhas cloud newsroom cycle finished at $(date -u +'%Y-%m-%d %H:%M:%S UTC')."
+          echo "OmniRoute ready: ${{ steps.omni_boot.outputs.ready }}"
+          echo "Inference outcome: ${{ steps.omni.outcome }}"
+          echo "News generation outcome: ${{ steps.generate.outcome }}"
+          echo "Published changes: ${{ steps.persist.outputs.published }}"
