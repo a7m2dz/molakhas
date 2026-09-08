@@ -11,6 +11,7 @@ $CycleScript = Join-Path $PSScriptRoot 'molakhas-cycle.ps1'
 $LogFile = Join-Path $RuntimeDir 'supervisor.log'
 $PidFile = Join-Path $RuntimeDir 'supervisor.pid'
 $HeartbeatRepo = Join-Path $RuntimeDir 'heartbeat-repo'
+$LocalEnvFile = Join-Path $ProjectRoot '.env.local.ps1'
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 
@@ -37,12 +38,24 @@ if (-not $hasMutex) {
 [System.IO.File]::WriteAllText($PidFile, [string]$PID)
 Set-Location $ProjectRoot
 
+# Local secrets/config are intentionally gitignored. Prefer them when present.
+if (Test-Path $LocalEnvFile) {
+  try {
+    . $LocalEnvFile
+    Write-Log 'Loaded local environment from .env.local.ps1.'
+  } catch {
+    Write-Log "Failed to load .env.local.ps1: $($_.Exception.Message)"
+  }
+}
+
+# Fall back to the per-user Windows secret store only when the local file did not set a key.
+if (-not $env:OMNIROUTE_API_KEY) {
+  $storedApiKey = [Environment]::GetEnvironmentVariable('OMNIROUTE_API_KEY', 'User')
+  if ($storedApiKey) { $env:OMNIROUTE_API_KEY = $storedApiKey }
+}
+
 if (-not $env:PUBLIC_SITE_URL) { $env:PUBLIC_SITE_URL = 'https://mulakhas.com' }
 if (-not $env:OMNIROUTE_BASE_URL) { $env:OMNIROUTE_BASE_URL = 'http://127.0.0.1:20128/v1' }
-
-$storedApiKey = [Environment]::GetEnvironmentVariable('OMNIROUTE_API_KEY', 'User')
-if ($storedApiKey) { $env:OMNIROUTE_API_KEY = $storedApiKey }
-
 $env:OMNIROUTE_MODEL = 'auto/best-free'
 if (-not $env:OMNIROUTE_FALLBACK_MODEL) { $env:OMNIROUTE_FALLBACK_MODEL = 'auto' }
 if (-not $env:OMNIROUTE_TIMEOUT_MS) { $env:OMNIROUTE_TIMEOUT_MS = '90000' }
@@ -158,7 +171,7 @@ function Publish-Heartbeat {
 }
 
 if (-not $env:OMNIROUTE_API_KEY) {
-  Write-Log 'OMNIROUTE_API_KEY is missing from Windows User environment; publisher cycles will fail until it is saved.'
+  Write-Log 'OMNIROUTE_API_KEY is missing from .env.local.ps1 and Windows User environment; publisher cycles will wait.'
 }
 
 Write-Log "Molakhas supervisor started. Project=$ProjectRoot Cycle=${CycleMinutes}m Heartbeat=${HeartbeatMinutes}m Model=$($env:OMNIROUTE_MODEL) PID=$PID"
@@ -204,7 +217,7 @@ try {
         ) -WorkingDirectory $ProjectRoot -WindowStyle Hidden -PassThru
         $nextCycle = (Get-Date).AddMinutes([Math]::Max(5, $CycleMinutes))
       } elseif (-not $env:OMNIROUTE_API_KEY) {
-        Write-Log 'Publisher cycle postponed because OMNIROUTE_API_KEY is not stored for this Windows user.'
+        Write-Log 'Publisher cycle postponed because OMNIROUTE_API_KEY is unavailable.'
         $nextCycle = (Get-Date).AddMinutes(2)
       } else {
         Write-Log 'Publisher cycle postponed because OmniRoute HEAD probe is not healthy.'
