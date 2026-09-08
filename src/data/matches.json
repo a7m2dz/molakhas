@@ -29,7 +29,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bayern%20M%C3%BCnchen-vs-Bod%C3%B8%2FGlimt#6106240",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -62,7 +62,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Como-vs-RB%20Leipzig#6106411",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -95,7 +95,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Man%20United-vs-Sabah%20FK#6106293",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -128,7 +128,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Slavia%20Prague-vs-Lens#6106392",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -161,7 +161,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Fenerbah%C3%A7e-vs-Roma#6106331",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -194,7 +194,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSV%20Eindhoven-vs-Shakhtar%20Donetsk#6106304",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 20
   },
   {
@@ -227,7 +227,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Liverpool-vs-Atl%C3%A9tico%20Madrid#6106246",
-    "updatedAt": "2026-09-08T09:29:13.623Z",
+    "updatedAt": "2026-09-08T11:20:45.170Z",
     "details": {
       "venue": "Anfield",
       "referee": "Davide Massa",
@@ -267,7 +267,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:13.623Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.170Z",
       "detailGeneral": {
         "matchId": "6106246",
         "matchName": "Liverpool-vs-Atlético Madrid_Wed, Sep 9, 2026, 19:00 UTC",
@@ -307,7 +307,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSG-vs-Slovan%20Bratislava#6106237",
-    "updatedAt": "2026-09-08T09:29:13.977Z",
+    "updatedAt": "2026-09-08T11:20:45.178Z",
     "details": {
       "venue": "Parc des Princes",
       "referee": "Mykola Balakin",
@@ -347,7 +347,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:13.977Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.178Z",
       "detailGeneral": {
         "matchId": "6106237",
         "matchName": "Paris Saint-Germain-vs-Slovan Bratislava_Wed, Sep 9, 2026, 19:00 UTC",
@@ -387,7 +387,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sporting%20CP-vs-Galatasaray#6106280",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -420,7 +420,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Napoli-vs-Arsenal#6106318",
-    "updatedAt": "2026-09-08T09:29:14.325Z",
+    "updatedAt": "2026-09-08T11:20:45.187Z",
     "details": {
       "venue": "Stadio Diego Armando Maradona",
       "referee": "Glenn Nyberg",
@@ -460,7 +460,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:14.325Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.187Z",
       "detailGeneral": {
         "matchId": "6106318",
         "matchName": "Napoli-vs-Arsenal_Wed, Sep 9, 2026, 19:00 UTC",
@@ -500,7 +500,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Chelsea-vs-Leeds#6099342",
-    "updatedAt": "2026-09-08T09:29:15.187Z",
+    "updatedAt": "2026-09-08T11:20:45.195Z",
     "details": {
       "venue": "Stamford Bridge",
       "referee": "Jarred Gillett",
@@ -540,7 +540,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:15.187Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.195Z",
       "detailGeneral": {
         "matchId": "6099342",
         "matchName": "Chelsea-vs-Leeds United_Wed, Sep 9, 2026, 19:00 UTC",
@@ -580,7 +580,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Fateh%20FC-vs-Al%20Diriyah#5970133",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -613,7 +613,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Nassr%20FC-vs-Abha#5970134",
-    "updatedAt": "2026-09-08T09:29:12.888Z",
+    "updatedAt": "2026-09-08T11:20:45.147Z",
     "details": {
       "venue": "Al-Awwal Park",
       "referee": "",
@@ -653,7 +653,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:12.888Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.147Z",
       "detailGeneral": {
         "matchId": "5970134",
         "matchName": "Al Nassr FC-vs-Abha_Wed, Sep 9, 2026, 18:00 UTC",
@@ -693,7 +693,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Barcelona-vs-Feyenoord#6106264",
-    "updatedAt": "2026-09-08T09:29:13.417Z",
+    "updatedAt": "2026-09-08T11:20:45.163Z",
     "details": {
       "venue": "Spotify Camp Nou",
       "referee": "Sven Jablonski",
@@ -733,7 +733,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:13.417Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.163Z",
       "detailGeneral": {
         "matchId": "6106264",
         "matchName": "Barcelona-vs-Feyenoord_Wed, Sep 9, 2026, 16:45 UTC",
@@ -773,7 +773,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/VfB%20Stuttgart-vs-Viking#6106400",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -806,7 +806,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Kholood-vs-Al%20Shabab#5970132",
-    "updatedAt": "2026-09-08T09:29:12.491Z",
+    "updatedAt": "2026-09-08T11:20:45.138Z",
     "details": {
       "venue": "Ar-Rass Stadium (Al Hazm Club Stadium)",
       "referee": "",
@@ -846,7 +846,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:12.491Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.138Z",
       "detailGeneral": {
         "matchId": "5970132",
         "matchName": "Al Kholood-vs-Al Shabab_Wed, Sep 9, 2026, 15:55 UTC",
@@ -886,7 +886,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Dortmund-vs-Villarreal#6106272",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -919,7 +919,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/FC%20Porto-vs-Man%20City#6106286",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -952,7 +952,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Lille-vs-Real%20Betis#6106311",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -985,7 +985,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Real%20Madrid-vs-Inter#6106242",
-    "updatedAt": "2026-09-08T09:29:13.237Z",
+    "updatedAt": "2026-09-08T11:20:45.155Z",
     "details": {
       "venue": "Estadio Bernabéu",
       "referee": "Michael Oliver",
@@ -1025,7 +1025,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:13.237Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.155Z",
       "detailGeneral": {
         "matchId": "6106242",
         "matchName": "Real Madrid-vs-Inter_Tue, Sep 8, 2026, 19:00 UTC",
@@ -1065,7 +1065,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Millwall-vs-Newcastle#6099336",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1098,7 +1098,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bournemouth-vs-Lincoln#6099334",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1131,7 +1131,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Crystal%20Palace-vs-Middlesbrough#6099328",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1164,7 +1164,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Leyton%20Orient-vs-Bradford#6099339",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1197,7 +1197,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sunderland-vs-Hull#6099331",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1230,7 +1230,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Qadsiah-vs-Al%20Ahli#5970131",
-    "updatedAt": "2026-09-08T09:29:11.275Z",
+    "updatedAt": "2026-09-08T11:20:45.108Z",
     "details": {
       "venue": "Prince Mohammed Bin Fahd Stadium",
       "referee": "",
@@ -1270,7 +1270,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:11.275Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.107Z",
       "detailGeneral": {
         "matchId": "5970131",
         "matchName": "Al Qadsiah-vs-Al Ahli_Tue, Sep 8, 2026, 18:00 UTC",
@@ -1310,7 +1310,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Ittihad-vs-Al-Fayha#5970130",
-    "updatedAt": "2026-09-08T09:29:11.563Z",
+    "updatedAt": "2026-09-08T11:20:45.117Z",
     "details": {
       "venue": "Alinma Bank Stadium at King Abdullah Sport City",
       "referee": "",
@@ -1350,7 +1350,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:11.563Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.117Z",
       "detailGeneral": {
         "matchId": "5970130",
         "matchName": "Al Ittihad-vs-Al-Fayha_Tue, Sep 8, 2026, 18:00 UTC",
@@ -1390,7 +1390,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/AEK%20Athens-vs-LASK#6106404",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1423,7 +1423,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Club%20Brugge-vs-Aston%20Villa#6106295",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 40
   },
   {
@@ -1456,7 +1456,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Hazem-vs-Al-Taawoun#5970129",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 55
   },
   {
@@ -1489,7 +1489,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al-Ettifaq-vs-Al-Faisaly#5970128",
-    "updatedAt": "2026-09-08T09:29:15.219Z",
+    "updatedAt": "2026-09-08T11:20:45.206Z",
     "details": {
       "venue": "Al Ettifaq Club Stadium",
       "referee": "",
@@ -1529,7 +1529,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:15.219Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.206Z",
       "detailGeneral": {
         "matchId": "5970128",
         "matchName": "Al-Ettifaq-vs-Al-Faisaly_Tue, Sep 8, 2026, 15:30 UTC",
@@ -1569,7 +1569,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Elche-vs-Real%20Sociedad#5868044",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 48
   },
   {
@@ -1602,7 +1602,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Udinese-vs-Lazio#5749669",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 48
   },
   {
@@ -1635,7 +1635,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Hilal-vs-Neom%20SC#5970127",
-    "updatedAt": "2026-09-08T09:29:12.199Z",
+    "updatedAt": "2026-09-08T11:20:45.129Z",
     "details": {
       "venue": "Kingdom Arena",
       "referee": "Sascha Stegemann",
@@ -1955,7 +1955,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-08T09:29:12.199Z",
+      "detailUpdatedAt": "2026-09-08T11:20:45.129Z",
       "detailGeneral": {
         "matchId": "5970127",
         "matchName": "Al Hilal-vs-Neom SC_Mon, Sep 7, 2026, 18:00 UTC",
@@ -1995,7 +1995,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Getafe-vs-Celta%20Vigo#5868046",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 48
   },
   {
@@ -2028,7 +2028,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Cagliari-vs-Lecce#5749662",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 48
   },
   {
@@ -2061,7 +2061,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Khaleej-vs-Al%20Riyadh#5970126",
-    "updatedAt": "2026-09-08T09:29:09.777Z",
+    "updatedAt": "2026-09-08T11:20:44.141Z",
     "indexQualityScore": 48
   },
   {
