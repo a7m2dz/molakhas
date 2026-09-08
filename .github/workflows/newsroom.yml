@@ -31,9 +31,10 @@ concurrency:
 jobs:
   newsroom:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     env:
       PUBLIC_SITE_URL: https://mulakhas.com
+      OMNIROUTE_SERVER_HOST: 127.0.0.1
       OMNIROUTE_BASE_URL: ${{ vars.OMNIROUTE_BASE_URL || 'http://127.0.0.1:20128/v1' }}
       OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
       OMNIROUTE_MODEL: ${{ vars.OMNIROUTE_MODEL || 'auto' }}
@@ -92,23 +93,17 @@ jobs:
           nohup omniroute --no-open > /tmp/omniroute.log 2>&1 &
           echo $! > /tmp/omniroute.pid
 
-          for attempt in $(seq 1 75); do
-            if curl -fsS --max-time 4 "$OMNIROUTE_BASE_URL/models" > /tmp/omniroute-models.json 2>/dev/null; then
-              echo "OmniRoute is ready on the GitHub runner."
+          for attempt in $(seq 1 180); do
+            if curl -fsS --max-time 4 "http://127.0.0.1:20128/" > /tmp/omniroute-home.html 2>/dev/null; then
+              echo "OmniRoute HTTP server is ready on the GitHub runner."
               echo "ready=true" >> "$GITHUB_OUTPUT"
               echo "mode=ephemeral" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-
-            if ! kill -0 "$(cat /tmp/omniroute.pid)" 2>/dev/null; then
-              echo "OmniRoute process exited before becoming ready."
-              break
-            fi
-
             sleep 2
           done
 
-          echo "OmniRoute did not become ready; continuing with non-AI refresh only."
+          echo "OmniRoute HTTP server did not become ready; continuing with non-AI refresh only."
           tail -n 200 /tmp/omniroute.log || true
           echo "ready=false" >> "$GITHUB_OUTPUT"
           exit 0
@@ -141,8 +136,6 @@ jobs:
           git config user.name "molakhas-newsroom[bot]"
           git config user.email "actions@users.noreply.github.com"
 
-          # The runner starts from a clean checkout, so any changes under these
-          # generated-data/media paths were produced by this newsroom run.
           git add -A src/data public/news-images public/brand
 
           if git diff --cached --quiet; then
