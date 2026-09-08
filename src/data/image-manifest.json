@@ -1006,5 +1006,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ماركينيوس-لويس-انريكي-لا-يخاف-من-اتخاذ-قرارات-صعبة": {
+    "src": "https://www.soccernews.com/og/og-image.png",
+    "fallbackSrc": "/news-images/ماركينيوس-لويس-انريكي-لا-يخاف-من-اتخاذ-قرارات-صعبة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "SoccerNews",
+    "sourceUrl": "https://www.soccernews.com/marquinhos-luis-enrique-not-afraid-to-make-tough-decisions/404552/",
+    "originalStoryUrl": "https://www.soccernews.com/marquinhos-luis-enrique-not-afraid-to-make-tough-decisions/404552/",
+    "type": "image/png",
+    "width": 1200,
+    "height": 630,
+    "alt": "لاعب باريس سان جيرمان ماركينيوس يتحدث عن أداء المدرب لويس إنريكي في دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SoccerNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "دوري-الابطال-الاوروبي-يواجه-ازمة-اهتمام-مع-عودة-الاندية-الصغيرة": {
+    "src": "https://i.guim.co.uk/img/media/2a3433aea1618ecf2b227ecc6d566a5c4af2f9ef/313_0_2917_2333/master/2917.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=a0ef1a121a7b5b4bdbd77d9622ebae20",
+    "fallbackSrc": "/news-images/دوري-الابطال-الاوروبي-يواجه-ازمة-اهتمام-مع-عودة-الاندية-الصغيرة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/08/champions-league-hype-machine-football-daily-newsletter",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/08/champions-league-hype-machine-football-daily-newsletter",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 960,
+    "alt": "مباراة في دوري الأبطال الأوروبي تظهر لاعبين من فريقين مختلفين في منتصف الملعب",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
