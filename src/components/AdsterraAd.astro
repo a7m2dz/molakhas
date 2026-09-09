@@ -1,0 +1,62 @@
+---
+const { variant = 'native', label = 'إعلان' } = Astro.props;
+---
+
+<div class:list={["adsterra-slot", `adsterra-${variant}`]} aria-label={label}>
+  <small class="ad-label">{label}</small>
+
+  {variant === 'native' && <>
+    <script is:inline async="async" data-cfasync="false" src="https://pl31255134.profitableratecpmnetwork.com/d9cc4e1d91e4ef1bf2936965dba0d22c/invoke.js"></script>
+    <div id="container-d9cc4e1d91e4ef1bf2936965dba0d22c"></div>
+  </>}
+
+  {variant === 'rectangle' && <>
+    <script is:inline>
+      atOptions = {
+        'key' : 'd119c13375a1405c76e57b0b39a71f70',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script is:inline src="https://www.highrevenueformat.com/d119c13375a1405c76e57b0b39a71f70/invoke.js"></script>
+  </>}
+
+  {variant === 'leaderboard' && <script is:inline>
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      window.atOptions = {
+        'key' : '8b709a27b35fbc9cc6e4779971d24f58',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+      document.write('<script src="https://www.highrevenueformat.com/8b709a27b35fbc9cc6e4779971d24f58/invoke.js"><\/script>');
+    }
+  </script>}
+
+  {variant === 'mobile' && <script is:inline>
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      window.atOptions = {
+        'key' : '3185aef4197670a4c2ead96a47abd8c4',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+      document.write('<script src="https://www.highrevenueformat.com/3185aef4197670a4c2ead96a47abd8c4/invoke.js"><\/script>');
+    }
+  </script>}
+</div>
+
+<style>
+  .adsterra-slot{width:100%;margin:18px auto;text-align:center;overflow:hidden;min-height:0}
+  .ad-label{display:block;margin:0 0 6px;color:var(--muted);font-size:9px;line-height:1;text-align:center}
+  .adsterra-native{max-width:920px;text-align:initial}
+  .adsterra-rectangle{max-width:320px;min-height:270px}
+  .adsterra-leaderboard{max-width:748px;min-height:110px}
+  .adsterra-mobile{max-width:340px;min-height:70px}
+  @media(max-width:767px){.adsterra-leaderboard{display:none}}
+  @media(min-width:768px){.adsterra-mobile{display:none}}
+</style>
