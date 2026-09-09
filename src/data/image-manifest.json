@@ -1400,5 +1400,53 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — hollywoodreporter.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "الكونغرس-يبدا-صياغة-حافز-فيدرالي-بنسبة-20-للافلام-والتلفزيون-بدعم-من-ترامب": {
+    "src": "https://variety.com/wp-content/uploads/2026/09/grammys-on-the-hill-advocacy-day-awards-dinner-house-minorit-1000x667-1.jpg?crop=0px%2C14px%2C1000px%2C562px&",
+    "fallbackSrc": "/news-images/الكونغرس-يبدا-صياغة-حافز-فيدرالي-بنسبة-20-للافلام-والتلفزيون-بدعم-من-ترامب.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Variety",
+    "sourceUrl": "https://variety.com/2026/film/news/congress-draft-federal-film-incentive-trump-1236855119/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQRHItOTd1Sm50RjRjWFVWTXYxbjVqX1VmbGRCbW1Lb0dGbVBtNjJpQzJxemFjakFSMW1WcUNFU2xFVTVKY3dSMDQwQU5wQ05rQ0dUX3lXYi1mWUhNVTFBRDN3SE5tN2ZfSlljSlBSQkJoVVVWS3pBWWNlQ1NnUExWYXk0c3dOeUhrenpmMXlQODEwT2Z0?oc=5",
+    "type": "image/webp",
+    "width": 1000,
+    "height": 563,
+    "alt": "الكونغرس الأمريكي يناقش حافزًا فيدراليًا لإنتاج الأفلام والتلفزيون",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Variety.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "هالاند-يسجل-ثنايية-ويقود-مانشستر-سيتي-للفوز-على-بورتو-في-دوري-الابطال": {
+    "src": "https://www.soccernews.com/og/og-image.png",
+    "fallbackSrc": "/news-images/هالاند-يسجل-ثنايية-ويقود-مانشستر-سيتي-للفوز-على-بورتو-في-دوري-الابطال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "SoccerNews",
+    "sourceUrl": "https://www.soccernews.com/haaland-man-city-delivered-under-champions-league-pressure-in-porto/404581/",
+    "originalStoryUrl": "https://www.soccernews.com/haaland-man-city-delivered-under-champions-league-pressure-in-porto/404581/",
+    "type": "image/png",
+    "width": 1200,
+    "height": 630,
+    "alt": "إيرلينغ هالاند يحتفل بتسجيله هدفًا في مرمى بورتو خلال مباراة دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SoccerNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "فيل-جاكسون-يحصل-على-تمثال-امام-صالة-كريبتو-دوت-كوم-ارينا": {
+    "src": "https://images.eurohoops.net/2015/09/kobe-jackson-phil-600x314.jpg",
+    "fallbackSrc": "/news-images/فيل-جاكسون-يحصل-على-تمثال-امام-صالة-كريبتو-دوت-كوم-ارينا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/es/nba-news-es/2005897/phil-jackson-tendra-su-estatua-frente-al-crypto-com-arena/",
+    "originalStoryUrl": "https://www.eurohoops.net/es/nba-news-es/2005897/phil-jackson-tendra-su-estatua-frente-al-crypto-com-arena/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "تمثال فيل جاكسون أمام صالة كريبتو دوت كوم أرينا في لوس أنجلوس تكريمًا لمسيرته التدريبية مع ليكرز",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
