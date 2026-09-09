@@ -2520,5 +2520,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "نتيجة-مباراة-انجلترا-ضد-باكستان-في-اليوم-الثالث-من-المباراة-الثالثة": {
+    "src": "/news-images/نتيجة-مباراة-انجلترا-ضد-باكستان-في-اليوم-الثالث-من-المباراة-الثالثة.webp",
+    "fallbackSrc": "/news-images/نتيجة-مباراة-انجلترا-ضد-باكستان-في-اليوم-الثالث-من-المباراة-الثالثة.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "صورة توضح لحظة لعب في مباراة الكريكيت بين إنجلترا وباكستان على ملعب إيدجباستون",
+    "caption": "مباراة حاسمة بين إنجلترا وباكستان في اليوم الثالث من المباراة النهائية",
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/cricket/england-v-pakistan/scorecard/c2f248cf-f4cf-5338-8bf2-475060a6a70f",
+    "resolverVersion": 4,
+    "rejectionReason": "publisher resolved (direct-source) but no usable source image found"
   }
 }
