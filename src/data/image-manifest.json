@@ -1964,5 +1964,63 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287198/Hyunjung-Lee-Trail-Blazers-Sign-Camp-Deal",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "هل-تاثر-ارتيا-باسلوب-جناحي-باريس-سان-جيرمان-في-ابتكار-تكتيكة-لارسنال": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/07155340/GettyImages-2293837444-scaled.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/هل-تاثر-ارتيا-باسلوب-جناحي-باريس-سان-جيرمان-في-ابتكار-تكتيكة-لارسنال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7571572/2026/09/09/arsenal-wingers-doubling-up/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7571572/2026/09/09/arsenal-wingers-doubling-up/",
+    "type": "image/jpeg",
+    "alt": "صورة توضيحية لمباراة كرة قدم تظهر تجمع جناحَي فريق على نفس الجانب من الملعب.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ايوب-بوعدي-يحقق-انطلاقة-متميزة-مع-مانشستر-سيتي-في-دوري-الابطال": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/09004400/GettyImages-2293710547-scaled-e1788929189345.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/ايوب-بوعدي-يحقق-انطلاقة-متميزة-مع-مانشستر-سيتي-في-دوري-الابطال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7576301/2026/09/09/ayyoub-bouaddi-manchester-city-champions-league-analysis/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7576301/2026/09/09/ayyoub-bouaddi-manchester-city-champions-league-analysis/",
+    "type": "image/jpeg",
+    "alt": "آيوب بوعدي يمرر الكرة في مرمى بورتو خلال مباراة مانشستر سيتي في دوري الأبطال",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "السينما-والتلفاز-الامريكي-يقتربان-من-اقرار-ايتمانات-ضريبية-فدرالية": {
+    "src": "https://deadline.com/wp-content/uploads/2026/09/adam-schiff-donald-trump.jpg?w=1024",
+    "fallbackSrc": "/news-images/السينما-والتلفاز-الامريكي-يقتربان-من-اقرار-ايتمانات-ضريبية-فدرالية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadline",
+    "sourceUrl": "https://deadline.com/2026/09/federal-film-tv-tax-credits-latest-1237071772/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQTnJONzdOS0JVQ1U3N2hrN2QtWS0wNkctajUzRE5sMzZsTm9aRGswdUFUUjQ5bzZBcHdNTzJCdjktNDdLWEt4Rk9qZDJtS2ZNTV8ycFRWTnZRQnFjQVRabUh1SmJlazdwbVFUTVMyME9ESENkQmNzS3REOVRDVG9HNA?oc=5",
+    "type": "image/webp",
+    "width": 1600,
+    "height": 901,
+    "alt": "مؤتمر صحفي للسيناتور آدم شيف حول إئتمانات الضرائب للسينما والتلفاز",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadline.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "جاكي-يونغ-تقود-امريكا-للفوز-على-ايطاليا-في-كاس-العالم-لكرة-السلة-للسيدات": {
+    "src": "/news-images/جاكي-يونغ-تقود-امريكا-للفوز-على-ايطاليا-في-كاس-العالم-لكرة-السلة-للسيدات.webp",
+    "fallbackSrc": "/news-images/جاكي-يونغ-تقود-امريكا-للفوز-على-ايطاليا-في-كاس-العالم-لكرة-السلة-للسيدات.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "صورة لجاكي يونغ لاعبة منتخب أمريكا خلال مباراة إيطاليا في كأس العالم لكرة السلة للسيدات",
+    "caption": "جاكي يونغ تقود أمريكا للفوز على إيطاليا في كأس العالم",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287195/Jackie-Young-Leads-Team-USA-Win-Over-Italy-In-Womens-FIBA-World-Cup",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
