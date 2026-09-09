@@ -71,7 +71,6 @@
     "discoveryOnly": false,
     "scanLimit": 20
   },
-
   {
     "id": "feedspot-bbc-sport",
     "name": "BBC Sport",
@@ -86,15 +85,15 @@
   },
   {
     "id": "feedspot-sky-sports",
-    "name": "Sky Sports",
+    "name": "Sky Sports All-Rounder",
     "url": "https://www.skysports.com/rss/12040",
     "section": "sports",
-    "trust": 90,
-    "priority": 85,
+    "trust": 93,
+    "priority": 95,
     "enabled": true,
     "autoPublish": true,
     "discoveryOnly": false,
-    "scanLimit": 20
+    "scanLimit": 30
   },
   {
     "id": "feedspot-fox-sports",
@@ -216,7 +215,6 @@
     "discoveryOnly": false,
     "scanLimit": 20
   },
-
   {
     "id": "feedspot-guardian-football",
     "name": "The Guardian Football",
@@ -289,7 +287,6 @@
     "discoveryOnly": false,
     "scanLimit": 20
   },
-
   {
     "id": "feedspot-realgm",
     "name": "RealGM Basketball",
@@ -362,7 +359,6 @@
     "discoveryOnly": false,
     "scanLimit": 20
   },
-
   {
     "id": "google-saudi-radar",
     "name": "Google News Saudi Radar",
@@ -446,5 +442,401 @@
     "autoPublish": false,
     "discoveryOnly": true,
     "scanLimit": 24
+  },
+  {
+    "id": "afc-official",
+    "name": "AFC Official",
+    "url": "https://news.google.com/rss/search?q=site%3Athe-afc.com%20football%20OR%20%22AFC%20Champions%20League%22&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 99,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "fifa-official",
+    "name": "FIFA",
+    "url": "https://news.google.com/rss/search?q=site%3Afifa.com%20football%20OR%20World%20Cup&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 98,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "uefa-official",
+    "name": "UEFA",
+    "url": "https://news.google.com/rss/search?q=site%3Auefa.com%20football%20OR%20Champions%20League%20OR%20Europa%20League&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "premier-league-official",
+    "name": "Premier League",
+    "url": "https://news.google.com/rss/search?q=site%3Apremierleague.com%20Premier%20League&hl=en-GB&gl=GB&ceid=GB:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 99,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "laliga-official",
+    "name": "LaLiga",
+    "url": "https://news.google.com/rss/search?q=site%3Alaliga.com%20LaLiga&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 97,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "bundesliga-official",
+    "name": "Bundesliga",
+    "url": "https://news.google.com/rss/search?q=site%3Abundesliga.com%20Bundesliga&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 96,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "serie-a-official",
+    "name": "Lega Serie A",
+    "url": "https://news.google.com/rss/search?q=site%3Alegaseriea.it%20Serie%20A&hl=en-US&gl=US&ceid=US:en",
+    "section": "football",
+    "trust": 97,
+    "priority": 96,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "alhilal-official",
+    "name": "Al-Hilal Official",
+    "url": "https://news.google.com/rss/search?q=site%3Aalhilal.com%20football%20OR%20%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "ittihad-official",
+    "name": "Al-Ittihad Official",
+    "url": "https://news.google.com/rss/search?q=site%3Aittihadclub.sa%20football%20OR%20%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "alahli-official",
+    "name": "Al-Ahli Saudi Official",
+    "url": "https://news.google.com/rss/search?q=site%3Aalahlifc.sa%20football%20OR%20%D8%A7%D9%84%D8%A3%D9%87%D9%84%D9%8A&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "fabrizio-transfer-radar",
+    "name": "Fabrizio Romano Transfer Radar",
+    "url": "https://news.google.com/rss/search?q=Fabrizio%20Romano%20football%20transfer%20OR%20signing&hl=en-US&gl=US&ceid=US:en",
+    "section": "transfers",
+    "trust": 84,
+    "priority": 70,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 28
+  },
+  {
+    "id": "bbc-transfers",
+    "name": "BBC Sport Transfers",
+    "url": "https://news.google.com/rss/search?q=site%3Abbc.com%2Fsport%20football%20transfer%20OR%20signing&hl=en-GB&gl=GB&ceid=GB:en",
+    "section": "transfers",
+    "trust": 93,
+    "priority": 94,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "sky-transfers",
+    "name": "Sky Sports Transfers",
+    "url": "https://news.google.com/rss/search?q=site%3Askysports.com%20football%20transfer%20OR%20signing&hl=en-GB&gl=GB&ceid=GB:en",
+    "section": "transfers",
+    "trust": 93,
+    "priority": 95,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "official-club-transfer-radar",
+    "name": "Official Club Transfer Radar",
+    "url": "https://news.google.com/rss/search?q=%28site%3Arealmadrid.com%20OR%20site%3Afcbarcelona.com%20OR%20site%3Aliverpoolfc.com%20OR%20site%3Aarsenal.com%20OR%20site%3Amancity.com%20OR%20site%3Amanutd.com%29%20transfer%20OR%20signing&hl=en-US&gl=US&ceid=US:en",
+    "section": "transfers",
+    "trust": 96,
+    "priority": 94,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "mma-fighting",
+    "name": "MMA Fighting",
+    "url": "https://news.google.com/rss/search?q=site%3Ammafighting.com%20UFC%20OR%20MMA&hl=en-US&gl=US&ceid=US:en",
+    "section": "ufc",
+    "trust": 92,
+    "priority": 94,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "mma-junkie",
+    "name": "MMA Junkie",
+    "url": "https://news.google.com/rss/search?q=site%3Ammajunkie.usatoday.com%20UFC%20OR%20MMA&hl=en-US&gl=US&ceid=US:en",
+    "section": "ufc",
+    "trust": 91,
+    "priority": 92,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "sherdog",
+    "name": "Sherdog",
+    "url": "https://news.google.com/rss/search?q=site%3Asherdog.com%20UFC%20OR%20MMA&hl=en-US&gl=US&ceid=US:en",
+    "section": "ufc",
+    "trust": 89,
+    "priority": 88,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "espn-mma",
+    "name": "ESPN MMA",
+    "url": "https://news.google.com/rss/search?q=site%3Aespn.com%2Fmma%20UFC%20OR%20MMA&hl=en-US&gl=US&ceid=US:en",
+    "section": "ufc",
+    "trust": 93,
+    "priority": 95,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "arabicmma-radar",
+    "name": "Arabic MMA",
+    "url": "https://news.google.com/rss/search?q=site%3Aarabicmma.net%20UFC%20OR%20MMA%20OR%20%D9%81%D9%86%D9%88%D9%86%20%D9%82%D8%AA%D8%A7%D9%84%D9%8A%D8%A9&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "ufc",
+    "trust": 84,
+    "priority": 75,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "fightful-wwe-radar",
+    "name": "Fightful Wrestling",
+    "url": "https://news.google.com/rss/search?q=site%3Afightful.com%20WWE%20OR%20Raw%20OR%20SmackDown&hl=en-US&gl=US&ceid=US:en",
+    "section": "wwe",
+    "trust": 90,
+    "priority": 90,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "pwinsider-wwe-radar",
+    "name": "PWInsider Wrestling",
+    "url": "https://news.google.com/rss/search?q=site%3Apwinsider.com%20WWE%20OR%20Raw%20OR%20SmackDown&hl=en-US&gl=US&ceid=US:en",
+    "section": "wwe",
+    "trust": 89,
+    "priority": 88,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "f4w-wwe-radar",
+    "name": "Wrestling Observer / F4W",
+    "url": "https://news.google.com/rss/search?q=site%3Af4wonline.com%20WWE%20OR%20Raw%20OR%20SmackDown&hl=en-US&gl=US&ceid=US:en",
+    "section": "wwe",
+    "trust": 89,
+    "priority": 88,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "arab-wrestling-radar",
+    "name": "Arab Wrestling",
+    "url": "https://news.google.com/rss/search?q=site%3Aarab-wrestling.com%20WWE%20OR%20%D9%85%D8%B5%D8%A7%D8%B1%D8%B9%D8%A9&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "wwe",
+    "trust": 82,
+    "priority": 72,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "online-wrestling-radar",
+    "name": "Online Wrestling Arabic",
+    "url": "https://news.google.com/rss/search?q=site%3Aonline-wrestling.info%20WWE%20OR%20%D9%85%D8%B5%D8%A7%D8%B1%D8%B9%D8%A9&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "wwe",
+    "trust": 80,
+    "priority": 70,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "nba-official",
+    "name": "NBA.com",
+    "url": "https://news.google.com/rss/search?q=site%3Anba.com%20NBA&hl=en-US&gl=US&ceid=US:en",
+    "section": "basketball",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 24
+  },
+  {
+    "id": "espn-nba",
+    "name": "ESPN NBA",
+    "url": "https://news.google.com/rss/search?q=site%3Aespn.com%2Fnba%20NBA&hl=en-US&gl=US&ceid=US:en",
+    "section": "basketball",
+    "trust": 93,
+    "priority": 95,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "fiba-official",
+    "name": "FIBA",
+    "url": "https://news.google.com/rss/search?q=site%3Afiba.basketball%20basketball&hl=en-US&gl=US&ceid=US:en",
+    "section": "basketball",
+    "trust": 98,
+    "priority": 98,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "euroleague-official",
+    "name": "EuroLeague",
+    "url": "https://news.google.com/rss/search?q=site%3Aeuroleaguebasketball.net%20EuroLeague&hl=en-US&gl=US&ceid=US:en",
+    "section": "basketball",
+    "trust": 97,
+    "priority": 97,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "espn-boxing",
+    "name": "ESPN Boxing",
+    "url": "https://news.google.com/rss/search?q=site%3Aespn.com%2Fboxing%20boxing&hl=en-US&gl=US&ceid=US:en",
+    "section": "boxing",
+    "trust": 93,
+    "priority": 95,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "boxingscene",
+    "name": "BoxingScene",
+    "url": "https://news.google.com/rss/search?q=site%3Aboxingscene.com%20boxing&hl=en-US&gl=US&ceid=US:en",
+    "section": "boxing",
+    "trust": 90,
+    "priority": 91,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 22
+  },
+  {
+    "id": "the-ring",
+    "name": "The Ring",
+    "url": "https://news.google.com/rss/search?q=site%3Aringmagazine.com%20boxing&hl=en-US&gl=US&ceid=US:en",
+    "section": "boxing",
+    "trust": 90,
+    "priority": 90,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  },
+  {
+    "id": "arabic-sports-radar",
+    "name": "Arabic Sports MMA/WWE Radar",
+    "url": "https://news.google.com/rss/search?q=%28site%3Awinwin.com%20OR%20site%3Asport360.com%29%20%28UFC%20OR%20MMA%20OR%20WWE%20OR%20%D9%85%D8%B5%D8%A7%D8%B1%D8%B9%D8%A9%29&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "sports",
+    "trust": 84,
+    "priority": 68,
+    "enabled": true,
+    "autoPublish": false,
+    "discoveryOnly": true,
+    "scanLimit": 24
+  },
+  {
+    "id": "alnassr-official",
+    "name": "Al-Nassr Official",
+    "url": "https://news.google.com/rss/search?q=site%3Aalnassr.sa%20football%20OR%20%D8%A7%D9%84%D9%86%D8%B5%D8%B1&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
   }
 ]

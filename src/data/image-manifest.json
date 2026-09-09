@@ -2114,5 +2114,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "rivers-united-يطلب-دعم-مشجعي-اكوا-ايبوم-في-مواجهة-سان-بيدرو": {
+    "src": "https://sportsration.com/wp-content/uploads/2026/09/c97f9826-14f3-4a36-abad-c23815e2bea1.jpeg",
+    "fallbackSrc": "/news-images/rivers-united-يطلب-دعم-مشجعي-اكوا-ايبوم-في-مواجهة-سان-بيدرو.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "SportsRation",
+    "sourceUrl": "https://sportsration.com/caf-champions-league-rivers-united-calls-for-akwa-ibom-fans-support-promises-jersey-giveaway/",
+    "originalStoryUrl": "https://sportsration.com/caf-champions-league-rivers-united-calls-for-akwa-ibom-fans-support-promises-jersey-giveaway/",
+    "type": "image/jpeg",
+    "width": 1080,
+    "height": 676,
+    "alt": "ملعب غودسويل أكبابيو في يويو يملأه مشجعو ريفرز يونيتد قبل مباراة سان بيدرو",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SportsRation.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
