@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fightful-wwe-radar",
+    "name": "Fightful Wrestling",
+    "trust": 90,
+    "priority": 90,
+    "autoPublish": true,
+    "discoveryOnly": false
+  },
+  {
+    "id": "pwinsider-wwe-radar",
+    "name": "PWInsider Wrestling",
+    "trust": 89,
+    "priority": 88,
+    "autoPublish": true,
+    "discoveryOnly": false
+  },
+  {
+    "id": "f4w-wwe-radar",
+    "name": "Wrestling Observer / F4W",
+    "trust": 89,
+    "priority": 88,
+    "autoPublish": true,
+    "discoveryOnly": false
+  }
+]
