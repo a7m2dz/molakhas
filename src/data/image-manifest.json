@@ -2100,5 +2100,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "مكان-استيڤاو-ويليان-في-تشيلسي-فرصته-في-الهجوم-هذا-الموسم": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/229e/live/a4d2eee0-aaac-11f1-9eba-7de947fa7cd1.jpg",
+    "fallbackSrc": "/news-images/مكان-استيڤاو-ويليان-في-تشيلسي-فرصته-في-الهجوم-هذا-الموسم.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/cm2mlk4p4x5o?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/cm2mlk4p4x5o?at_medium=RSS&at_campaign=rss",
+    "type": "image/jpeg",
+    "alt": "إستيڤاو ويليان يهاجم في مباراة تشيلسي ضد أرسنال وهو يقترب من هدفه",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
