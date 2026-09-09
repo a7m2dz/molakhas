@@ -1478,5 +1478,21 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287207/Hawks-Promote-Peter-Dinwiddie",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "هالاند-يسجل-هدفين-ومانشستر-سيتي-ينتصر-على-بورتو-في-دوري-الابطال": {
+    "src": "https://i.guim.co.uk/img/media/b7faec214ad59df768ccfd2d1fa4751f87627218/129_0_2062_1650/master/2062.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=a6ee2fdc112a3b085617088e04338d1c",
+    "fallbackSrc": "/news-images/هالاند-يسجل-هدفين-ومانشستر-سيتي-ينتصر-على-بورتو-في-دوري-الابطال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/08/porto-manchester-city-champions-league-match-report",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/08/porto-manchester-city-champions-league-match-report",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 960,
+    "alt": "إيرلينغ هالاند يحتفل بتسجيل هدفين لمانشستر سيتي في مباراة دوري الأبطال ضد بورتو تحت الأمطار",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
