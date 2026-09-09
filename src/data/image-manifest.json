@@ -1696,5 +1696,51 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "تشريح-باورلي-nba-اليوم-اسهل-بكثير-من-الماضي": {
+    "src": "https://images.eurohoops.net/2020/05/74f39507-charles-barkley-iso-suns-archive-600x314.jpg",
+    "fallbackSrc": "/news-images/تشريح-باورلي-nba-اليوم-اسهل-بكثير-من-الماضي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/tr/nba-news-tr/2005856/charles-barkley-bugun-nba-eskiye-gore-cok-daha-kolay/",
+    "originalStoryUrl": "https://www.eurohoops.net/tr/nba-news-tr/2005856/charles-barkley-bugun-nba-eskiye-gore-cok-daha-kolay/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة تشاريز باورلي يتحدث عن سهولة دوري NBA الحالي مقارنةً بالماضي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "دكستر-البعث-يعلن-موعد-عرض-الموسم-الثاني-في-30-اكتوبر": {
+    "src": "https://www.hollywoodreporter.com/wp-content/uploads/2026/09/DXR_202_MI_0519_0138_RT.jpg?w=1296&",
+    "fallbackSrc": "/news-images/دكستر-البعث-يعلن-موعد-عرض-الموسم-الثاني-في-30-اكتوبر.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Hollywood Reporter",
+    "sourceUrl": "https://www.hollywoodreporter.com/tv/tv-news/dexter-resurrection-season-2-premiere-date-teaser-1236693877/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOMl9Ma1psQ3dfYmZscVBmMjJtcU9VZ3NiUDVGUWx6bW9qQnNRTlprbWdiNnc3WEJyVzlMZUZkV1BaRmJERS1KbGFaRHBvc3FzMThXMjhuYU9GOURMV1NwTUhud2Y5a0dkLXdOS3Y0cFEwTFU4VldEbXFGRXFPOEVDLXcxc2tRMHhXVnNPaTRhNGUtX1J1NERia0k5ZTROWHc0TGNEZU5RbHVwUQ?oc=5",
+    "type": "image/webp",
+    "width": 1296,
+    "height": 730,
+    "alt": "مايكيل سي هال يضع نظارات في مشهد من دكستر: البعث",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "جولي-اليمان-تحطم-الرقم-القياسي-في-التمريرات-الحاسمة-بكاس-العالم": {
+    "src": "/news-images/جولي-اليمان-تحطم-الرقم-القياسي-في-التمريرات-الحاسمة-بكاس-العالم.webp",
+    "fallbackSrc": "/news-images/جولي-اليمان-تحطم-الرقم-القياسي-في-التمريرات-الحاسمة-بكاس-العالم.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "جولي أليمان لاعبة كرة السلة البلجيكية خلال مباراة بلجيكا وأستراليا في كأس العالم",
+    "caption": "جولي أليمان تحتفل بتحقيق الرقم القياسي في التمريرات الحاسمة بكأس العالم",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287200/Julie-Allemand-Breaks-World-Cup-Assist-Record-",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
