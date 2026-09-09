@@ -1602,5 +1602,37 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287194/Sixers-To-Keep-First-Round-Pick-Swap-With-Clippers-In-2029",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "هاري-كين-يطمح-لجايزة-الكرة-الذهبية-بعد-موسم-شخصي-مميز-مع-بايرن": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/08213559/harry-kane-bayern-munich-5-1200x740.webp",
+    "fallbackSrc": "/news-images/هاري-كين-يطمح-لجايزة-الكرة-الذهبية-بعد-موسم-شخصي-مميز-مع-بايرن.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/harry-kane-eyes-ballon-dor-after-by-far-best-personal-season-amid-champions-league-aspirations-with-bayern/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/harry-kane-eyes-ballon-dor-after-by-far-best-personal-season-amid-champions-league-aspirations-with-bayern/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "هاري كين يهداف في مباراة مع بايرن ميونخ وهو يحمل الكرة في ملعب مليء بالجماهير",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "جوردان-هوكينز-ينتقل-الى-ممفيس-غريزليس-في-صفقة-تبادل-رباعية": {
+    "src": "https://images.eurohoops.net/2026/09/914413fe-hawkins-600x314.jpg",
+    "fallbackSrc": "/news-images/جوردان-هوكينز-ينتقل-الى-ممفيس-غريزليس-في-صفقة-تبادل-رباعية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/nba-news/2005888/jordan-hawkins-traded-to-the-grizzlies-in-a-4-player-deal/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/nba-news/2005888/jordan-hawkins-traded-to-the-grizzlies-in-a-4-player-deal/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "جوردان هوكينز خلال مباراة مع نيو أورلينز بيليكانز في دوري كرة السلة الأميركي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
