@@ -1742,5 +1742,37 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287200/Julie-Allemand-Breaks-World-Cup-Assist-Record-",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "النصر-يواجه-ازمة-كبيرة-قبل-مواجهة-ابها-في-دوري-روشن": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/04/03175438/ronaldo-martinez-coman-1200x740.webp",
+    "fallbackSrc": "/news-images/النصر-يواجه-ازمة-كبيرة-قبل-مواجهة-ابها-في-دوري-روشن.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/cristiano-ronaldo-learns-when-kingsley-coman-and-inigo-martinez-could-return-for-al-nassr-with-joao-felix-adding-to-the-headache/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/cristiano-ronaldo-learns-when-kingsley-coman-and-inigo-martinez-could-return-for-al-nassr-with-joao-felix-adding-to-the-headache/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "كريستيانو رونالدو نجم النصر السعودي خلال مباراة في دوري روشن",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "نصرا-النصر-يتكبد-اول-هزيمة-في-دوري-السعودية-وتغيب-جواو-فليكس-عن-مباراته-القادمة": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/05202700/ronaldo-felix-1200x740.webp",
+    "fallbackSrc": "/news-images/نصرا-النصر-يتكبد-اول-هزيمة-في-دوري-السعودية-وتغيب-جواو-فليكس-عن-مباراته-القادمة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/cristiano-ronaldo-faces-fresh-al-nassr-headache-after-first-defeat-as-joao-felix-set-to-miss-next-saudi-pro-league-match-vs-abha/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/cristiano-ronaldo-faces-fresh-al-nassr-headache-after-first-defeat-as-joao-felix-set-to-miss-next-saudi-pro-league-match-vs-abha/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "ريواردو رونالدو يعبّر بعد هزيمة النصر 2-1 أمام الاتحاد في جدة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }

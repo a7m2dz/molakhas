@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T03:49:29.494Z",
+  "generatedAt": "2026-09-09T04:08:23.177Z",
   "date": "2026-09-09",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -8,23 +8,23 @@
     "football": 10,
     "nba": 0,
     "mma": 1,
-    "wwe": 6,
-    "total": 17
+    "wwe": 5,
+    "total": 16
   },
   "events": [
     {
-      "id": "wwe-20260908-0",
-      "sport": "wwe",
-      "sportLabel": "WWE",
-      "title": "NXT",
-      "subtitle": "WWE Performance Center, Orlando, Florida",
-      "start": "2026-09-09T00:00:00.000Z",
-      "state": "live",
+      "id": "football-5970132",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Kholood ضد Al Shabab",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-09T15:55:00.000Z",
+      "state": "upcoming",
       "score": "",
-      "importance": 90,
-      "source": "WWE.com",
-      "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
+      "importance": 99,
+      "source": "FotMob",
+      "url": "/matches/al-kholood-al-shabab-2026-09-09-5970132/",
+      "internal": true,
       "scope": "today"
     },
     {
@@ -43,21 +43,6 @@
       "scope": "upcoming"
     },
     {
-      "id": "football-5970132",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al Kholood ضد Al Shabab",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-09T15:55:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 95,
-      "source": "FotMob",
-      "url": "/matches/al-kholood-al-shabab-2026-09-09-5970132/",
-      "internal": true,
-      "scope": "today"
-    },
-    {
       "id": "football-5970134",
       "sport": "football",
       "sportLabel": "كرة القدم",
@@ -73,7 +58,7 @@
       "scope": "today"
     },
     {
-      "id": "wwe-20260911-3",
+      "id": "wwe-20260911-2",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "Friday Night SmackDown",
@@ -88,7 +73,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260911-4",
+      "id": "wwe-20260911-3",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "AAA TripleMania 34 Night 1",
@@ -103,7 +88,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260913-5",
+      "id": "wwe-20260913-4",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "AAA TripleMania 34 Night 2",
@@ -193,7 +178,7 @@
       "scope": "today"
     },
     {
-      "id": "wwe-20260909-1",
+      "id": "wwe-20260909-0",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "WWE Evolve",
@@ -208,7 +193,7 @@
       "scope": "upcoming"
     },
     {
-      "id": "wwe-20260910-2",
+      "id": "wwe-20260910-1",
       "sport": "wwe",
       "sportLabel": "WWE",
       "title": "WWE Main Event",
