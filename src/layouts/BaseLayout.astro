@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/enhancements.css';
 import LurvuePromo from '../components/LurvuePromo.astro';
+import AdsterraAd from '../components/AdsterraAd.astro';
 import { sections } from '../data/sections';
 
 const {
@@ -150,6 +151,10 @@ const schema = {
         <a class="store-cta" href={storeUrl.toString()} target="_blank" rel="sponsored nofollow noopener"><span>▣</span> متجر لورفيو</a>
       </div>
     </header>
+    <div class="shell">
+      <AdsterraAd variant="leaderboard" />
+      <AdsterraAd variant="mobile" />
+    </div>
     <main id="content"><slot /></main>
     <footer class="site-footer">
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
