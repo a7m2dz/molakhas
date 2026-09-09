@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T23:46:35.973Z",
+  "generatedAt": "2026-09-09T00:05:05.970Z",
   "date": "2026-09-09",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -24,6 +24,21 @@
       "importance": 95,
       "source": "ESPN fallback",
       "url": "https://www.espn.com/mma/fightcenter/_/id/600060736",
+      "internal": false,
+      "scope": "today"
+    },
+    {
+      "id": "wwe-20260908-0",
+      "sport": "wwe",
+      "sportLabel": "WWE",
+      "title": "NXT",
+      "subtitle": "WWE Performance Center, Orlando, Florida",
+      "start": "2026-09-09T00:00:00.000Z",
+      "state": "live",
+      "score": "",
+      "importance": 90,
+      "source": "WWE.com",
+      "url": "https://www.wwe.com/article/wwe-upcoming-events",
       "internal": false,
       "scope": "today"
     },
@@ -55,21 +70,6 @@
       "source": "FotMob",
       "url": "/matches/al-nassr-fc-abha-2026-09-09-5970134/",
       "internal": true,
-      "scope": "today"
-    },
-    {
-      "id": "wwe-20260908-0",
-      "sport": "wwe",
-      "sportLabel": "WWE",
-      "title": "NXT",
-      "subtitle": "WWE Performance Center, Orlando, Florida",
-      "start": "2026-09-09T00:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 90,
-      "source": "WWE.com",
-      "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
       "scope": "today"
     },
     {
