@@ -1448,5 +1448,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "مورينيو-يطالب-بالاحترام-لفينيسيوس-جونيور-بعد-صافرات-الاستهجان": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/08194606/jose-mourinho-vinicius-junior-real-madrid-1200x740.webp",
+    "fallbackSrc": "/news-images/مورينيو-يطالب-بالاحترام-لفينيسيوس-جونيور-بعد-صافرات-الاستهجان.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/real-madrid-boss-jose-mourinho-asks-for-respect-for-vinicius-jr-amid-form-struggles-in-ucl-debut/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/real-madrid-boss-jose-mourinho-asks-for-respect-for-vinicius-jr-amid-form-struggles-in-ucl-debut/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "فينيسيوس جونيور خلال مباراة ريال مدريد وإنتر ميلان في دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "اتلانتا-هوكس-يرقي-بيتر-دينويدي-لمنصب-نايب-الرييس-التنفيذي": {
+    "src": "/news-images/اتلانتا-هوكس-يرقي-بيتر-دينويدي-لمنصب-نايب-الرييس-التنفيذي.webp",
+    "fallbackSrc": "/news-images/اتلانتا-هوكس-يرقي-بيتر-دينويدي-لمنصب-نايب-الرييس-التنفيذي.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "بيتر دينويدي نائب الرئيس التنفيذي الجديد للعمليات الكروية في أتلانتا هوكس",
+    "caption": "بيتر دينويدي يتولى منصبًا جديدًا في إدارة أتلانتا هوكس",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287207/Hawks-Promote-Peter-Dinwiddie",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
