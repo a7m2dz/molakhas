@@ -2534,5 +2534,19 @@
     "sourceUrl": "https://www.skysports.com/cricket/england-v-pakistan/scorecard/c2f248cf-f4cf-5338-8bf2-475060a6a70f",
     "resolverVersion": 4,
     "rejectionReason": "publisher resolved (direct-source) but no usable source image found"
+  },
+  "كاريك-بينجامين-سيسكو-قريب-من-العودة-للمشاركة-الاساسية-مع-مانشستر-يونايتد": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/09095609/GettyImages-2293926133-e1788962203976.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/كاريك-بينجامين-سيسكو-قريب-من-العودة-للمشاركة-الاساسية-مع-مانشستر-يونايتد.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7578164/2026/09/09/sesko-shaw-manchester-united-team-news/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7578164/2026/09/09/sesko-shaw-manchester-united-team-news/",
+    "type": "image/jpeg",
+    "alt": "لاعب مانشستر يونايتد بينجامين سيسكو يحتفل بهدف خلال مباراة ضد إيفرتون في ملعب جوديسون بارك",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }

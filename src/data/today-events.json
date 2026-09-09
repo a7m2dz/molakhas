@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T14:10:00.441Z",
+  "generatedAt": "2026-09-09T14:27:17.660Z",
   "date": "2026-09-09",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -7,9 +7,9 @@
   "counts": {
     "football": 10,
     "nba": 0,
-    "mma": 2,
+    "mma": 1,
     "wwe": 5,
-    "total": 17
+    "total": 16
   },
   "events": [
     {
@@ -41,6 +41,21 @@
       "url": "/matches/al-nassr-fc-abha-2026-09-09-5970134/",
       "internal": true,
       "scope": "today"
+    },
+    {
+      "id": "ufc-official-2026-09-13-0",
+      "sport": "mma",
+      "sportLabel": "MMA / UFC",
+      "title": "UFC: Silva vs Delgado",
+      "subtitle": "Desert Diamond Arena",
+      "start": "2026-09-12T21:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 97,
+      "source": "UFC.com",
+      "url": "https://www.ufc.com/events",
+      "internal": false,
+      "scope": "upcoming"
     },
     {
       "id": "wwe-20260911-2",
@@ -204,36 +219,6 @@
       "importance": 74,
       "source": "WWE.com",
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060772",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Noche UFC",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-12T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060772/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060737",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-15T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060737/league/ufc",
       "internal": false,
       "scope": "upcoming"
     },
