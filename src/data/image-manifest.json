@@ -2426,5 +2426,51 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ميسون-ارسنال-لم-يتعاقد-مع-لاعب-مميز-للفوز-بدوري-ابطال-اوروبا": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-merson-says-vinicius-jr_7346081.jpg?20260909131959",
+    "fallbackSrc": "/news-images/ميسون-ارسنال-لم-يتعاقد-مع-لاعب-مميز-للفوز-بدوري-ابطال-اوروبا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/news/12040/13583541/arsenal-didnt-make-x-factor-signing-like-vinicius-junior-or-julian-alvarez-to-win-champions-league-says-paul-merson",
+    "originalStoryUrl": "https://www.skysports.com/football/news/12040/13583541/arsenal-didnt-make-x-factor-signing-like-vinicius-junior-or-julian-alvarez-to-win-champions-league-says-paul-merson",
+    "type": "image/jpeg",
+    "alt": "لاعبو أرسنال في تدريبات دوري الأبطال مع التركيز على خط الهجوم والقدرات التهديفية",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "اولمبياكوس-يوقع-اتفاقية-نقل-موقتة-الى-ملعب-ايك-سونيل-ارينا-لعام-2026": {
+    "src": "https://images.eurohoops.net/2026/07/65aa5360-aek-sunel-arena-600x314.jpg",
+    "fallbackSrc": "/news-images/اولمبياكوس-يوقع-اتفاقية-نقل-موقتة-الى-ملعب-ايك-سونيل-ارينا-لعام-2026.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/euroleague/2006070/olympiacos-moves-to-sunel-arena-aek-euroleague/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/euroleague/2006070/olympiacos-moves-to-sunel-arena-aek-euroleague/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة تظهر ملعب سونيل أرينا الحديث الذي سيستضيف مباريات أولمبياكوس خلال فترة تجديد ملعبه التقليدي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "الدوري-الاوروبي-نابولي-يواجه-ارسنال-الليلة-بغياب-ميتشومناي-وانغيسا": {
+    "src": "https://icdn.football-italia.net/wp-content/uploads/2026/08/Rasmus-Hojlund-Trevoh-Chalobah.jpg",
+    "fallbackSrc": "/news-images/الدوري-الاوروبي-نابولي-يواجه-ارسنال-الليلة-بغياب-ميتشومناي-وانغيسا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Football Italia",
+    "sourceUrl": "https://football-italia.net/napoli-vs-arsenal-probable-line-ups-watch-tv/",
+    "originalStoryUrl": "https://football-italia.net/napoli-vs-arsenal-probable-line-ups-watch-tv/",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 852,
+    "alt": "لاعبو نابولي وأرسنال في استعدادات المباراة ضمن منافسات دوري أبطال أوروبا على ملعب سان باولو",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Football Italia.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
