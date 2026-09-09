@@ -2038,5 +2038,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "خمسة-فرق-في-الدوري-الامريكي-اوقفت-حركاتها-غير-المبررة-خلال-الانتقالات-الصيفية": {
+    "src": "https://images.eurohoops.net/2026/02/33b2926a-jaylen-brown-shouts-boston-celtics-600x314.jpg",
+    "fallbackSrc": "/news-images/خمسة-فرق-في-الدوري-الامريكي-اوقفت-حركاتها-غير-المبررة-خلال-الانتقالات-الصيفية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/tr/nba-news-tr/2005914/nbade-bu-yaz-mantiksiz-hareket-eden-5-takim/",
+    "originalStoryUrl": "https://www.eurohoops.net/tr/nba-news-tr/2005914/nbade-bu-yaz-mantiksiz-hareket-eden-5-takim/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة جماعية لفريق كرة سلة أثناء مباراة في الدوري الأمريكي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
