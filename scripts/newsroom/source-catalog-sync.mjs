@@ -3,19 +3,23 @@ import fs from 'node:fs/promises';
 const catalogs = [
   {
     base: new URL('../../src/data/sources.json', import.meta.url),
-    extra: new URL('../../src/data/sources-extra.json', import.meta.url),
+    extras: [
+      new URL('../../src/data/sources-extra.json', import.meta.url),
+      new URL('../../src/data/sources-extra-saudi.json', import.meta.url)
+    ],
     label: 'sports'
   },
   {
     base: new URL('../../src/data/entertainment-sources.json', import.meta.url),
-    extra: new URL('../../src/data/entertainment-sources-extra.json', import.meta.url),
+    extras: [new URL('../../src/data/entertainment-sources-extra.json', import.meta.url)],
     label: 'entertainment'
   }
 ];
 
-async function syncCatalog({ base, extra, label }) {
+async function syncCatalog({ base, extras, label }) {
   const baseItems = JSON.parse(await fs.readFile(base, 'utf8'));
-  const extraItems = JSON.parse(await fs.readFile(extra, 'utf8'));
+  const extraGroups = await Promise.all(extras.map(async (file) => JSON.parse(await fs.readFile(file, 'utf8'))));
+  const extraItems = extraGroups.flat();
   const merged = new Map();
 
   for (const item of baseItems) merged.set(item.id, item);
