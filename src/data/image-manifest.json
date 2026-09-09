@@ -2346,5 +2346,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — nba.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "شيفتشينكو-تتخلى-عن-لقب-ufc-للوزن-الذبلي-بعد-اصابة-تبعثر-خطط-البطولة": {
+    "src": "https://images.deadspin.com/tr:w-1200,h-675,fo-auto/1788954866420",
+    "fallbackSrc": "/news-images/شيفتشينكو-تتخلى-عن-لقب-ufc-للوزن-الذبلي-بعد-اصابة-تبعثر-خطط-البطولة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Deadspin",
+    "sourceUrl": "https://deadspin.com/valentina-shevchenkos-ufc-title-exit-exposes-a-major-double-standard/",
+    "originalStoryUrl": "https://deadspin.com/valentina-shevchenkos-ufc-title-exit-exposes-a-major-double-standard/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "صورة لفالنتينا شيفتشينكو أثناء تواجدها في حلبة UFC ترتدي حزام البطولة في وزن الذباب، تظهر فيها وهي تحتفل بانتصارها",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Deadspin.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "خبير-ام-اس-بي-يشجع-بن-سيمونز-على-تقليد-درايموند-غرين-بدور-جديد-في-سكرامنتو": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Ben-Simmons-9.jpg",
+    "fallbackSrc": "/news-images/خبير-ام-اس-بي-يشجع-بن-سيمونز-على-تقليد-درايموند-غرين-بدور-جديد-في-سكرامنتو.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-legends-basketball-news-ben-simmons-urged-to-become-draymond-green-without-one-key-skill-after-his-return-to-nba/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-legends-basketball-news-ben-simmons-urged-to-become-draymond-green-without-one-key-skill-after-his-return-to-nba/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "لاعب كرة سلة يرتدي قميص سكرامنتو كينغز يقف في منتصف الملعب أثناء مباراة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
