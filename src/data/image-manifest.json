@@ -2144,5 +2144,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "هالاند-يضيف-هدفين-في-فوز-مانشستر-سيتي-على-بورتو-ويعد-الافضل-تاريخيا": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-erling-haaland-man-city_7345823.jpg?20260909102520",
+    "fallbackSrc": "/news-images/هالاند-يضيف-هدفين-في-فوز-مانشستر-سيتي-على-بورتو-ويعد-الافضل-تاريخيا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/news/12040/13583453/erling-haaland-jamie-carragher-believes-manchester-city-striker-will-be-greatest-goalscorer-of-all-time",
+    "originalStoryUrl": "https://www.skysports.com/football/news/12040/13583453/erling-haaland-jamie-carragher-believes-manchester-city-striker-will-be-greatest-goalscorer-of-all-time",
+    "type": "image/jpeg",
+    "alt": "إرلينغ هالاند يرفع يده احتفالاً بعد تسجيل هدفين في مباراة مانشستر سيتي ضد بورتو بدوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
