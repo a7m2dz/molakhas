@@ -2130,5 +2130,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — SportsRation.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ساوثامبتون-يزيح-سوانزي-عن-صدارة-دوري-البطولة-الانجليزي-بثلاثية": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-leo-scienza-southampton_7345513.jpg?20260908220249",
+    "fallbackSrc": "/news-images/ساوثامبتون-يزيح-سوانزي-عن-صدارة-دوري-البطولة-الانجليزي-بثلاثية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/southampton-vs-swansea-city/report/560563",
+    "originalStoryUrl": "https://www.skysports.com/football/southampton-vs-swansea-city/report/560563",
+    "type": "image/jpeg",
+    "alt": "لاعب ساوثامبتون كايل لارين يحتفل بهدفه في مباراة ضد سوانزي بدوري البطولة الإنجليزي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
