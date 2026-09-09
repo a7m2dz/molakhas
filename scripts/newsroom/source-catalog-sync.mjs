@@ -5,7 +5,8 @@ const catalogs = [
     base: new URL('../../src/data/sources.json', import.meta.url),
     extras: [
       new URL('../../src/data/sources-extra.json', import.meta.url),
-      new URL('../../src/data/sources-extra-saudi.json', import.meta.url)
+      new URL('../../src/data/sources-extra-saudi.json', import.meta.url),
+      new URL('../../src/data/sources-extra-overrides.json', import.meta.url)
     ],
     label: 'sports'
   },
