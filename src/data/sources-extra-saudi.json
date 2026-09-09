@@ -1,0 +1,14 @@
+[
+  {
+    "id": "alnassr-official",
+    "name": "Al-Nassr Official",
+    "url": "https://news.google.com/rss/search?q=site%3Aalnassr.sa%20football%20OR%20%D8%A7%D9%84%D9%86%D8%B5%D8%B1&hl=ar&gl=SA&ceid=SA:ar",
+    "section": "saudi",
+    "trust": 98,
+    "priority": 100,
+    "enabled": true,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 20
+  }
+]
