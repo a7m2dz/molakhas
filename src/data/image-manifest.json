@@ -2592,5 +2592,33 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "نيو-اورلينز-بيليكاس-تتخلى-عن-لاعب-الجناح-تاج-جيبسون": {
+    "src": "/news-images/نيو-اورلينز-بيليكاس-تتخلى-عن-لاعب-الجناح-تاج-جيبسون.webp",
+    "fallbackSrc": "/news-images/نيو-اورلينز-بيليكاس-تتخلى-عن-لاعب-الجناح-تاج-جيبسون.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "لاعب كرة سلة أمريكي في ملعب خلال مباراة، يرتدي قميصًا أبيض وأحمر، ويراقب المتابعة الدفاعية.",
+    "caption": "لاعب الجناح تاج جيبسون خلال إحدى مبارياته مع فريقه السابق.",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287215/Taj-Gibson-Waived-By-Pelicans",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
+  },
+  "دوري-ابطال-اوروبا-2026-27-انطلاق-مباريات-الجولة-الاولى-اليوم": {
+    "src": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/MwsLRUvjZkbG_BHYDZYQzGV1Z_1440x968.jpg",
+    "fallbackSrc": "/news-images/دوري-ابطال-اوروبا-2026-27-انطلاق-مباريات-الجولة-الاولى-اليوم.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/live-blogs/champions-league-scores-live-updates-results/MwsLRUvjZkbG/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/live-blogs/champions-league-scores-live-updates-results/MwsLRUvjZkbG/",
+    "type": "image/jpeg",
+    "alt": "مباراة كرة قدم من دوري أبطال أوروبا تجمع بين لاعبين من فريقين مختلفين في ملعب مزدحم بجماهير المدرجات",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
