@@ -2054,5 +2054,51 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "تايلر-هيرو-يواجه-نزاع-حضانة-حاد-بعد-انفصاله-عن-كاتيا-اليز-هنري": {
+    "src": "https://images.eurohoops.net/2025/04/01905e8d-tyler-herro-miami-heat-600x314.jpg",
+    "fallbackSrc": "/news-images/تايلر-هيرو-يواجه-نزاع-حضانة-حاد-بعد-انفصاله-عن-كاتيا-اليز-هنري.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/nba-news/2005923/tyler-herro-split-child-custody-milwaukee-bucks-nba/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/nba-news/2005923/tyler-herro-split-child-custody-milwaukee-bucks-nba/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة تايلر هيرو يرتدي قميص ميلووكي باكس وهو يبتسم للكاميرا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "داني-اولمو-الفوز-بكاس-العالم-يغير-حياتك-ويمنح-برشلونة-ثقة-اضافية": {
+    "src": "https://i.guim.co.uk/img/media/2054650759c79da62a63530e7007d526220244f0/297_0_2970_2376/master/2970.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=53e721da4e13abf468ce63c35a4f0e63",
+    "fallbackSrc": "/news-images/داني-اولمو-الفوز-بكاس-العالم-يغير-حياتك-ويمنح-برشلونة-ثقة-اضافية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Guardian Football",
+    "sourceUrl": "https://www.theguardian.com/football/2026/sep/09/dani-olmo-spain-world-cup-barcelona-champions-league",
+    "originalStoryUrl": "https://www.theguardian.com/football/2026/sep/09/dani-olmo-spain-world-cup-barcelona-champions-league",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 960,
+    "alt": "داني أولمو لاعب برشلونة ومنتخب إسبانيا يتحدث في مؤتمر صحفي عن الفوز بكأس العالم",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "تقييم-باريس-سان-جيرمان-بين-اعظم-سلالات-كرة-القدم-الاوروبية": {
+    "src": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/8bc9/live/e4cef900-a960-11f1-b109-879e35c24276.jpg",
+    "fallbackSrc": "/news-images/تقييم-باريس-سان-جيرمان-بين-اعظم-سلالات-كرة-القدم-الاوروبية.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BBC Sport",
+    "sourceUrl": "https://www.bbc.co.uk/sport/football/articles/cy9z0xz8ql1o?at_medium=RSS&at_campaign=rss",
+    "originalStoryUrl": "https://www.bbc.co.uk/sport/football/articles/cy9z0xz8ql1o?at_medium=RSS&at_campaign=rss",
+    "type": "image/jpeg",
+    "alt": "لاعبو باريس سان جيرمان يرفعون الكأس بعد فوزهم في نهائي دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BBC Sport.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
