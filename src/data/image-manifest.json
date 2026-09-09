@@ -2488,5 +2488,37 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "جيك-بول-يخطط-لضم-مايكل-فينوم-بيج-بعد-اعلان-دانا-وايت-عن-قطع-من-روزنامة-ufc": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Dana-White-Jake-Paul-Michael-Venom-Page.jpg",
+    "fallbackSrc": "/news-images/جيك-بول-يخطط-لضم-مايكل-فينوم-بيج-بعد-اعلان-دانا-وايت-عن-قطع-من-روزنامة-ufc.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/ufc-mma-news-jake-paul-plans-to-sign-michael-venom-page-after-dana-white-confirms-ufc-roster-cut/",
+    "originalStoryUrl": "https://www.essentiallysports.com/ufc-mma-news-jake-paul-plans-to-sign-michael-venom-page-after-dana-white-confirms-ufc-roster-cut/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 800,
+    "alt": "جيك بول يوجه رسالة إلى مايكل فينوم بيج عبر وسائل التواصل الاجتماعي ضمن جهوده لاستقطابه منظمة المقاتلة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "نجم-الـان-بي-ايه-السابق-يتعرض-للانتقاد-بعد-كشفه-اسماء-زملاء-سابقين-في-قضية-احتيال": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-1-154.jpg",
+    "fallbackSrc": "/news-images/نجم-الـان-بي-ايه-السابق-يتعرض-للانتقاد-بعد-كشفه-اسماء-زملاء-سابقين-في-قضية-احتيال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-legends-basketball-news-bad-look-nba-champion-calls-out-glen-davis-for-exposing-gilbert-arenas-tony-allen-more-after-seventeen-month-jail-time-jason-williams/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-legends-basketball-news-bad-look-nba-champion-calls-out-glen-davis-for-exposing-gilbert-arenas-tony-allen-more-after-seventeen-month-jail-time-jason-williams/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "صورة للاعب كرة السلة الأمريكي جلين ديفيس المعروف باسم \"بيغ بابي\" أثناء مسيرته الاحترافية في الـإن بي إيه",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
