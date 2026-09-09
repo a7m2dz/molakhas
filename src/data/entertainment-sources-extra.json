@@ -1,0 +1,67 @@
+[
+  {
+    "id": "apple-tv-plus-official",
+    "name": "Apple TV+ Press",
+    "query": "site:apple.com/tv-pr (series OR season OR film OR movie OR Apple TV+)",
+    "hl": "en-US",
+    "gl": "US",
+    "ceid": "US:en",
+    "trust": 97,
+    "priority": 99,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 18
+  },
+  {
+    "id": "prime-video-official",
+    "name": "Prime Video",
+    "query": "site:aboutamazon.com/news/entertainment (Prime Video OR movie OR series OR season)",
+    "hl": "en-US",
+    "gl": "US",
+    "ceid": "US:en",
+    "trust": 96,
+    "priority": 98,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 18
+  },
+  {
+    "id": "max-hbo-official",
+    "name": "HBO / Max",
+    "query": "(site:press.wbd.com OR site:hbomax.com) (HBO OR Max) (series OR season OR film OR movie)",
+    "hl": "en-US",
+    "gl": "US",
+    "ceid": "US:en",
+    "trust": 96,
+    "priority": 98,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 18
+  },
+  {
+    "id": "paramount-plus-official",
+    "name": "Paramount+",
+    "query": "site:paramountpressexpress.com Paramount+ OR series OR season OR movie",
+    "hl": "en-US",
+    "gl": "US",
+    "ceid": "US:en",
+    "trust": 96,
+    "priority": 97,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 18
+  },
+  {
+    "id": "peacock-official",
+    "name": "Peacock",
+    "query": "site:nbcuniversal.com OR site:peacocktv.com (Peacock series OR season OR movie)",
+    "hl": "en-US",
+    "gl": "US",
+    "ceid": "US:en",
+    "trust": 95,
+    "priority": 96,
+    "autoPublish": true,
+    "discoveryOnly": false,
+    "scanLimit": 18
+  }
+]
