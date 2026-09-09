@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LurvuePromo from '../../components/LurvuePromo.astro';
+import AdsterraAd from '../../components/AdsterraAd.astro';
 import { sectionMap } from '../../data/sections';
 import stories from '../../data/stories.json';
 import imageManifest from '../../data/image-manifest.json';
@@ -105,7 +106,12 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
       </a>)}</div>
     </section>}
 
-    <div class="article-body">{story.body.map((paragraph, index) => <>{index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}<p>{paragraph}</p></>)}</div>
+    <div class="article-body">{story.body.map((paragraph, index) => <>
+      {index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}
+      <p>{paragraph}</p>
+      {index === 1 && <AdsterraAd variant="native" />}
+      {index === 4 && <AdsterraAd variant="rectangle" />}
+    </>)}</div>
     <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
 
     <LurvuePromo section={story.section} position="article-end" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />
