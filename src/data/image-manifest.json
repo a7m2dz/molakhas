@@ -2188,5 +2188,33 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "جارد-بوين-يحرز-هدفين-ويقود-وست-هام-للصدارة-بعد-فوز-3-2-على-بولتون": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-jarrod-bowen-west-ham_7345528.jpg?20260908221801",
+    "fallbackSrc": "/news-images/جارد-بوين-يحرز-هدفين-ويقود-وست-هام-للصدارة-بعد-فوز-3-2-على-بولتون.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/bolton-wanderers-vs-west-ham-united/report/560559",
+    "originalStoryUrl": "https://www.skysports.com/football/bolton-wanderers-vs-west-ham-united/report/560559",
+    "type": "image/jpeg",
+    "alt": "جارد بوين يحتفل بتسجيل هدفه الثاني في مباراة وست هام يونايتد ضد بولتون واندررز على ملعب Toughsheet Community Stadium",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "سولهايم-كاب-2026-جدول-البطولة-وازواج-اللعب-وفرق-اوروبا-وامريكا-في-هولندا": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-leona-maguire-golf_7345184.jpg?20260908152942",
+    "fallbackSrc": "/news-images/سولهايم-كاب-2026-جدول-البطولة-وازواج-اللعب-وفرق-اوروبا-وامريكا-في-هولندا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/golf/news/12040/13583025/solheim-cup-2026-latest-scores-tee-times-pairings-schedule-leaderboard-as-europe-host-team-usa-at-bernardus-golf",
+    "originalStoryUrl": "https://www.skysports.com/golf/news/12040/13583025/solheim-cup-2026-latest-scores-tee-times-pairings-schedule-leaderboard-as-europe-host-team-usa-at-bernardus-golf",
+    "type": "image/jpeg",
+    "alt": "صورة للبطولة العالمية للغولف للسيدات بين فريق أوروبا وفريق أمريكا في هولندا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
