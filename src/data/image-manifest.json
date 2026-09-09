@@ -2472,5 +2472,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Football Italia.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "برشلونة-يواجه-فيينورد-في-افتتاح-دوري-ابطال-اوروبا-2026": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/08/23151911/rodri-fc-barcelona-1200x740.webp",
+    "fallbackSrc": "/news-images/برشلونة-يواجه-فيينورد-في-افتتاح-دوري-ابطال-اوروبا-2026.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/watch-on-us-tv/how-to-watch-barcelona-vs-feyenoord-in-the-usa-live-stream-and-tv-for-champions-league-2026/",
+    "originalStoryUrl": "https://worldsoccertalk.com/watch-on-us-tv/how-to-watch-barcelona-vs-feyenoord-in-the-usa-live-stream-and-tv-for-champions-league-2026/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "لاعبو برشلونة أثناء تدريبهم في ملعب كامب نو استعدادًا لمباراة فيينورد في دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
