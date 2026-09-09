@@ -2548,5 +2548,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "توقعات-sky-sports-لموسم-nfl-2026-من-سيفوز-بدوري-الممتاز": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-joe-burrow-cincinnati-bengals_7346128.jpg?20260909142321",
+    "fallbackSrc": "/news-images/توقعات-sky-sports-لموسم-nfl-2026-من-سيفوز-بدوري-الممتاز.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/nfl/news/12040/13583402/nfl-2026-predictions-super-bowl-mvp-offensive-and-defensive-player-of-the-year-best-offseason-addition-and-more",
+    "originalStoryUrl": "https://www.skysports.com/nfl/news/12040/13583402/nfl-2026-predictions-super-bowl-mvp-offensive-and-defensive-player-of-the-year-best-offseason-addition-and-more",
+    "type": "image/jpeg",
+    "alt": "لاعبو NFL في مباراة ودية، مع تركيز على لاعب يرتدي قميص فريق شيكاغو بيرز أثناء التدريبات الجماعية",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ستافروبولوس-اذا-لم-تحدث-الشراكة-مع-ان-بي-اي-فلدى-يورو-ليغ-افكار-واضحة-للمستقبل": {
+    "src": "https://images.eurohoops.net/2025/09/1bac46a7-christos-stavropoulos-milan-talks-600x314.jpg",
+    "fallbackSrc": "/news-images/ستافروبولوس-اذا-لم-تحدث-الشراكة-مع-ان-بي-اي-فلدى-يورو-ليغ-افكار-واضحة-للمستقبل.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/el/euroleague-el-2/2006103/stavropoulos-gia-nba-europe-an-den-iparxi-sinergasia-i-evroligka-echi-xekathares-idees-gia-to-mellon/",
+    "originalStoryUrl": "https://www.eurohoops.net/el/euroleague-el-2/2006103/stavropoulos-gia-nba-europe-an-den-iparxi-sinergasia-i-evroligka-echi-xekathares-idees-gia-to-mellon/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة تعبيرية تظهر لاعبين في مباراة لكرة السلة ضمن منافسات يورو ليغ، تبرز جو الحماس والمنافسة",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
