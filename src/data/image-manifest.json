@@ -2378,5 +2378,53 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "بوبى-جرين-ينهار-بالبكاء-بعد-تشخيص-زوجته-السابقة-بسرطان-الدم": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/UFC-Octagon-1-1.jpg",
+    "fallbackSrc": "/news-images/بوبى-جرين-ينهار-بالبكاء-بعد-تشخيص-زوجته-السابقة-بسرطان-الدم.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/ufc-mma-news-ufc-star-breaks-down-in-tears-as-baby-mama-fights-for-her-life-after-leukemia-diagnosis/",
+    "originalStoryUrl": "https://www.essentiallysports.com/ufc-mma-news-ufc-star-breaks-down-in-tears-as-baby-mama-fights-for-her-life-after-leukemia-diagnosis/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 800,
+    "alt": "صورة تظهر المقاتل الأمريكي بوبى جرين يبكي في الجيم بعد سماع خبر تشخيص زوجته السابقة بسرطان الدم، بينما يدعمه زميله أرنولد باربوزا.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "دراجموند-غرين-وماجيك-جونسون-يبهران-من-عودة-فرانسيس-تيافوي-المذهلة-في-us-open": {
+    "src": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-434.jpg",
+    "fallbackSrc": "/news-images/دراجموند-غرين-وماجيك-جونسون-يبهران-من-عودة-فرانسيس-تيافوي-المذهلة-في-us-open.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "EssentiallySports",
+    "sourceUrl": "https://www.essentiallysports.com/nba-active-basketball-news-tennis-news-draymond-green-magic-johnson-and-nba-world-stunned-by-frances-tiafoes-us-open-quarterfinal-comeback/",
+    "originalStoryUrl": "https://www.essentiallysports.com/nba-active-basketball-news-tennis-news-draymond-green-magic-johnson-and-nba-world-stunned-by-frances-tiafoes-us-open-quarterfinal-comeback/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "فرانسيس تيافوي يحتفل بفوزه التاريخي في US Open بعد عودته المذهلة من تخلفه بمجموعتين نظيفتين",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — EssentiallySports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "تاخير-جديد-في-صفقة-كاوهي-ليونارد-مع-تورونتو-رابتورز-بسبب-هيكلية-فريق-لوس-انجلوس-كليبرز": {
+    "src": "https://imgcdn.basketballnews.com/Kawhi-Leonard-1.jpg",
+    "fallbackSrc": "/news-images/تاخير-جديد-في-صفقة-كاوهي-ليونارد-مع-تورونتو-رابتورز-بسبب-هيكلية-فريق-لوس-انجلوس-كليبرز.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-kawhi-leonard-trade-gets-delayed-again-as-los-angeles-clippers-take-another-step/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-kawhi-leonard-trade-gets-delayed-again-as-los-angeles-clippers-take-another-step/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "صورة توضيحية للاعب كاوهي ليونارد أثناء مباراة له مع فريق لوس أنجلوس كليبرز في دوري كرة السلة الأمريكي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
