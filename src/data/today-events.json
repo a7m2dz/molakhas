@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T00:05:05.970Z",
+  "generatedAt": "2026-09-09T00:16:57.387Z",
   "date": "2026-09-09",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -7,26 +7,11 @@
   "counts": {
     "football": 10,
     "nba": 0,
-    "mma": 3,
+    "mma": 1,
     "wwe": 6,
-    "total": 19
+    "total": 17
   },
   "events": [
-    {
-      "id": "ufc-600060736",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-08T23:00:00.000Z",
-      "state": "live",
-      "score": "",
-      "importance": 95,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060736",
-      "internal": false,
-      "scope": "today"
-    },
     {
       "id": "wwe-20260908-0",
       "sport": "wwe",
@@ -41,6 +26,21 @@
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
       "internal": false,
       "scope": "today"
+    },
+    {
+      "id": "ufc-official-2026-09-13-0",
+      "sport": "mma",
+      "sportLabel": "MMA / UFC",
+      "title": "UFC: Silva vs Delgado",
+      "subtitle": "Desert Diamond Arena",
+      "start": "2026-09-12T21:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 97,
+      "source": "UFC.com",
+      "url": "https://www.ufc.com/events",
+      "internal": false,
+      "scope": "upcoming"
     },
     {
       "id": "football-5970132",
@@ -219,36 +219,6 @@
       "importance": 74,
       "source": "WWE.com",
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060772",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Noche UFC",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-12T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060772/league/ufc",
-      "internal": false,
-      "scope": "upcoming"
-    },
-    {
-      "id": "ufc-600060737",
-      "sport": "mma",
-      "sportLabel": "MMA / UFC",
-      "title": "Dana White's Contender Series",
-      "subtitle": "Ultimate Fighting Championship",
-      "start": "2026-09-15T23:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 72,
-      "source": "ESPN fallback",
-      "url": "https://www.espn.com/mma/fightcenter/_/id/600060737/league/ufc",
       "internal": false,
       "scope": "upcoming"
     },
