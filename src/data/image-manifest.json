@@ -2288,5 +2288,63 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — skysports.com.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "kmi-يقر-بخطا-واضح-في-تقنية-var-خلال-فوز-ارسنال-1-0-على-استون-فيلا": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-iam-maatsen-bruno_7345968.jpg?20260909114831",
+    "fallbackSrc": "/news-images/kmi-يقر-بخطا-واضح-في-تقنية-var-خلال-فوز-ارسنال-1-0-على-استون-فيلا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/watch/video/13583510/ian-maatsen-on-bruno-guimaraes-the-tackle-that-var-missed",
+    "originalStoryUrl": "https://www.skysports.com/watch/video/13583510/ian-maatsen-on-bruno-guimaraes-the-tackle-that-var-missed",
+    "type": "image/jpeg",
+    "alt": "لقطة من مباراة أرسنال ضد أستون فيلا تُظهر التدخل الفاشل لتقنية VAR على اللاعب المتعرض للخطأ",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "جواء-فيلكس-وكينغزلي-كومان-يغيبان-عن-مباراة-النصر-ضد-ابها-في-الدوري-السعودي": {
+    "src": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/08190447/felix-coman-1200x740.webp",
+    "fallbackSrc": "/news-images/جواء-فيلكس-وكينغزلي-كومان-يغيبان-عن-مباراة-النصر-ضد-ابها-في-الدوري-السعودي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "World Soccer Talk",
+    "sourceUrl": "https://worldsoccertalk.com/news/why-arent-joao-felix-and-kingsley-coman-playing-for-al-nassr-against-abha-in-the-saudi-pro-league/",
+    "originalStoryUrl": "https://worldsoccertalk.com/news/why-arent-joao-felix-and-kingsley-coman-playing-for-al-nassr-against-abha-in-the-saudi-pro-league/",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 740,
+    "alt": "كريستيانو رونالدو يحتفل مع زملائه جواء فيلكس وكينغزلي كومان بعد تسجيل هدف في مباراة النصر",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — World Soccer Talk.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "لجنة-حوادث-المباريات-الرييسية-تقر-بمنح-ارسنال-ركلة-جزاء-في-فوزه-على-استون-فيلا": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/09070628/GettyImages-2292891191-scaled.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/لجنة-حوادث-المباريات-الرييسية-تقر-بمنح-ارسنال-ركلة-جزاء-في-فوزه-على-استون-فيلا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7577763/2026/09/09/arsenal-penalty-aston-villa-guimaraes-maatsen-premier-league/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7577763/2026/09/09/arsenal-penalty-aston-villa-guimaraes-maatsen-premier-league/",
+    "type": "image/jpeg",
+    "alt": "إيان ميتسن يتعثر أثناء تدخل على برونو غيماريز في مباراة أرسنال ضد أستون فيلا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "اتلانتا-هوكس-يعلن-عن-ترقيات-واضافات-ادارية-في-مكتبها-التنفيذي": {
+    "src": "https://cdn.nba.com/manage/2026/09/GettyImages-2268519371.jpg",
+    "fallbackSrc": "/news-images/اتلانتا-هوكس-يعلن-عن-ترقيات-واضافات-ادارية-في-مكتبها-التنفيذي.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "nba.com",
+    "sourceUrl": "https://www.nba.com/news/hawks-announce-front-office-moves",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5PN3F2TjA5LUh5emN6RnpMQmJ0aWppVWg4LU5FekhlcC1CZlhlZnR5V19RRk1nXzJGZVJmdHNlWnN1emJfQ3QyNXMzQ0g4WjN4WnRidWZpbVdYTTFjTWpLZlV6dU8wUG5GQnc?oc=5",
+    "type": "image/webp",
+    "alt": "بيتر دينويدي يرفع يده في مؤتمر صحفي لأتلانتا هوكس بعد ترقيته إلى نائب الرئيس التنفيذي للعمليات الرياضية",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — nba.com.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
   }
 }
