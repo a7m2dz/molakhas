@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T05:47:04.019Z",
+  "generatedAt": "2026-09-09T06:53:17.411Z",
   "date": "2026-09-09",
   "timezone": "Asia/Riyadh",
   "upcomingDays": 8,
@@ -28,6 +28,21 @@
       "scope": "today"
     },
     {
+      "id": "football-5970134",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Nassr FC ضد Abha",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-09T18:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 99,
+      "source": "FotMob",
+      "url": "/matches/al-nassr-fc-abha-2026-09-09-5970134/",
+      "internal": true,
+      "scope": "today"
+    },
+    {
       "id": "ufc-official-2026-09-13-0",
       "sport": "mma",
       "sportLabel": "MMA / UFC",
@@ -41,21 +56,6 @@
       "url": "https://www.ufc.com/events",
       "internal": false,
       "scope": "upcoming"
-    },
-    {
-      "id": "football-5970134",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al Nassr FC ضد Abha",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-09T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 95,
-      "source": "FotMob",
-      "url": "/matches/al-nassr-fc-abha-2026-09-09-5970134/",
-      "internal": true,
-      "scope": "today"
     },
     {
       "id": "wwe-20260911-2",
@@ -178,6 +178,21 @@
       "scope": "today"
     },
     {
+      "id": "football-5970133",
+      "sport": "football",
+      "sportLabel": "كرة القدم",
+      "title": "Al Fateh FC ضد Al Diriyah",
+      "subtitle": "Saudi Pro League",
+      "start": "2026-09-09T18:00:00.000Z",
+      "state": "upcoming",
+      "score": "",
+      "importance": 75,
+      "source": "FotMob",
+      "url": "/matches/al-fateh-fc-al-diriyah-2026-09-09-5970133/",
+      "internal": true,
+      "scope": "today"
+    },
+    {
       "id": "wwe-20260909-0",
       "sport": "wwe",
       "sportLabel": "WWE",
@@ -206,21 +221,6 @@
       "url": "https://www.wwe.com/article/wwe-upcoming-events",
       "internal": false,
       "scope": "upcoming"
-    },
-    {
-      "id": "football-5970133",
-      "sport": "football",
-      "sportLabel": "كرة القدم",
-      "title": "Al Fateh FC ضد Al Diriyah",
-      "subtitle": "Saudi Pro League",
-      "start": "2026-09-09T18:00:00.000Z",
-      "state": "upcoming",
-      "score": "",
-      "importance": 71,
-      "source": "FotMob",
-      "url": "/matches/al-fateh-fc-al-diriyah-2026-09-09-5970133/",
-      "internal": true,
-      "scope": "today"
     },
     {
       "id": "football-6106400",

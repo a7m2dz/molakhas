@@ -29,7 +29,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sevilla-vs-Valencia#5868059",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -62,7 +62,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Rennes-vs-Marseille#5802935",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -95,7 +95,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Venezia-vs-Fiorentina#5749679",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -128,7 +128,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Union%20Berlin-vs-Schalke%2004#5881169",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -161,7 +161,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Ahli-vs-Al%20Hazem#5970135",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 55
   },
   {
@@ -194,7 +194,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al-Faisaly-vs-Al%20Ittihad#5970137",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 55
   },
   {
@@ -227,7 +227,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Qadsiah-vs-Al-Ettifaq#5970139",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 55
   },
   {
@@ -260,7 +260,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bayern%20M%C3%BCnchen-vs-Bod%C3%B8%2FGlimt#6106240",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -293,7 +293,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Como-vs-RB%20Leipzig#6106411",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -326,7 +326,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Man%20United-vs-Sabah%20FK#6106293",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -359,7 +359,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Slavia%20Prague-vs-Lens#6106392",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 20
   },
   {
@@ -392,7 +392,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Fenerbah%C3%A7e-vs-Roma#6106331",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 40
   },
   {
@@ -425,7 +425,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSV%20Eindhoven-vs-Shakhtar%20Donetsk#6106304",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 40
   },
   {
@@ -458,7 +458,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Liverpool-vs-Atl%C3%A9tico%20Madrid#6106246",
-    "updatedAt": "2026-09-09T05:47:01.100Z",
+    "updatedAt": "2026-09-09T06:53:15.098Z",
     "details": {
       "venue": "Anfield",
       "referee": "Davide Massa",
@@ -498,7 +498,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:01.100Z",
+      "detailUpdatedAt": "2026-09-09T06:53:15.098Z",
       "detailGeneral": {
         "matchId": "6106246",
         "matchName": "Liverpool-vs-Atlético Madrid_Wed, Sep 9, 2026, 19:00 UTC",
@@ -538,7 +538,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/PSG-vs-Slovan%20Bratislava#6106237",
-    "updatedAt": "2026-09-09T05:47:01.239Z",
+    "updatedAt": "2026-09-09T06:53:15.224Z",
     "details": {
       "venue": "Parc des Princes",
       "referee": "Mykola Balakin",
@@ -578,7 +578,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:01.239Z",
+      "detailUpdatedAt": "2026-09-09T06:53:15.224Z",
       "detailGeneral": {
         "matchId": "6106237",
         "matchName": "Paris Saint-Germain-vs-Slovan Bratislava_Wed, Sep 9, 2026, 19:00 UTC",
@@ -618,7 +618,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sporting%20CP-vs-Galatasaray#6106280",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 40
   },
   {
@@ -651,7 +651,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Napoli-vs-Arsenal#6106318",
-    "updatedAt": "2026-09-09T05:47:01.369Z",
+    "updatedAt": "2026-09-09T06:53:15.373Z",
     "details": {
       "venue": "Stadio Diego Armando Maradona",
       "referee": "Glenn Nyberg",
@@ -691,7 +691,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:01.369Z",
+      "detailUpdatedAt": "2026-09-09T06:53:15.373Z",
       "detailGeneral": {
         "matchId": "6106318",
         "matchName": "Napoli-vs-Arsenal_Wed, Sep 9, 2026, 19:00 UTC",
@@ -731,7 +731,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Chelsea-vs-Leeds#6099342",
-    "updatedAt": "2026-09-09T05:47:01.544Z",
+    "updatedAt": "2026-09-09T06:53:15.643Z",
     "details": {
       "venue": "Stamford Bridge",
       "referee": "Jarred Gillett",
@@ -771,7 +771,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:01.544Z",
+      "detailUpdatedAt": "2026-09-09T06:53:15.643Z",
       "detailGeneral": {
         "matchId": "6099342",
         "matchName": "Chelsea-vs-Leeds United_Wed, Sep 9, 2026, 19:00 UTC",
@@ -807,12 +807,59 @@
     },
     "tournamentStage": "6",
     "section": "saudi",
-    "opportunityScore": 71,
-    "indexable": false,
+    "opportunityScore": 75,
+    "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Fateh%20FC-vs-Al%20Diriyah#5970133",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
-    "indexQualityScore": 40
+    "updatedAt": "2026-09-09T06:53:15.768Z",
+    "details": {
+      "venue": "Maydan Tamweel Aloula",
+      "referee": "",
+      "attendance": null,
+      "round": "6",
+      "events": [],
+      "stats": [],
+      "lineups": {
+        "home": [
+          "Adrian Šemper",
+          "Abdulrahman Al-Khaibre",
+          "Marwane Saadane",
+          "Abdulaziz Al-Suwailem",
+          "Abdulelah Al Khaibari",
+          "Mihai Lixandru",
+          "Zaydou Youssouf",
+          "Mourad Batna",
+          "Faisal Al Abdulwahed",
+          "Lukás Haraslín",
+          "Wilfried Kanga"
+        ],
+        "away": [
+          "Nikola Vasilj",
+          "Chancel Mbemba",
+          "Qasem Lajami",
+          "Berat Djimsiti",
+          "Idrissa Gana Gueye",
+          "Clayton Diandy",
+          "Enzo Millot",
+          "Abdulaziz Al Faraj",
+          "Hussain Al-Sabiyani",
+          "Óscar Rodríguez",
+          "Darwin Núñez"
+        ]
+      },
+      "topPlayers": [],
+      "xg": null,
+      "hasDetails": true,
+      "detailProvider": "FotMob",
+      "detailUpdatedAt": "2026-09-09T06:53:15.768Z",
+      "detailGeneral": {
+        "matchId": "5970133",
+        "matchName": "Al Fateh FC-vs-Al Diriyah_Wed, Sep 9, 2026, 18:00 UTC",
+        "leagueName": "Saudi Arabian League"
+      },
+      "fetchMethod": "api-data"
+    },
+    "indexQualityScore": 72
   },
   {
     "scopeVersion": 2,
@@ -840,11 +887,11 @@
     },
     "tournamentStage": "6",
     "section": "saudi",
-    "opportunityScore": 95,
+    "opportunityScore": 99,
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Nassr%20FC-vs-Abha#5970134",
-    "updatedAt": "2026-09-09T05:47:00.343Z",
+    "updatedAt": "2026-09-09T06:53:14.064Z",
     "details": {
       "venue": "Al-Awwal Park",
       "referee": "",
@@ -884,7 +931,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:00.343Z",
+      "detailUpdatedAt": "2026-09-09T06:53:14.064Z",
       "detailGeneral": {
         "matchId": "5970134",
         "matchName": "Al Nassr FC-vs-Abha_Wed, Sep 9, 2026, 18:00 UTC",
@@ -924,7 +971,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Barcelona-vs-Feyenoord#6106264",
-    "updatedAt": "2026-09-09T05:47:00.604Z",
+    "updatedAt": "2026-09-09T06:53:14.765Z",
     "details": {
       "venue": "Spotify Camp Nou",
       "referee": "Sven Jablonski",
@@ -964,7 +1011,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:00.604Z",
+      "detailUpdatedAt": "2026-09-09T06:53:14.765Z",
       "detailGeneral": {
         "matchId": "6106264",
         "matchName": "Barcelona-vs-Feyenoord_Wed, Sep 9, 2026, 16:45 UTC",
@@ -1004,7 +1051,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/VfB%20Stuttgart-vs-Viking#6106400",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 40
   },
   {
@@ -1037,7 +1084,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Kholood-vs-Al%20Shabab#5970132",
-    "updatedAt": "2026-09-09T05:46:59.758Z",
+    "updatedAt": "2026-09-09T06:53:13.929Z",
     "details": {
       "venue": "Ar-Rass Stadium (Al Hazm Club Stadium)",
       "referee": "",
@@ -1077,7 +1124,7 @@
       "xg": null,
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:46:59.758Z",
+      "detailUpdatedAt": "2026-09-09T06:53:13.929Z",
       "detailGeneral": {
         "matchId": "5970132",
         "matchName": "Al Kholood-vs-Al Shabab_Wed, Sep 9, 2026, 15:55 UTC",
@@ -1117,7 +1164,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Dortmund-vs-Villarreal#6106272",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1150,7 +1197,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/FC%20Porto-vs-Man%20City#6106286",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1183,7 +1230,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Lille-vs-Real%20Betis#6106311",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1216,7 +1263,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Real%20Madrid-vs-Inter#6106242",
-    "updatedAt": "2026-09-09T05:47:00.965Z",
+    "updatedAt": "2026-09-09T06:53:14.971Z",
     "details": {
       "venue": "Estadio Bernabéu",
       "referee": "Michael Oliver",
@@ -1506,7 +1553,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:00.965Z",
+      "detailUpdatedAt": "2026-09-09T06:53:14.971Z",
       "detailGeneral": {
         "matchId": "6106242",
         "matchName": "Real Madrid-vs-Inter_Tue, Sep 8, 2026, 19:00 UTC",
@@ -1546,7 +1593,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Millwall-vs-Newcastle#6099336",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1579,7 +1626,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Bournemouth-vs-Lincoln#6099334",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1612,7 +1659,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Crystal%20Palace-vs-Middlesbrough#6099328",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1645,7 +1692,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Leyton%20Orient-vs-Bradford#6099339",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1678,7 +1725,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Sunderland-vs-Hull#6099331",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -1711,7 +1758,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Qadsiah-vs-Al%20Ahli#5970131",
-    "updatedAt": "2026-09-09T05:46:59.968Z",
+    "updatedAt": "2026-09-09T06:53:14.391Z",
     "details": {
       "venue": "Prince Mohammed Bin Fahd Stadium",
       "referee": "Ismail Elfath",
@@ -2031,7 +2078,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:46:59.968Z",
+      "detailUpdatedAt": "2026-09-09T06:53:14.391Z",
       "detailGeneral": {
         "matchId": "5970131",
         "matchName": "Al Qadsiah-vs-Al Ahli_Tue, Sep 8, 2026, 18:00 UTC",
@@ -2071,7 +2118,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Ittihad-vs-Al-Fayha#5970130",
-    "updatedAt": "2026-09-09T05:47:00.209Z",
+    "updatedAt": "2026-09-09T06:53:14.628Z",
     "details": {
       "venue": "Alinma Bank Stadium at King Abdullah Sport City",
       "referee": "Faisal Al-Balawi",
@@ -2361,7 +2408,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:00.209Z",
+      "detailUpdatedAt": "2026-09-09T06:53:14.628Z",
       "detailGeneral": {
         "matchId": "5970130",
         "matchName": "Al Ittihad-vs-Al-Fayha_Tue, Sep 8, 2026, 18:00 UTC",
@@ -2401,7 +2448,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/AEK%20Athens-vs-LASK#6106404",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -2434,7 +2481,7 @@
     "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Club%20Brugge-vs-Aston%20Villa#6106295",
-    "updatedAt": "2026-09-09T05:46:58.608Z",
+    "updatedAt": "2026-09-09T06:53:12.612Z",
     "indexQualityScore": 48
   },
   {
@@ -2467,7 +2514,7 @@
     "indexable": true,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al%20Hazem-vs-Al-Taawoun#5970129",
-    "updatedAt": "2026-09-09T05:47:01.889Z",
+    "updatedAt": "2026-09-09T06:53:16.009Z",
     "details": {
       "venue": "Ar-Rass Stadium (Al Hazm Club Stadium)",
       "referee": "Khalid Al Turais",
@@ -2727,7 +2774,7 @@
       },
       "hasDetails": true,
       "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:01.889Z",
+      "detailUpdatedAt": "2026-09-09T06:53:16.009Z",
       "detailGeneral": {
         "matchId": "5970129",
         "matchName": "Al Hazem-vs-Al-Taawoun_Tue, Sep 8, 2026, 15:55 UTC",
@@ -2764,268 +2811,11 @@
     "tournamentStage": "6",
     "section": "saudi",
     "opportunityScore": 73,
-    "indexable": true,
+    "indexable": false,
     "source": "FotMob",
     "sourceUrl": "https://www.fotmob.com/matches/Al-Ettifaq-vs-Al-Faisaly#5970128",
-    "updatedAt": "2026-09-09T05:47:02.107Z",
-    "details": {
-      "venue": "Al Ettifaq Club Stadium",
-      "referee": "Abdullah Al-Harbi",
-      "attendance": 4375,
-      "round": "6",
-      "events": [
-        {
-          "minute": "45",
-          "type": "AddedTime",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "45",
-          "type": "Half",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "56",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "63",
-          "type": "Card",
-          "player": "Abdullah Madu",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "64",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "64",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "67",
-          "type": "Card",
-          "player": "Abdoulaye Kanté",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "73",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "73",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "77",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "79",
-          "type": "Card",
-          "player": "Mohammed Al Shanqiti",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "83",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "89",
-          "type": "Substitution",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "89",
-          "type": "Card",
-          "player": "Abdulrahman Al Sharif",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "90",
-          "type": "AddedTime",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        },
-        {
-          "minute": "90",
-          "type": "Half",
-          "player": "",
-          "assist": "",
-          "teamId": null,
-          "team": "",
-          "score": "",
-          "description": ""
-        }
-      ],
-      "stats": [
-        {
-          "title": "Ball possession",
-          "home": "54",
-          "away": "46"
-        },
-        {
-          "title": "Expected goals (xG)",
-          "home": "0.72",
-          "away": "0.11"
-        },
-        {
-          "title": "Total shots",
-          "home": "15",
-          "away": "3"
-        },
-        {
-          "title": "Shots on target",
-          "home": "5",
-          "away": "1"
-        },
-        {
-          "title": "Big chances",
-          "home": "0",
-          "away": "0"
-        },
-        {
-          "title": "Big chances missed",
-          "home": "0",
-          "away": "0"
-        },
-        {
-          "title": "Accurate passes",
-          "home": "385 (87%)",
-          "away": "336 (86%)"
-        },
-        {
-          "title": "Yellow cards",
-          "home": "0",
-          "away": "0"
-        },
-        {
-          "title": "Corners",
-          "home": "5",
-          "away": "2"
-        }
-      ],
-      "lineups": {
-        "home": [
-          "Turki Ba Al Jawsh",
-          "Radhi Al Otaibi",
-          "Jack Hendry",
-          "Abdullah Ahmed Khateeb",
-          "Madallah Al Olayan",
-          "Abdoulaye Kanté",
-          "Ondrej Duda",
-          "Jordan Larsson",
-          "Álvaro Medrán",
-          "Bersant Celina",
-          "Moussa Dembélé"
-        ],
-        "away": [
-          "Fernando Pacheco",
-          "Yaseen Barnawi",
-          "Abdoulaye Seck",
-          "Andrei Girotto",
-          "Mohammed Al Shanqiti",
-          "Eid Al-Muwallad",
-          "Christian Bassogog",
-          "Flávio",
-          "Abdulrahman Al Sharif",
-          "Jaime Seoane",
-          "Alexandre Mendy"
-        ]
-      },
-      "topPlayers": [],
-      "xg": {
-        "home": "0.72",
-        "away": "0.11"
-      },
-      "hasDetails": true,
-      "detailProvider": "FotMob",
-      "detailUpdatedAt": "2026-09-09T05:47:02.107Z",
-      "detailGeneral": {
-        "matchId": "5970128",
-        "matchName": "Al-Ettifaq-vs-Al-Faisaly_Tue, Sep 8, 2026, 15:30 UTC",
-        "leagueName": "Saudi Arabian League"
-      },
-      "fetchMethod": "api-data"
-    },
-    "indexQualityScore": 75
+    "updatedAt": "2026-09-09T06:53:12.612Z",
+    "indexQualityScore": 48
   },
   {
     "scopeVersion": 2,

@@ -2022,5 +2022,21 @@
     "sourceUrl": "https://basketball.realgm.com/wiretap/287195/Jackie-Young-Leads-Team-USA-Win-Over-Italy-In-Womens-FIBA-World-Cup",
     "resolverVersion": 4,
     "rejectionReason": "source page HTTP 403"
+  },
+  "جيانيس-انتيتوكونبو-يشتري-قصرا-فاخرا-في-ميامي-بمبلغ-13-5-مليون-دولار-بعد-انتقاله-الى-هيت": {
+    "src": "https://images.eurohoops.net/2026/07/7154071c-gettyimages-2285915361-600x314.jpg",
+    "fallbackSrc": "/news-images/جيانيس-انتيتوكونبو-يشتري-قصرا-فاخرا-في-ميامي-بمبلغ-13-5-مليون-دولار-بعد-انتقاله-الى-هيت.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/nba-news/2005918/giannis-antetokounmpo-buys-miami-mansion-miami-heat-nba/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/nba-news/2005918/giannis-antetokounmpo-buys-miami-mansion-miami-heat-nba/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة لقصر فاخر في حي باينكريست بميامي، ملك جيانيس أنتيتوكونبو بعد انتقاله إلى فريق هيت.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
