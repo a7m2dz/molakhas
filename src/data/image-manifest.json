@@ -1510,5 +1510,53 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "مسلسل-last-seen-على-apple-tv-يعرض-9-سبتمبر-ويظهر-اداء-مميزا-لباتريك-بامال": {
+    "src": "https://www.hollywoodreporter.com/wp-content/uploads/2026/09/Last_Seen_Photo_010201.jpg?w=1440&",
+    "fallbackSrc": "/news-images/مسلسل-last-seen-على-apple-tv-يعرض-9-سبتمبر-ويظهر-اداء-مميزا-لباتريك-بامال.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Hollywood Reporter",
+    "sourceUrl": "https://www.hollywoodreporter.com/tv/tv-reviews/last-seen-review-patrick-brammall-apple-tv-1236694504/",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOdFFVdWQ5b2ZZNnRZaWQ5cXViQWlmOWNjVWhnOXlMVi1HSDRmOS14VzdjZUwwZ1NHMjV3MEw5N1RnREY2TW9ZWnJKcnFFSXVTS29ZTnRmdlVldVhTWEN6WWs4TTZlMGtMZVRPeWJfSTdQZ2E5MUdPTTR1RUFCZ0FLQjVscl9GMHdfeWtMOVJheGppcktKNXVMSUF5Tl9oSlp1MWhoaQ?oc=5",
+    "type": "image/webp",
+    "width": 1500,
+    "height": 1000,
+    "alt": "ملصق مسلسل Last Seen على Apple TV",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Hollywood Reporter.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "نادي-لوس-انجلوس-ليكرز-يكرم-فيل-جاكسون-بتمثال-خارج-ملعبه": {
+    "src": "https://images.eurohoops.net/2015/09/kobe-jackson-phil-600x314.jpg",
+    "fallbackSrc": "/news-images/نادي-لوس-انجلوس-ليكرز-يكرم-فيل-جاكسون-بتمثال-خارج-ملعبه.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/nba-news/2005892/phil-jackson-to-be-honored-with-statue-outside-crypto-com-arena/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/nba-news/2005892/phil-jackson-to-be-honored-with-statue-outside-crypto-com-arena/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة للمدرب فيل جاكسون أثناء إدارة مباراة لنادي لوس أنجلوس ليكرز في دوري السلة الأمريكي للمحترفين.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "برشلونة-يقدم-صفقاته-الاحدى-عشرة-رسميا-لموسم-كرة-السلة-الجديد": {
+    "src": "https://images.eurohoops.net/2026/09/9028736f-barca-new-600x314.jpg",
+    "fallbackSrc": "/news-images/برشلونة-يقدم-صفقاته-الاحدى-عشرة-رسميا-لموسم-كرة-السلة-الجديد.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/euroleague/2005854/barca-officially-presents-the-eleven-signings-for-this-season/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/euroleague/2005854/barca-officially-presents-the-eleven-signings-for-this-season/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "لاعبو برشلونة الجدد لكرة السلة خلال حفل التقديم الرسمي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
