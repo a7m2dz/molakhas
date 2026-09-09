@@ -1494,5 +1494,21 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Guardian Football.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "ديلون-جونز-بطل-nba-متتالي-ينضم-الى-فيلادلفيا-76ers-مع-اعلان-الملعب-الجديد": {
+    "src": "https://imgcdn.basketballnews.com/LeBron-James-19.jpg",
+    "fallbackSrc": "/news-images/ديلون-جونز-بطل-nba-متتالي-ينضم-الى-فيلادلفيا-76ers-مع-اعلان-الملعب-الجديد.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-new-york-knicks-champion-signs-with-lebron-james-philadelphia-sixers-amid-latest-stadium-announcement-dillon-jones/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-new-york-knicks-champion-signs-with-lebron-james-philadelphia-sixers-amid-latest-stadium-announcement-dillon-jones/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "ديلون جونز، بطل NBA متتالي، يوقع عقداً مع فيلادلفيا 76ers في حفل صحفي.",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
