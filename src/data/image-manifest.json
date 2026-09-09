@@ -2158,5 +2158,35 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "كريستي-يسجل-ثلاثية-ويقود-بورنموث-للفوز-4-0-على-لينكولن-في-كاس-كاراباو": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-ryan-christie-bournemouth_7345497.jpg?20260908215326",
+    "fallbackSrc": "/news-images/كريستي-يسجل-ثلاثية-ويقود-بورنموث-للفوز-4-0-على-لينكولن-في-كاس-كاراباو.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/bournemouth-vs-lincoln-city/report/577572",
+    "originalStoryUrl": "https://www.skysports.com/football/bournemouth-vs-lincoln-city/report/577572",
+    "type": "image/jpeg",
+    "alt": "ريان كريستي يحتفل بعد تسجيله ثلاثية في فوز بورنموث 4-0 على لينكولن سيتي في كأس كاراباو",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "جيمي-برادياج-يعلن-طموح-ريال-مدريد-للفوز-بكل-الالقاب": {
+    "src": "https://images.eurohoops.net/2026/09/52c3fe63-jaime-pradilla-real-madrid-1-600x314.jpg",
+    "fallbackSrc": "/news-images/جيمي-برادياج-يعلن-طموح-ريال-مدريد-للفوز-بكل-الالقاب.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Eurohoops",
+    "sourceUrl": "https://www.eurohoops.net/en/trademarks/2005973/jaime-pradilla-in-real-madrid-we-compete-to-win-every-title/",
+    "originalStoryUrl": "https://www.eurohoops.net/en/trademarks/2005973/jaime-pradilla-in-real-madrid-we-compete-to-win-every-title/",
+    "type": "image/jpeg",
+    "width": 600,
+    "height": 314,
+    "alt": "صورة لجيمي برادياج وهو يرتدي قميص ريال مدريد الجديد متجهًا إلى الملعب",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
