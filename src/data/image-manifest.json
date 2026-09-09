@@ -1558,5 +1558,49 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "wwe-يعلن-عن-ثمانية-مواعيد-جديدة-لفعاليات-raw-و-smackdown-في-امريكا": {
+    "src": "https://www.wwe.com/f/styles/og_image/public/2025/08/wwe_search_default_image--d7650557cda271ffd0cc2fe2eb48ba7f--6f03cc7cb234868832594e750cae0580.jpg",
+    "fallbackSrc": "/news-images/wwe-يعلن-عن-ثمانية-مواعيد-جديدة-لفعاليات-raw-و-smackdown-في-امريكا.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "WWE",
+    "sourceUrl": "https://www.wwe.com/article/wwe-announces-eight-new-raw-and-smackdown-event-dates-across-the-u-s",
+    "originalStoryUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPRXZPRnQzeHNRVmM5VVBwbEoyRVQ3ODhoaThPYTBOaHEzanItdHVpZENTcElpdUQ1b3ZOZXg3UjdpaFhMSlV3LUVMbEV4WUlUWTh5bEhxOXRkYy1mci16WlZ0VFdTb2ZvMmlETFlsc1o0YTNVNTVZUElOYm0wVWs0Wm1EbWllaFlqQnFRUklRaU5YNEdPN1VzWERUWXM?oc=5",
+    "type": "image/jpeg",
+    "alt": "ملصق يعلن عن مواعيد فعاليات WWE RAW و SmackDown في الولايات المتحدة لعام 2026",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — WWE.",
+    "resolverVersion": 4,
+    "resolutionMethod": "google-batch-signed"
+  },
+  "ستيفن-جاكسون-يقترح-انتقال-ستيفن-كاري-الى-سبيرز-ليلعب-بجوار-فيكتور-ويمبانياما": {
+    "src": "https://imgcdn.basketballnews.com/Stephen-Curry-2.jpg",
+    "fallbackSrc": "/news-images/ستيفن-جاكسون-يقترح-انتقال-ستيفن-كاري-الى-سبيرز-ليلعب-بجوار-فيكتور-ويمبانياما.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "BasketballNews",
+    "sourceUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-ex-golden-state-warriors-star-wants-stephen-curry-to-join-victor-wembanyama-in-massive-trade-idea/",
+    "originalStoryUrl": "https://www.basketballnews.com/news/basketballnews-nba-active-news-ex-golden-state-warriors-star-wants-stephen-curry-to-join-victor-wembanyama-in-massive-trade-idea/",
+    "type": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "ستيفن كاري مع غولدن ستيت ووريورز خلال مباراة في دوري NBA",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — BasketballNews.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "فيلادلفيا-76ers-تحافظ-على-تبادل-اختيار-مع-كليبرز-عام-2029": {
+    "src": "/news-images/فيلادلفيا-76ers-تحافظ-على-تبادل-اختيار-مع-كليبرز-عام-2029.webp",
+    "fallbackSrc": "/news-images/فيلادلفيا-76ers-تحافظ-على-تبادل-اختيار-مع-كليبرز-عام-2029.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "شعار فريق فيلادلفيا 76ers مع خلفية تبادل اختيار مع كليبرز في الدوري NBA",
+    "caption": "تبادل اختيار فيلادلفيا 76ers مع كليبرز عام 2029",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287194/Sixers-To-Keep-First-Round-Pick-Swap-With-Clippers-In-2029",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
