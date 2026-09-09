@@ -2578,5 +2578,19 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Eurohoops.",
     "resolverVersion": 4,
     "resolutionMethod": "direct-source"
+  },
+  "مباراة-دربي-ضد-ويست-بروميتش-ضمن-ثلاث-مواجهات-مباشرة-في-دوري-الدرجة-الاولى-الانجليزي-الليلة": {
+    "src": "https://e0.365dm.com/26/09/1600x900/skysports-efl-championship_7344851.jpg?20260908102831",
+    "fallbackSrc": "/news-images/مباراة-دربي-ضد-ويست-بروميتش-ضمن-ثلاث-مواجهات-مباشرة-في-دوري-الدرجة-الاولى-الانجليزي-الليلة.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports All-Rounder",
+    "sourceUrl": "https://www.skysports.com/football/live-blog/12040/13163353/championship-news-transfer-latest-and-gossip-plus-efl-updates-from-league-one-and-league-two",
+    "originalStoryUrl": "https://www.skysports.com/football/live-blog/12040/13163353/championship-news-transfer-latest-and-gossip-plus-efl-updates-from-league-one-and-league-two",
+    "type": "image/jpeg",
+    "alt": "مباراة كرة قدم مباشرة من دوري الدرجة الأولى الإنجليزي تُعرض عبر سكاي سبورتس، تظهر لاعبين من فريقين مختلفين في لحظة تنافس",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports All-Rounder.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
   }
 }
