@@ -1908,5 +1908,61 @@
     "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — ET بالعربي.",
     "resolverVersion": 4,
     "resolutionMethod": "google-batch-signed"
+  },
+  "ارسنال-امام-نابولي-هل-يلجا-ارتيتا-للتدوير-في-ظل-ازدحام-المباريات": {
+    "src": "https://e0.365dm.com/26/08/1600x900/skysports-arsenal-club-blog_7326689.jpg?20260820164959",
+    "fallbackSrc": "/news-images/ارسنال-امام-نابولي-هل-يلجا-ارتيتا-للتدوير-في-ظل-ازدحام-المباريات.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "Sky Sports",
+    "sourceUrl": "https://www.skysports.com/football/live-blog/12040/13025486/arsenal-transfer-news-rumours-and-gossip-live-updates-and-latest-on-deals-signings-loans-and-contracts",
+    "originalStoryUrl": "https://www.skysports.com/football/live-blog/12040/13025486/arsenal-transfer-news-rumours-and-gossip-live-updates-and-latest-on-deals-signings-loans-and-contracts",
+    "type": "image/jpeg",
+    "alt": "ميكيل أرتيتا مدرب أرسنال خلال مؤتمر صحفي قبل مواجهة نابولي في دوري أبطال أوروبا",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — Sky Sports.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ريتشارد-هيوز-ينتقل-الى-الهلال-السعودي-بعد-مسيرة-متقلبة-في-ليفربول": {
+    "src": "https://static01.nyt.com/athletic/uploads/wp/2026/09/08180449/GettyImages-2239335919-scaled-e1788905108783.jpg?width=1200&height=630&fit=cover",
+    "fallbackSrc": "/news-images/ريتشارد-هيوز-ينتقل-الى-الهلال-السعودي-بعد-مسيرة-متقلبة-في-ليفربول.webp",
+    "kind": "source-remote",
+    "external": true,
+    "provider": "The Athletic News",
+    "sourceUrl": "https://www.nytimes.com/athletic/7576225/2026/09/09/richard-hughes-liverpool-sporting-director-legacy/",
+    "originalStoryUrl": "https://www.nytimes.com/athletic/7576225/2026/09/09/richard-hughes-liverpool-sporting-director-legacy/",
+    "type": "image/jpeg",
+    "alt": "ريتشارد هيوز يتحدث في مؤتمر صحفي بعد إعلان انتقاله إلى نادي الهلال السعودي",
+    "caption": "الصورة المستخدمة في صفحة المصدر الأصلي للخبر — The Athletic News.",
+    "resolverVersion": 4,
+    "resolutionMethod": "direct-source"
+  },
+  "ديون-جونز-يوقع-عقد-exhibit-10-مع-فيلادلفيا-سفنتي-سيكسرز": {
+    "src": "/news-images/ديون-جونز-يوقع-عقد-exhibit-10-مع-فيلادلفيا-سفنتي-سيكسرز.webp",
+    "fallbackSrc": "/news-images/ديون-جونز-يوقع-عقد-exhibit-10-مع-فيلادلفيا-سفنتي-سيكسرز.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "ديون جونز لاعب كرة السلة الأمريكي في مباراة مع فريقه السابق نيويورك نيكس",
+    "caption": "ديون جونز خلال مشاركته مع نيويورك نيكس",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287208/Dillon-Jones-Signs-Exhibit-10-Deal-With-Sixers",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
+  },
+  "هيونج-جونج-لي-يوقع-عقدا-مع-بورتلاند-ترايل-بلايزرز": {
+    "src": "/news-images/هيونج-جونج-لي-يوقع-عقدا-مع-بورتلاند-ترايل-بلايزرز.webp",
+    "fallbackSrc": "/news-images/هيونج-جونج-لي-يوقع-عقدا-مع-بورتلاند-ترايل-بلايزرز.webp",
+    "kind": "branded-fallback",
+    "type": "image/webp",
+    "width": 1200,
+    "height": 675,
+    "alt": "لاعب كرة السلة الكوري هيونج جونج لي يرتدي زي فريقه الياباني السابق",
+    "caption": "هيونج جونج لي خلال إحدى مبارياته مع فريقه الياباني",
+    "provider": "RealGM Basketball",
+    "sourceUrl": "https://basketball.realgm.com/wiretap/287198/Hyunjung-Lee-Trail-Blazers-Sign-Camp-Deal",
+    "resolverVersion": 4,
+    "rejectionReason": "source page HTTP 403"
   }
 }
