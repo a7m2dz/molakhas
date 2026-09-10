@@ -90,45 +90,54 @@ async function main() {
   run('npm', ['run', 'audit:prelaunch'], { timeout: 8 * 60_000 });
 
   run('git', ['add', '-A', '--', 'src/data', 'public/news-images', 'public/brand']);
-  if (run('git', ['diff', '--cached', '--quiet'], { allowFailure: true }) === 0) {
-    log('No publishable changes.');
-    return;
-  }
-
-  run('git', ['config', 'user.name', 'molakhas-windows[bot]']);
-  run('git', ['config', 'user.email', 'actions@users.noreply.github.com']);
-  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-  run('git', ['commit', '-m', `newsroom-windows-refresh-${stamp}`]);
-
-  let stashedLocalEdits = false;
-  if (capture('git', ['status', '--porcelain'])) {
-    const stashCode = run('git', ['stash', 'push', '--include-untracked', '-m', `molakhas-publisher-${Date.now()}`], { allowFailure: true });
-    stashedLocalEdits = stashCode === 0;
-    if (stashedLocalEdits) log('Temporarily stashed non-newsroom local edits before publishing.');
-  }
-
+  const hasPublishableChanges = run('git', ['diff', '--cached', '--quiet'], { allowFailure: true }) !== 0;
   let published = false;
-  try {
-    for (let attempt = 1; attempt <= 3; attempt += 1) {
-      const rebased = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
-      if (rebased === 0 && run('git', ['push', 'origin', 'HEAD:main'], { allowFailure: true }) === 0) {
-        published = true;
-        break;
+
+  if (hasPublishableChanges) {
+    run('git', ['config', 'user.name', 'molakhas-windows[bot]']);
+    run('git', ['config', 'user.email', 'actions@users.noreply.github.com']);
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    run('git', ['commit', '-m', `newsroom-windows-refresh-${stamp}`]);
+
+    let stashedLocalEdits = false;
+    if (capture('git', ['status', '--porcelain'])) {
+      const stashCode = run('git', ['stash', 'push', '--include-untracked', '-m', `molakhas-publisher-${Date.now()}`], { allowFailure: true });
+      stashedLocalEdits = stashCode === 0;
+      if (stashedLocalEdits) log('Temporarily stashed non-newsroom local edits before publishing.');
+    }
+
+    try {
+      for (let attempt = 1; attempt <= 3; attempt += 1) {
+        const rebased = run('git', ['pull', '--rebase', '--autostash', 'origin', 'main'], { allowFailure: true });
+        if (rebased === 0 && run('git', ['push', 'origin', 'HEAD:main'], { allowFailure: true }) === 0) {
+          published = true;
+          break;
+        }
+        run('git', ['rebase', '--abort'], { allowFailure: true });
+        await new Promise((resolve) => setTimeout(resolve, attempt * 10_000));
       }
-      run('git', ['rebase', '--abort'], { allowFailure: true });
-      await new Promise((resolve) => setTimeout(resolve, attempt * 10_000));
+    } finally {
+      if (stashedLocalEdits) {
+        const restore = run('git', ['stash', 'pop'], { allowFailure: true });
+        log(restore === 0 ? 'Restored local edits after publishing.' : 'Local edits remain safely stored in git stash; manual restore may be needed.');
+      }
     }
-  } finally {
-    if (stashedLocalEdits) {
-      const restore = run('git', ['stash', 'pop'], { allowFailure: true });
-      log(restore === 0 ? 'Restored local edits after publishing.' : 'Local edits remain safely stored in git stash; manual restore may be needed.');
-    }
+
+    if (!published) throw new Error('Push failed after three attempts; local commit is preserved.');
+    log('Published changes to main.');
+  } else {
+    log('No publishable newsroom data changes; deploying the successful production build anyway.');
   }
 
-  if (!published) throw new Error('Push failed after three attempts; local commit is preserved.');
+  // Building dist is not a production deployment. The live site is served by
+  // Cloudflare Worker static assets, so every successful build/audit must deploy.
+  log('Deploying current production build to Cloudflare Worker.');
+  run('npm', ['exec', '--', 'wrangler', 'deploy'], { timeout: 10 * 60_000 });
+  log('Cloudflare deployment complete.');
 
-  log('Published changes to main.');
-  run('npm', ['run', 'indexnow'], { allowFailure: true, timeout: 4 * 60_000 });
+  if (published) {
+    run('npm', ['run', 'indexnow'], { allowFailure: true, timeout: 4 * 60_000 });
+  }
   log('Windows publisher cycle complete.');
 }
 
