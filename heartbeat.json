@@ -1,7 +1,7 @@
 {
     "source":  "windows-primary",
-    "updatedAt":  "2026-09-10T05:00:56.1665399Z",
+    "updatedAt":  "2026-09-10T05:06:16.6443814Z",
     "project":  "molakhas",
-    "omnirouteHealthy":  false,
+    "omnirouteHealthy":  true,
     "model":  "auto/best-free"
 }
