@@ -102,9 +102,9 @@ function Start-OmniRouteIfNeeded {
   $cmdExe = $env:ComSpec
   if (-not $cmdExe) { $cmdExe = "$env:SystemRoot\System32\cmd.exe" }
 
-  Write-Log 'OmniRoute is offline. Starting local OmniRoute with --no-open on 127.0.0.1.'
+  Write-Log 'OmniRoute is offline. Starting it exactly as if typing: omniroute + Enter.'
   try {
-    Start-Process -FilePath $cmdExe -ArgumentList @('/d', '/s', '/c', 'omniroute --no-open') -WorkingDirectory $ProjectRoot -WindowStyle Hidden | Out-Null
+    Start-Process -FilePath $cmdExe -ArgumentList @('/d', '/s', '/c', 'omniroute') -WorkingDirectory $ProjectRoot -WindowStyle Hidden | Out-Null
   } catch {
     Write-Log "Failed to start OmniRoute: $($_.Exception.Message)"
     return $false
@@ -133,7 +133,7 @@ function Publish-Heartbeat {
       if (-not $remote) { throw 'Git origin remote is not configured.' }
       & git -C $HeartbeatRepo remote add origin $remote | Out-Null
       & git -C $HeartbeatRepo config user.name 'molakhas-windows[bot]' | Out-Null
-      & git -C $HeartbeatRepo config user.email 'actions@users.noreply.github.com' | Out-Null
+      & git -C $HeartbeatRepo config user.email actions@users.noreply.github.com | Out-Null
     }
 
     & git -C $HeartbeatRepo fetch --depth=1 origin windows-heartbeat 2>$null | Out-Null
