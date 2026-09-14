@@ -28,9 +28,23 @@ function termMatch(haystack: string, term = '') {
   return haystack.includes(needle);
 }
 
+function teamFitsStory(hub: any, story: any, haystack: string) {
+  // "Spurs / سبيرز" is ambiguous between Tottenham Hotspur and San Antonio Spurs.
+  // Never connect NBA/basketball stories to Tottenham merely because that nickname appears.
+  if (hub?.slug === 'tottenham') {
+    const basketballContext = story?.section === 'basketball' || /\bnba\b|سان انطونيو|سان أنطونيو|الدوري الامريكي لكرة السلة|الدوري الأمريكي لكرة السلة/u.test(haystack);
+    if (basketballContext) {
+      const explicitTottenham = /توتنهام|tottenham/u.test(haystack);
+      if (!explicitTottenham) return false;
+    }
+  }
+  return true;
+}
+
 export function graphForStory(story: any) {
   const haystack = storyText(story);
   const teams = buildTeamHubs()
+    .filter((hub) => teamFitsStory(hub, story, haystack))
     .filter((hub) => hub.terms.some((term) => termMatch(haystack, term)))
     .sort((a, b) => Number(b.opportunityScore || 0) - Number(a.opportunityScore || 0))
     .slice(0, 4);
