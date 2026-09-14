@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { languageIssues } from './quality-gate.mjs';
 
 const ROOT = new URL('../../', import.meta.url);
 const ROOT_PATH = fileURLToPath(ROOT);
@@ -65,20 +66,26 @@ async function internalTargetExists(href) {
 const stories = await readJson('src/data/stories.json');
 const matches = await readJson('src/data/matches.json');
 const events = await readJson('src/data/today-events.json');
-const approved = (Array.isArray(stories) ? stories : []).filter((story) => story?.status === 'approved' && story?.sourceId !== 'molakhas-editorial');
+const approved = (Array.isArray(stories) ? stories : []).filter((story) => story?.status === 'approved');
 
 const slugMap = new Map();
 for (const story of approved) {
   const key = `${story.section}/${story.slug}`;
   if (slugMap.has(key)) failures.push(`duplicate approved story route: ${key}`);
   slugMap.set(key, story.id || story.sourceUrl || key);
-  if (!story.title || !story.excerpt || !story.sourceUrl) failures.push(`approved story missing core fields: ${key}`);
+  if (!story.title || !story.excerpt) failures.push(`approved story missing core fields: ${key}`);
+  if (story.sourceId !== 'molakhas-editorial' && !story.sourceUrl) failures.push(`approved sourced story missing source URL: ${key}`);
   if ((story.qualityFlags || []).length) failures.push(`approved story still has quality flags: ${key} -> ${(story.qualityFlags || []).join(',')}`);
-  if ((story.title || '').length > 100) warnings.push(`long article title (${story.title.length}): ${key}`);
+
+  const language = languageIssues(story);
+  if (language.length) failures.push(`approved story failed language gate: ${key} -> ${language.join('; ')}`);
+
+  if ((story.title || '').length > 110) warnings.push(`long article title (${story.title.length}): ${key}`);
   if ((story.metaDescription || '').length > 185) warnings.push(`long meta description (${story.metaDescription.length}): ${key}`);
   if ((story.metaDescription || '').length > 0 && (story.metaDescription || '').length < 90) warnings.push(`short meta description (${story.metaDescription.length}): ${key}`);
 }
-pass.push(`${approved.length} approved stories checked`);
+pass.push(`${approved.length} approved stories checked, including editorial stories`);
+pass.push('approved-story language gate completed');
 
 const indexableMatches = (Array.isArray(matches) ? matches : []).filter((match) => match?.indexable !== false);
 for (const match of indexableMatches) {
@@ -144,6 +151,11 @@ if (await exists('dist/index.html')) {
 if (await exists('dist/sitemap.xml')) {
   const sitemap = await fs.readFile(new URL('dist/sitemap.xml', ROOT), 'utf8');
   if (!sitemap.includes('/latest')) failures.push('latest news archive missing from sitemap');
+  for (const story of approved) {
+    const route = `/${story.section}/${story.slug}`;
+    if (!sitemap.includes(route)) failures.push(`approved story missing from sitemap: ${route}`);
+    if (!(await exists(`dist/${story.section}/${story.slug}/index.html`))) failures.push(`approved story missing generated page: ${route}`);
+  }
   for (const match of (Array.isArray(matches) ? matches : []).filter((m) => m?.slug && m?.indexable === false)) {
     if (sitemap.includes(`/matches/${match.slug}`)) failures.push(`noindex match leaked into sitemap: ${match.slug}`);
   }
@@ -153,7 +165,7 @@ if (await exists('dist/sitemap.xml')) {
     const route = routeForFile(file);
     if (sitemap.includes(route)) failures.push(`noindex entity page leaked into sitemap: ${route}`);
   }
-  pass.push('sitemap index-quality leakage check completed');
+  pass.push('sitemap index-quality leakage and approved-story coverage checks completed');
 }
 
 console.log('\n[Prelaunch Audit] PASS');
