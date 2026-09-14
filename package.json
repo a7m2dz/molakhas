@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run sports:refresh && node scripts/newsroom/source-images.mjs && astro build",
+    "build": "npm run sports:refresh && node scripts/newsroom/source-images-v5.mjs && astro build",
     "deploy": "npm run build && npm run audit:prelaunch && wrangler deploy",
     "preview": "astro preview",
     "fotmob:radar": "node scripts/newsroom/fotmob-radar.mjs",
@@ -23,7 +23,7 @@
     "newsroom": "npm run sources:sync && npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs && npm run entertainment && npm run seo:opportunities",
     "newsroom:dry": "npm run sources:sync && npm run search:feedback && npm run sports:refresh && node scripts/newsroom/run.mjs --dry-run && npm run entertainment:dry && npm run seo:opportunities",
     "omniroute:test": "node scripts/newsroom/omniroute-test.mjs",
-    "images:generate": "node scripts/newsroom/source-images.mjs",
+    "images:generate": "node scripts/newsroom/source-images-v5.mjs",
     "indexnow": "node scripts/newsroom/indexnow.mjs",
     "audit:prelaunch": "node scripts/newsroom/prelaunch-audit.mjs"
   },
