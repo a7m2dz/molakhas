@@ -10,13 +10,13 @@ import { graphForStory, graphRelatedScore } from '../../lib/content-graph';
 import { matchDateArabic, matchStateArabic, matchTimeArabic } from '../../lib/matches';
 
 export function getStaticPaths() {
-  return stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
+  return stories.filter((s) => s.status === 'approved').map((story) => ({ params: { section: story.section, slug: story.slug }, props: { story } }));
 }
 const { story } = Astro.props;
 const section = sectionMap[story.section];
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const canonical = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
-const sourceHref = story.publisherUrl || story.sourceUrl;
+const sourceHref = story.publisherUrl || story.sourceUrl || '';
 const mediaMap = imageManifest as Record<string, any>;
 const media = mediaMap[story.slug] || {};
 const imageSrc = media.src || story.image?.src || `/news-images/${story.slug}.webp`;
@@ -27,11 +27,10 @@ const imageCaption = media.caption || story.image?.caption || story.excerpt;
 const imageType = media.type || story.image?.type || undefined;
 const imageWidth = media.width || story.image?.width || undefined;
 const imageHeight = media.height || story.image?.height || undefined;
-const seoTitle = story.seoTitle || story.title;
 const metaDescription = story.metaDescription || story.excerpt;
 const words = story.body.join(' ').split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.ceil(words / 180));
-const publicStories = stories.filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial');
+const publicStories = stories.filter((s) => s.status === 'approved');
 const counts = topicCounts(publicStories as any[]);
 const graph = graphForStory(story);
 const related = publicStories
@@ -58,7 +57,7 @@ const schema = {
   author:{'@type':'Organization','@id':`${siteUrl}/authors/editorial-team`,name:'فريق تحرير ملخص',url:`${siteUrl}/authors/editorial-team`},
   publisher:{'@type':'Organization','@id':`${siteUrl}/#organization`,name:'ملخص',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}},
   about: aboutEntities.length ? aboutEntities : (story.entities || story.tags || []).slice(0,6).map((name)=>({'@type':'Thing',name})),
-  isBasedOn:sourceHref
+  ...(sourceHref ? { isBasedOn:sourceHref } : {})
 };
 const breadcrumbSchema = {
   '@type':'BreadcrumbList', itemListElement:[
@@ -71,21 +70,21 @@ const xShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(story
 const waShare = `https://wa.me/?text=${encodeURIComponent(`${story.title}\n${canonical}`)}`;
 const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&text=${encodeURIComponent(story.title)}`;
 ---
-<BaseLayout title={`${seoTitle} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} imageType={imageType} imageWidth={imageWidth} imageHeight={imageHeight} tags={story.tags || []} schemaExtra={[schema, breadcrumbSchema]}>
+<BaseLayout title={`${story.title} | ملخص`} description={metaDescription} section={story.section} type="article" publishedAt={story.publishedAt} modifiedAt={story.generatedAt || story.publishedAt} image={imageSrc} imageAlt={imageAlt} imageType={imageType} imageWidth={imageWidth} imageHeight={imageHeight} tags={story.tags || []} schemaExtra={[schema, breadcrumbSchema]}>
   <article class="article shell">
     <nav class="breadcrumbs" aria-label="مسار التنقل"><a href="/">الرئيسية</a><span>←</span><a href={`/${story.section}`}>{section?.name ?? 'رياضة'}</a></nav>
     <header>
       <span class="article-section">{section?.name ?? 'رياضة'}</span>
       <h1>{story.title}</h1>
       <p class="article-deck">{story.excerpt}</p>
-      <div class="article-meta"><span>بقلم <a href="/authors/editorial-team">فريق تحرير ملخص</a></span><time datetime={story.publishedAt}>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'full',timeStyle:'short'})}</time><span>{readingMinutes} د قراءة</span><span>المصدر: <a href={sourceHref} rel="noopener nofollow" target="_blank">{story.sourceName}</a></span></div>
+      <div class="article-meta"><span>بقلم <a href="/authors/editorial-team">فريق تحرير ملخص</a></span><time datetime={story.publishedAt}>{new Date(story.publishedAt).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'full',timeStyle:'short'})}</time><span>{readingMinutes} د قراءة</span>{sourceHref && <span>المصدر: <a href={sourceHref} rel="noopener nofollow" target="_blank">{story.sourceName || 'المصدر الأصلي'}</a></span>}</div>
     </header>
 
     <figure class="article-hero">
       <img src={imageSrc} alt={imageAlt} width={imageWidth || 1200} height={imageHeight || 675} loading="eager" fetchpriority="high" decoding="async" referrerpolicy={media.external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackSrc}'`} />
       <figcaption>
         <span>{imageCaption}</span>
-        {media.kind === 'source-remote' && <small class="image-credit">الصورة من صفحة المصدر: {media.provider || story.sourceName || 'المصدر الأصلي'} · <a href={media.sourceUrl || sourceHref} target="_blank" rel="noopener nofollow">فتح المصدر</a></small>}
+        {media.kind === 'source-remote' && sourceHref && <small class="image-credit">الصورة من صفحة المصدر: {media.provider || story.sourceName || 'المصدر الأصلي'} · <a href={media.sourceUrl || sourceHref} target="_blank" rel="noopener nofollow">فتح المصدر</a></small>}
       </figcaption>
     </figure>
 
@@ -110,14 +109,13 @@ const tgShare = `https://t.me/share/url?url=${encodeURIComponent(canonical)}&tex
       {index === 2 && <LurvuePromo section={story.section} position="article-inline" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />}
       <p>{paragraph}</p>
       {index === 1 && <AdsterraAd variant="native" />}
-      {index === 4 && <AdsterraAd variant="rectangle" />}
     </>)}</div>
     <div class="share-row" aria-label="مشاركة الخبر"><strong>شارك الخبر</strong><a href={waShare} target="_blank" rel="noopener">واتساب</a><a href={xShare} target="_blank" rel="noopener">X</a><a href={tgShare} target="_blank" rel="noopener">تيليجرام</a></div>
 
     <LurvuePromo section={story.section} position="article-end" storySlug={story.slug} keyword={story.focusKeyword} storyTitle={story.title} />
 
     {story.tags?.length > 0 && <div class="tag-list" aria-label="مواضيع الخبر">{story.tags.map((tag) => { const slug = topicSlug(tag); const available = (counts.get(slug)?.count || 0) >= 2; return available ? <a href={`/topic/${slug}`}>#{tag}</a> : <span>#{tag}</span>; })}</div>}
-    <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر. يمكنك الرجوع إلى صفحة الناشر الأصلية للتحقق من التفاصيل والسياق الكامل.</p><div><a href={sourceHref} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a><a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div></div>
+    <div class="article-source-note"><strong>عن هذا الخبر</strong><p>أعاد فريق ملخص تحرير المعلومات المتاحة بصياغة عربية أصلية، مع بوابة جودة قبل النشر.{sourceHref ? ' يمكنك الرجوع إلى صفحة الناشر الأصلية للتحقق من التفاصيل والسياق الكامل.' : ''}</p><div>{sourceHref && <a href={sourceHref} target="_blank" rel="noopener nofollow">فتح المصدر الأصلي ←</a>}<a href="/editorial-policy">سياسة التحرير ←</a><a href="/corrections">طلب تصحيح ←</a></div></div>
     {related.length > 0 && <section class="related"><div class="section-title"><h2>قد يهمك أيضًا</h2><a href={`/${story.section}`}>كل أخبار {section?.name ?? 'القسم'} ←</a></div><div class="related-grid">{related.map((item)=><a class="related-card" href={`/${item.section}/${item.slug}`}><img src={imageFor(item)} alt={altFor(item)} width="1200" height="675" loading="lazy" decoding="async" referrerpolicy={mediaFor(item).external ? 'no-referrer' : undefined} onerror={`this.onerror=null;this.src='${fallbackFor(item)}'`}/><span>{new Date(item.publishedAt).toLocaleDateString('ar-SA-u-nu-latn',{dateStyle:'medium'})}</span><h3>{item.title}</h3><p>{item.excerpt}</p></a>)}</div></section>}
   </article>
 </BaseLayout>
