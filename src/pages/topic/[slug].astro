@@ -6,7 +6,7 @@ import { sectionMap } from '../../data/sections';
 import { topicCounts, topicSlug } from '../../lib/content';
 
 export function getStaticPaths() {
-  const publicStories = (stories as any[]).filter((s) => s.status === 'approved' && s.sourceId !== 'molakhas-editorial');
+  const publicStories = (stories as any[]).filter((s) => s.status === 'approved');
   const counts = topicCounts(publicStories);
   return [...counts.entries()]
     .filter(([, value]) => value.count >= 2)
