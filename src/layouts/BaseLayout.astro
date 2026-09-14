@@ -22,16 +22,12 @@ const {
   schemaExtra = []
 } = Astro.props;
 
-// Cap overlong <title> at ~72 chars while preserving the trailing brand suffix ("| ملخص").
+// Keep news titles intact. Google News recommends a close match between the visible
+// headline and the HTML title; only guard against pathological overlong values.
 const docTitle = (() => {
-  const t = String(title);
-  if (t.length <= 72) return t;
-  const parts = t.split(' | ');
-  const brand = parts.length > 1 ? parts.pop() : '';
-  const main = parts.join(' | ');
-  const budget = Math.max(30, 72 - (brand ? brand.length + 3 : 0));
-  const mainTrimmed = main.length > budget ? main.slice(0, budget).trimEnd().replace(/[،\s]+$/u, '') + '…' : main;
-  return brand ? `${mainTrimmed} | ${brand}` : mainTrimmed;
+  const t = String(title).trim();
+  if (t.length <= 110) return t;
+  return `${t.slice(0, 109).trimEnd().replace(/[،\s]+$/u, '')}…`;
 })();
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
@@ -70,7 +66,7 @@ const schema = {
       name: 'ملخص',
       alternateName: 'Molakhas',
       url: siteUrl,
-      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-mark.svg`}
+      logo: {'@type':'ImageObject',url:`${siteUrl}/brand/molakhas-logo.png`,width:512,height:512}
     },
     {
       '@type': 'WebSite',
@@ -110,8 +106,8 @@ const schema = {
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="ar" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="ملخص RSS" href="/rss.xml" />
-    <link rel="icon" type="image/svg+xml" href="/brand/molakhas-mark.svg" />
-    <link rel="apple-touch-icon" href="/brand/molakhas-mark.svg" />
+    <link rel="icon" type="image/png" href="/brand/molakhas-logo.png" />
+    <link rel="apple-touch-icon" href="/brand/molakhas-logo.png" />
     {imageUrl && <link rel="preload" as="image" href={imageUrl} fetchpriority="high" />}
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="ملخص" />
@@ -153,10 +149,10 @@ const schema = {
         <a class="store-cta" href={storeUrl.toString()} target="_blank" rel="sponsored nofollow noopener"><span>▣</span> متجر لورفيو</a>
       </div>
     </header>
-    <div class="shell">
+    {type !== 'article' && <div class="shell">
       <AdsterraAd variant="leaderboard" />
       <AdsterraAd variant="mobile" />
-    </div>
+    </div>}
     <main id="content"><slot /></main>
     <footer class="site-footer">
       {type !== 'article' && <LurvuePromo section={section} position="footer" />}
