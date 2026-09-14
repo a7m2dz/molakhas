@@ -59,17 +59,17 @@ url.searchParams.set('utm_content', [position, storySlug].filter(Boolean).join('
 if (keyword) url.searchParams.set('utm_term', String(keyword).slice(0, 80));
 if (competition) url.searchParams.set('utm_id', String(competition).replace(/\s+/g, '-').slice(0, 80));
 const aria = storyTitle ? `عرض لورفيو المرتبط بـ ${storyTitle}` : 'عرض متجر لورفيو';
-const eyebrow = compact ? '4K • خصم 10% • Hala10' : item.eyebrow;
+const eyebrow = compact ? '4K • رياضة • ترفيه' : item.eyebrow;
 ---
 <aside class:list={["lurvue", { compact, live }]} aria-label={aria} data-lurvue-position={position} data-lurvue-context={conversionContext}>
   <div>
     <span class="lurvue-eyebrow"><span class="ad-label">إعلان</span> {eyebrow}</span>
     <strong>{item.text}</strong>
-    <small><span class="lurvue-proof">تجربة 24 ساعة • رياضة وترفيه</span> <span>• خصم <b>10%</b> بالكود <code>Hala10</code></span></small>
+    <small><span class="lurvue-proof">تجربة 24 ساعة • رياضة وترفيه</span></small>
   </div>
   <a href={url.toString()} target="_blank" rel="sponsored nofollow noopener" data-lurvue-cta={position} data-lurvue-context={conversionContext}>{item.cta} ←</a>
 </aside>
 
 <style>
-  .ad-label{display:inline-flex;align-items:center;padding:1px 6px;border:1px solid #ffffff24;border-radius:999px;color:#d7ddeb;font-size:9px;letter-spacing:.2px;margin-inline-end:5px}.lurvue code{font-family:inherit;font-weight:900;color:#fff;background:#090d14;border:1px dashed #d946ef77;padding:1px 6px;border-radius:7px}.lurvue a{transition:transform .18s ease,box-shadow .18s ease}.lurvue a:hover{transform:translateY(-1px);box-shadow:0 8px 28px #d946ef33,0 0 22px #22d3ee1f}.lurvue-proof{font-weight:700;color:#e6edf7}.lurvue.live{border-color:#ff4d6d66}.lurvue.live .lurvue-eyebrow{color:#ff9cab}
+  .ad-label{display:inline-flex;align-items:center;padding:1px 6px;border:1px solid #ffffff24;border-radius:999px;color:#d7ddeb;font-size:9px;letter-spacing:.2px;margin-inline-end:5px}.lurvue a{transition:transform .18s ease,box-shadow .18s ease}.lurvue a:hover{transform:translateY(-1px);box-shadow:0 8px 28px #d946ef33,0 0 22px #22d3ee1f}.lurvue-proof{font-weight:700;color:#e6edf7}.lurvue.live{border-color:#ff4d6d66}.lurvue.live .lurvue-eyebrow{color:#ff9cab}
 </style>
