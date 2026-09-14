@@ -6,7 +6,7 @@ import stories from '../data/stories.json';
 import imageManifest from '../data/image-manifest.json';
 
 const items = stories
-  .filter((story) => story.status === 'approved' && story.sourceId !== 'molakhas-editorial')
+  .filter((story) => story.status === 'approved')
   .sort((a,b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
   .slice(0,60);
 const mediaMap = imageManifest as Record<string, any>;
