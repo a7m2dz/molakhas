@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "npm run sports:refresh && node scripts/newsroom/source-images.mjs && astro build",
+    "deploy": "npm run build && npm run audit:prelaunch && wrangler deploy",
     "preview": "astro preview",
     "fotmob:radar": "node scripts/newsroom/fotmob-radar.mjs",
     "fotmob:refresh": "node scripts/newsroom/fotmob-radar.mjs --write",
