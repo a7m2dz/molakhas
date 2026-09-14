@@ -72,7 +72,15 @@ jobs:
                   data = json.load(f)
               updated = datetime.fromisoformat(str(data.get('updatedAt', '')).replace('Z', '+00:00'))
               age = max(0.0, (datetime.now(timezone.utc) - updated.astimezone(timezone.utc)).total_seconds() / 60.0)
-              healthy = data.get('source') == 'windows-primary' and data.get('omnirouteHealthy') is True
+              # A listening OmniRoute process is not enough. The Windows primary is
+              # considered healthy only after the publisher has actually completed
+              # a recent successful build/deploy cycle. Old heartbeat formats that
+              # lack publisherHealthy intentionally fall back to the cloud.
+              healthy = (
+                  data.get('source') == 'windows-primary'
+                  and data.get('omnirouteHealthy') is True
+                  and data.get('publisherHealthy') is True
+              )
               active = healthy and age <= 20.0
               age_value = f'{age:.1f}'
           except Exception as exc:
@@ -91,9 +99,9 @@ jobs:
           echo "Windows primary active: ${{ steps.heartbeat.outputs.active }}"
           echo "Heartbeat age: ${{ steps.heartbeat.outputs.age_minutes }} minutes"
           if [ "${{ steps.heartbeat.outputs.active }}" = "true" ]; then
-            echo "Windows is healthy; cloud newsroom stands by."
+            echo "Windows publisher is healthy; cloud newsroom stands by."
           else
-            echo "Windows is unavailable/stale; cloud newsroom will take over."
+            echo "Windows publisher is unavailable/stale; cloud newsroom will take over."
           fi
 
   newsroom:
@@ -118,6 +126,9 @@ jobs:
       AUTO_PUBLISH_MIN_SCORE: ${{ vars.AUTO_PUBLISH_MIN_SCORE || '88' }}
       AUTO_PUBLISH_MIN_TRUST: ${{ vars.AUTO_PUBLISH_MIN_TRUST || '88' }}
       AUTO_PUBLISH_MIN_CONFIDENCE: ${{ vars.AUTO_PUBLISH_MIN_CONFIDENCE || '78' }}
+      GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'sc-domain:mulakhas.com' }}
+      GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
+      GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -272,6 +283,22 @@ jobs:
 
           exit 1
 
+      - name: Deploy successful cloud build to Cloudflare
+        id: cloudflare_deploy
+        continue-on-error: true
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "Cloudflare API token is not configured in GitHub; skipping direct cloud deploy."
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          npx wrangler deploy
+          echo "deployed=true" >> "$GITHUB_OUTPUT"
+
       - name: Notify search engines with IndexNow
         if: steps.persist.outputs.published == 'true'
         continue-on-error: true
@@ -287,3 +314,4 @@ jobs:
           echo "Inference outcome: ${{ steps.omni.outcome }}"
           echo "News generation outcome: ${{ steps.generate.outcome }}"
           echo "Published changes: ${{ steps.persist.outputs.published }}"
+          echo "Cloudflare deployed: ${{ steps.cloudflare_deploy.outputs.deployed }}"
