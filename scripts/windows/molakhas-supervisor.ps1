@@ -12,6 +12,7 @@ $LogFile = Join-Path $RuntimeDir 'supervisor.log'
 $PidFile = Join-Path $RuntimeDir 'supervisor.pid'
 $HeartbeatRepo = Join-Path $RuntimeDir 'heartbeat-repo'
 $LocalEnvFile = Join-Path $ProjectRoot '.env.local.ps1'
+$PrimaryHealthyWindowMinutes = [Math]::Max(30, $CycleMinutes * 3)
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 
@@ -123,7 +124,11 @@ function Start-OmniRouteIfNeeded {
 }
 
 function Publish-Heartbeat {
-  param([bool]$OmniHealthy)
+  param(
+    [bool]$OmniHealthy,
+    [bool]$PublisherHealthy,
+    [Nullable[datetime]]$LastSuccessfulCycle
+  )
   try {
     New-Item -ItemType Directory -Force -Path $HeartbeatRepo | Out-Null
 
@@ -144,11 +149,17 @@ function Publish-Heartbeat {
       Get-ChildItem -Force $HeartbeatRepo | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
     }
 
+    # Backwards compatible: the cloud workflow historically reads omnirouteHealthy.
+    # It now represents effective Windows-primary health, not merely a listening port.
+    $primaryHealthy = [bool]($OmniHealthy -and $PublisherHealthy)
     $payload = [ordered]@{
       source = 'windows-primary'
       updatedAt = (Get-Date).ToUniversalTime().ToString('o')
       project = 'molakhas'
-      omnirouteHealthy = [bool]$OmniHealthy
+      omnirouteHealthy = $primaryHealthy
+      omnirouteReachable = [bool]$OmniHealthy
+      publisherHealthy = [bool]$PublisherHealthy
+      lastSuccessfulCycle = if ($LastSuccessfulCycle.HasValue) { $LastSuccessfulCycle.Value.ToUniversalTime().ToString('o') } else { $null }
       model = $env:OMNIROUTE_MODEL
     } | ConvertTo-Json -Depth 3
 
@@ -161,7 +172,7 @@ function Publish-Heartbeat {
 
     & git -C $HeartbeatRepo push --force origin HEAD:windows-heartbeat 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) {
-      Write-Log "Published Windows-primary heartbeat. healthy=$OmniHealthy model=$($env:OMNIROUTE_MODEL)"
+      Write-Log "Published Windows-primary heartbeat. primaryHealthy=$primaryHealthy omni=$OmniHealthy publisher=$PublisherHealthy model=$($env:OMNIROUTE_MODEL)"
     } else {
       Write-Log 'Heartbeat push failed; cloud fallback will remain eligible.'
     }
@@ -181,6 +192,7 @@ $nextHeartbeat = Get-Date
 $nextCycle = Get-Date
 $publisherProcess = $null
 $omniHealthy = $false
+$lastSuccessfulCycle = $null
 
 try {
   while ($true) {
@@ -191,20 +203,28 @@ try {
       $nextHealthCheck = (Get-Date).AddSeconds([Math]::Max(10, $HealthCheckSeconds))
     }
 
-    if ($now -ge $nextHeartbeat) {
-      Publish-Heartbeat -OmniHealthy $omniHealthy
-      $nextHeartbeat = (Get-Date).AddMinutes([Math]::Max(2, $HeartbeatMinutes))
-    }
-
     if ($publisherProcess -and $publisherProcess.HasExited) {
       $exitCode = $publisherProcess.ExitCode
       Write-Log "Publisher cycle exited with code $exitCode."
       $publisherProcess.Dispose()
       $publisherProcess = $null
-      if ($exitCode -ne 0) {
+      if ($exitCode -eq 0) {
+        $lastSuccessfulCycle = Get-Date
+        Write-Log 'Publisher cycle marked healthy after a successful build/deploy.'
+      } else {
         $nextCycle = (Get-Date).AddMinutes(2)
         Write-Log 'Failed publisher cycle will retry in about 2 minutes.'
       }
+    }
+
+    if ($now -ge $nextHeartbeat) {
+      $publisherHealthy = $false
+      if ($lastSuccessfulCycle) {
+        $publisherAge = ((Get-Date) - $lastSuccessfulCycle).TotalMinutes
+        $publisherHealthy = $publisherAge -le $PrimaryHealthyWindowMinutes
+      }
+      Publish-Heartbeat -OmniHealthy $omniHealthy -PublisherHealthy $publisherHealthy -LastSuccessfulCycle $lastSuccessfulCycle
+      $nextHeartbeat = (Get-Date).AddMinutes([Math]::Max(2, $HeartbeatMinutes))
     }
 
     if (-not $publisherProcess -and $now -ge $nextCycle) {
