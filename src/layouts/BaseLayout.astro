@@ -32,7 +32,6 @@ const docTitle = (() => {
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
 const imageUrl = image ? new URL(image, `${siteUrl}/`).toString() : null;
-// Every page gets a valid share image — real hero when present, brand default otherwise.
 const ogImageUrl = imageUrl || `${siteUrl}/brand/og-default.png`;
 const ogImageType = imageType || (imageUrl ? undefined : 'image/png');
 const ogImageWidth = imageWidth || 1200;
@@ -85,8 +84,6 @@ const schema = {
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
-    <!-- Monetag MultiTag: all-in-one monetization. -->
-    <script is:inline src="https://quge5.com/88/tag.min.js" data-zone="278407" async data-cfasync="false"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -94,7 +91,6 @@ const schema = {
     <meta name="theme-color" content="#080B0F" />
     <meta name="generator" content="Astro" />
     <meta name="author" content="فريق تحرير ملخص" />
-    <meta name="monetag" content="f5188a2e6a8296c3ffb06fbc632cbc36" />
     <!-- Google tag (gtag.js) -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-X85PYZYJ76"></script>
     <script is:inline>
