@@ -12,7 +12,11 @@ const esc = (v='') => String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').r
 const absolute = (value='') => /^https?:\/\//i.test(String(value)) ? String(value) : `${base}${String(value).startsWith('/') ? '' : '/'}${value}`;
 export function GET() {
   const mediaMap = imageManifest as Record<string, any>;
-  const publicStories = stories.filter(s=>s.status==='approved' && s.sourceId!=='molakhas-editorial');
+  // Every approved story is eligible for discovery. Source IDs describe provenance,
+  // not indexability, so editorial stories must not be silently omitted from Google.
+  const publicStories = stories
+    .filter((s)=>s.status==='approved')
+    .sort((a,b)=>+new Date(b.publishedAt)-+new Date(a.publishedAt));
   // Latest publish per section — used for section-index lastmod and thin-page gating.
   const latestInSection = new Map<string, any>();
   for (const s of publicStories as any[]) {
@@ -20,7 +24,7 @@ export function GET() {
     if (!existing || +new Date(s.publishedAt) > +new Date(existing.publishedAt)) latestInSection.set(s.section, s);
   }
   const staticUrls = [
-    { path: '/', lastmod: new Date().toISOString() },
+    { path: '/', lastmod: publicStories[0]?.generatedAt || publicStories[0]?.publishedAt || new Date().toISOString() },
     { path: '/latest', lastmod: publicStories[0]?.generatedAt || publicStories[0]?.publishedAt || new Date().toISOString() },
     { path: '/matches' }, { path: '/matches/today', lastmod: new Date().toISOString() },
     { path: '/teams' }, { path: '/competitions' },
@@ -54,5 +58,5 @@ export function GET() {
   const staticXml = allUrls.map(item=>`<url><loc>${esc(base+item.path)}</loc>${item.lastmod?`<lastmod>${new Date(item.lastmod).toISOString()}</lastmod>`:''}</url>`).join('');
   const articleXml = articleUrls.map(item=>`<url><loc>${esc(base+item.path)}</loc>${item.lastmod?`<lastmod>${new Date(item.lastmod).toISOString()}</lastmod>`:''}<image:image><image:loc>${esc(encodeURI(item.image))}</image:loc><image:title>${esc(item.imageTitle)}</image:title></image:image></url>`).join('');
   const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">${staticXml}${articleXml}</urlset>`;
-  return new Response(xml, { headers: { 'Content-Type':'application/xml; charset=utf-8', 'Cache-Control':'public,max-age=900' } });
+  return new Response(xml, { headers: { 'Content-Type':'application/xml; charset=utf-8', 'Cache-Control':'no-cache, must-revalidate' } });
 }
