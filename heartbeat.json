@@ -1,9 +1,9 @@
 {
     "source":  "windows-primary",
-    "updatedAt":  "2026-09-15T09:15:21.1749998Z",
+    "updatedAt":  "2026-09-15T09:20:37.5627492Z",
     "project":  "molakhas",
     "omnirouteHealthy":  false,
-    "omnirouteReachable":  true,
+    "omnirouteReachable":  false,
     "publisherHealthy":  false,
     "lastSuccessfulCycle":  null,
     "model":  "auto/best-free"
