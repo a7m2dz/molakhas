@@ -6,7 +6,7 @@
 
 ## الحالة الحالية
 
-- الموقع: `https://molakhas.a7asmari.workers.dev`
+- الموقع: `https://mulakhas.com/`
 - Cloudflare يبني وينشر تلقائيًا من `main`.
 - فحص RSS يعمل من GitHub Actions حتى لو OmniRoute المحلي متوقف.
 - توليد الأخبار الأساسي يعمل عبر OmniRoute المحلي على Windows بدون تعريضه للإنترنت.
